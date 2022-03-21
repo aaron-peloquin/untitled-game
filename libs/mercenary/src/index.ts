@@ -1,1 +1,1 @@
-export * from './lib/Mercenary';
+export * from './lib/generateMercenary';
