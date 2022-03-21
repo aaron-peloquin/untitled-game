@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@helper": ["libs/helper/src/index.ts"],
       "@quest": ["libs/quest/src/index.ts"]
     }
   },
