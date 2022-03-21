@@ -9,7 +9,7 @@ const Test = () => {
 
   const [randMercenary, setRandMercenary] = useState<number>(0);
   const newMercenary = useCallback(()=>setRandMercenary(Math.random()), []);
-//   const mercenary = useMemo(generateMercenary, [randMercenary]);
+  //   const mercenary = useMemo(generateMercenary, [randMercenary]);
   return <>
     <h1>{quest.type}</h1>
     <h2>Challenge: {Math.round(quest.level)} <em>({quest.level})</em></h2>
