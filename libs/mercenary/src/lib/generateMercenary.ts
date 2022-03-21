@@ -3,7 +3,7 @@ import {pickArray, pickObject, pickRange} from '@helper';
 interface I_Mercenary {
   name: string
   profession: string
-  damage: [number, number]
+  damage: number[]
   level: number
   health: number
   ethnicity: string
@@ -22,14 +22,16 @@ const MERC_NAMES: Record<string, string[]> = {
 };
 
 
-export const generateMercenary = (levelMin=0.6, levelMax=1.75):I_Mercenary => {
+export const generateMercenary = (levelMin=1, levelMax=3):I_Mercenary => {
+  const levelAverage = (levelMin + levelMax) / 2;
   const level = pickRange(levelMin, levelMax);
   const damage = [
     pickRange(levelMin, levelMax, 2),
     pickRange(levelMin, levelMax, 2),
-  ];
+  ].sort();
 
-  const health = pickRange(level, level * 2, (level*5)+5, 0);
+  const hpMultiplier = ((level > levelAverage ? level:levelAverage) * 5) + 5;
+  const health = pickRange(level, level * 1.5, hpMultiplier, 0);
 
   const [ethnicity, mercClasses] = pickObject(MERC_CLASS);
   const profession = pickArray(mercClasses);
