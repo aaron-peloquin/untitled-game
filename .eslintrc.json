@@ -25,6 +25,7 @@
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript","google"],
       "rules": {
+        "max-len":"off",
         "linebreak-style":"off",
         "require-jsdoc":"off"
       }
