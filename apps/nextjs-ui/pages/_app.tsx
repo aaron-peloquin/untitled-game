@@ -8,9 +8,11 @@ function CustomApp({Component, pageProps}: AppProps) {
       <Head>
         <title>Welcome to nextjs-ui!</title>
       </Head>
-      <main className="app">
-        <Component {...pageProps} />
-      </main>
+      <body>
+        <main className="app">
+          <Component {...pageProps} />
+        </main>
+      </body>
     </html>
   );
 }
