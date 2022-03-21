@@ -1,1 +1,2 @@
-export * from './lib/Helper';
+export * from './lib/pickArray';
+export * from './lib/pickObject';

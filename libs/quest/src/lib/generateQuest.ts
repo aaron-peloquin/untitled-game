@@ -1,3 +1,5 @@
+import {pickArray, pickObject} from '@helper';
+
 interface I_Quest {
   type: string
   level: number
@@ -7,19 +9,6 @@ interface I_Quest {
     profession: string
   }
 }
-
-const pickArray = (arr: string[]):string => {
-  return arr[Math.floor(Math.random()*arr.length)];
-};
-
-type pickObjectSig = <T>(obj: Record<string, T>) => [string, T]
-
-const pickObject: pickObjectSig = (obj) => {
-  const keys = Object.keys(obj);
-  const key = pickArray(keys);
-  const value = obj[key];
-  return [key, value];
-};
 
 const QUEST_TYPE = [
   'Slay',
