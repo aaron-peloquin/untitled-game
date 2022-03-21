@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "nextjs-ui": "apps/nextjs-ui",
-    "nextjs-ui-e2e": "apps/nextjs-ui-e2e"
+    "nextjs-ui-e2e": "apps/nextjs-ui-e2e",
+    "quest": "libs/quest"
   }
 }
