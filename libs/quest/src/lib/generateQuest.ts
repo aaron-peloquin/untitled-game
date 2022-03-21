@@ -39,8 +39,8 @@ const QUEST_TARGET_PROFESSIONS: Record<string, string[]> = {
   ],
 };
 
-export const generateQuest = (questMin=0.6, questMax=1.75):I_Quest => {
-  const level = (Math.random() * (questMax - questMin) + questMin).toFixed(2);
+export const generateQuest = (levelMin=0.6, levelMax=1.75):I_Quest => {
+  const level = (Math.random() * (levelMax - levelMin) + levelMin).toFixed(2);
   const type = pickArray(QUEST_TYPE);
 
   const [ethnicity, targetNames] = pickObject(QUEST_TARGET_NAMES);
