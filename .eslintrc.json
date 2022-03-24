@@ -1,7 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx"],
+  "plugins": ["@nrwl/nx", "sort-keys-fix"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -27,7 +27,8 @@
       "rules": {
         "max-len":"off",
         "linebreak-style":"off",
-        "require-jsdoc":"off"
+        "require-jsdoc":"off",
+        "sort-keys-fix/sort-keys-fix": "error"
       }
     }
   ]
