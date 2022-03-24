@@ -1,13 +1,8 @@
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 
 import {generateQuest} from '@quest';
 import {generateMercenary} from '@mercenary';
-import {seedGenerator, pickRange} from '@helper';
-
-const getRandom = pickRange();
-
-// const mercenaryGenerator = generateMercenary();
-// const questGenerator = generateQuest();
+import {seedGenerator} from '@helper';
 
 const Test = () => {
   const [currentSeed, setSeed] = useState<string>('randomization seed');
@@ -26,31 +21,16 @@ const Test = () => {
   const newMercenary = useCallback(()=>setRandMercenary(Math.random()), []);
 
   const mercenary = useMemo(() => seededMercenary(1, 3), [forceNewMercenary, seededMercenary]);
-  const quest = useMemo(() => seededQuest(2, 2), [forceNewQuest, seededQuest]);
+  const quest = useMemo(() => seededQuest(1, 3), [forceNewQuest, seededQuest]);
 
   const doQuest = useCallback(() => {
-    // Todo: more than combat later
-    let mercenaryHp = mercenary.health;
-    let questChallenge = quest.level * (getRandom(2.5, 6));
-    const rounds = [];
-    while (mercenaryHp > 0 && questChallenge > 0) {
-      const damage = getRandom(mercenary.damage[0], mercenary.damage[1]);
-      const questHardship = quest.level + getRandom(1.25, 5);
-
-      questChallenge -= damage;
-      mercenaryHp -= questHardship;
-
-      rounds.push(`Dealt ${damage} (${questChallenge} remaining). There was a ${questHardship} hardship, our mercenary has ${mercenaryHp} remaining`);
-    }
-    let outcome = mercenaryHp > 0 ? 'Success' : 'Failure';
-    if (mercenaryHp < -(mercenary.level * 2)) {
-      outcome = 'Death';
-    }
-    setQuestResult({
-      outcome,
-      rounds,
-    });
+    const questResult = quest.run(mercenary);
+    setQuestResult(questResult);
   }, [mercenary, quest]);
+
+  useEffect(() => {
+    doQuest();
+  }, [doQuest]);
 
   return <>
     <h1>Form</h1>
@@ -70,7 +50,7 @@ const Test = () => {
 
     <h1>{questResult?.outcome}</h1>
     <ol>
-      {questResult?.rounds.map((round) => <li key={round.replace(' ')}>{round}</li>)}
+      {questResult?.roundsLog.map((round) => <li key={round.replace(' ', '')}>{round}</li>)}
     </ol>
   </>;
 };
