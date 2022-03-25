@@ -29,7 +29,8 @@
         "linebreak-style":"off",
         "max-len":"off",
         "require-jsdoc":"off",
-        "sort-keys-fix/sort-keys-fix": "error"
+        "sort-keys-fix/sort-keys-fix": "error",
+        "space-infix-ops": "error"
       }
     }
   ]

@@ -5,7 +5,7 @@ export const runSlayQuest:T_FullRunQuestSig = (quest) => (mercenary) => {
   const numberGenerator = seedGenerator(`${quest.target.name}_${quest.target.profession}`);
   const numberRange = pickRange(numberGenerator);
   const roundsLog = [];
-  let outcome='';
+  let outcome = '';
 
   const questMaxHealth = (quest.level * numberGenerator()) ^ 30;
   let questCurrentHealth = questMaxHealth;
