@@ -37,7 +37,8 @@ const Test = () => {
   return <>
     <h1>Form</h1>
     <form>
-      <input value={currentSeed} onChange={handleChangeSeed} />
+      <label htmlFor="currentSeed">Randomization Seed</label>
+      <input id="currentSeed" value={currentSeed} onChange={handleChangeSeed} />
     </form>
     <h1>{quest.type}</h1>
     <h2>Challenge: {Math.round(quest.level)} <em>({quest.level})</em></h2>
