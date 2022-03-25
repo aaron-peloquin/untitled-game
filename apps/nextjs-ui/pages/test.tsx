@@ -24,13 +24,15 @@ const Test = () => {
   const quest = useMemo(() => seededQuest(1, 3), [forceNewQuest, seededQuest]);
 
   const doQuest = useCallback(() => {
-    const questResult = quest.run(mercenary);
-    setQuestResult(questResult);
+    setQuestResult({outcome: 'Thinking...'});
+    // fake loading time
+    setTimeout(() => {
+      const questResult = quest.run(mercenary);
+      setQuestResult(questResult);
+    }, 250);
   }, [mercenary, quest]);
 
-  useEffect(() => {
-    doQuest();
-  }, [doQuest]);
+  useEffect(doQuest, [doQuest]);
 
   return <>
     <h1>Form</h1>
@@ -50,7 +52,7 @@ const Test = () => {
 
     <h1>{questResult?.outcome}</h1>
     <ol>
-      {questResult?.roundsLog.map((round) => <li key={round.replace(' ', '')}>{round}</li>)}
+      {questResult?.roundsLog?.map((round) => <li key={round.replace(' ', '')}>{round}</li>)}
     </ol>
   </>;
 };
