@@ -10,7 +10,6 @@ export const runSlayQuest:T_FullRunQuestSig = (quest) => (mercenary) => {
   const questMaxHealth = (quest.level * numberGenerator()) ^ 30;
   let questCurrentHealth = questMaxHealth;
   let mercCurrentHealth = mercenary.health;
-  console.log('running slay quest:', {mercCurrentHealth, mercenary, quest, questMaxHealth});
 
   while (questCurrentHealth > 0 && mercCurrentHealth > 0) {
     const questChallengeDamage = (numberGenerator() * ((quest.level) ^ 2)) ^ (quest.level + 2);

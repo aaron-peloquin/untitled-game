@@ -15,7 +15,6 @@ export const MERC_CLASS_BASE_STATS: Record<string, T_BaseStats> = {
   Thief: {capture: 30, cost: 5, damage: 20, damageMultiplier: 1, endurance: 5, enduranceMultiplier: 1.5, stealth: 30},
   Wizard: {capture: 30, cost: 5, damage: 5, damageMultiplier: 1, endurance: 10, enduranceMultiplier: 1, stealth: 30},
 };
-console.log(MERC_CLASS_BASE_STATS);
 
 export const MERC_NAMES: Record<string, string[]> = {
   Dwarf: ['Malka', 'Duru', 'Bobbet', 'Rangur'],
