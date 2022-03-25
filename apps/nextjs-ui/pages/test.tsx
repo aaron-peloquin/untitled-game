@@ -32,26 +32,45 @@ const Test = () => {
     }, 250);
   }, [mercenary, quest]);
 
+  const handleSubmit = useCallback((e)=>{
+    e.preventDefault();
+    doQuest();
+  }, [doQuest]);
+
   useEffect(doQuest, [doQuest]);
 
   return <>
     <h1>Form</h1>
-    <form>
-      <label htmlFor="currentSeed">Randomization Seed</label>
-      <input id="currentSeed" value={currentSeed} onChange={handleChangeSeed} />
+    <form onSubmit={handleSubmit}>
+      <fieldset>
+        <legend>Game Settings</legend>
+        <label htmlFor="currentSeed">Randomization Seed: </label>
+        <input id="currentSeed" value={currentSeed} onChange={handleChangeSeed} />
+        <p><em>Two global seed-based number generators are created. One for Quests, the other for Mercenaries</em></p>
+      </fieldset>
+      <fieldset>
+        <legend>Game Controls</legend>
+        <div>
+          <button type="button" onClick={newQuest}>New Quest</button>
+          <button type="button" onClick={newMercenary}>New Mercenary</button>
+        </div>
+        <div>
+          <button type="submit">Attempt Quest</button>
+        </div>
+      </fieldset>
     </form>
-    <h1>{quest.type}</h1>
-    <h2>Challenge: {Math.round(quest.level)} <em>({quest.level})</em></h2>
+    <h1>Quest</h1>
+    <h2>{quest.type}</h2>
+    <h3>Challenge: {Math.round(quest.level)} <em>({quest.level})</em></h3>
     {/* eslint-disable-next-line max-len*/}
     <p>I want you to {quest.type} a {quest.target.profession} {quest.target.ethnicity} named {quest.target.name}</p>
 
-    <h1>{mercenary.name}</h1>
+    <h1>Mercenary</h1>
+    <h2>{mercenary.name}</h2>
     <p>A level {mercenary.level} {mercenary.ethnicity} {mercenary.profession}. They have {mercenary.health} hp and attack for {mercenary.damage[0]} - {mercenary.damage[1]} damage.</p>
-    <button onClick={newQuest}>New Quest</button>
-    <button onClick={newMercenary}>New Mercenary</button>
-    <button onClick={doQuest}>Attempt Quest</button>
 
-    <h1>{questResult?.outcome}</h1>
+    <h1>Quest Log</h1>
+    <h2>{questResult?.outcome}</h2>
     <ol>
       {questResult?.roundsLog?.map((round) => <li key={round.replace(' ', '')}>{round}</li>)}
     </ol>
