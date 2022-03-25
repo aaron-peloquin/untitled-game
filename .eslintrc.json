@@ -25,8 +25,9 @@
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript","google"],
       "rules": {
-        "max-len":"off",
+        "camelcase": "off",
         "linebreak-style":"off",
+        "max-len":"off",
         "require-jsdoc":"off",
         "sort-keys-fix/sort-keys-fix": "error"
       }
