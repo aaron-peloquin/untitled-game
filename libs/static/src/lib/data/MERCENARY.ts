@@ -8,19 +8,19 @@ export const MERC_CLASS: Record<string, string[]> = {
 };
 
 export const MERC_ETHNICITY_BASE_STATS: Record<string, T_BaseStats> = {
-  Dwarf: {capture: 0, cost: 2, attack: 15, endurance: 3, stealth: -10},
-  Elf: {capture: 15, cost: 2, attack: -5, endurance: 1, stealth: 15},
-  Human: {capture: 10, cost: 0, attack: 10, endurance: 1, stealth: 10},
-}
+  Dwarf: {attack: 15, capture: 0, cost: 2, endurance: 3, stealth: -10},
+  Elf: {attack: -5, capture: 15, cost: 2, endurance: 1, stealth: 15},
+  Human: {attack: 10, capture: 10, cost: 0, endurance: 1, stealth: 10},
+};
 
 export const MERC_CLASS_BASE_STATS: Record<string, T_BaseStats> = {
-  Barbarian: {capture: 15, cost: 2, attack: 75, endurance: 2, stealth: 5},
-  Cleric: {capture: 80, cost: 2, attack: 20, endurance: 5, stealth: 15},
-  Druid: {capture: 65, cost: 2, attack: 15, endurance: 4, stealth: 30},
-  Fighter: {capture: 70, cost: 2, attack: 35, endurance: 8, stealth: 15},
-  Ranger: {capture: 40, cost: 2, attack: 15, endurance: 5, stealth: 70},
-  Thief: {capture: 25, cost: 2, attack: 20, endurance: 4, stealth: 85},
-  Wizard: {capture: 35, cost: 2, attack: 85, endurance: 1, stealth: 10},
+  Barbarian: {attack: 75, capture: 15, cost: 2, endurance: 2, stealth: 5},
+  Cleric: {attack: 20, capture: 80, cost: 2, endurance: 5, stealth: 15},
+  Druid: {attack: 15, capture: 65, cost: 2, endurance: 4, stealth: 30},
+  Fighter: {attack: 35, capture: 70, cost: 2, endurance: 8, stealth: 15},
+  Ranger: {attack: 15, capture: 40, cost: 2, endurance: 5, stealth: 70},
+  Thief: {attack: 20, capture: 25, cost: 2, endurance: 4, stealth: 85},
+  Wizard: {attack: 85, capture: 35, cost: 2, endurance: 1, stealth: 10},
 };
 
 export const MERC_NAMES: Record<string, string[]> = {
