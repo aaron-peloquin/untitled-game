@@ -1,5 +1,6 @@
 import {T_BaseStats} from 'TS_Mercenary';
 
+
 export const MERC_CLASS: Record<string, string[]> = {
   Dwarf: ['Fighter', 'Barbarian'],
   Elf: ['Ranger', 'Druid'],
@@ -21,4 +22,3 @@ export const MERC_NAMES: Record<string, string[]> = {
   Elf: ['Sundrey', 'Lillywind', 'Vello'],
   Human: ['Cora', 'Balic', 'Stephon', 'Jakub', 'Evelyn', 'Luigi', 'Lysa', 'Suphan'],
 };
-
