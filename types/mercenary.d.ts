@@ -11,10 +11,8 @@ declare module 'TS_Mercenary' {
 
   export type T_BaseStats = {
     cost: number
-    damage: number
-    damageMultiplier: number
+    attack: number
     endurance: number
-    enduranceMultiplier: number
     stealth: number
     capture: number
   }
