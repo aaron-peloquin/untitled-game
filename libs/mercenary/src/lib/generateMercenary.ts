@@ -10,28 +10,23 @@ export const generateMercenary = (numberGenerator: () => number = Math.random) =
   const name = pickArray(MERC_NAMES[ethnicity], numberGenerator);
   const profession = pickArray(mercClasses, numberGenerator);
 
-  const baseClassStats = MERC_CLASS_BASE_STATS[profession];
-  const baseStats:T_BaseStats = {...MERC_ETHNICITY_BASE_STATS[ethnicity]}
-  for (const statKey in baseClassStats) {
-    baseStats[statKey] += baseClassStats[statKey]
+  const baseProfessionStats = MERC_CLASS_BASE_STATS[profession];
+  const baseEthnicityStats = MERC_ETHNICITY_BASE_STATS[ethnicity];
+  const baseStats: T_BaseStats = {
+    cost: baseProfessionStats.cost + baseEthnicityStats.cost,
+    attack: baseProfessionStats.attack + baseEthnicityStats.attack,
+    endurance: baseProfessionStats.endurance + baseEthnicityStats.endurance,
+    stealth: baseProfessionStats.stealth + baseEthnicityStats.stealth,
+    capture: baseProfessionStats.capture + baseEthnicityStats.capture,
   }
-  console.log('baseStats', profession, ethnicity, baseStats)
-  const dmgLow = baseStats.damage ^ level;
-  const dmgHigh = dmgLow * baseStats.damageMultiplier;
-  const daWizard = [
-    rangeGenerator(dmgLow, dmgHigh),
-    rangeGenerator(dmgLow, dmgHigh),
-  ].sort();
 
-  const endLow = baseStats.endurance ^ level;
-  const endHigh = endLow * baseStats.enduranceMultiplier;
-  const health = rangeGenerator(endLow, endHigh);
+  const baseHealth = (baseStats.endurance * rangeGenerator(0, 1.5))
+  const health = baseHealth * level;
 
-  const cost = health + (daWizard[0]+daWizard[1]);
-
-  return {
-    cost,
-    damage: daWizard,
+  return {   
+    originalHealth: health,
+    stats: baseStats,
+    originalStats: baseStats,
     ethnicity,
     health,
     level,

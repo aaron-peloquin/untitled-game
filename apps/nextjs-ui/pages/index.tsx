@@ -4,6 +4,9 @@ import {generateQuest} from '@quest';
 import {generateMercenary} from '@mercenary';
 import {seedGenerator} from '@helper';
 
+const LEVEL_LOW = 10
+const LEVEL_HIGH = 10
+
 const Test = () => {
   const [currentSeed, setSeed] = useState<string>('randomization seed');
   const handleChangeSeed = useCallback((e: {target: {value: string}}) => {
@@ -19,9 +22,8 @@ const Test = () => {
 
   const newQuest = useCallback(()=>setRandQuest(Math.random()), []);
   const newMercenary = useCallback(()=>setRandMercenary(Math.random()), []);
-
-  const mercenary = useMemo(() => seededMercenary(1, 3), [forceNewMercenary, seededMercenary]);
-  const quest = useMemo(() => seededQuest(1, 3), [forceNewQuest, seededQuest]);
+  const mercenary = useMemo(() => seededMercenary(LEVEL_LOW, LEVEL_HIGH), [forceNewMercenary, seededMercenary]);
+  const quest = useMemo(() => seededQuest(LEVEL_LOW, LEVEL_HIGH), [forceNewQuest, seededQuest]);
 
   const doQuest = useCallback(() => {
     setQuestResult({outcome: 'Thinking...'});
@@ -59,18 +61,16 @@ const Test = () => {
         </div>
       </fieldset>
     </form>
-    <h1>Quest</h1>
-    <h2>{quest.type}</h2>
-    <h3>Challenge: {Math.round(quest.level)} <em>({quest.level})</em></h3>
+    <h1>Quest: {quest.type}</h1>
+    <h2>Challenge: {Math.round(quest.level)} <em>({quest.level})</em></h2>
     {/* eslint-disable-next-line max-len*/}
     <p>I want you to {quest.type} a {quest.target.profession} {quest.target.ethnicity} named {quest.target.name}</p>
 
-    <h1>Mercenary</h1>
-    <h2>{mercenary.name}</h2>
-    <p>A level {mercenary.level} {mercenary.ethnicity} {mercenary.profession}. They have {mercenary.health} hp and attack for {mercenary.damage[0]} - {mercenary.damage[1]} damage.</p>
+    <h1>Mercenary: {mercenary.name}</h1>
+    <h2>Level: {Math.round(mercenary.level)} <em>({mercenary.level})</em></h2>
+    <p>{mercenary.ethnicity} {mercenary.profession}. They have {mercenary.health.toFixed(2)} hp and {mercenary.stats.attack}% to hit.</p>
 
-    <h1>Quest Log</h1>
-    <h2>{questResult?.outcome}</h2>
+    <h1>Quest Log: {questResult?.outcome}</h1>
     <ol>
       {questResult?.roundsLog?.map((round) => <li key={round.replace(' ', '')}>{round}</li>)}
     </ol>

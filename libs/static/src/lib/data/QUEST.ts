@@ -7,7 +7,7 @@ export const QUEST_TYPE = [
 export const QUEST_TARGET_NAMES: Record<string, string[]> = {
   Goblin: [
     'Krug', 'Nobzzzzzzed', 'Ruz', 'Mul',
-    'Geez', 'Gop', 'Stix', 'Ag',
+    'Geez', 'Gop', 'Stix', 'Agu',
   ],
   Human: [
     'Liam', 'Olivia', 'Noah', 'Emma',

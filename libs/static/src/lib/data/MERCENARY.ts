@@ -8,8 +8,8 @@ export const MERC_CLASS: Record<string, string[]> = {
 };
 
 export const MERC_ETHNICITY_BASE_STATS: Record<string, T_BaseStats> = {
-  Dwarf: {capture: 0, cost: 2, attack: 15, endurance: 2, stealth: -5},
-  Elf: {capture: 15, cost: 2, attack: -5, endurance: 0, stealth: 15},
+  Dwarf: {capture: 0, cost: 2, attack: 15, endurance: 3, stealth: -10},
+  Elf: {capture: 15, cost: 2, attack: -5, endurance: 1, stealth: 15},
   Human: {capture: 10, cost: 0, attack: 10, endurance: 1, stealth: 10},
 }
 
