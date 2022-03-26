@@ -1,64 +1,100 @@
-import {pickRange, seedGenerator} from '@helper';
-import {T_FullRunQuestSig} from 'TS_Quest';
+/* eslint-disable guard-for-in */
+import {get, mean, set} from 'lodash';
 
-const analytics = {
-  win: 0,
-  lose: 0,
-  dead: 0,
-}
+import {pickRange, seedGenerator} from '@helper';
+
+import {I_Mercenary} from 'TS_Mercenary';
+import {I_Quest, T_FullRunQuestSig, T_QuestResult} from 'TS_Quest';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const analytics: Record<string, any> = {};
+
+const increaseAnalytics = (mercenary: I_Mercenary, quest: I_Quest, result:T_QuestResult) => {
+  const mercLevel = Math.round(mercenary.level);
+  const questLevel = Math.round(quest.level);
+  const analyticsPath = `${mercenary.profession}.${mercLevel}.${questLevel}`;
+  const metricValue = get(analytics, `${analyticsPath}.outcomes.${result.outcome}`, 0);
+  set(analytics, `${analyticsPath}.outcomes.${result.outcome}`, metricValue + 1);
+
+  const analyticsRounds = get(analytics, `${analyticsPath}.rounds`, []);
+  analyticsRounds.push(result.roundsLog.length - 2);
+  set(analytics, `${analyticsPath}.rounds`, analyticsRounds);
+  set(analytics, `${analyticsPath}.outcomes.totalRuns`, analyticsRounds.length);
+  set(analytics, `${analyticsPath}.outcomes.AverageRounds`, mean(analyticsRounds));
+};
+
+export const logAnalytics = () => {
+  const tabularData = {};
+  console.clear();
+  console.log('full analytics:', analytics);
+  for (const profession in analytics) {
+    const mercLevels = analytics[profession];
+    for (const mercLevel in mercLevels) {
+      const questLevels = mercLevels[mercLevel];
+      for (const questLevel in questLevels) {
+        const outcomes = questLevels[questLevel].outcomes;
+        const parsedData = {
+          ...outcomes,
+          AverageRounds: parseFloat(outcomes.AverageRounds.toFixed(3)),
+          mercLevel: parseInt(mercLevel),
+          profession,
+          questLevel: parseInt(questLevel),
+        };
+        set(tabularData, `M${mercLevel}_Q${questLevel}_${profession}`, parsedData);
+      }
+    }
+  }
+  console.table(tabularData);
+  return tabularData;
+};
 
 export const runSlayQuest:T_FullRunQuestSig = (quest) => (mercenary) => {
-  const numberGenerator = seedGenerator(`${quest.target.name}_${quest.target.profession}`);
+  const numberGenerator = seedGenerator(`${quest.type} ${quest.target.name} ${quest.target.profession}`);
   const numberRange = pickRange(numberGenerator);
   const roundsLog = [];
   let outcome = '';
 
-  const questMaxHealth = quest.level + numberRange(0, quest.level*2)
+  const questMaxHealth = quest.level + numberRange(0, quest.level * 2);
   let questCurrentHealth = questMaxHealth;
   let mercCurrentHealth = mercenary.health;
-  const difficulty = (quest.level - mercenary.level) + .20
-  const hitDifficulty = difficulty * 25;
-  roundsLog.push(`${mercenary.name} (${mercCurrentHealth.toFixed(2)} hp) engages in combat with ${quest.target.name} (${questCurrentHealth.toFixed(2)} hp)`);
-  let round = 0
+  const difficulty = (quest.level + 0.25) - mercenary.level;
+  const percentDifficulty = difficulty * 25;
+  roundsLog.push(`${mercenary.name} (${mercCurrentHealth.toFixed(2)} hp) engages in combat with ${quest.target.name} (${questCurrentHealth.toFixed(2)} hp). ${difficulty}:${percentDifficulty}`);
 
   while (questCurrentHealth > 0 && mercCurrentHealth > 0) {
-    round++
-    const questHit = (numberRange(1, 100) + hitDifficulty)
-    const mercenaryHit = (numberRange(1, 100) - hitDifficulty)
-    
-    if (questHit  >= 50) {
+    const questHit = (numberRange(1, 100) + percentDifficulty);
+    const mercenaryHit = (numberRange(1, 100) - percentDifficulty + mercenary.stats.attack);
+
+    if (questHit >= 50) {
       mercCurrentHealth -= numberRange(.25, .75) * quest.level;
     }
     if (mercenaryHit >= 50) {
       questCurrentHealth -= numberRange(.25, .75) * mercenary.level;
     }
 
-    const roundDescription = `${difficulty}:${hitDifficulty}: ${mercenary.name} (${mercCurrentHealth.toFixed(2)} hp) ${mercenaryHit ? `hit (${mercenaryHit}%)` : `missed (${mercenaryHit}%)`} ${quest.target.name}
+    const roundDescription = `${mercenary.name} (${mercCurrentHealth.toFixed(2)} hp) ${mercenaryHit ? `hit (${mercenaryHit}%)` : `missed (${mercenaryHit}%)`} ${quest.target.name}
     (${questCurrentHealth.toFixed(2)} hp), and they ${questHit ? `hit (${questHit}%)` : `missed (${questHit}%)`}`;
     roundsLog.push(roundDescription);
   }
   if (mercCurrentHealth > 0) {
     outcome = 'Success';
-    analytics.win++
-    roundsLog.push(`${mercenary.name} successfully defeated ${quest.target.name}`)
-  } else if (mercCurrentHealth <= -(mercenary.level/2)) {
+    roundsLog.push(`${mercenary.name} successfully defeated ${quest.target.name}`);
+  } else if (mercCurrentHealth <= -(mercenary.level / 2)) {
     outcome = 'Death';
-    analytics.dead++
-    roundsLog.push(`${mercenary.name} died`)
+    roundsLog.push(`${mercenary.name} died`);
   } else {
-    analytics.lose++
     outcome = 'Failure';
-    roundsLog.push(`${mercenary.name} was returned in failure`)
+    roundsLog.push(`${mercenary.name} was returned in failure`);
   }
-  console.log('analytics', analytics)
 
-  return {
+  const result: T_QuestResult = {
     outcome,
-    rewards: {
-      exp: 5,
-      gold: 2,
-    },
+    rewards: {exp: 5, gold: 2},
     roundsLog,
   };
+
+  increaseAnalytics(mercenary, quest, result);
+
+  return result;
 };
 

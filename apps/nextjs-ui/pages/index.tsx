@@ -1,11 +1,11 @@
 import {useCallback, useEffect, useMemo, useState} from 'react';
 
-import {generateQuest} from '@quest';
+import {generateQuest, logAnalytics} from '@quest';
 import {generateMercenary} from '@mercenary';
 import {seedGenerator} from '@helper';
 
-const LEVEL_LOW = 10
-const LEVEL_HIGH = 10
+const LEVEL_LOW = 0.5;
+const LEVEL_HIGH = 2.5;
 
 const Test = () => {
   const [currentSeed, setSeed] = useState<string>('randomization seed');
@@ -49,6 +49,7 @@ const Test = () => {
         <label htmlFor="currentSeed">Randomization Seed: </label>
         <input id="currentSeed" value={currentSeed} onChange={handleChangeSeed} />
         <p><em>Two global seed-based number generators are created. One for Quests, the other for Mercenaries</em></p>
+        <div><button type="button" onClick={logAnalytics}>logAnalytics();</button></div>
       </fieldset>
       <fieldset>
         <legend>Game Controls</legend>
