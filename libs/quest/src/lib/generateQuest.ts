@@ -5,8 +5,8 @@ import {runSlayQuest} from './runSlayQuest';
 
 export const generateQuest = (numberGenerator: () => number = Math.random) => (levelMin=0.6, levelMax=1.75):I_Quest => {
   let questRunner;
-  const level = (numberGenerator() * (levelMax - levelMin) + levelMin).toFixed(2);
   const type = pickArray(QUEST_TYPE, numberGenerator);
+  const level = (numberGenerator() * (levelMax - levelMin) + levelMin).toFixed(2);
 
   const [ethnicity, targetNames] = pickObject(QUEST_TARGET_NAMES, numberGenerator);
   const name = pickArray(targetNames, numberGenerator);
