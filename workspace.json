@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "band": "libs/band",
     "helper": "libs/helper",
     "mercenary": "libs/mercenary",
     "nextjs-ui": "apps/nextjs-ui",

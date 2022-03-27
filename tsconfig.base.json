@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@band": ["libs/band/src/index.ts"],
       "@helper": ["libs/helper/src/index.ts"],
       "@mercenary": ["libs/mercenary/src/index.ts"],
       "@quest": ["libs/quest/src/index.ts"],
