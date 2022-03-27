@@ -6,7 +6,7 @@ function CustomApp({Component, pageProps}: AppProps) {
   return (
     <div>
       <Head>
-        <title>Welcome to nextjs-ui!</title>
+        <title>Untitled Game!</title>
       </Head>
       <main className="app">
         <Component {...pageProps} />
