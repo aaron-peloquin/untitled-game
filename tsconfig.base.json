@@ -17,6 +17,7 @@
     "paths": {
       "@band": ["libs/band/src/index.ts"],
       "@helper": ["libs/helper/src/index.ts"],
+      "@location": ["libs/location/src/index.ts"],
       "@mercenary": ["libs/mercenary/src/index.ts"],
       "@quest": ["libs/quest/src/index.ts"],
       "@static": ["libs/static/src/index.ts"]

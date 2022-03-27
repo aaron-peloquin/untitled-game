@@ -3,6 +3,7 @@
   "projects": {
     "band": "libs/band",
     "helper": "libs/helper",
+    "location": "libs/location",
     "mercenary": "libs/mercenary",
     "nextjs-ui": "apps/nextjs-ui",
     "nextjs-ui-e2e": "apps/nextjs-ui-e2e",
