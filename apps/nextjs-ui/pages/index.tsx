@@ -3,9 +3,17 @@ import {useCallback, useEffect, useMemo, useState} from 'react';
 import {generateQuest, logAnalytics} from '@quest';
 import {generateMercenary} from '@mercenary';
 import {seedGenerator} from '@helper';
+import {generateLocation} from '@location';
+import {T_QuestResult} from 'TS_Quest';
 
 const LEVEL_LOW = 0.5;
 const LEVEL_HIGH = 2.5;
+
+const QUEST_RESULT_LOADING:T_QuestResult = {
+  outcome: 'Thinking...',
+  rewards: null,
+  roundsLog: null,
+};
 
 const Test = () => {
   const [currentSeed, setSeed] = useState<string>('randomization seed');
@@ -15,18 +23,18 @@ const Test = () => {
 
   const seededMercenary = useMemo(() => generateMercenary(seedGenerator(currentSeed)), [currentSeed]);
   const seededQuest = useMemo(() => generateQuest(seedGenerator(currentSeed)), [currentSeed]);
+  const [questResult, setQuestResult] = useState<T_QuestResult>();
 
-  const [questResult, setQuestResult] = useState<any>();
-  const [forceNewQuest, setRandQuest] = useState<number>(0);
-  const [forceNewMercenary, setRandMercenary] = useState<number>(0);
+  const mercenary = useMemo(() => seededMercenary(LEVEL_LOW, LEVEL_HIGH), [seededMercenary]);
+  const quest = useMemo(() => seededQuest(LEVEL_LOW, LEVEL_HIGH), [seededQuest]);
 
-  const newQuest = useCallback(()=>setRandQuest(Math.random()), []);
-  const newMercenary = useCallback(()=>setRandMercenary(Math.random()), []);
-  const mercenary = useMemo(() => seededMercenary(LEVEL_LOW, LEVEL_HIGH), [forceNewMercenary, seededMercenary]);
-  const quest = useMemo(() => seededQuest(LEVEL_LOW, LEVEL_HIGH), [forceNewQuest, seededQuest]);
+  const seededLocation = useMemo(() => generateLocation(seedGenerator(currentSeed), seededMercenary, seededQuest), [currentSeed, seededMercenary, seededQuest]);
+  const location = useMemo(() => seededLocation(LEVEL_LOW, LEVEL_HIGH), [seededLocation]);
+
+  console.log('location', location);
 
   const doQuest = useCallback(() => {
-    setQuestResult({outcome: 'Thinking...'});
+    setQuestResult(QUEST_RESULT_LOADING);
     // fake loading time
     setTimeout(() => {
       const questResult = quest.run(mercenary);
@@ -53,10 +61,10 @@ const Test = () => {
       </fieldset>
       <fieldset>
         <legend>Game Controls</legend>
-        <div>
+        {/* <div>
           <button type="button" onClick={newQuest}>New Quest</button>
           <button type="button" onClick={newMercenary}>New Mercenary</button>
-        </div>
+        </div> */}
         <div>
           <button type="submit">Attempt Quest</button>
         </div>
@@ -64,7 +72,6 @@ const Test = () => {
     </form>
     <h1>Quest: {quest.type}</h1>
     <h2>Challenge: {Math.round(quest.level)} <em>({quest.level})</em></h2>
-    {/* eslint-disable-next-line max-len*/}
     <p>I want you to {quest.type} a {quest.target.profession} {quest.target.ethnicity} named {quest.target.name}</p>
 
     <h1>Mercenary: {mercenary.name}</h1>
