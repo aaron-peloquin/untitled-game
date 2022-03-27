@@ -1,10 +1,5 @@
+import {I_Band} from 'TS_Band';
 import {I_Mercenary} from 'TS_Mercenary';
-
-interface I_Band {
-  gold: number,
-  mercenaries: I_Mercenary[],
-  name: string
-}
 
 const BAND_DATASTORE: I_Band = {
   gold: 15,
