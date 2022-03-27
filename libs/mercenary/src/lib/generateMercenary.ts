@@ -1,8 +1,9 @@
 import {pickArray, pickObject, pickRange} from '@helper';
 import {MERC_CLASS, MERC_CLASS_BASE_STATS, MERC_ETHNICITY_BASE_STATS, MERC_NAMES} from '@static';
-import {I_Mercenary, T_BaseStats} from 'TS_Mercenary';
+import {T_NumGenSig} from 'TS_General';
+import {T_BaseStats, T_generateMercenarySig} from 'TS_Mercenary';
 
-export const generateMercenary = (numberGenerator: () => number = Math.random) => (levelMin = 1, levelMax = 3):I_Mercenary => {
+export const generateMercenary = (numberGenerator: T_NumGenSig):T_generateMercenarySig => (levelMin = 1, levelMax = 3) => {
   const rangeGenerator = pickRange(numberGenerator);
 
   const level = rangeGenerator(levelMin, levelMax);
@@ -23,7 +24,7 @@ export const generateMercenary = (numberGenerator: () => number = Math.random) =
   const baseHealth = (baseStats.endurance * rangeGenerator(0, 1.5));
   const health = baseHealth * level;
 
-  return {
+  const result = {
     ethnicity,
     health,
     level,
@@ -33,4 +34,6 @@ export const generateMercenary = (numberGenerator: () => number = Math.random) =
     profession,
     stats: baseStats,
   };
+
+  return result;
 };

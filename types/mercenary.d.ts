@@ -1,4 +1,12 @@
 declare module 'TS_Mercenary' {
+
+  export type T_BaseStats = {
+    cost: number
+    attack: number
+    endurance: number
+    stealth: number
+    capture: number
+  }
   interface I_Mercenary {
     name: string
     profession: string
@@ -10,11 +18,7 @@ declare module 'TS_Mercenary' {
     ethnicity: string
   }
 
-  export type T_BaseStats = {
-    cost: number
-    attack: number
-    endurance: number
-    stealth: number
-    capture: number
-  }
+
+  export type T_generateMercenarySig = (levelMin: number, levelMax: number) => I_Mercenary
+ 
 }
