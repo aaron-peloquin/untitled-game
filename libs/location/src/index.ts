@@ -1,1 +1,1 @@
-export * from './lib/location';
+export * from './lib/generateLocation';
