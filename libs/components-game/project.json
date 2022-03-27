@@ -1,0 +1,23 @@
+{
+  "root": "libs/components-game",
+  "sourceRoot": "libs/components-game/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/components-game/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/components-game"],
+      "options": {
+        "jestConfig": "libs/components-game/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

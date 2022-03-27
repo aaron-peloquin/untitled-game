@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "band": "libs/band",
+    "components-game": "libs/components-game",
     "helper": "libs/helper",
     "location": "libs/location",
     "mercenary": "libs/mercenary",
