@@ -8,6 +8,7 @@ declare module 'TS_Mercenary' {
     capture: number
   }
   interface I_Mercenary {
+    mercenaryId: number
     name: string
     profession: string
     stats: T_BaseStats

@@ -1,1 +1,1 @@
-export * from './lib/band';
+export * from './lib/useBand';

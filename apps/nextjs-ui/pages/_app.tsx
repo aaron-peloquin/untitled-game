@@ -2,7 +2,7 @@ import {AppProps} from 'next/app';
 import Head from 'next/head';
 import './styles.css';
 
-function CustomApp({Component, pageProps}: AppProps) {
+const CustomApp = ({Component, pageProps}: AppProps) => {
   return (
     <div>
       <Head>
@@ -13,6 +13,6 @@ function CustomApp({Component, pageProps}: AppProps) {
       </main>
     </div>
   );
-}
+};
 
 export default CustomApp;

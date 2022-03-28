@@ -32,21 +32,12 @@ export const generateLocation:T_generateLocationSig = (locationNumGenerator, gen
   const mercenaries = [];
   const quests = [];
 
-  console.log('generateMercenary', generateMercenary);
-
   for (let index = 0; index < countMercenaries; index++) {
     mercenaries.push(generateMercenary(levelRanges[0], levelRanges[1]));
   }
   for (let index = 0; index < countQuests; index++) {
     quests.push(generateQuest(levelRanges[0], levelRanges[1]));
   }
-
-  console.log({
-    countMercenaries,
-    countQuests,
-    mercenaries,
-    quests,
-  });
 
   const name = `${prefix} ${locationName}`;
   const result:I_Location = {
