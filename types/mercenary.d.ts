@@ -1,5 +1,5 @@
 declare module 'TS_Mercenary' {
-
+  import {T_NumGenSig} from "TS_General"
   export type T_BaseStats = {
     cost: number
     attack: number
@@ -20,7 +20,5 @@ declare module 'TS_Mercenary' {
     ethnicity: string
   }
 
-
-  export type T_generateMercenarySig = (levelMin: number, levelMax: number) => T_Mercenary
- 
+  export type T_generateMercenarySig = (numberGenerator: T_NumGenSig, gameSaveId: number, levelMin: number, levelMax: number) => PromiseExtended<IndexableType>
 }

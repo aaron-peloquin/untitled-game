@@ -29,6 +29,6 @@ declare module 'TS_Quest' {
       run: T_RunQuestSig
     }
 
-  export type T_generateQuestSig = (levelMin: number, levelMax: number) => I_Quest
+  export type T_generateQuestSig = (numberGenerator: T_NumGenSig, gameSaveId: number, levelMin: number, levelMax: number) => PromiseExtended<IndexableType>
 
 }

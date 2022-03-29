@@ -1,12 +1,11 @@
-import {pickArray, pickObject} from '@helper';
+import {db, pickArray, pickObject} from '@helper';
 import {QUEST_TARGET_NAMES, QUEST_TARGET_PROFESSIONS, QUEST_TYPE} from '@static';
-import {T_NumGenSig} from 'TS_General';
 import {I_BaseQuest, I_Quest, T_generateQuestSig} from 'TS_Quest';
 
 import {runSlayQuest} from './runSlayQuest';
 
 
-export const generateQuest = (numberGenerator: T_NumGenSig = Math.random):T_generateQuestSig => (levelMin = 0.6, levelMax = 1.75) => {
+export const generateQuest:T_generateQuestSig = (numberGenerator, gameSaveId, levelMin = 0.6, levelMax = 1.75) => {
   let questRunner;
   const type = pickArray(QUEST_TYPE, numberGenerator);
   const level = (numberGenerator() * (levelMax - levelMin) + levelMin).toFixed(2);
@@ -17,6 +16,7 @@ export const generateQuest = (numberGenerator: T_NumGenSig = Math.random):T_gene
 
 
   const quest: I_BaseQuest = {
+    gameSaveId,
     level: parseFloat(level),
     target: {
       ethnicity,
@@ -26,14 +26,15 @@ export const generateQuest = (numberGenerator: T_NumGenSig = Math.random):T_gene
     type,
   };
 
-  switch (type) {
-    default:
-      questRunner = runSlayQuest(quest);
-  }
+  // switch (type) {
+  //   default:
+  //     questRunner = runSlayQuest(quest);
+  // }
 
-  const questWithRunner: I_Quest = {
-    ...quest,
-    run: questRunner,
-  };
-  return questWithRunner;
+  // const questWithRunner: I_Quest = {
+  //   ...quest,
+  //   run: questRunner,
+  // };
+
+  return db.quests.add(quest);
 };

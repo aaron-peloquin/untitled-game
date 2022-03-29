@@ -1,8 +1,8 @@
 import {memo} from 'react';
-import {I_Quest} from 'TS_Quest';
+import {I_BaseQuest} from 'TS_Quest';
 
 type Props = {
-    quest: I_Quest
+    quest: I_BaseQuest
 }
 const QuestItem: React.FC<Props> = ({quest}) => {
   return <li>{quest.type} (${quest.level})</li>;

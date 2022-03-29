@@ -3,15 +3,13 @@ import Dexie, {Table} from 'dexie';
 import {T_GameSave} from 'TS_General';
 import {T_Location} from 'TS_Location';
 import {T_Mercenary} from 'TS_Mercenary';
-import {I_Quest} from 'TS_Quest';
+import {I_BaseQuest} from 'TS_Quest';
 
 export class MySubClassedDexie extends Dexie {
-  // 'friends' is added by dexie when declaring the stores()
-  // We just tell the typing system this is the case
   gameSaves!: Table<T_GameSave>;
   locations!: Table<T_Location>;
   mercenaries!: Table<T_Mercenary>;
-  quests!: Table<I_Quest>;
+  quests!: Table<I_BaseQuest>;
 
   constructor() {
     super('untitled-game');

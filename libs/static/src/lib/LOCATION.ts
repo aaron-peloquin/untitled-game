@@ -3,8 +3,8 @@ export const LOCATION_NAME_PREFIX: string[] = [
   'New',
   'South',
   'Olde',
-  'Outskirts of',
-  'Village of',
+  'The outskirts of',
+  'The village of',
 ];
 export const LOCATION_NAMES: string[] = [
   'Charlesberg',
