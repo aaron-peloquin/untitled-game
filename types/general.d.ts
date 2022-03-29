@@ -3,6 +3,7 @@ declare module 'TS_General' {
   import {T_Band} from 'TS_Band'
   export type T_GameSave = {
     id?: number
+    currentSave: number
     name: string
     seed: string
     band: T_Band

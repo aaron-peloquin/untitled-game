@@ -1,4 +1,6 @@
 export * from './lib/data/db';
+export * from './lib/data/useSetGameSave';
+export * from './lib/data/useCurrentSave';
 export * from './lib/gameDataContext';
 export * from './lib/pickArray';
 export * from './lib/pickObject';
