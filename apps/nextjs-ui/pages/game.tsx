@@ -1,14 +1,7 @@
-import {useCurrentSave} from '@helper';
-import {useEffect, useState} from 'react';
+import {GameLayout} from '@components-game';
 
 const Game = () => {
-  const game = useCurrentSave();
-  const [stater, setStater] = useState(3);
-  console.log('render', game);
-  useEffect(() => {
-    console.log('effect', game);
-  }, [game]);
-  return <button onClick={() => setStater(stater + 1)}>Clicky</button>;
+  return <GameLayout />;
 };
 
 export default Game;
