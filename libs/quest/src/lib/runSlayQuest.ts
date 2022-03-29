@@ -1,7 +1,7 @@
 /* eslint-disable guard-for-in */
+import {pickRange, seedGenerator} from '@helper';
 import {get, mean, set} from 'lodash';
 
-import {pickRange, seedGenerator} from '@helper';
 
 import {T_Mercenary} from 'TS_Mercenary';
 import {I_Quest, T_FullRunQuestSig, I_QuestResult} from 'TS_Quest';

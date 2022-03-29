@@ -1,6 +1,6 @@
-import _ from 'lodash';
 import {memo} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
+
 import MercenaryItem from '../atoms/MercenaryItem';
 
 type Props = {

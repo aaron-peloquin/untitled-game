@@ -1,7 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx", "jsx-a11y", "sort-keys-fix"],
+  "plugins": ["@nrwl/nx", "jsx-a11y", "sort-keys-fix", "import"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -23,6 +23,7 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
+      "excludedFiles": ["next-env.d.ts"],
       "extends": ["plugin:@nrwl/nx/typescript","google"],
       "rules": {
         "camelcase": "off",
@@ -31,6 +32,11 @@
         "require-jsdoc":"off",
         "sort-keys": "error",
         "sort-keys-fix/sort-keys-fix": "error",
+        "import/order": ["error", {
+          "alphabetize": {"order": "asc", "caseInsensitive": true},
+          "groups": ["builtin", "external", "internal", "index", "sibling", "parent",  "object"],
+          "newlines-between": "always-and-inside-groups"
+          }],
         "space-infix-ops": "error"
       }
     }

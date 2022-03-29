@@ -1,8 +1,9 @@
 import {useCurrentSave} from '@helper';
+import {useEffect} from 'react';
+
 import BandPanel from '../organisms/BandPanel';
 import Location from '../organisms/Location';
 
-import {useEffect} from 'react';
 
 export const GameLayout = () => {
   const save = useCurrentSave();

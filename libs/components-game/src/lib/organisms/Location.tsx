@@ -1,6 +1,8 @@
 import {T_Location} from 'TS_Location';
+
 import MercenaryList from '../molecules/MercenaryList';
 import QuestList from '../molecules/QuestList';
+
 
 type Props = {
   location: T_Location
