@@ -10,8 +10,6 @@ export const useSetCurrentSave = () => {
   const router = useRouter();
   const currentSave = useCurrentSave();
 
-  console.log('from hook', currentSave);
-
   const setGameSave = useCallback((id) => {
     if (currentSave?.id) {
       db.gameSaves.update(currentSave.id, {currentSave: 0});
