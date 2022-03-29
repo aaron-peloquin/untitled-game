@@ -1,22 +1,6 @@
 import {pickArray, pickRange} from '@helper';
 import {T_Location, T_generateLocationSig} from 'TS_Location';
 
-const LOCATION_NAME_PREFIX = [
-  'New',
-  'South',
-  'Olde',
-  'Outskirts of',
-  'Village of',
-];
-const LOCATION_NAMES = [
-  'Charleston',
-  'Hampsberg',
-  'Fankton',
-  'Westville',
-  'Steville',
-];
-
-
 export const generateLocation:T_generateLocationSig = (locationNumGenerator, generateMercenary, generateQuest) => (levelMin = 0.6, levelMax = 1.75):T_Location => {
   const locationRangeNumber = pickRange(locationNumGenerator);
   const prefix = pickArray(LOCATION_NAME_PREFIX, locationNumGenerator);

@@ -1,5 +1,7 @@
-export * from './lib/data/BAND';
-export * from './lib/data/MERCENARY';
-export * from './lib/data/QUEST';
+export * from './lib/LOCATION';
+export * from './lib/MERCENARY';
+export * from './lib/QUEST';
+export * from './lib/URLs';
+
 
 export const IS_SSR = typeof window === 'undefined';
