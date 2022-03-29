@@ -31,7 +31,7 @@
         "require-jsdoc":"off",
         "sort-keys": "error",
         "sort-keys-fix/sort-keys-fix": "error",
-        "space-infix-ops": "error",
+        "space-infix-ops": "error"
       }
     }
   ]
