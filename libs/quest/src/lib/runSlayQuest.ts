@@ -3,13 +3,13 @@ import {get, mean, set} from 'lodash';
 
 import {pickRange, seedGenerator} from '@helper';
 
-import {I_Mercenary} from 'TS_Mercenary';
-import {I_Quest, T_FullRunQuestSig, T_QuestResult} from 'TS_Quest';
+import {T_Mercenary} from 'TS_Mercenary';
+import {I_Quest, T_FullRunQuestSig, I_QuestResult} from 'TS_Quest';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const analytics: Record<string, any> = {};
 
-const increaseAnalytics = (mercenary: I_Mercenary, quest: I_Quest, result:T_QuestResult) => {
+const increaseAnalytics = (mercenary: T_Mercenary, quest: I_Quest, result:I_QuestResult) => {
   const mercLevel = Math.round(mercenary.level);
   const questLevel = Math.round(quest.level);
   const analyticsPath = `${mercenary.profession}.${mercLevel}.${questLevel}`;
@@ -87,7 +87,7 @@ export const runSlayQuest:T_FullRunQuestSig = (quest) => (mercenary) => {
     roundsLog.push(`${mercenary.name} was returned in failure`);
   }
 
-  const result: T_QuestResult = {
+  const result: I_QuestResult = {
     outcome,
     rewards: {exp: 5, gold: 2},
     roundsLog,

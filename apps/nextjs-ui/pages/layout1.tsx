@@ -4,12 +4,12 @@ import {generateQuest, logAnalytics} from '@quest';
 import {generateMercenary} from '@mercenary';
 import {seedGenerator} from '@helper';
 import {generateLocation} from '@location';
-import {T_QuestResult} from 'TS_Quest';
+import {I_QuestResult} from 'TS_Quest';
 
 const LEVEL_LOW = 0.5;
 const LEVEL_HIGH = 2.5;
 
-const QUEST_RESULT_LOADING:T_QuestResult = {
+const QUEST_RESULT_LOADING:I_QuestResult = {
   outcome: 'Thinking...',
   rewards: null,
   roundsLog: null,
@@ -23,7 +23,7 @@ const Test = () => {
 
   const seededMercenary = useMemo(() => generateMercenary(seedGenerator(currentSeed)), [currentSeed]);
   const seededQuest = useMemo(() => generateQuest(seedGenerator(currentSeed)), [currentSeed]);
-  const [questResult, setQuestResult] = useState<T_QuestResult>();
+  const [questResult, setQuestResult] = useState<I_QuestResult>();
 
   const mercenary = useMemo(() => seededMercenary(LEVEL_LOW, LEVEL_HIGH), [seededMercenary]);
   const quest = useMemo(() => seededQuest(LEVEL_LOW, LEVEL_HIGH), [seededQuest]);

@@ -1,13 +1,19 @@
-import { NEW_BAND } from '@band';
+import {NEW_BAND} from '@band';
 import {createContext} from 'react';
 import {T_GameData} from 'TS_General';
 
 export const gameDataContext = createContext<T_GameData>({
   bandController: {
+    addMercenary: () => {
+      return;
+    },
+    adjustGold: () => {
+      return;
+    },
     data: NEW_BAND,
-    addMercenary: () => { return; },
-    adjustGold: () => { return; },
-    removeMercenary: () => { return; },
+    removeMercenary: () => {
+      return;
+    },
   },
   currentLocation: {
     level: 0,

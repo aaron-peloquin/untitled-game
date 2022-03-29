@@ -1,5 +1,5 @@
 import {pickArray, pickRange} from '@helper';
-import {I_Location, T_generateLocationSig} from 'TS_Location';
+import {T_Location, T_generateLocationSig} from 'TS_Location';
 
 const LOCATION_NAME_PREFIX = [
   'New',
@@ -17,7 +17,7 @@ const LOCATION_NAMES = [
 ];
 
 
-export const generateLocation:T_generateLocationSig = (locationNumGenerator, generateMercenary, generateQuest) => (levelMin = 0.6, levelMax = 1.75):I_Location => {
+export const generateLocation:T_generateLocationSig = (locationNumGenerator, generateMercenary, generateQuest) => (levelMin = 0.6, levelMax = 1.75):T_Location => {
   const locationRangeNumber = pickRange(locationNumGenerator);
   const prefix = pickArray(LOCATION_NAME_PREFIX, locationNumGenerator);
   const locationName = pickArray(LOCATION_NAMES, locationNumGenerator);
@@ -40,7 +40,7 @@ export const generateLocation:T_generateLocationSig = (locationNumGenerator, gen
   }
 
   const name = `${prefix} ${locationName}`;
-  const result:I_Location = {
+  const result:T_Location = {
     level,
     levelRanges,
     mercenaries,

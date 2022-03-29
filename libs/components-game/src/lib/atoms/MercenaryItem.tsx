@@ -1,9 +1,9 @@
 import { gameDataContext } from '@helper';
 import {memo, useCallback, useContext, useMemo} from 'react';
-import {I_Mercenary} from 'TS_Mercenary';
+import {T_Mercenary} from 'TS_Mercenary';
 
 type Props = {
-  mercenary: I_Mercenary
+  mercenary: T_Mercenary
 }
 const MercenaryItem: React.FC<Props> = ({mercenary}) => {
   const {bandController} = useContext(gameDataContext)

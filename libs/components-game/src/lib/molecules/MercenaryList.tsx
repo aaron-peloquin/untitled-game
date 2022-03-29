@@ -1,12 +1,12 @@
 import { gameDataContext } from '@helper';
 import _ from 'lodash';
 import {memo, useContext, useMemo} from 'react';
-import {I_Mercenary} from 'TS_Mercenary';
+import {T_Mercenary} from 'TS_Mercenary';
 import MercenaryItem from '../atoms/MercenaryItem';
 
 type Props = {
   hideEnlisted?: boolean,
-  mercenaries: I_Mercenary[]
+  mercenaries: T_Mercenary[]
 }
 const MercenaryList: React.FC<Props> = ({hideEnlisted, mercenaries}) => {
   const {bandController} = useContext(gameDataContext);

@@ -1,3 +1,4 @@
+export * from './lib/data/db';
 export * from './lib/gameDataContext';
 export * from './lib/pickArray';
 export * from './lib/pickObject';

@@ -7,8 +7,9 @@ declare module 'TS_Mercenary' {
     stealth: number
     capture: number
   }
-  interface I_Mercenary {
-    mercenaryId: number
+  interface T_Mercenary {
+    id?: number
+    gameSaveId: number
     name: string
     profession: string
     stats: T_BaseStats
@@ -20,6 +21,6 @@ declare module 'TS_Mercenary' {
   }
 
 
-  export type T_generateMercenarySig = (levelMin: number, levelMax: number) => I_Mercenary
+  export type T_generateMercenarySig = (levelMin: number, levelMax: number) => T_Mercenary
  
 }

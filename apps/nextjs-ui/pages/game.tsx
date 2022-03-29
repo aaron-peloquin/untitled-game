@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useMemo, useState} from 'react';
 
 import {gameDataContext, seedGenerator} from '@helper';
-import {I_Location} from 'TS_Location';
+import {T_Location} from 'TS_Location';
 import {T_GameData} from 'TS_General';
 import {useBand} from '@band';
 import {GameLayout} from '@components-game';
@@ -10,7 +10,7 @@ import {generateMercenary} from '@mercenary';
 import {generateLocation} from '@location';
 const GameProvider = gameDataContext.Provider;
 
-// const QUEST_RESULT_LOADING:T_QuestResult = {
+// const QUEST_RESULT_LOADING:I_QuestResult = {
 //   outcome: 'Thinking...',
 //   rewards: null,
 //   roundsLog: null,
@@ -18,7 +18,7 @@ const GameProvider = gameDataContext.Provider;
 
 const Game = () => {
   const [seed, setSeed] = useState<string>('randomization seed');
-  const [pastLocations, setPastLocations] = useState<I_Location[]>();
+  const [pastLocations, setPastLocations] = useState<T_Location[]>();
 
   const bandController = useBand();
   const seededMercenaryGenerator = useMemo(() => generateMercenary(seedGenerator(seed)), [seed]);
@@ -28,7 +28,7 @@ const Game = () => {
     return generateLocation(seedGenerator(seed), seededMercenaryGenerator, seededQuestGenerator);
   }, [seed, seededMercenaryGenerator, seededQuestGenerator]);
 
-  const [currentLocation, setLocation] = useState<I_Location>(seededLocationGenerator(1, 3));
+  const [currentLocation, setLocation] = useState<T_Location>(seededLocationGenerator(1, 3));
   useEffect(() => {
     const location = seededLocationGenerator(1, 3);
     setLocation(location);

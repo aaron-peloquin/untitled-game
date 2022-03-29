@@ -1,6 +1,6 @@
 declare module 'TS_Quest' {
-    import {I_Mercenary} from 'TS_Mercenary';
-    export type T_QuestResult = {
+    import {T_Mercenary} from 'TS_Mercenary';
+    export type I_QuestResult = {
         outcome: string
         rewards: {
           exp: number
@@ -9,11 +9,13 @@ declare module 'TS_Quest' {
         roundsLog: string[]
       }
 
-    export type T_RunQuestSig = (mercenary: I_Mercenary) => T_QuestResult
+    export type T_RunQuestSig = (mercenary: T_Mercenary) => I_QuestResult
 
     export type T_FullRunQuestSig = (quest: I_BaseQuest) => T_RunQuestSig
 
     export interface I_BaseQuest {
+      id?: number
+      gameSaveId: number
       type: string
       level: number
       target: {
