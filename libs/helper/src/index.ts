@@ -3,7 +3,6 @@ export * from './lib/data/gameSaves/useSetGameSave';
 export * from './lib/data/gameSaves/useCurrentSave';
 export * from './lib/data/gameSaves/useCurrentSaveId';
 export * from './lib/data/gameSaves/useAllGameSaves';
-export * from './lib/gameDataContext';
 export * from './lib/pickArray';
 export * from './lib/pickObject';
 export * from './lib/pickRange';

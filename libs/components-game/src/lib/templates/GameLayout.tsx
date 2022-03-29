@@ -1,8 +1,18 @@
-// import CurrentLocation from '../organisms/CurrentLocation';
-// import GameSettings from '../organisms/GameSettings';
+import {useCurrentSave} from '@helper';
 import BandPanel from '../organisms/BandPanel';
+import Location from '../organisms/Location';
+
+import {useEffect} from 'react';
 
 export const GameLayout = () => {
+  const save = useCurrentSave();
+  useEffect(() => {
+    if (save) {
+      if (!save.currentLocation) {
+        // generateWorld
+      };
+    }
+  });
   return (
     <div>
       <h1>A Untitled Game</h1>
@@ -12,7 +22,7 @@ export const GameLayout = () => {
       </fieldset>
       <fieldset>
         <legend><h2>Location</h2></legend>
-        {/* <CurrentLocation /> */}
+        <Location location={save?.currentLocation} />
       </fieldset>
       <fieldset>
         <legend><h2>Travel</h2></legend>
