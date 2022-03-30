@@ -20,7 +20,7 @@ const Location: React.FC<Props> = ({locationId}) => {
 
   return <>
     You're at the local tavern in <strong>{location?.name}</strong>, there are both recruits and citizens with quests available here. This a level {location?.levelRanges[0]} to {location?.levelRanges[1]} tavern.
-    <h3>Mercenaries for hire</h3>
+    <h3>Mercenaries</h3>
     {mercenaries?.length ? <MercenaryList canHire mercenaries={mercenaries} /> : <span>No mercenaries for hire</span>}
     <h3>Available Quests</h3>
     {quests?.length ? <QuestList quests={quests} /> : <span>No quests available</span>}

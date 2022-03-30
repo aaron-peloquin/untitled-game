@@ -11,7 +11,7 @@ const BandPanel = () => {
 
   return <>
     <h2>{game?.band.name}</h2>
-    <p>You have {game?.band.gold} gold in your pouch</p>
+    <p>You have {game?.band.gold.toLocaleString('en-US')} gold in your pouch</p>
     {mercenaries?.length ? <MercenaryList fullStats mercenaries={mercenaries} /> : null}
   </>;
 };
