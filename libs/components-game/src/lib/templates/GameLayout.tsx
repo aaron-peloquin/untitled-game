@@ -1,12 +1,13 @@
-import {db, seedGenerator, useCurrentSave} from '@helper';
+import {contextSave, db, seedGenerator, useCurrentSave} from '@helper';
 import {generateLocation} from '@location';
-import {useEffect} from 'react';
+import {memo, useEffect} from 'react';
 
 import BandPanel from '../organisms/BandPanel';
 import Location from '../organisms/Location';
 
+const SaveProvider = contextSave.Provider;
 
-export const GameLayout = () => {
+export const GameLayout = memo(() => {
   const save = useCurrentSave();
   useEffect(() => {
     const generateWorld = async () => {
@@ -17,8 +18,9 @@ export const GameLayout = () => {
           let levelMin;
           let levelMax;
           for (let index = 0; index < 44; index++) {
-            levelMin = (index / 4) > 1 ? index : 1;
-            levelMax = index * 4;
+            const quarterIndex = index / 1.4;
+            levelMin = quarterIndex < 1 ? 1 : quarterIndex;
+            levelMax = index * 1.4 || 1.4;
             const locationId = await generateLocation(numberGenerator, save.id || 0, levelMin, levelMax);
             if (index === 0) {
               db.gameSaves.update(save.id || [], {currentLocation: locationId});
@@ -28,8 +30,8 @@ export const GameLayout = () => {
       }
     };
     generateWorld();
-  });
-  return (
+  }, [save]);
+  return <SaveProvider value={save?.id || 0}>
     <div>
       <h1>A Untitled Game</h1>
       <fieldset>
@@ -45,5 +47,5 @@ export const GameLayout = () => {
         {/** Leave this location */}
       </fieldset>
     </div>
-  );
-};
+  </SaveProvider>;
+});

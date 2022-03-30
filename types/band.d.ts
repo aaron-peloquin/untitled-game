@@ -3,7 +3,7 @@ declare module 'TS_Band' {
   
   export type T_Band = {
     gold: number,
-    mercenaries: T_Mercenary[],
+    mercenaries: number[],
     name: string
   }
   

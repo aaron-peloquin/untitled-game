@@ -16,7 +16,7 @@ export const NewGameLayout = () => {
     e.preventDefault();
     const newSave = {
       band: {
-        gold: 15,
+        gold: 1500,
         mercenaries: [],
         name,
       },

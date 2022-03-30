@@ -12,8 +12,9 @@ export const generateLocation:T_generateLocationSig = (numberGenerator, gameSave
   const levelRanges = [
     locationRangeNumber(levelMin, levelMax),
     locationRangeNumber(levelMin, levelMax),
-  ].sort();
+  ].sort((a, b) => a > b ? 0 : -1);
   const level = locationRangeNumber(levelRanges[0], levelRanges[1]);
+  console.log(`${Math.round(level)}:`, levelRanges, [levelMin.toFixed(2), levelMax.toFixed(2)] );
   const countQuests = locationRangeNumber(levelRanges[0], levelRanges[1] + 1);
   const countMercenaries = locationRangeNumber(levelRanges[0], levelRanges[1] + 1);
   const mercenaries: number[] = [];
@@ -30,7 +31,6 @@ export const generateLocation:T_generateLocationSig = (numberGenerator, gameSave
     quests,
   };
   return db.locations.add(location).then(async (id) => {
-    console.log(`created location #${location}`, location);
     for (let index = 0; index < countMercenaries; index++) {
       const mercId = await generateMercenary(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e)=> console.log('error merc', e));
       mercenaries.push(mercId);

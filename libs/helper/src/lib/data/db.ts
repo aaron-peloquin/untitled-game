@@ -16,7 +16,7 @@ export class MySubClassedDexie extends Dexie {
     this.version(1).stores({
       // Primary key and indexed props
       gameSaves: '++id, name, currentSave',
-      locations: '++id, gameSaveId, name',
+      locations: '++id, gameSaveId, name, *mercenaries, *quests',
       mercenaries: '++id, gameSaveId, name, profession, ethnicity',
       quests: '++id, gameSaveId, type, level',
     });
