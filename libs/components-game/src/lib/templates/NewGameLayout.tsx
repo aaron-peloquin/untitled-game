@@ -1,5 +1,6 @@
 import {db, useSetCurrentSave} from '@helper';
 import {SyntheticEvent, useCallback, useState} from 'react';
+import {T_GameSave} from 'TS_General';
 
 export const NewGameLayout = () => {
   const [name, setName] = useState<string>('New game name');
@@ -14,13 +15,13 @@ export const NewGameLayout = () => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    const newSave = {
+    const newSave:T_GameSave = {
       band: {
-        gold: 1500,
+        gold: 15,
         mercenaries: [],
         name,
       },
-      currentLocation: null,
+      currentLocation: 0,
       currentSave: 0,
       name,
       pastLocations: [],

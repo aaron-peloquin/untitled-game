@@ -10,6 +10,7 @@ declare module 'TS_Location' {
     levelRanges: number[]
     quests: number[]
     mercenaries: number[]
+    relatedLocations: number[]
   }
 
   export type T_generateLocationSig = (locationNumGenerator: T_NumGenSig, gameSaveId: number, levelMin: number, levelMax: number) => PromiseExtended<IndexableType>
