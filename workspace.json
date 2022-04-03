@@ -3,6 +3,7 @@
   "projects": {
     "band": "libs/band",
     "components-game": "libs/components-game",
+    "components-layout": "libs/components-layout",
     "helper": "libs/helper",
     "location": "libs/location",
     "mercenary": "libs/mercenary",
