@@ -1,3 +1,4 @@
+import {GridArea, GridTemplate} from '@components-layout';
 import {memo} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
 
@@ -9,9 +10,11 @@ type Props = {
   mercenaries: T_Mercenary[]
 }
 const MercenaryList: React.FC<Props> = ({canHire, mercenaries, fullStats}) => {
-  return <ul>
-    {mercenaries.map((mercenary) => <MercenaryItem canHire={canHire} fullStats={fullStats} mercenary={mercenary} />)}
-  </ul>;
+  return <GridTemplate columns="2">
+    {mercenaries.map((mercenary) => <GridArea>
+      <MercenaryItem canHire={canHire} fullStats={fullStats} mercenary={mercenary} />
+    </GridArea>)}
+  </GridTemplate>;
 };
 
 export default memo(MercenaryList);

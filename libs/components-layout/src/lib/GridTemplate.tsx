@@ -12,8 +12,8 @@ type T_Props = {
 
 const GridTemplate: React.FC<T_Props> = memo(({children, gridTemplateAreas, gridTemplateRows, gridTemplateColumns, columns, rows}) => {
   const dynamicStyles = useMemo(() => {
-    const columnsValue = gridTemplateColumns ?? `1fr `.repeat(columns || 0);
-    const rowsValue = gridTemplateRows ?? `1fr `.repeat(rows || 0);
+    const columnsValue = gridTemplateColumns ?? `1fr `.repeat(columns || 1);
+    const rowsValue = gridTemplateRows ?? `1fr `.repeat(rows || 1);
     return {
       gridTemplateAreas,
       gridTemplateColumns: columnsValue,

@@ -1,4 +1,4 @@
-import { GridArea, GridTemplate } from '@components-layout';
+import {GridArea, GridTemplate} from '@components-layout';
 import {memo} from 'react';
 import {I_BaseQuest} from 'TS_Quest';
 
@@ -9,7 +9,9 @@ type Props = {
 }
 const QuestList: React.FC<Props> = ({quests}) => {
   return <GridTemplate columns={2}>
-    {quests.map((quest) => <GridArea><QuestItem quest={quest} /></GridArea>)}
+    {quests.map((quest) => <GridArea>
+      <QuestItem quest={quest} />
+    </GridArea>)}
   </GridTemplate>;
 };
 
