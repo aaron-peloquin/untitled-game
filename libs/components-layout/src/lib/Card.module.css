@@ -1,9 +1,24 @@
 
 .card {
     border-radius: 4px;
-    background-color: #444;
-    color: #CCC;
-    box-shadow:1 4px 4px #222;
     margin: 1rem;
     padding: 1rem
+}
+
+.card-layer-1 {
+    background-color: #000;
+    color: #FFF;
+    box-shadow:1 4px 4px #111;
+}
+
+.card-layer-2 {
+    background-color: #222;
+    color: #DDD;
+    box-shadow:1 4px 4px #111;
+}
+
+.card-layer-3 {
+    background-color: #444;
+    color: #BBB;
+    box-shadow:1 4px 4px #222;
 }

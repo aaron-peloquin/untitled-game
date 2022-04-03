@@ -1,3 +1,4 @@
+import {Card} from '@components-layout';
 import {db} from '@helper';
 import {IS_SSR} from '@static';
 import {useLiveQuery} from 'dexie-react-hooks';
@@ -21,12 +22,15 @@ const Location: React.FC<Props> = ({locationId}) => {
 
   return <>
     You're at the local tavern in <strong>{location?.name}</strong>, there are both recruits and citizens with quests available here. This a level {location?.levelRanges[0]} to {location?.levelRanges[1]} tavern.
-    <h3>Mercenaries</h3>
-    {mercenaries?.length ? <MercenaryList canHire mercenaries={mercenaries} /> : <span>No mercenaries for hire</span>}
-    <h3>Available Quests</h3>
-    {quests?.length ? <QuestList quests={quests} /> : <span>No quests available</span>}
-    <h3>Travel</h3>
-    {relatedLocations?.length ? <RelatedLocationsList locations={relatedLocations} /> : <span>End of the road?</span>}
+    <Card heading='Mercenaries' layer="3">
+      {mercenaries?.length ? <MercenaryList canHire mercenaries={mercenaries} /> : <span>No mercenaries for hire</span>}
+    </Card>
+    <Card heading='Available Quests' layer="3">
+      {quests?.length ? <QuestList quests={quests} /> : <span>No quests available</span>}
+    </Card>
+    <Card heading='Travel' layer="3">
+      {relatedLocations?.length ? <RelatedLocationsList locations={relatedLocations} /> : <span>End of the road?</span>}
+    </Card>
   </>;
 };
 

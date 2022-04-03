@@ -12,7 +12,7 @@ const SaveProvider = contextSave.Provider;
 
 const gridTemplateAreas = `
 "sidenav_ band____"
-"sidenav_ location"`;
+"location location"`;
 
 export const GameLayout = memo(() => {
   const save = useCurrentSave();
@@ -21,13 +21,14 @@ export const GameLayout = memo(() => {
     <div>
       <GridTemplate gridTemplateAreas={gridTemplateAreas} gridTemplateColumns="1fr 3fr">
         <GridArea gridArea='band____'>
-          <Card heading="Mercenary Band">
+          <Card heading="Mercenary Band" layer="2">
             <BandPanel />
           </Card>
         </GridArea>
         <GridArea gridArea='location'>
-          <h2>Location</h2>
-          {save?.currentLocation && <Location locationId={save?.currentLocation} />}
+          {save?.currentLocation && <Card heading='Location' layer="2">
+            <Location locationId={save?.currentLocation} />
+          </Card>}
         </GridArea>
         <GridArea gridArea='sidenav_'>
           <SideNav />

@@ -4,13 +4,18 @@ import styles from './Card.module.css';
 
 /* eslint-disable-next-line */
 type T_Props = {
+  layer: '1' | '2' | '3'
   heading?: string
 }
 
-export const Card: React.FC<T_Props> = memo(({heading, children}) => {
+export const Card: React.FC<T_Props> = memo(({layer, heading, children}) => {
+  const classNames = styles['card'] + ' ' + styles[`card-layer-${layer}`];
+
   return (
-    <div className={styles['card']}>
-      {heading && <h3>{heading}</h3>}
+    <div className={classNames}>
+      {layer === '1' && <h1>{heading}</h1>}
+      {layer === '2' && <h2>{heading}</h2>}
+      {layer === '3' && <h3>{heading}</h3>}
       {children}
     </div>
   );
