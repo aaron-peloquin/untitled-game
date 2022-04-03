@@ -14,10 +14,10 @@ export const MainMenuLayout = () => {
       {currentSave && <li><Link href={URLs.playGame}>{`Continue (${currentSave.name})`}</Link></li>}
       <li><Link href={URLs.newGame}>New Game</Link></li>
       {gameSaves?.map((save) => <li key={save.id}>
-          Load <button onClick={(e: SyntheticEvent) => {
+        <button onClick={(e: SyntheticEvent) => {
           e.preventDefault();
           setGameSave(save.id);
-        }}>{save.name}</button>
+        }}>Load</button> {save.name}
       </li>)}
       <li><Link href={URLs.settings}>Settings</Link></li>
     </ul>
