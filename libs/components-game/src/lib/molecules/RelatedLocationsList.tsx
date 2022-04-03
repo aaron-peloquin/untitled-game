@@ -1,3 +1,4 @@
+import {GridArea, GridTemplate} from '@components-layout';
 import {memo} from 'react';
 import {T_Location} from 'TS_Location';
 
@@ -7,9 +8,11 @@ type Props = {
     locations: T_Location[]
 }
 const RelatedLocationsList: React.FC<Props> = ({locations}) => {
-  return <ul>
-    {locations.map((location) => <RelatedLocationItem location={location} />)}
-  </ul>;
+  return <GridTemplate columns={1}>
+    {locations.map((location) => <GridArea key={location.id}>
+      <RelatedLocationItem location={location} />
+    </GridArea>)}
+  </GridTemplate>;
 };
 
 export default memo(RelatedLocationsList);
