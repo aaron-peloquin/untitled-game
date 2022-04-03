@@ -31,11 +31,12 @@ export const NewGameLayout = () => {
   };
 
   return <form onSubmit={handleSubmit}>
+    <h1>New game</h1>
     <fieldset>
       <label htmlFor="name">Save Name</label>
-      <input name="name" id="name" value={name} onChange={handleNameChange} />
+      <input required name="name" id="name" value={name} onChange={handleNameChange} />
       <label htmlFor="seed">Seed</label>
-      <input name="seed" id="seed" value={seed} onChange={handleSeedChange} />
+      <input required name="seed" id="seed" value={seed} onChange={handleSeedChange} />
     </fieldset>
     <fieldset>
       <button type="submit">Start</button>
