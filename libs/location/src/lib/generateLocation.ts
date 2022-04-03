@@ -19,7 +19,6 @@ export const generateLocation:T_generateLocationSig = (numberGenerator, gameSave
   const mercenaries: number[] = [];
   const quests: number[] = [];
 
-
   const name = `${prefix} ${locationName}`;
   const location:T_Location = {
     gameSaveId,
@@ -31,15 +30,21 @@ export const generateLocation:T_generateLocationSig = (numberGenerator, gameSave
     relatedLocations: [],
   };
   return db.locations.add(location).then(async (id) => {
+    const waitForMe = [];
     for (let index = 0; index < countMercenaries; index++) {
-      const mercId = await generateMercenary(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e: Error)=> console.log('error merc', e));
-      mercenaries.push(mercId);
+      waitForMe.push(generateMercenary(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e: Error)=> console.error('error merc', e)).then((mercId) => {
+        mercenaries.push(mercId);
+      }));
+      ;
     }
     for (let index = 0; index < countQuests; index++) {
-      const questId = await generateQuest(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e: Error)=> console.log('error merc', e));
-      quests.push(questId);
+      waitForMe.push(generateQuest(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e: Error)=> console.log('error merc', e)).then((questId) => {
+        quests.push(questId);
+      }));
     }
-    db.locations.update(id, {mercenaries, quests});
+    await Promise.all(waitForMe);
+    console.log('loc', id, mercenaries, quests);
+    await db.locations.update(id, {mercenaries, quests});
     return id;
   });
 };

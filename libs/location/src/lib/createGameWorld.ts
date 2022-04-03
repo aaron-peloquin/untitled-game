@@ -8,6 +8,7 @@ import {generateLocation} from './generateLocation';
 type T_createGameWorldSig = (save?: T_GameSave) => void
 export const createGameWorld:T_createGameWorldSig = (save) => {
   const generateWorld = async () => {
+    const firstGenerated = false;
     if (save) {
       const saveId = save.id || 0;
       if (!save.currentLocation) {
@@ -19,12 +20,13 @@ export const createGameWorld:T_createGameWorldSig = (save) => {
           const quarterIndex = index / 1.4;
           levelMin = quarterIndex < 1 ? 1 : quarterIndex;
           levelMax = index * 1.4 || 1.4;
-          const locationId = await generateLocation(numberGenerator, saveId, levelMin, levelMax);
-          if (index === 0) {
-            locationPromises.push(db.gameSaves.update(save.id || 0, {currentLocation: locationId}));
-          }
+          locationPromises.push(generateLocation(numberGenerator, saveId, levelMin, levelMax));
         }
         Promise.all(locationPromises).then(async () => {
+          // set first location as currentLocation
+          const location = await db.locations.where('gameSaveId').equals(saveId).first();
+          await db.gameSaves.update(save.id || 0, {currentLocation: location?.id});
+
           const relationRange = pickRange(numberGenerator);
           const locationRelations: Record<string, number[]> = {};
           const locations = await db.locations.where('gameSaveId').equals(saveId).toArray();
@@ -62,7 +64,7 @@ export const createGameWorld:T_createGameWorldSig = (save) => {
             if (locationRelations[locationId].length) {
               const locId = parseInt(locationId);
               const relatedLocations = locationRelations[locationId].filter((id) => id !== locId).sort((a, b) => a > b ? 0 : -1);
-              const boop = db.locations.update(locId, {relatedLocations}).then((result) => console.log('update result:', result));
+              const boop = db.locations.update(locId, {relatedLocations});
               relationPromises.push(boop);
             }
           }
