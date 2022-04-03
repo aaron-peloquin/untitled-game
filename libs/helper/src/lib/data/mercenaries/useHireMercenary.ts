@@ -15,6 +15,7 @@ export const useHireMercenary: useHireMercenarySign = ({save, canHire, mercenary
     const bandGold = save?.band?.gold || 0;
     const mercenaryCost = mercenary.stats.cost || 1;
     const bandCanHire = bandGold >= mercenaryCost;
+
     if (canSave) {
       if (bandCanHire) {
         // reduce gold

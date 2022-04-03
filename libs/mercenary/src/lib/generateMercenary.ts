@@ -15,7 +15,7 @@ export const generateMercenary: T_generateMercenarySig = (numberGenerator, gameS
   const baseStats: T_BaseStats = {
     attack: baseProfessionStats.attack + baseEthnicityStats.attack,
     capture: baseProfessionStats.capture + baseEthnicityStats.capture,
-    cost: baseProfessionStats.cost + baseEthnicityStats.cost,
+    cost: Math.round(baseProfessionStats.cost + baseEthnicityStats.cost + rangeGenerator(-1, 1) + level),
     endurance: baseProfessionStats.endurance + baseEthnicityStats.endurance,
     stealth: baseProfessionStats.stealth + baseEthnicityStats.stealth,
   };
