@@ -1,5 +1,7 @@
 html {
-  background-color: black;
+  background-color: #000;
+  font-size: 18px;
+  font-family:'Courier New', Courier, monospace;
   color: #CCC;
   height: 100%;
   display: block;
