@@ -1,8 +1,6 @@
 import {Card} from '@components-layout';
 import {db, useBandMercenaries} from '@helper';
 import {runSlayQuest} from '@quest';
-// import {useLiveQuery} from 'dexie-react-hooks';
-// import _ from 'lodash';
 import {memo, useCallback, useState} from 'react';
 import {I_BaseQuest, T_RunQuestSig} from 'TS_Quest';
 

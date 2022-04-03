@@ -25,10 +25,6 @@ declare module 'TS_Quest' {
       }
     }
 
-    export interface I_Quest extends I_BaseQuest {
-      run: T_RunQuestSig
-    }
-
   export type T_generateQuestSig = (numberGenerator: T_NumGenSig, gameSaveId: number, levelMin: number, levelMax: number) => PromiseExtended<IndexableType>
 
 }

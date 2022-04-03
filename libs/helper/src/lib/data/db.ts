@@ -1,15 +1,14 @@
-// db.ts
 import Dexie, {Table} from 'dexie';
 import {T_GameSave} from 'TS_General';
-import {I_Location} from 'TS_Location';
+import {T_Location} from 'TS_Location';
 import {T_Mercenary} from 'TS_Mercenary';
 import {I_BaseQuest} from 'TS_Quest';
 
 export class MySubClassedDexie extends Dexie {
-  gameSaves!: Table<T_GameSave>;
-  locations!: Table<I_Location, {id: number}>;
-  mercenaries!: Table<T_Mercenary>;
-  quests!: Table<I_BaseQuest>;
+  gameSaves!: Table<T_GameSave, number>;
+  locations!: Table<T_Location, number>;
+  mercenaries!: Table<T_Mercenary, number>;
+  quests!: Table<I_BaseQuest, number>;
 
   constructor() {
     super('untitled-game');

@@ -1,4 +1,5 @@
 import {db, pickRange, seedGenerator} from '@helper';
+import * as _ from 'lodash';
 import {T_GameSave} from 'TS_General';
 import {T_Location} from 'TS_Location';
 
@@ -20,16 +21,16 @@ export const createGameWorld:T_createGameWorldSig = (save) => {
           levelMax = index * 1.4 || 1.4;
           const locationId = await generateLocation(numberGenerator, saveId, levelMin, levelMax);
           if (index === 0) {
-            locationPromises.push(db.gameSaves.update(save.id || [], {currentLocation: locationId}));
+            locationPromises.push(db.gameSaves.update(save.id || 0, {currentLocation: locationId}));
           }
         }
         Promise.all(locationPromises).then(async () => {
           const relationRange = pickRange(numberGenerator);
           const locationRelations: Record<string, number[]> = {};
           const locations = await db.locations.where('gameSaveId').equals(saveId).toArray();
-          const locationIdRange = [
-            locations[0].id,
-            locations[locations.length - 1].id,
+          const locationIdRange: number[] = [
+            locations[0].id || 0,
+            locations[locations.length - 1].id || 0,
           ];
           locations.forEach((location: T_Location) => {
             const locationId = location.id || 0;

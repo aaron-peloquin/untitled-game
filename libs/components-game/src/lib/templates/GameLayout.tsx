@@ -1,7 +1,7 @@
 import {Card, GridArea, GridTemplate} from '@components-layout';
 import {contextSave, useCurrentSave} from '@helper';
 import {createGameWorld} from '@location';
-import _ from 'lodash';
+import * as _ from 'lodash';
 import {memo, useEffect} from 'react';
 
 import BandPanel from '../organisms/BandPanel';

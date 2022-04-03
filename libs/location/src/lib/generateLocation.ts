@@ -32,11 +32,11 @@ export const generateLocation:T_generateLocationSig = (numberGenerator, gameSave
   };
   return db.locations.add(location).then(async (id) => {
     for (let index = 0; index < countMercenaries; index++) {
-      const mercId = await generateMercenary(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e)=> console.log('error merc', e));
+      const mercId = await generateMercenary(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e: Error)=> console.log('error merc', e));
       mercenaries.push(mercId);
     }
     for (let index = 0; index < countQuests; index++) {
-      const questId = await generateQuest(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e)=> console.log('error merc', e));
+      const questId = await generateQuest(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e: Error)=> console.log('error merc', e));
       quests.push(questId);
     }
     db.locations.update(id, {mercenaries, quests});

@@ -13,3 +13,8 @@ declare module 'TS_General' {
 
   export type T_NumGenSig = () => number
 }
+
+declare module '*.css' {
+  const content: Record<string, string>;
+  export default content;
+}

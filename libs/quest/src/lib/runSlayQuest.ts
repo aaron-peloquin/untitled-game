@@ -1,26 +1,25 @@
 /* eslint-disable guard-for-in */
 import {pickRange, seedGenerator} from '@helper';
-import {get, mean, set} from 'lodash';
-
+import * as _ from 'lodash';
 
 import {T_Mercenary} from 'TS_Mercenary';
-import {I_Quest, T_FullRunQuestSig, I_QuestResult} from 'TS_Quest';
+import {I_BaseQuest, T_FullRunQuestSig, I_QuestResult} from 'TS_Quest';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const analytics: Record<string, any> = {};
 
-const increaseAnalytics = (mercenary: T_Mercenary, quest: I_Quest, result:I_QuestResult) => {
+const increaseAnalytics = (mercenary: T_Mercenary, quest: I_BaseQuest, result:I_QuestResult) => {
   const mercLevel = Math.round(mercenary.level);
   const questLevel = Math.round(quest.level);
   const analyticsPath = `${mercenary.profession}.${mercLevel}.${questLevel}`;
-  const metricValue = get(analytics, `${analyticsPath}.outcomes.${result.outcome}`, 0);
-  set(analytics, `${analyticsPath}.outcomes.${result.outcome}`, metricValue + 1);
+  const metricValue = _.get(analytics, `${analyticsPath}.outcomes.${result.outcome}`, 0);
+  _.set(analytics, `${analyticsPath}.outcomes.${result.outcome}`, metricValue + 1);
 
-  const analyticsRounds = get(analytics, `${analyticsPath}.rounds`, []);
+  const analyticsRounds = _.get(analytics, `${analyticsPath}.rounds`, []);
   analyticsRounds.push(result.roundsLog.length - 2);
-  set(analytics, `${analyticsPath}.rounds`, analyticsRounds);
-  set(analytics, `${analyticsPath}.outcomes.totalRuns`, analyticsRounds.length);
-  set(analytics, `${analyticsPath}.outcomes.AverageRounds`, mean(analyticsRounds));
+  _.set(analytics, `${analyticsPath}.rounds`, analyticsRounds);
+  _.set(analytics, `${analyticsPath}.outcomes.totalRuns`, analyticsRounds.length);
+  _.set(analytics, `${analyticsPath}.outcomes.AverageRounds`, _.mean(analyticsRounds));
 };
 
 export const logAnalytics = () => {
@@ -40,7 +39,7 @@ export const logAnalytics = () => {
           profession,
           questLevel: parseInt(questLevel),
         };
-        set(tabularData, `M${mercLevel}_Q${questLevel}_${profession}`, parsedData);
+        _.set(tabularData, `M${mercLevel}_Q${questLevel}_${profession}`, parsedData);
       }
     }
   }

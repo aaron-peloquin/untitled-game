@@ -1,7 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx", "jsx-a11y", "sort-keys-fix", "import"],
+  "plugins": ["@nrwl/nx", "jsx-a11y", "sort-keys-fix", "import", "react", "react-hooks"],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
