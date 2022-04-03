@@ -5,7 +5,7 @@ type T_Props = {
 }
 
 export const GridArea: React.FC<T_Props> = memo(({children, gridArea}) => {
-  return <div style={{gridArea}}>
+  return <div style={{gridArea: `${gridArea}`}}>
     {children}
   </div>;
 });

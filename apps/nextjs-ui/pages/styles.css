@@ -6,3 +6,10 @@ html {
   height: 100%;
   display: block;
 }
+
+a {
+  color: #77F;
+}
+a:visited {
+  color: #AAF;
+}

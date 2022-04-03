@@ -10,7 +10,7 @@ const BandPanel = () => {
   const mercenaries = useLiveQuery(() => IS_SSR ? [] : db.mercenaries.where('id').anyOf(mercenaryIds).toArray(), [mercenaryIds]);
 
   return <>
-    <h2>{game?.band.name}</h2>
+    <strong>{game?.band.name}</strong>
     <p>You have {game?.band.gold.toLocaleString('en-US')} gold in your pouch</p>
     {mercenaries?.length ? <MercenaryList fullStats mercenaries={mercenaries} /> : null}
   </>;
