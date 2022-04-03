@@ -37,7 +37,9 @@
           "groups": ["builtin", "external", "internal", "index", "sibling", "parent",  "object"],
           "newlines-between": "always-and-inside-groups"
           }],
-        "space-infix-ops": "error"
+          "react-hooks/rules-of-hooks": "error",
+          "react-hooks/exhaustive-deps": "error",
+          "space-infix-ops": "error"
       }
     }
   ]
