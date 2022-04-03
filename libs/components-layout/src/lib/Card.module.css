@@ -8,17 +8,23 @@
 .card-layer-1 {
     background-color: #000;
     color: #FFF;
-    box-shadow:1 4px 4px #111;
+    box-shadow:1 4px 4px #000;
 }
 
 .card-layer-2 {
-    background-color: #222;
-    color: #DDD;
+    background-color: #111;
+    color: #EEE;
     box-shadow:1 4px 4px #111;
 }
 
 .card-layer-3 {
-    background-color: #444;
-    color: #BBB;
+    background-color: #222;
+    color: #DDD;
     box-shadow:1 4px 4px #222;
+}
+
+.card-layer-4 {
+    background-color: #333;
+    color: #CCC;
+    box-shadow:1 4px 4px #333;
 }

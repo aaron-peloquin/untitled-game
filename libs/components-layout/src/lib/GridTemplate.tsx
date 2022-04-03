@@ -3,7 +3,7 @@ import {memo, useMemo} from 'react';
 import styles from './GridTemplate.module.css';
 
 type T_Props = {
-    gridTemplateAreas: string
+    gridTemplateAreas?: string
     gridTemplateRows?: string
     gridTemplateColumns?: string
     columns?: number
