@@ -9,7 +9,7 @@ type Props = {
 }
 const QuestList: React.FC<Props> = ({quests}) => {
   return <GridTemplate columns={2}>
-    {quests.map((quest) => <GridArea>
+    {quests.map((quest) => <GridArea key={quest.id}>
       <QuestItem quest={quest} />
     </GridArea>)}
   </GridTemplate>;
