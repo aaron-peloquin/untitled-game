@@ -1,3 +1,4 @@
+import {Card} from '@components-layout';
 import {db, useBandMercenaries} from '@helper';
 import {runSlayQuest} from '@quest';
 // import {useLiveQuery} from 'dexie-react-hooks';
@@ -23,14 +24,17 @@ const QuestItem: React.FC<Props> = ({quest}) => {
         questRunner = runSlayQuest(quest);
         break;
     }
-    const mercenary = await db.mercenaries.get(selectedMercenaryId);
-    const result = questRunner(mercenary);
-    console.log('result', result, quest, mercenary);
+    db.mercenaries.get(selectedMercenaryId).then((mercenary) => {
+      if (mercenary) {
+        const result = questRunner(mercenary);
+        console.log('result', result, quest, mercenary);
+      }
+    });
   }, [quest, selectedMercenaryId]);
-  return <li>
+  return <Card layer="4" heading={`${quest.type} ${quest.target.ethnicity}`}>
     <dl>
-      <dt>Type</dt>
-      <dd>{quest.type}</dd>
+      {/* <dt>Type</dt>
+      <dd>{quest.type}</dd> */}
       <dt>Difficulty</dt>
       <dd>{quest.level}</dd>
       <dt>Target</dt>
@@ -43,7 +47,7 @@ const QuestItem: React.FC<Props> = ({quest}) => {
       </select>
       <button type="submit" disabled={!selectedMercenaryId}>Go Quest!</button>
     </form> : null}
-  </li>;
+  </Card>;
 };
 
 export default memo(QuestItem);
