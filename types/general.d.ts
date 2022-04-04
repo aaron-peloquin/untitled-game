@@ -11,7 +11,10 @@ declare module 'TS_General' {
     pastLocations: number[]
   }
 
+  export type T_TwoItemNumberArray = [ number, number ]
+
   export type T_NumGenSig = () => number
+
 }
 
 declare module '*.css' {

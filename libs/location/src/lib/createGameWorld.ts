@@ -8,7 +8,6 @@ import {generateLocation} from './generateLocation';
 type T_createGameWorldSig = (save?: T_GameSave) => void
 export const createGameWorld:T_createGameWorldSig = (save) => {
   const generateWorld = async () => {
-    const firstGenerated = false;
     if (save) {
       const saveId = save.id || 0;
       if (!save.currentLocation) {

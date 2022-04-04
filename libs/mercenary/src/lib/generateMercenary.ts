@@ -2,10 +2,10 @@ import {db, pickArray, pickObject, pickRange} from '@helper';
 import {MERC_CLASS, MERC_CLASS_BASE_STATS, MERC_ETHNICITY_BASE_STATS, MERC_NAMES} from '@static';
 import {T_BaseStats, T_generateMercenarySig} from 'TS_Mercenary';
 
-export const generateMercenary: T_generateMercenarySig = (numberGenerator, gameSaveId, levelMin = 1, levelMax = 3) => {
+export const generateMercenary: T_generateMercenarySig = ({numberGenerator, gameSaveId, levelRanges}) => {
   const rangeGenerator = pickRange(numberGenerator);
 
-  const level = rangeGenerator(levelMin, levelMax);
+  const level = rangeGenerator(levelRanges[0], levelRanges[1]);
   const [ethnicity, mercClasses] = pickObject(MERC_CLASS, numberGenerator);
   const name = pickArray(MERC_NAMES[ethnicity], numberGenerator);
   const profession = pickArray(mercClasses, numberGenerator);

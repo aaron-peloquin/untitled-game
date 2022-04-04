@@ -1,4 +1,5 @@
 declare module 'TS_Location' {
+  import {T_TwoItemNumberArray} from 'TS_General';
   import {T_Mercenary} from 'TS_Mercenary';
   import {I_Quest} from 'TS_Quest';
   
@@ -7,7 +8,7 @@ declare module 'TS_Location' {
     name: string
     gameSaveId: number
     level: number
-    levelRanges: number[]
+    levelRanges: T_TwoItemNumberArray
     quests: number[]
     mercenaries: number[]
     relatedLocations: number[]

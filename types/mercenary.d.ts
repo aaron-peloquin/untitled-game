@@ -18,7 +18,13 @@ declare module 'TS_Mercenary' {
     originalHealth: number
     originalStats: T_BaseStats
     ethnicity: string
+    statsVisible: boolean
   }
 
-  export type T_generateMercenarySig = (numberGenerator: T_NumGenSig, gameSaveId: number, levelMin: number, levelMax: number) => PromiseExtended<IndexableType>
+  type T_generateMercenaryArgs = {
+    numberGenerator: T_NumGenSig
+    gameSaveId: number
+    levelRange: number[]
+  }
+  export type T_generateMercenarySig = (T_generateMercenaryArgs) => PromiseExtended<IndexableType>
 }

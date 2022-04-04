@@ -2,6 +2,7 @@ import {db, pickArray, pickRange} from '@helper';
 import {generateMercenary} from '@mercenary';
 import {generateQuest} from '@quest';
 import {LOCATION_NAMES, LOCATION_NAME_PREFIX} from '@static';
+import {T_TwoItemNumberArray} from 'TS_General';
 import {T_Location, T_generateLocationSig} from 'TS_Location';
 
 export const generateLocation:T_generateLocationSig = (numberGenerator, gameSaveId, levelMin = 0.6, levelMax = 1.75) => {
@@ -12,7 +13,8 @@ export const generateLocation:T_generateLocationSig = (numberGenerator, gameSave
   const levelRanges = [
     locationRangeNumber(levelMin, levelMax),
     locationRangeNumber(levelMin, levelMax),
-  ].sort((a, b) => a > b ? 0 : -1);
+  ].sort((a, b) => a > b ? 0 : -1) as T_TwoItemNumberArray;
+
   const level = locationRangeNumber(levelRanges[0], levelRanges[1]);
   const countQuests = locationRangeNumber(2, 5);
   const countMercenaries = locationRangeNumber(levelMin < 4 ? 2 : 1, levelMin < 8 ? 6 : 4);
@@ -32,13 +34,13 @@ export const generateLocation:T_generateLocationSig = (numberGenerator, gameSave
   return db.locations.add(location).then(async (id) => {
     const waitForMe = [];
     for (let index = 0; index < countMercenaries; index++) {
-      waitForMe.push(generateMercenary(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e: Error)=> console.error('error merc', e)).then((mercId) => {
+      waitForMe.push(generateMercenary({gameSaveId, levelRanges, numberGenerator}).catch((e: Error)=> console.error('error merc', e)).then((mercId: number) => {
         mercenaries.push(mercId);
       }));
       ;
     }
     for (let index = 0; index < countQuests; index++) {
-      waitForMe.push(generateQuest(numberGenerator, gameSaveId, levelRanges[0], levelRanges[1]).catch((e: Error)=> console.log('error merc', e)).then((questId) => {
+      waitForMe.push(generateQuest({gameSaveId, levelRanges, numberGenerator}).catch((e: Error)=> console.log('error making quest', e)).then((questId: number) => {
         quests.push(questId);
       }));
     }
