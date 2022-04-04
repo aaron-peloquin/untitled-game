@@ -11,7 +11,7 @@ const VERBS = [
   'meeting a',
   'dancing with a',
   'staring at the',
-  'mocking my',
+  'is mocking my',
 ];
 
 const gridTemplateAreas = `
@@ -20,8 +20,7 @@ const gridTemplateAreas = `
 
 export const NewGameLayout = () => {
   const [name, setName] = useState<string>(`${generate.first()} ${generate.last()}`);
-  const profession: string = generate.profession();
-  const [seed, setSeed] = useState<string>(`The ${profession} ${pickArray(VERBS)} ${generate.animal()}`);
+  const [seed, setSeed] = useState<string>(`The ${generate.profession()} ${pickArray(VERBS)} ${generate.animal()}`);
   const handleSeedChange = useCallback((e) => {
     setSeed(e.target.value);
   }, []);
