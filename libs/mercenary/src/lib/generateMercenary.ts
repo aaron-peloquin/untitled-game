@@ -33,6 +33,7 @@ export const generateMercenary: T_generateMercenarySig = (numberGenerator, gameS
     originalStats: baseStats,
     profession,
     stats: baseStats,
+    statsVisible: false,
   };
 
   return db.mercenaries.add(mercenary);

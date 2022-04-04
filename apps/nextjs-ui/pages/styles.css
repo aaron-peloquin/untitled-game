@@ -13,3 +13,7 @@ a {
 a:visited {
   color: #AAF;
 }
+
+input {
+  width: 100%;
+}
