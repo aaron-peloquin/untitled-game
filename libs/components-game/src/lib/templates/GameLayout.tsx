@@ -1,7 +1,6 @@
 import {Card, GridArea, GridTemplate} from '@components-layout';
 import {contextSave, useCurrentSave} from '@helper';
 import {createGameWorld} from '@location';
-import * as _ from 'lodash';
 import {memo, useEffect} from 'react';
 
 import BandPanel from '../organisms/BandPanel';
@@ -21,9 +20,7 @@ export const GameLayout = memo(() => {
     <div>
       <GridTemplate gridTemplateAreas={gridTemplateAreas} gridTemplateColumns="1fr 3fr">
         <GridArea gridArea='band____'>
-          <Card heading="Mercenary Band" layer="2">
-            <BandPanel />
-          </Card>
+          <BandPanel />
         </GridArea>
         <GridArea gridArea='location'>
           {save?.currentLocation && <Card heading='Location' layer="2">

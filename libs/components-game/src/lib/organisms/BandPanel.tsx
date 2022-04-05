@@ -1,19 +1,16 @@
-import {db, useCurrentSave} from '@helper';
-import {IS_SSR} from '@static';
-import {useLiveQuery} from 'dexie-react-hooks';
+import {Card} from '@components-layout';
+import {useBand} from '@helper';
+
 
 import MercenaryList from '../molecules/MercenaryList';
 
 const BandPanel = () => {
-  const game = useCurrentSave();
-  const mercenaryIds = game?.band.mercenaries || [];
-  const mercenaries = useLiveQuery(() => IS_SSR ? [] : db.mercenaries.where('id').anyOf(mercenaryIds).toArray(), [mercenaryIds]);
+  const band = useBand();
 
-  return <>
-    <strong>{game?.band.name}</strong>
-    <p>You have {game?.band.gold.toLocaleString('en-US')} gold in your pouch</p>
-    {mercenaries?.length ? <MercenaryList fullStats mercenaries={mercenaries} /> : null}
-  </>;
+  return <Card heading={`${band.name}'s Mercenary Band`} layer="2">
+    <p>You are visiting <strong>{band.location?.name}</strong> with <strong>{band.gold.toLocaleString('en-US')} gold</strong> in your coffers</p>
+    {band.mercenaries.length ? <MercenaryList columns={3} mercenaries={band.mercenaries} /> : null}
+  </Card>;
 };
 
 export default BandPanel;
