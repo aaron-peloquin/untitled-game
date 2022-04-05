@@ -1,7 +1,5 @@
 import {Card} from '@components-layout';
-import {db} from '@helper';
-import {IS_SSR} from '@static';
-import {useLiveQuery} from 'dexie-react-hooks';
+import {useDataLocation} from '@helper';
 import {memo} from 'react';
 
 import MercenaryList from '../molecules/MercenaryList';
@@ -13,24 +11,20 @@ type Props = {
   locationId: number
 }
 const Location: React.FC<Props> = ({locationId}) => {
-  const location = useLiveQuery(() => IS_SSR ? undefined : db.locations.where('id').equals(locationId).first(), [locationId]);
+  const location = useDataLocation(locationId);
 
-  const mercenaries = useLiveQuery(() => IS_SSR ? [] : db.mercenaries.where('id').anyOf(location?.mercenaries || []).toArray(), [location?.mercenaries]);
-  const quests = useLiveQuery(() => IS_SSR ? [] : db.quests.where('id').anyOf(location?.quests || []).toArray(), [location?.quests]);
-  const relatedLocations = useLiveQuery(() => IS_SSR ? [] : db.locations.where('id').anyOf(location?.relatedLocations || []).toArray(), [location?.quests]);
-
-  return <>
-    You're at the local tavern in <strong>{location?.name}</strong>, there are both recruits and citizens with quests available here. This a level {location?.levelRanges[0]} to {location?.levelRanges[1]} tavern.
+  return <Card heading={location.name} layer="2">
+    You're at the local tavern, there are both recruits and citizens with quests available here. This a level {location?.levelRanges?.[0]} to {location?.levelRanges?.[1]} tavern.
     <Card heading='Mercenaries' layer="3">
-      {mercenaries?.length ? <MercenaryList canHire mercenaries={mercenaries} /> : <span>No mercenaries for hire</span>}
+      {location.mercenaries?.length ? <MercenaryList canHire mercenaries={location.mercenaries} /> : <span>No mercenaries for hire</span>}
     </Card>
     <Card heading='Available Quests' layer="3">
-      {quests?.length ? <QuestList quests={quests} /> : <span>No quests available</span>}
+      {location.quests?.length ? <QuestList quests={location.quests} /> : <span>No quests available</span>}
     </Card>
     <Card heading='Travel' layer="3">
-      {relatedLocations?.length ? <RelatedLocationsList locations={relatedLocations} /> : <span>End of the road?</span>}
+      {location.relatedLocations?.length ? <RelatedLocationsList locations={location.relatedLocations} /> : <span>End of the road?</span>}
     </Card>
-  </>;
+  </Card>;
 };
 
 export default memo(Location);

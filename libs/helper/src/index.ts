@@ -7,6 +7,8 @@ export * from './lib/data/gameSaves/useAllGameSaves';
 export * from './lib/data/gameSaves/useDeleteSave';
 export * from './lib/data/gameSaves/useBand';
 
+export * from './lib/data/locations/useDataLocation';
+
 export * from './lib/data/mercenaries/useBandMercenaries';
 export * from './lib/data/mercenaries/useHireMercenary';
 export * from './lib/data/mercenaries/useRevealMercenaryStats';
