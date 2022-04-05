@@ -45,7 +45,6 @@ export const generateLocation:T_generateLocationSig = (numberGenerator, gameSave
       }));
     }
     await Promise.all(waitForMe);
-    console.log('loc', id, mercenaries, quests);
     await db.locations.update(id, {mercenaries, quests});
     return id;
   });

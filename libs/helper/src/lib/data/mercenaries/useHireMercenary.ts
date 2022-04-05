@@ -22,6 +22,7 @@ export const useHireMercenary: useHireMercenarySign = ({save, canHire, mercenary
         const newGoldValue = bandGold - mercenaryCost;
         db.gameSaves.update(saveId, {'band.gold': newGoldValue});
         // hire mercenary
+        db.mercenaries.update(mercenaryId, {statsVisible: true});
         db.gameSaves.where('id').equals(saveId).modify((save) => save.band.mercenaries.push(mercenaryId));
         // remove mercenary from locations
         db.locations.where('mercenaries').equals(mercenaryId).modify((location) => {
