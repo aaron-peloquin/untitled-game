@@ -1,16 +1,17 @@
-import {Card, GridArea, GridTemplate} from '@components-layout';
+import {GridArea, GridTemplate} from '@components-layout';
 import {contextSave, useCurrentSave} from '@helper';
 import {createGameWorld} from '@location';
 import {memo, useEffect} from 'react';
 
 import BandPanel from '../organisms/BandPanel';
 import Location from '../organisms/Location';
-import {SideNav} from '../organisms/SideNav';
+import {TopNav} from '../organisms/TopNav';
 
 const SaveProvider = contextSave.Provider;
 
 const gridTemplateAreas = `
-"sidenav_ band____"
+"topnav__ topnav__"
+"band____ band____"
 "location location"`;
 
 export const GameLayout = memo(() => {
@@ -23,12 +24,10 @@ export const GameLayout = memo(() => {
           <BandPanel />
         </GridArea>
         <GridArea gridArea='location'>
-          {save?.currentLocation && <Card heading='Location' layer="2">
-            <Location locationId={save?.currentLocation} />
-          </Card>}
+          {save?.currentLocation && <Location locationId={save?.currentLocation} />}
         </GridArea>
-        <GridArea gridArea='sidenav_'>
-          <SideNav />
+        <GridArea gridArea='topnav__'>
+          <TopNav />
         </GridArea>
       </GridTemplate>
     </div>
