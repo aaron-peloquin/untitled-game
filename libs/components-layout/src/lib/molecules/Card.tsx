@@ -2,9 +2,11 @@ import {memo} from 'react';
 
 import styles from './Card.module.css';
 
+export type T_CardLayer = '1' | '2' | '3' | '4'
+
 /* eslint-disable-next-line */
 type T_Props = {
-  layer: '1' | '2' | '3' | '4'
+  layer: T_CardLayer
   heading?: string
 }
 
