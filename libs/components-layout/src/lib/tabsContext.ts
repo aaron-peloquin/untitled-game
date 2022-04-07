@@ -1,5 +1,5 @@
 import {emptyFunction} from '@static';
-import {createContext, Dispatch, SetStateAction} from 'react';
+import {createContext} from 'react';
 
 type T_TabId = string
 type T_TabName = string
@@ -13,7 +13,7 @@ export type T_Tab = {
 
 export type T_tabsContextValue = {
   currentTabId: string
-  deregisterTab: (removeTabId: string) => void
+  deregisterTab: (removeTabId: T_Tab) => void
   setCurrentTabId: (id: T_TabId) => void
   registerTab: (tab: T_Tab) => void
   tabs: T_Tab[]

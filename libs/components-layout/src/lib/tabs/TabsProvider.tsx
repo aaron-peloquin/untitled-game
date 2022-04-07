@@ -14,17 +14,22 @@ export const TabsProvider:React.FC<T_Props> = memo(({children, defaultTab = ''})
   const [currentTabId, setCurrentTabId] = useState(defaultTab);
   const [tabs, setTabs] = useState<T_Tab[]>([]);
 
-  const registerTab = useCallback((tab) => {
-    if (!refTabs.current.some((id) => tab.id === id)) {
+  const registerTab = useCallback((tab: T_Tab) => {
+    if (!refTabs.current.some(({id}) => tab.id === id)) {
+      console.log('registering', tab);
       refTabs.current.push(tab);
-      setTabs(refTabs.current);
+      setTabs(_.cloneDeep(refTabs.current));
     }
   }, []);
 
-  const deregisterTab = useCallback((tab) => {
-    if (refTabs.current.some((id) => tab.id === id)) {
-      refTabs.current = _.remove(refTabs.current, {id: tab.id});
-      setTabs(refTabs.current);
+  const deregisterTab = useCallback((tab: T_Tab) => {
+    const tabIsRegistered = refTabs.current.some(({id}) => tab.id === id);
+    console.log('deregistering?', tabIsRegistered, tab);
+
+    if (tabIsRegistered) {
+      refTabs.current = refTabs.current.filter(({id}) => tab.id !== id);
+      console.log('new tabs:', _.cloneDeep(refTabs.current));
+      setTabs(_.cloneDeep(refTabs.current));
     }
   }, []);
 

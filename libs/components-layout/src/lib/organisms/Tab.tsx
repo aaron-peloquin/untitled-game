@@ -23,9 +23,9 @@ export const Tab: React.FC<T_Props> = memo(({children, id, name}) => {
   useEffect(() => {
     return () => {
       console.log('deregistering', id);
-      deregisterTab(id);
+      deregisterTab({id, name});
     };
-  }, []);
+  }, [deregisterTab, id, name]);
 
 
   const classNames = useMemo(() => id === tabsData.currentTabId ? `${style['tab']} ${style['active-tab']}` : style['tab'], [id, tabsData.currentTabId]);
@@ -35,6 +35,7 @@ export const Tab: React.FC<T_Props> = memo(({children, id, name}) => {
     tabIndex={0}
     role="tabpanel"
     id={`${id}-tab`}
+    key={`${id}-tab`}
     aria-labelledby={id}
   >
     {children}
