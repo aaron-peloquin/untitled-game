@@ -9,7 +9,9 @@ const BandPanel = () => {
 
   return <Card heading={`${band.name}'s Mercenary Band`} layer="2">
     <p>You are visiting <strong>{band.location?.name}</strong> with <strong>{band.gold.toLocaleString('en-US')} gold</strong> in your coffers</p>
-    {band.mercenaries.length ? <MercenaryList columns={3} mercenaries={band.mercenaries} /> : null}
+    <Card layer="3" heading="Your Mercenaries">
+      {band.mercenaries.length ? <MercenaryList columns={3} mercenaries={band.mercenaries} /> : null}
+    </Card>
   </Card>;
 };
 
