@@ -22,7 +22,9 @@ export const TabsProvider:React.FC<T_Props> = memo(({children, defaultTab = ''})
 
   const registerTab = useCallback((tab: T_Tab) => {
     if (!refTabs.current.some(({id}) => tab.id === id)) {
-      console.log('registering', tab);
+      if (!tab.sort) {
+        tab.sort = refTabs.current.length + 1;
+      }
       refTabs.current.push(tab);
       updateTabs();
     }
@@ -30,7 +32,6 @@ export const TabsProvider:React.FC<T_Props> = memo(({children, defaultTab = ''})
 
   const deregisterTab = useCallback((tab: T_Tab) => {
     const tabIsRegistered = refTabs.current.some(({id}) => tab.id === id);
-    console.log('deregistering?', tabIsRegistered, tab);
 
     if (tabIsRegistered) {
       refTabs.current = refTabs.current.filter(({id}) => tab.id !== id);

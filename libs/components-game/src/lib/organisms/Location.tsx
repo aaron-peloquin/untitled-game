@@ -15,7 +15,7 @@ const Location: React.FC<Props> = ({locationId}) => {
   return <Card heading={location.name} layer="2">
     You're at the local tavern, there are both recruits and citizens with quests available here. This a level {location?.levelRanges?.[0]} to {location?.levelRanges?.[1]} tavern.
     <Tabs layer="3">
-      <Tab name="Mercenary" id='merc'>
+      <Tab name="Mercenary" id="mercenaries">
         <Card heading='Mercenaries' layer="3">
           {location.mercenaries?.length ? <MercenaryList canHire mercenaries={location.mercenaries} /> : <span>No mercenaries for hire</span>}
         </Card>
@@ -25,8 +25,8 @@ const Location: React.FC<Props> = ({locationId}) => {
           {location.quests?.length ? <QuestList quests={location.quests} /> : <span>No quests available</span>}
         </Card>
       </Tab>
-      <Tab name="Nearby Locations" id="locz">
-        <Card heading='Travel' layer="3">
+      <Tab name="Nearby Locations" id="nearby-locations">
+        <Card heading="Travel" layer="3">
           {location.relatedLocations?.length ? <RelatedLocationsList locations={location.relatedLocations} /> : <span>End of the road?</span>}
         </Card>
       </Tab>
