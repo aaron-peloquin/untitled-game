@@ -12,14 +12,12 @@ export const Tab: React.FC<T_Props> = memo(({children, id, name, sort}) => {
   useEffect(() => {
     const isTabRegistered = tabs.some((tab) => tab.id === id);
     if (!isTabRegistered) {
-      console.log('registering:', id);
       registerTab({id, name, sort});
     }
   }, [id, name, registerTab, sort, tabs]);
 
   useEffect(() => {
     return () => {
-      console.log('deregistering', id);
       deregisterTab({id, name, sort});
     };
   }, [deregisterTab, id, name, sort]);

@@ -47,8 +47,6 @@ export const TabsProvider:React.FC<T_Props> = memo(({children, defaultTab = ''})
 
   const providerValue:T_tabsContextValue = useMemo(() => ({currentTabId, deregisterTab, registerTab, setCurrentTabId, tabs}), [currentTabId, deregisterTab, registerTab, tabs]);
 
-  console.log('tabs', tabs);
-
   return <Provider value={providerValue}>
     {children}
   </Provider>;
