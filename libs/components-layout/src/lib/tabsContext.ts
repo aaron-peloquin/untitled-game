@@ -9,6 +9,7 @@ export type T_Tabs = Record<T_TabId, T_TabName>
 export type T_Tab = {
   id: string
   name: string
+  sort?: number
 }
 
 export type T_tabsContextValue = {
