@@ -1,7 +1,14 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx", "jsx-a11y", "sort-keys-fix", "import", "react", "react-hooks"],
+  "plugins": [
+    "@nrwl/nx",
+    "jsx-a11y",
+    "sort-keys-fix",
+    "import",
+    "react",
+    "react-hooks"
+  ],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -36,10 +43,11 @@
           "alphabetize": {"order": "asc", "caseInsensitive": true},
           "groups": ["builtin", "external", "internal", "index", "sibling", "parent",  "object"],
           "newlines-between": "always-and-inside-groups"
-          }],
-          "react-hooks/rules-of-hooks": "error",
-          "react-hooks/exhaustive-deps": "error",
-          "space-infix-ops": "error"
+          }
+        ],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "error",
+        "space-infix-ops": "error"
       }
     }
   ]
