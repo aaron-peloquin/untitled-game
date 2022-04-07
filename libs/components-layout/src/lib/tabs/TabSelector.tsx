@@ -10,7 +10,7 @@ import {tabsContext} from '../tabsContext';
 export const TabSelector: React.FC = memo(() => {
   const tabsData = useContext(tabsContext);
 
-  return <GridTemplate className={styles['tabs-container']} columns={tabsData.tabs.length}>
+  return <span role="tablist"><GridTemplate className={styles['tabs-container']} columns={tabsData.tabs.length}>
     {tabsData.tabs?.map(({name, id}) => {
       const isSelected = id === tabsData.currentTabId;
       const tabSelectedStyles = isSelected ? styles['selected-tab'] : styles['unselected-tab'];
@@ -27,5 +27,5 @@ export const TabSelector: React.FC = memo(() => {
         </button>
       </GridArea>;
     })}
-  </GridTemplate>;
+  </GridTemplate></span>;
 });

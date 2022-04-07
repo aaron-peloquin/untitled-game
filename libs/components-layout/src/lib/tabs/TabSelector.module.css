@@ -1,25 +1,38 @@
 .tabs-container {
-  margin: 16px 16px 0 16px;
+  margin-top: 16px;
 }
 
 .tab {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  margin: 0 8px;
+  /* margin: 0 8px; */
   padding: 0 8px;
   background-color: black;
   border: solid grey;
   border-width: 4px 4px 0 4px;
+  border-top-left-radius: 8px;
+  /* border-top-right-radius: 4px; */
+}
+
+.tab button {
+  border: 0;
+  padding: 8px;
+  background: transparent;
+  color: white;
+  width: 100%;
+  display: block;
+  height: 100%;
+  font-weight: bold;;
   cursor: pointer;
-  font-size: larger;
+  font-size: large;
   font-weight: bold;
 }
 
 .unselected-tab {
-  color: saddlebrown;
-
+  border-color: saddlebrown;
+  border-bottom: 4px solid sandybrown;
 }
 
 .selected-tab {
-  color: sandybrown;
+  border-color: sandybrown;
 }
