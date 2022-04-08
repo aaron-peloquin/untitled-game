@@ -1,14 +1,12 @@
 import {emptyFunction} from '@static';
 import {createContext} from 'react';
 
-type T_TabId = string
+export type T_TabId = string
 type T_TabName = string
 
-export type T_Tabs = Record<T_TabId, T_TabName>
-
 export type T_Tab = {
-  id: string
-  name: string
+  id: T_TabId
+  name: T_TabName
   sort?: number
 }
 

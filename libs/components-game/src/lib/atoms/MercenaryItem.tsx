@@ -34,7 +34,7 @@ const MercenaryItem: React.FC<Props> = ({canHire, mercenary}) => {
       <dt>Stealth:</dt>
       <dd>{mercenary.stats.stealth}%</dd>
     </dl>}
-    <GridTemplate columns={2}>
+    <GridTemplate columns={2} justifyItems="center">
       {(canHire && !mercenary.statsVisible) && <GridArea><button disabled={!canRevealStats} onClick={revealStats}>Spar for {revealStatsCost ? `${revealStatsCost} gold` : 'free'}</button></GridArea>}
       {canHire && <GridArea><button disabled={!canBandHire} onClick={hireMercenary}>Hire for {mercenary.stats.cost} gold</button></GridArea>}
     </GridTemplate>
