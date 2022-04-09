@@ -1,11 +1,13 @@
 declare module 'TS_Band' {
-  import {T_Mercenary} from 'TS_Mercenary';
-  
-  export type T_Band = {
+ 
+  type T_Band = {
+    bandId?: number
+    seed: string
+    currentLocation: number
     gold: number,
     mercenaries: number[],
     name: string
   }
-  
-  export type bandSig = () => T_BandController
+
+  type createBandSig = (name: string, seed: string) => T_Band
 }

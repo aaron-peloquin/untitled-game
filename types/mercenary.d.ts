@@ -1,30 +1,22 @@
+
 declare module 'TS_Mercenary' {
   import {T_NumGenSig} from "TS_General"
-  export type T_BaseStats = {
-    cost: number
-    attack: number
-    endurance: number
-    stealth: number
-    capture: number
-  }
+  import {IndexableType, PromiseExtended} from "dexie"
+
   interface T_Mercenary {
     id?: number
-    gameSaveId: number
+    currentHealth: number
+    ethnicity: string
+    level: number
     name: string
     profession: string
-    stats: T_BaseStats
-    level: number
-    health: number
-    originalHealth: number
-    originalStats: T_BaseStats
-    ethnicity: string
+    personality: string
     statsVisible: boolean
   }
 
-  type T_generateMercenaryArgs = {
+  type T_createMercenaryArgs = {
     numberGenerator: T_NumGenSig
-    gameSaveId: number
     levelRange: number[]
   }
-  export type T_generateMercenarySig = (T_generateMercenaryArgs) => PromiseExtended<IndexableType>
+  export type T_createMercenarySig = (T_createMercenaryArgs) => PromiseExtended<IndexableType>
 }

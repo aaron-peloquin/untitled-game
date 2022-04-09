@@ -1,20 +1,17 @@
 declare module 'TS_General' {
-  import {T_Band} from 'TS_Band'
-  
-  export type T_GameSave = {
+
+  type T_GameSave = {
     id?: number
     currentSave: number
     name: string
     seed: string
-    band: T_Band
+    gameDatastoreName: string
     currentLocation: number
     pastLocations: number[]
   }
 
-  export type T_TwoItemNumberArray = [ number, number ]
-
-  export type T_NumGenSig = () => number
-
+  type T_TwoItemNumberArray = [ number, number ]
+  type T_NumGenSig = () => number
 }
 
 declare module '*.css' {

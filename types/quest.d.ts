@@ -1,37 +1,40 @@
+
 declare module 'TS_Quest' {
-  import {T_Mercenary} from 'TS_Mercenary';
-  import {T_TwoItemNumberArray} from 'TS_General';
-  export type T_QuestLogItem = {
-    // ${noun} ${verb}
-    noun: string
-    verb: string
-  }
-  export type T_QuestResult = {
-      outcome: string
-      rewards: {
-        bandExp: number
-        mercenaryExp: number
-        gold: number
-      }
-      roundsLog: T_Round[]
-    }
+  import {T_Mercenary} from 'TS_Mercenary'
+  import {T_NumGenSig, T_TwoItemNumberArray} from 'TS_General'
+  import {IndexableType, PromiseExtended} from 'dexie'
 
-  export type T_RunQuestSig = (quest: I_BaseQuest, mercenary: T_Mercenary) => I_QuestResult
-
-  export interface I_BaseQuest {
-    id?: number
+  type T_BaseQuest = {
+    questId?: number
     level: number
     type: string
-    targetName: string
     targetEthnicity: string
+    targetName: string
     targetProfession: string
 }
 
-  type T_generateQuestArgs = {
+  type T_createQuestArgs = {
     numberGenerator: T_NumGenSig
-    gameSaveId: number
     levelRange: T_TwoItemNumberArray
   }
 
-  export type T_generateQuestSig = (T_generateQuestArgs) => PromiseExtended<IndexableType>
+  type T_createQuestSig = (T_createQuestArgs) => PromiseExtended<IndexableType>
+
+  type T_QuestLogItem = {
+    person: string
+    action: string
+  }
+
+  type T_QuestResult = {
+    outcome: string
+    removeMercenary: boolean
+    rewards: {
+      bandExp: number
+      mercenaryExp: number
+      gold: number
+    }
+    roundsLog: T_QuestLogItem[]
+  }
+
+  type T_RunQuestSig = (quest: T_BaseQuest, mercenary: T_Mercenary) => T_QuestResult
 }
