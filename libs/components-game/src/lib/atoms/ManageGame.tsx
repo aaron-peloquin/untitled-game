@@ -1,4 +1,6 @@
-import {useDeleteSave, useSetCurrentSave} from '@helper';
+// import {useDeleteSave, useSetCurrentSave} from '@helper';
+import {useDeleteSave} from '@datastore';
+import {useSetCurrentSave} from '@helper';
 import {useRouter} from 'next/router';
 import {memo, SyntheticEvent, useCallback, useState} from 'react';
 import {T_GameSave} from 'TS_General';
@@ -14,7 +16,7 @@ export const ManageGame: React.FC<T_Props> = memo(({save}) => {
   }, []);
   const saveId = save?.id || 0;
 
-  const handleDeleteGame = useDeleteSave(saveId, router);
+  const handleDeleteGame = useDeleteSave(saveId);
 
   const setGameSave = useSetCurrentSave();
   const handleLoadGame = useCallback((e: SyntheticEvent) => {

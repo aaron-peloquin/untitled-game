@@ -1,12 +1,12 @@
-import {useCurrentSave, useAllGameSaves} from '@helper';
+import {useGetCurrentSave, useListGameSaves} from '@datastore';
 import {URLs} from '@static';
 import Link from 'next/link';
 
 import {ManageGame} from '../atoms/ManageGame';
 
 export const MainMenuLayout = () => {
-  const gameSaves = useAllGameSaves();
-  const currentSave = useCurrentSave();
+  const gameSaves = useListGameSaves();
+  const currentSave = useGetCurrentSave();
 
   return <>
     <h1>Welcome</h1>
