@@ -3,9 +3,9 @@ declare module 'TS_Location' {
   import {IndexableType, PromiseExtended} from 'dexie'
 
   type T_Location = {
+    locationId?: number
     level: number
     levelRanges: T_TwoItemNumberArray
-    locationId?: number
     mercenaries: number[]
     name: string
     quests: number[]

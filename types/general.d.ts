@@ -1,7 +1,7 @@
 declare module 'TS_General' {
 
   type T_GameSave = {
-    id?: number
+    gameSaveId?: number
     currentSave: number
     name: string
     seed: string

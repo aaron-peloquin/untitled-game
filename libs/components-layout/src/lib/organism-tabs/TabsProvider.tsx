@@ -3,8 +3,7 @@ import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
 import {tabsContext, T_Tab, T_tabsContextValue} from './tabsContext';
 
-
-const Provider = tabsContext.Provider;
+const {Provider} = tabsContext;
 
 type T_Props = {
   defaultTab?: string

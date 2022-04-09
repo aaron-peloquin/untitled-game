@@ -4,7 +4,7 @@ declare module 'TS_Quest' {
   import {T_NumGenSig, T_TwoItemNumberArray} from 'TS_General'
   import {IndexableType, PromiseExtended} from 'dexie'
 
-  type T_BaseQuest = {
+  type T_Quest = {
     questId?: number
     level: number
     type: string

@@ -4,13 +4,13 @@ declare module 'TS_Mercenary' {
   import {IndexableType, PromiseExtended} from "dexie"
 
   interface T_Mercenary {
-    id?: number
+    mercenaryId?: number
     currentHealth: number
     ethnicity: string
     level: number
     name: string
-    profession: string
     personality: string
+    profession: string
     statsVisible: boolean
   }
 
