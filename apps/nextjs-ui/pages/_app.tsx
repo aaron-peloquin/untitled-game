@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 import './styles.css';
 
-const CustomApp = ({Component, pageProps}: AppProps) => {
+const UntitledGameApp = ({Component, pageProps}: AppProps) => {
   return (
     <GameDataProvider>
       <Head>
@@ -17,4 +17,4 @@ const CustomApp = ({Component, pageProps}: AppProps) => {
   );
 };
 
-export default CustomApp;
+export default UntitledGameApp;

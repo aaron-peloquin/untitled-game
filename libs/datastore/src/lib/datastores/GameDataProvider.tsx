@@ -8,7 +8,7 @@ import {useGetCurrentSave} from '../hooks/gameController/useGetCurrentSave';
 
 const {Provider} = gameDataContext;
 
-export const GameDataProvider: React.FC = memo(({children}) => {
+const GameDataProvider: React.FC = memo(({children}) => {
   const save = useGetCurrentSave();
   const gameProviderValue = useMemo(() => {
     const dataStore = save?.gameDatastoreName ? new GameDataClass(save?.gameDatastoreName) : undefined;
@@ -23,3 +23,8 @@ export const GameDataProvider: React.FC = memo(({children}) => {
     {children}
   </Provider>;
 });
+
+GameDataProvider.displayName = 'GameDataProvider';
+export {
+  GameDataProvider,
+};
