@@ -25,8 +25,8 @@ export const ManageGame: React.FC<T_Props> = memo(({save}) => {
   }, [save.id, setGameSave]);
   return <>
     <button onClick={handleLoadGame}>Load</button>
-    <> {save.name} </>
     <button onClick={setDeleteState}>Delete</button>
-    {promptDelete && <> Are you sure? <button onClick={handleDeleteGame}>Yes, delete</button></>}
+    <> {save.name}</>
+    {promptDelete && <>. Are you sure you want to delete? <button onClick={handleDeleteGame}>Yes, delete</button></>}
   </>;
 });

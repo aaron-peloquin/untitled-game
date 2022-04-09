@@ -1,3 +1,4 @@
+import {Card, GridArea, GridTemplate} from '@components-layout';
 import {useGetCurrentSave, useListGameSaves} from '@datastore';
 import {URLs} from '@static';
 import Link from 'next/link';
@@ -8,13 +9,12 @@ export const MainMenuLayout = () => {
   const gameSaves = useListGameSaves();
   const currentSave = useGetCurrentSave();
 
-  return <>
-    <h1>Welcome</h1>
-    <ul>
-      {currentSave && <li><Link href={URLs.playGame}>{`Continue (${currentSave.name})`}</Link></li>}
-      <li><Link href={URLs.newGame}>New Game</Link></li>
-      {gameSaves?.map((save) => <li key={save.id}><ManageGame save={save} /></li>)}
-      <li><Link href={URLs.settings}>Settings</Link></li>
-    </ul>
-  </>;
+  return <Card layer="1" heading="An Untitled Game">
+    <GridTemplate gridTemplateColumns="1fr" justifyItems="left" gridGap="8px">
+      {currentSave && <GridArea><Link href={URLs.playGame}>{`Continue (${currentSave.name})`}</Link></GridArea>}
+      <GridArea><Link href={URLs.newGame}>New Game</Link></GridArea>
+      {gameSaves?.map((save) => <GridArea key={save.id}><ManageGame save={save} /></GridArea>)}
+      <GridArea><Link href={URLs.settings}>Settings</Link></GridArea>
+    </GridTemplate>
+  </Card>;
 };
