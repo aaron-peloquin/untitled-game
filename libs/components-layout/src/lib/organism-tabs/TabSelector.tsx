@@ -1,13 +1,13 @@
 import {memo, useContext} from 'react';
 
 
+import {tabsContext} from './tabsContext';
 import styles from './TabSelector.module.css';
 
 import {GridArea} from '../molecules/GridArea';
 import {GridTemplate} from '../molecules/GridTemplate';
-import {tabsContext} from '../tabsContext';
 
-export const TabSelector: React.FC = memo(() => {
+const TabSelector: React.FC = memo(() => {
   const tabsData = useContext(tabsContext);
 
   return <span role="tablist"><GridTemplate className={styles['tabs-container']} columns={tabsData.tabs.length}>
@@ -29,3 +29,6 @@ export const TabSelector: React.FC = memo(() => {
     })}
   </GridTemplate></span>;
 });
+
+TabSelector.displayName = 'TabSelector';
+export {TabSelector};

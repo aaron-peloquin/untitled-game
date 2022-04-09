@@ -35,7 +35,6 @@ const GridTemplate: React.FC<T_CombinedProps> = memo(({
     {children}
   </div>;
 });
+
 GridTemplate.displayName = 'GridTemplate';
-export {
-  GridTemplate,
-};
+export {GridTemplate};

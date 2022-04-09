@@ -2,10 +2,10 @@ import {memo, useContext, useEffect, useMemo} from 'react';
 
 import style from './Tab.module.css';
 
-import {tabsContext, T_Tab} from '../tabsContext';
+import {tabsContext, T_Tab} from './tabsContext';
 
 type T_Props = T_Tab
-export const Tab: React.FC<T_Props> = memo(({children, id, name, sort}) => {
+const Tab: React.FC<T_Props> = memo(({children, id, name, sort}) => {
   const tabsData = useContext(tabsContext);
   const {deregisterTab, registerTab, tabs} = tabsData;
 
@@ -36,3 +36,6 @@ export const Tab: React.FC<T_Props> = memo(({children, id, name, sort}) => {
     {children}
   </div>;
 });
+
+Tab.displayName = 'Tab';
+export {Tab};

@@ -1,9 +1,10 @@
 import {memo} from 'react';
 
-import {Card, T_CardLayer} from '../molecules/Card';
-import {TabSelector} from '../tabs/TabSelector';
-import {TabsProvider} from '../tabs/TabsProvider';
-import {T_TabId} from '../tabsContext';
+import {T_TabId} from './tabsContext';
+import {TabSelector} from './TabSelector';
+import {TabsProvider} from './TabsProvider';
+
+import {T_CardLayer, Card} from '../molecules/Card';
 
 type T_Props = {
     defaultTab?: T_TabId

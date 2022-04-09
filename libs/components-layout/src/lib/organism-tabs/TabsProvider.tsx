@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 
-import {tabsContext, T_Tab, T_tabsContextValue} from '../tabsContext';
+import {tabsContext, T_Tab, T_tabsContextValue} from './tabsContext';
 
 
 const Provider = tabsContext.Provider;
@@ -9,7 +9,7 @@ const Provider = tabsContext.Provider;
 type T_Props = {
   defaultTab?: string
 }
-export const TabsProvider:React.FC<T_Props> = memo(({children, defaultTab = ''}) => {
+const TabsProvider:React.FC<T_Props> = memo(({children, defaultTab = ''}) => {
   const refTabs = useRef<T_Tab[]>([]);
   const [currentTabId, setCurrentTabId] = useState(defaultTab);
   const [tabs, setTabs] = useState<T_Tab[]>([]);
@@ -51,3 +51,6 @@ export const TabsProvider:React.FC<T_Props> = memo(({children, defaultTab = ''})
     {children}
   </Provider>;
 });
+
+TabsProvider.displayName = 'TabsProvider';
+export {TabsProvider};

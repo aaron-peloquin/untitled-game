@@ -10,7 +10,7 @@ type T_Props = {
   heading?: string
 }
 
-export const Card: React.FC<T_Props> = memo(({layer, heading, children}) => {
+const Card: React.FC<T_Props> = memo(({layer, heading, children}) => {
   const classNames = styles['card'] + ' ' + styles[`card-layer-${layer}`];
 
   return (
@@ -24,3 +24,5 @@ export const Card: React.FC<T_Props> = memo(({layer, heading, children}) => {
   );
 });
 
+Card.displayName = 'Card';
+export {Card};
