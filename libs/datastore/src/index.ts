@@ -1,4 +1,4 @@
-export * from './lib/datastores/gameController';
+export * from './lib/datastores/GameDataProvider';
 
 export * from './lib/hooks/gameController/useAddGameSave';
 export * from './lib/hooks/gameController/useDeleteSave';
