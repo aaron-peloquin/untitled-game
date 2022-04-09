@@ -1,29 +1,31 @@
 declare module 'TS_Quest' {
   import {T_Mercenary} from 'TS_Mercenary';
   import {T_TwoItemNumberArray} from 'TS_General';
-  export type I_QuestResult = {
+  export type T_QuestLogItem = {
+    // ${noun} ${verb}
+    noun: string
+    verb: string
+  }
+  export type T_QuestResult = {
       outcome: string
       rewards: {
-        exp: number
+        bandExp: number
+        mercenaryExp: number
         gold: number
       }
-      roundsLog: string[]
+      roundsLog: T_Round[]
     }
 
-  export type T_RunQuestSig = (mercenary: T_Mercenary) => I_QuestResult
-  export type T_FullRunQuestSig = (quest: I_BaseQuest) => T_RunQuestSig
+  export type T_RunQuestSig = (quest: I_BaseQuest, mercenary: T_Mercenary) => I_QuestResult
 
   export interface I_BaseQuest {
     id?: number
-    gameSaveId: number
-    type: string
     level: number
-    target: {
-      name: string
-      ethnicity: string
-      profession: string
-    }
-  }
+    type: string
+    targetName: string
+    targetEthnicity: string
+    targetProfession: string
+}
 
   type T_generateQuestArgs = {
     numberGenerator: T_NumGenSig
