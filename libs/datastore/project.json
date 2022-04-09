@@ -1,0 +1,32 @@
+{
+  "root": "libs/datastore",
+  "sourceRoot": "libs/datastore/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/datastore",
+        "main": "libs/datastore/src/index.ts",
+        "tsConfig": "libs/datastore/tsconfig.lib.json",
+        "assets": ["libs/datastore/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/datastore/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/datastore"],
+      "options": {
+        "jestConfig": "libs/datastore/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
