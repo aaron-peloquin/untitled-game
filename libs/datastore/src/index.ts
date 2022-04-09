@@ -5,3 +5,5 @@ export * from './lib/hooks/gameController/useDeleteSave';
 export * from './lib/hooks/gameController/useGetCurrentSave';
 export * from './lib/hooks/gameController/useListGameSaves';
 export * from './lib/hooks/gameController/useSetCurrentGameSave';
+
+export * from './lib/hooks/gameData/useGetBand';

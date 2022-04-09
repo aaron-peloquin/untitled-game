@@ -5,7 +5,7 @@ declare module 'TS_Quest' {
   import {IndexableType, PromiseExtended} from 'dexie'
 
   type T_Quest = {
-    questId?: number
+    questId: number
     level: number
     type: string
     targetEthnicity: string

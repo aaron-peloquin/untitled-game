@@ -4,7 +4,6 @@ import {pickArray} from '@helper';
 import chance from 'chance';
 import {SyntheticEvent, useCallback, useState} from 'react';
 
-
 const generate = chance();
 
 const VERBS = [

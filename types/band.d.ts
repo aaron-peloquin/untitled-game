@@ -1,11 +1,11 @@
 declare module 'TS_Band' {
  
   type T_Band = {
-    bandId?: number
+    bandId: number
     seed: string
-    currentLocation: number
+    currentLocationId: number
     gold: number,
-    mercenaries: number[],
+    mercenaryIds: number[],
     name: string
   }
 

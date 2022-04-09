@@ -11,7 +11,7 @@ const {Provider} = gameDataContext;
 const GameDataProvider: React.FC = memo(({children}) => {
   const save = useGetCurrentSave();
   const gameProviderValue = useMemo(() => {
-    const dataStore = save?.gameDatastoreName ? new GameDataClass(save?.gameDatastoreName) : undefined;
+    const dataStore = save?.gameDatastoreName ? new GameDataClass(save.gameDatastoreName, save.name, save.seed) : undefined;
     return {
       dataStore,
       name: save?.name || '',

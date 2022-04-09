@@ -11,14 +11,9 @@ declare module 'TS_Stats' {
     toHit: number
   }
 
-
   type T_ExportStats = {
     label: string
     stats: T_Stats
     onLevel: T_Stats
-  }
-
-  type T_ProfessionStats = T_ExportStats & {
-    type: 'mercenary' | 'quest'
   }
 }

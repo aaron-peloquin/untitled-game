@@ -17,7 +17,7 @@ export const useAddGameSave = (landingPage?: string) => {
       seed,
     };
     gameController.gameSaves.add(newSave).then((id) => {
-      const gameDatastoreName = `${id}_${name}_${seed}`.replace(/[^a-zA-Z0-9_]/g, '').toLowerCase();
+      const gameDatastoreName = `${id}_${name}`.replace(/[^a-zA-Z0-9_]/g, '-').toLowerCase();
       gameController.gameSaves.update(id, {gameDatastoreName}).then(() => {
         setCurrentGameSave(id);
       });

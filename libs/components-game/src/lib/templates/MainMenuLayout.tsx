@@ -13,7 +13,7 @@ export const MainMenuLayout = () => {
     <GridTemplate gridTemplateColumns="1fr" justifyItems="left" gridGap="8px">
       {currentSave && <GridArea><Link href={URLs.playGame}>{`Continue (${currentSave.name})`}</Link></GridArea>}
       <GridArea><Link href={URLs.newGame}>New Game</Link></GridArea>
-      {gameSaves?.map((save) => <GridArea key={save.id}><ManageGame save={save} /></GridArea>)}
+      {gameSaves?.map((save) => <GridArea key={save.gameSaveId}><ManageGame save={save} /></GridArea>)}
       <GridArea><Link href={URLs.settings}>Settings</Link></GridArea>
     </GridTemplate>
   </Card>;

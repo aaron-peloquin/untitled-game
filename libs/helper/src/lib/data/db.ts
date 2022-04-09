@@ -22,4 +22,4 @@ export class MySubClassedDexie extends Dexie {
   }
 }
 
-export const db = new MySubClassedDexie();
+export const db = {}; // new MySubClassedDexie();

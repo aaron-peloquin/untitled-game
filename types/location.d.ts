@@ -3,13 +3,13 @@ declare module 'TS_Location' {
   import {IndexableType, PromiseExtended} from 'dexie'
 
   type T_Location = {
-    locationId?: number
+    locationId: number
     level: number
-    levelRanges: T_TwoItemNumberArray
-    mercenaries: number[]
+    levelRange: T_TwoItemNumberArray
+    mercenaryIds: number[]
     name: string
-    quests: number[]
-    relatedLocations: number[]
+    questIds: number[]
+    relatedLocationIds: number[]
   }
 
   type T_createLocationSig = (locationNumGenerator: T_NumGenSig, gameSaveId: number, levelMin: number, levelMax: number) => PromiseExtended<IndexableType>

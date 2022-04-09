@@ -12,14 +12,14 @@ export const useSetCurrentGameSave = (landingPage: string = URLs.playGame) => {
   const currentSave = useGetCurrentSave();
 
   const setGameSave = useCallback((id) => {
-    if (currentSave?.id) {
-      gameController.gameSaves.update(currentSave.id, {currentSave: 0});
+    if (currentSave?.gameSaveId) {
+      gameController.gameSaves.update(currentSave.gameSaveId, {currentSave: 0});
     }
     gameController.gameSaves.update(id, {currentSave: 1});
     if (landingPage) {
       router.push(landingPage);
     }
     return;
-  }, [currentSave?.id, landingPage, router]);
+  }, [currentSave?.gameSaveId, landingPage, router]);
   return setGameSave;
 };
