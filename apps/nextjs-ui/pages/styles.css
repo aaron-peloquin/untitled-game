@@ -9,6 +9,7 @@ html {
 
 a {
   color: #77F;
+  text-decoration: none;
 }
 a:visited {
   color: #AAF;

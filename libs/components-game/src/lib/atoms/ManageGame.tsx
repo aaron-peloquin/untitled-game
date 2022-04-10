@@ -1,4 +1,4 @@
-// import {useDeleteSave, useSetCurrentSave} from '@helper';
+import {Button} from '@components-layout';
 import {useDeleteSave, useSetCurrentGameSave} from '@datastore';
 import {memo, SyntheticEvent, useCallback, useState} from 'react';
 import {T_GameSave} from 'TS_General';
@@ -21,9 +21,9 @@ export const ManageGame: React.FC<T_Props> = memo(({save}) => {
     setGameSave(saveId);
   }, [saveId, setGameSave]);
   return <>
-    <button onClick={handleLoadGame}>Load</button>
-    <button onClick={setDeleteState}>Delete</button>
+    <Button text="Load" onClick={handleLoadGame} />
+    <Button text="Delete" disabled={promptDelete} onClick={setDeleteState} />
     <> {save.name}</>
-    {promptDelete && <>. Are you sure you want to delete? <button onClick={handleDeleteGame}>Yes, delete</button></>}
+    {promptDelete && <>. Are you sure you want to delete? <Button text="Yes, Delete" onClick={handleDeleteGame} /></>}
   </>;
 });
