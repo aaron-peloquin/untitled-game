@@ -1,50 +1,37 @@
 import {Card} from '@components-layout';
 import {db, useBandMercenaries} from '@helper';
 import {runSlayQuest} from '@quest';
-import {memo, useCallback, useState} from 'react';
-import {I_BaseQuest, T_RunQuestSig} from 'TS_Quest';
+import {memo} from 'react';
+import {T_Quest} from 'TS_Quest';
 
 type Props = {
-    quest: I_BaseQuest
+    quest: T_Quest
 }
 const QuestItem: React.FC<Props> = ({quest}) => {
-  const [selectedMercenaryId, setSelectedMercenaryId] = useState<number>(0);
-
-  const handleMercenarySelect = useCallback((event) => {
-    setSelectedMercenaryId(parseInt(event.target.value));
-  }, []);
-  const bandMercenaries = useBandMercenaries();
-  const runQuest = useCallback(async (e) => {
-    e.preventDefault();
-    let questRunner: T_RunQuestSig;
-    switch (quest.type) {
-      default:
-        questRunner = runSlayQuest(quest);
-        break;
-    }
-    db.mercenaries.get(selectedMercenaryId).then((mercenary) => {
-      if (mercenary) {
-        const result = questRunner(mercenary);
-        console.log('result', result, quest, mercenary);
-      }
-    });
-  }, [quest, selectedMercenaryId]);
-  return <Card layer="4" heading={`${quest.type} ${quest.target.ethnicity}`}>
+  // const runQuest = useCallback(async (e) => {
+  //   e.preventDefault();
+  //   let questRunner: T_RunQuestSig;
+  //   switch (quest.type) {
+  //     default:
+  //       questRunner = runSlayQuest(quest);
+  //       break;
+  //   }
+  //   db.mercenaries.get(selectedMercenaryId).then((mercenary) => {
+  //     if (mercenary) {
+  //       const result = questRunner(mercenary);
+  //       console.log('result', result, quest, mercenary);
+  //     }
+  //   });
+  // }, [quest, selectedMercenaryId]);
+  return <Card layer="4" heading={`${quest.type} ${quest}`}>
     <dl>
       {/* <dt>Type</dt>
       <dd>{quest.type}</dd> */}
       <dt>Difficulty</dt>
       <dd>{quest.level}</dd>
       <dt>Target</dt>
-      <dd>{quest.target.name}, a {quest.target.ethnicity} {quest.target.profession}</dd>
+      <dd>{quest.targetName}, a {quest.targetEthnicity} {quest.targetProfession}</dd>
     </dl>
-    {bandMercenaries?.length ? <form onSubmit={runQuest}>
-      <select required onChange={handleMercenarySelect}>
-        <option value="0">Please Select...</option>
-        {bandMercenaries?.map((mercenary) => <option value={mercenary.id}>{mercenary.name} (level {Math.round(mercenary.level)})</option>)}
-      </select>
-      <button type="submit" disabled={!selectedMercenaryId}>Go Quest!</button>
-    </form> : null}
   </Card>;
 };
 

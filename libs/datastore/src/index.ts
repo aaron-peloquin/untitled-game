@@ -8,5 +8,6 @@ export * from './lib/hooks/gameController/useSetCurrentGameSave';
 
 export * from './lib/hooks/gameData/useGetBand';
 export * from './lib/hooks/gameData/useGetLocation';
+export * from './lib/hooks/gameData/useListLocationsById';
 export * from './lib/hooks/gameData/useListMercenariesById';
-
+export * from './lib/hooks/gameData/useListQuestsById';
