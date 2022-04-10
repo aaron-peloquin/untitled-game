@@ -9,21 +9,22 @@ type Props = {
 }
 
 const MercenaryItem: React.FC<Props> = ({canHire, mercenary}) => {
-  const save = useCurrentSave();
-  const mercCost = mercenary.stats.cost || 1;
-  const bandGold = save?.band?.gold || 0;
-  const canBandHire = bandGold >= mercCost;
+  // const save = useCurrentSave();
+  // const mercCost = mercenary.stats.cost || 1;
+  // const bandGold = save?.band?.gold || 0;
+  // const canBandHire = bandGold >= mercCost;
 
-  const revealStatsCostUnsafe = mercCost - 5;
-  const revealStatsCost = revealStatsCostUnsafe < 0 ? 0 : revealStatsCostUnsafe;
-  const canRevealStats = bandGold >= revealStatsCost;
+  // const revealStatsCostUnsafe = mercCost - 5;
+  // const revealStatsCost = revealStatsCostUnsafe < 0 ? 0 : revealStatsCostUnsafe;
+  // const canRevealStats = bandGold >= revealStatsCost;
+  const revealStatsCost = 0;
 
-  const hireMercenary = useHireMercenary({canHire: !!canHire, mercenary, save});
-  const revealStats = useRevealMercenaryStats({mercenary, revealStatsCost, save});
+  // const hireMercenary = useHireMercenary({canHire: !!canHire, mercenary, save});
+  // const revealStats = useRevealMercenaryStats({mercenary, revealStatsCost, save});
 
   return <Card layer='4' heading={`${mercenary.name}`}>
     A level {Math.round(mercenary.level)} {mercenary.ethnicity} {mercenary.profession}
-    {mercenary.statsVisible && <dl>
+    {/* {mercenary.statsVisible && <dl>
       <dt>Health:</dt>
       <dd>{mercenary.health.toFixed(0)} ({mercenary.stats.endurance} endurance)</dd>
 
@@ -33,10 +34,10 @@ const MercenaryItem: React.FC<Props> = ({canHire, mercenary}) => {
 
       <dt>Stealth:</dt>
       <dd>{mercenary.stats.stealth}%</dd>
-    </dl>}
+    </dl>} */}
     <GridTemplate columns={2} justifyItems="center">
-      {(canHire && !mercenary.statsVisible) && <GridArea><button disabled={!canRevealStats} onClick={revealStats}>Spar for {revealStatsCost ? `${revealStatsCost} gold` : 'free'}</button></GridArea>}
-      {canHire && <GridArea><button disabled={!canBandHire} onClick={hireMercenary}>Hire for {mercenary.stats.cost} gold</button></GridArea>}
+      {(canHire && !mercenary.statsVisible) && <GridArea><button disabled={true}>Spar for {revealStatsCost ? `${revealStatsCost} gold` : 'free'}</button></GridArea>}
+      {canHire && <GridArea><button disabled={true}>Hire for {0} gold</button></GridArea>}
     </GridTemplate>
   </Card>;
 };
