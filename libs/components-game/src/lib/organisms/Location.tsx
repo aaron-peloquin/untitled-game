@@ -11,10 +11,9 @@ type Props = {
 }
 const Location: React.FC<Props> = memo(({locationId}) => {
   const location = useGetLocation(locationId);
-  const locationMercenaries = useListMercenariesById(location?.mercenaryIds);
+  const locationMercenaries = useListMercenariesById(location?.mercenaryIds, true);
   const locationQuests = useListQuestsById(location?.questIds);
   const relatedLocations = useListLocationsById(location?.relatedLocationIds);
-  console.log({locationMercenaries, locationQuests, relatedLocations});
 
   return <Card heading={`Location: ${location?.name}`} layer="2">
     You're in {location?.name}, a level {location?.levelRange?.[0]} to {location?.levelRange?.[1]} area. There are {locationMercenaries?.length} recruits, and {locationQuests?.length} citizens with quests available here.
