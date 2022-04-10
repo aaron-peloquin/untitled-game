@@ -1,5 +1,5 @@
-import {pickArray, pickRange, seedGenerator} from '@helper';
-import {LOCATION_NAMES, LOCATION_NAME_PREFIX, QUEST_TYPE, worldGeneration} from '@static';
+import {pickArray, pickRange, randomName, seedGenerator} from '@helper';
+import {QUEST_TYPE, worldGeneration} from '@static';
 import * as chance from 'chance';
 import Dexie, {Table} from 'dexie';
 import _ = require('lodash');
@@ -10,9 +10,6 @@ import {T_Mercenary} from 'TS_Mercenary';
 import {T_Quest} from 'TS_Quest';
 
 const LOCATIONS_PER_GAME = 44;
-
-const generate = chance();
-
 
 // export gameData datastore, to be initalized by the provider
 export class GameDataClass extends Dexie {
@@ -51,11 +48,13 @@ export class GameDataClass extends Dexie {
 
   numberGenerator = Math['random'];
   rangeGenerator = pickRange();
+  generate = chance();
 
   private generateGameWorld = (seed: string) => {
     const locationPromises = [];
     this.numberGenerator = seedGenerator(seed);
     this.rangeGenerator = pickRange(this.numberGenerator);
+    this.generate = chance(seed);
     let levelMin: number;
     let levelMax: number;
 
@@ -117,9 +116,6 @@ export class GameDataClass extends Dexie {
   };
 
   private generateLocation = async (levelMin: number, levelMax: number) => {
-    const prefix = pickArray(LOCATION_NAME_PREFIX, this.numberGenerator);
-    const locationName = pickArray(LOCATION_NAMES, this.numberGenerator);
-
     const levelRange = [
       this.rangeGenerator(levelMin, levelMax),
       this.rangeGenerator(levelMin, levelMax),
@@ -131,7 +127,7 @@ export class GameDataClass extends Dexie {
     const mercenaryIds: number[] = [];
     const questIds: number[] = [];
 
-    const name = generate.city(); // `${prefix} ${locationName}`;
+    const name = this.generate.city();
     const location:Omit<T_Location, 'locationId'> = {
       level,
       levelRange,
@@ -168,7 +164,7 @@ export class GameDataClass extends Dexie {
     const ethnicity = pickArray(worldGeneration.mercenaries.ethnicities, this.numberGenerator);
     const personality = pickArray(worldGeneration.mercenaries.personalities, this.numberGenerator);
     const profession = pickArray(worldGeneration.mercenaries.professions, this.numberGenerator);
-    const name = generate.name();
+    const name = randomName(this.generate);
 
     const mercenary: Omit<T_Mercenary, 'mercenaryId'> = {
       currentHealth: -1,
@@ -190,7 +186,7 @@ export class GameDataClass extends Dexie {
     const level = parseFloat((this.numberGenerator() * (levelRange[1] - levelRange[0]) + levelRange[0]).toFixed(2));
 
     const ethnicity = pickArray(worldGeneration.quests.ethnicities, this.numberGenerator);
-    const name = generate.name();
+    const name = randomName(this.generate);
 
     const profession = pickArray(worldGeneration.quests.professions, this.numberGenerator);
 
