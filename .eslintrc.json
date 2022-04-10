@@ -37,6 +37,7 @@
         "linebreak-style":"off",
         "max-len":"off",
         "require-jsdoc":"off",
+        "react/display-name": "error",
         "sort-keys": "error",
         "sort-keys-fix/sort-keys-fix": "error",
         "import/order": ["error", {

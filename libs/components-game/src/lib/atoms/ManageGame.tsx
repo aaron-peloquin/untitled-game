@@ -6,7 +6,7 @@ import {T_GameSave} from 'TS_General';
 type T_Props = {
     save: T_GameSave
 }
-export const ManageGame: React.FC<T_Props> = memo(({save}) => {
+const ManageGame: React.FC<T_Props> = memo(({save}) => {
   const [promptDelete, setPromptDelete] = useState<boolean>(false);
   const setDeleteState = useCallback(() => {
     setPromptDelete(true);
@@ -27,3 +27,6 @@ export const ManageGame: React.FC<T_Props> = memo(({save}) => {
     {promptDelete && <>. Are you sure you want to delete? <Button text="Yes, Delete" onClick={handleDeleteGame} /></>}
   </>;
 });
+
+ManageGame.displayName = 'ManageGame';
+export {ManageGame};
