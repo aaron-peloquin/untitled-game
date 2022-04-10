@@ -8,8 +8,8 @@ type Props = {
     locations: T_Location[]
 }
 const RelatedLocationsList: React.FC<Props> = ({locations}) => {
-  return <GridTemplate columns={1}>
-    {locations.map((location) => <GridArea key={location.id}>
+  return <GridTemplate rows={1}>
+    {locations.map((location) => <GridArea key={location.locationId}>
       <RelatedLocationItem location={location} />
     </GridArea>)}
   </GridTemplate>;

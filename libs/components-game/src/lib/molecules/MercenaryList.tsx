@@ -11,7 +11,7 @@ type Props = {
 }
 const MercenaryList: React.FC<Props> = ({canHire, mercenaries, columns = 4}) => {
   return <GridTemplate columns={columns}>
-    {mercenaries.map((mercenary) => <GridArea key={mercenary.id}>
+    {mercenaries.map((mercenary) => <GridArea key={mercenary.mercenaryId}>
       <MercenaryItem canHire={canHire} mercenary={mercenary} />
     </GridArea>)}
   </GridTemplate>;

@@ -131,7 +131,7 @@ export class GameDataClass extends Dexie {
     const mercenaryIds: number[] = [];
     const questIds: number[] = [];
 
-    const name = `${prefix} ${locationName}`;
+    const name = generate.city(); // `${prefix} ${locationName}`;
     const location:Omit<T_Location, 'locationId'> = {
       level,
       levelRange,

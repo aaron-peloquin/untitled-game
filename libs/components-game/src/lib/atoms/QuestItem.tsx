@@ -23,14 +23,14 @@ const QuestItem: React.FC<Props> = ({quest}) => {
   //     }
   //   });
   // }, [quest, selectedMercenaryId]);
-  return <Card layer="4" heading={`${quest.type} ${quest}`}>
+  return <Card layer="4" heading={`${quest.type} ${quest.targetName}`}>
     <dl>
       {/* <dt>Type</dt>
       <dd>{quest.type}</dd> */}
       <dt>Difficulty</dt>
       <dd>{quest.level}</dd>
       <dt>Target</dt>
-      <dd>{quest.targetName}, a {quest.targetEthnicity} {quest.targetProfession}</dd>
+      <dd>A {quest.targetEthnicity} {quest.targetProfession}</dd>
     </dl>
   </Card>;
 };
