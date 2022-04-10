@@ -10,6 +10,12 @@ declare module 'TS_General' {
     pastLocations: number[]
   }
 
+  type T_GameSetting = {
+    hidden: number
+    name: string
+    value: string
+  }
+
   type T_TwoItemNumberArray = [ number, number ]
   type T_NumGenSig = () => number
 }

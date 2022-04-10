@@ -2,7 +2,7 @@ import {GridArea, GridTemplate} from '@components-layout';
 import {useGetBand} from '@datastore';
 import {memo} from 'react';
 
-// import BandPanel from '../organisms/BandPanel';
+import BandPanel from '../organisms/BandPanel';
 // import Location from '../organisms/Location';
 import {TopNav} from '../organisms/TopNav';
 
@@ -13,11 +13,9 @@ const gridTemplateAreas = `
 "location location"`;
 
 export const GameLayout = memo(() => {
-  const beep = useGetBand();
-  console.log({beep});
   return <GridTemplate gridTemplateAreas={gridTemplateAreas} gridTemplateColumns="1fr 3fr">
     <GridArea gridArea='band____'>
-      {/* <BandPanel /> */}
+      <BandPanel />
     </GridArea>
     <GridArea gridArea='location'>
       {/* {save?.currentLocation && <Location locationId={save?.currentLocation} />} */}
