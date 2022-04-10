@@ -9,16 +9,16 @@ import RelatedLocationsList from '../molecules/RelatedLocationsList';
 type Props = {
   locationId: number
 }
-export const Location: React.FC<Props> = memo(({locationId}) => {
+const Location: React.FC<Props> = memo(({locationId}) => {
   const location = useGetLocation(locationId);
   const locationMercenaries = useListMercenariesById(location?.mercenaryIds);
   const locationQuests = useListQuestsById(location?.questIds);
   const relatedLocations = useListLocationsById(location?.relatedLocationIds);
   console.log({locationMercenaries, locationQuests, relatedLocations});
 
-  return <Card heading={location?.name} layer="2">
-    You're at the local tavern, there are both recruits and citizens with quests available here. This a level {location?.levelRange?.[0]} to {location?.levelRange?.[1]} tavern.
-    <Tabs layer="3" defaultTab='quests'>
+  return <Card heading={`Location: ${location?.name}`} layer="2">
+    You're in {location?.name}, a level {location?.levelRange?.[0]} to {location?.levelRange?.[1]} area. There are {locationMercenaries?.length} recruits, and {locationQuests?.length} citizens with quests available here.
+    <Tabs layer="3">
       <Tab name="Mercenary" id="mercenaries">
         <Card heading='Mercenaries' layer="3">
           {locationMercenaries?.length ? <MercenaryList canHire mercenaries={locationMercenaries} /> : <span>No mercenaries for hire</span>}
@@ -38,4 +38,5 @@ export const Location: React.FC<Props> = memo(({locationId}) => {
   </Card>;
 });
 
-export default memo(Location);
+Location.displayName = 'Location';
+export {Location};

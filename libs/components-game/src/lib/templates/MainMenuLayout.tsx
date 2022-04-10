@@ -2,10 +2,11 @@ import {Card, GridArea, GridTemplate} from '@components-layout';
 import {useGetCurrentSave, useListGameSaves} from '@datastore';
 import {URLs} from '@static';
 import Link from 'next/link';
+import {memo} from 'react';
 
 import {ManageGame} from '../atoms/ManageGame';
 
-export const MainMenuLayout = () => {
+const MainMenuLayout = memo(() => {
   const gameSaves = useListGameSaves();
   const currentSave = useGetCurrentSave();
 
@@ -17,4 +18,7 @@ export const MainMenuLayout = () => {
       <GridArea><Link href={URLs.settings}>Settings</Link></GridArea>
     </GridTemplate>
   </Card>;
-};
+});
+
+MainMenuLayout.displayName = 'MainMenuLayout';
+export {MainMenuLayout};

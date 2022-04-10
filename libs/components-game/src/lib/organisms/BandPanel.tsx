@@ -1,10 +1,11 @@
 import {Card} from '@components-layout';
 import {useGetBand, useGetLocation, useListMercenariesById} from '@datastore';
+import {memo} from 'react';
 
 
 import MercenaryList from '../molecules/MercenaryList';
 
-const BandPanel = () => {
+const BandPanel = memo(() => {
   const band = useGetBand();
   const bandLocation = useGetLocation(band?.currentLocationId);
   const bandMercenaries = useListMercenariesById(band?.mercenaryIds);
@@ -15,6 +16,7 @@ const BandPanel = () => {
       {bandMercenaries?.length ? <MercenaryList columns={3} mercenaries={bandMercenaries} /> : null}
     </Card>
   </Card>;
-};
+});
 
-export default BandPanel;
+BandPanel.displayName = 'BandPanel';
+export {BandPanel};

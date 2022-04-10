@@ -1,10 +1,10 @@
-import {Card, GridArea, GridTemplate} from '@components-layout';
+import {Button, Card, GridArea, GridTemplate} from '@components-layout';
 import {useAddGameSave} from '@datastore';
-import {pickArray} from '@helper';
+import {pickArray, randomName} from '@helper';
 import chance from 'chance';
 import {SyntheticEvent, useCallback, useState} from 'react';
 
-const generate = chance();
+import {TopNav} from '../organisms/TopNav';
 
 const VERBS = [
   'meeting a',
@@ -15,17 +15,18 @@ const VERBS = [
 
 const gridTemplateAreas = `
 "name-label name-field"
-"seed-label seed-field"`;
+"seed-label seed-field"
+"btn-submit btn-submit"`;
+
+const randomSeed = (generate = chance()) => `The ${generate.profession()} ${pickArray(VERBS)} ${generate.animal()}`;
 
 export const NewGameLayout = () => {
-  const [name, setName] = useState<string>(`${generate.first()} ${generate.last()}`);
-  const [seed, setSeed] = useState<string>(`The ${generate.profession()} ${pickArray(VERBS)} ${generate.animal()}`);
-  const handleSeedChange = useCallback((e) => {
-    setSeed(e.target.value);
-  }, []);
-  const handleNameChange = useCallback((e) => {
-    setName(e.target.value);
-  }, []);
+  const [name, setName] = useState<string>(randomName);
+  const [seed, setSeed] = useState<string>(randomSeed);
+  const handleRandomName = useCallback(() => setName(randomName()), []);
+  const handleRandomSeed = useCallback(() => setSeed(randomSeed()), []);
+  const handleNameChange = useCallback((e) => setName(e.target.value), []);
+  const handleSeedChange = useCallback((e) => setSeed(e.target.value), []);
 
   const addGameSave = useAddGameSave();
 
@@ -34,25 +35,32 @@ export const NewGameLayout = () => {
     addGameSave(name, seed);
   }, [addGameSave, name, seed]);
 
-  return <form onSubmit={handleSubmit}>
-    <Card layer='2' heading='New Game'>
-      <Card layer='3' heading="Game Settings">
-        <GridTemplate gridTemplateAreas={gridTemplateAreas} gridTemplateColumns="1fr 4fr">
-          <GridArea gridArea='name-label'>
-            <label htmlFor="name">Mercenary Band Leader:</label>
-          </GridArea>
-          <GridArea gridArea='name-field'>
-            <input required name="name" id="name" value={name} onChange={handleNameChange} />
-          </GridArea>
-          <GridArea gridArea='seed-label'>
-            <label htmlFor='seed'>Game Seed:</label>
-          </GridArea>
-          <GridArea gridArea='seed-field'>
-            <input required name="seed" id="seed" value={seed} onChange={handleSeedChange} />
-          </GridArea>
-        </GridTemplate>
-        <button type="submit">Create Game</button>
+  return <>
+    <TopNav />
+    <form onSubmit={handleSubmit}>
+      <Card layer='2' heading='New Game'>
+        <Card layer='3' heading="Game Settings">
+          <GridTemplate gridTemplateAreas={gridTemplateAreas} gridTemplateColumns="1fr 2fr" gridGap="8px">
+            <GridArea gridArea='name-label'>
+              <Button type="button" ariaLabel="Randomize Band Name" text="Random" onClick={handleRandomName} />
+              <label htmlFor="name">Mercenary Band Leader:</label>
+            </GridArea>
+            <GridArea gridArea='name-field'>
+              <input required name="name" id="name" value={name} onChange={handleNameChange} />
+            </GridArea>
+            <GridArea gridArea='seed-label'>
+              <Button type="button" ariaLabel="Randomize Seed" text="Random" onClick={handleRandomSeed} />
+              <label htmlFor='seed'>Game Seed:</label>
+            </GridArea>
+            <GridArea gridArea='seed-field'>
+              <input required name="seed" id="seed" value={seed} onChange={handleSeedChange} />
+            </GridArea>
+            <GridArea gridArea='btn-submit' justifySelf="center">
+              <Button text='Create Game' type="submit" />
+            </GridArea>
+          </GridTemplate>
+        </Card>
       </Card>
-    </Card>
-  </form>;
+    </form>
+  </>;
 };
