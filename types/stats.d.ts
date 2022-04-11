@@ -16,4 +16,11 @@ declare module 'TS_Stats' {
     stats: T_Stats
     onLevel: T_Stats
   }
+
+  type T_KnownEthnicities = 'human'
+  type T_KnownPersonalities = 'brave'
+  type T_KnownProfessions = 'farmer' | 'fighter'
+  
+  type T_KnownStatBlocks = T_KnownEthnicities | T_KnownPersonalities | T_KnownProfessions
+  
 }
