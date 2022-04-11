@@ -1,5 +1,5 @@
 import {Card, GridArea, GridTemplate} from '@components-layout';
-import {useCurrentSave, useHireMercenary, useRevealMercenaryStats} from '@helper';
+import {useHireMercenary} from '@datastore';
 import {memo} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
 
@@ -9,6 +9,8 @@ type Props = {
 }
 
 const MercenaryItem: React.FC<Props> = ({canHire, mercenary}) => {
+  const {canAffordHire, hire, hireCost} = useHireMercenary(mercenary);
+
   // const save = useCurrentSave();
   // const mercCost = mercenary.stats.cost || 1;
   // const bandGold = save?.band?.gold || 0;
@@ -37,7 +39,7 @@ const MercenaryItem: React.FC<Props> = ({canHire, mercenary}) => {
     </dl>} */}
     <GridTemplate columns={2} justifyItems="center">
       {(canHire && !mercenary.statsVisible) && <GridArea><button disabled={true}>Spar for {revealStatsCost ? `${revealStatsCost} gold` : 'free'}</button></GridArea>}
-      {canHire && <GridArea><button disabled={true}>Hire for {0} gold</button></GridArea>}
+      {canHire && <GridArea><button disabled={!canAffordHire} onClick={hire}>Hire for {hireCost} gold</button></GridArea>}
     </GridTemplate>
   </Card>;
 };

@@ -11,7 +11,7 @@ type Props = {
 }
 const Location: React.FC<Props> = memo(({locationId}) => {
   const location = useGetLocation(locationId);
-  const locationMercenaries = useListMercenariesById(location?.mercenaryIds, true);
+  const locationMercenaries = useListMercenariesById(location?.mercenaryIds);
   const locationQuests = useListQuestsById(location?.questIds);
   const relatedLocations = useListLocationsById(location?.relatedLocationIds);
 
