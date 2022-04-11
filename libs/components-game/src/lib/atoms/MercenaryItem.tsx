@@ -1,5 +1,5 @@
 import {Card, GridArea, GridTemplate} from '@components-layout';
-import {useHireMercenary} from '@datastore';
+import {useHireMercenary, useSparMercenary} from '@datastore';
 import {memo} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
 
@@ -10,35 +10,14 @@ type Props = {
 
 const MercenaryItem: React.FC<Props> = ({canHire, mercenary}) => {
   const {canAffordHire, hire, hireCost} = useHireMercenary(mercenary);
-
-  // const save = useCurrentSave();
-  // const mercCost = mercenary.stats.cost || 1;
-  // const bandGold = save?.band?.gold || 0;
-  // const canBandHire = bandGold >= mercCost;
-
-  // const revealStatsCostUnsafe = mercCost - 5;
-  // const revealStatsCost = revealStatsCostUnsafe < 0 ? 0 : revealStatsCostUnsafe;
-  // const canRevealStats = bandGold >= revealStatsCost;
-  const revealStatsCost = 0;
-
-  // const hireMercenary = useHireMercenary({canHire: !!canHire, mercenary, save});
-  // const revealStats = useRevealMercenaryStats({mercenary, revealStatsCost, save});
+  const {canAffordSpar, spar, sparCost} = useSparMercenary(mercenary);
+  console.log({mercenary});
 
   return <Card layer='4' heading={`${mercenary.name}`}>
     A level {Math.round(mercenary.level)} {mercenary.ethnicity} {mercenary.profession}
-    {/* {mercenary.statsVisible && <dl>
-      <dt>Health:</dt>
-      <dd>{mercenary.health.toFixed(0)} ({mercenary.stats.endurance} endurance)</dd>
-
-      <dt>Attack:</dt>
-      <dd>{mercenary.stats.attack}% to hit</dd>
-      <dd>{mercenary.stats.capture}% to capture</dd>
-
-      <dt>Stealth:</dt>
-      <dd>{mercenary.stats.stealth}%</dd>
-    </dl>} */}
+    {mercenary.statsVisible && <p>stats</p>}
     <GridTemplate columns={2} justifyItems="center">
-      {(canHire && !mercenary.statsVisible) && <GridArea><button disabled={true}>Spar for {revealStatsCost ? `${revealStatsCost} gold` : 'free'}</button></GridArea>}
+      {(canHire && !mercenary.statsVisible) && <GridArea><button disabled={!canAffordSpar} onClick={spar}>Spar for {sparCost ? `${sparCost} gold` : 'free'}</button></GridArea>}
       {canHire && <GridArea><button disabled={!canAffordHire} onClick={hire}>Hire for {hireCost} gold</button></GridArea>}
     </GridTemplate>
   </Card>;
