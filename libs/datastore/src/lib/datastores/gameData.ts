@@ -49,7 +49,7 @@ export class GameDataClass extends Dexie {
       this.band.add(newBand);
 
       // generate world locations
-      this.generateGameWorld(seed);
+      this.generateGameWorld();
     });
   }
 
@@ -57,7 +57,7 @@ export class GameDataClass extends Dexie {
   rangeGenerator = pickRange();
   generate = chance();
 
-  private generateGameWorld = (seed: string) => {
+  private generateGameWorld = () => {
     const locationPromises = [];
     let levelMin: number;
     let levelMax: number;
@@ -207,7 +207,3 @@ export class GameDataClass extends Dexie {
     return this.quests.add(quest);
   };
 }
-function QUEST_TYPE(QUEST_TYPE: any, numberGenerator: () => number) {
-  throw new Error('Function not implemented.');
-}
-
