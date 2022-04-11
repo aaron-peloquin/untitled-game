@@ -42,7 +42,7 @@ export class GameDataClass extends Dexie {
         seed,
       };
 
-      this.generateMercenary([1, 1]);
+      this.generateMercenary([1, 1], true);
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -161,7 +161,7 @@ export class GameDataClass extends Dexie {
     });
   };
 
-  private generateMercenary = async (levelRange: T_TwoItemNumberArray) => {
+  private generateMercenary = async (levelRange: T_TwoItemNumberArray, statsVisible = false) => {
     const rangeGenerator = pickRange(this.numberGenerator);
 
     const level = rangeGenerator(levelRange[0], levelRange[1]);
@@ -177,7 +177,7 @@ export class GameDataClass extends Dexie {
       name,
       personality,
       profession,
-      statsVisible: false,
+      statsVisible,
     };
 
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

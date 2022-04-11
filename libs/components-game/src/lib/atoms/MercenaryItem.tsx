@@ -11,7 +11,6 @@ type Props = {
 const MercenaryItem: React.FC<Props> = ({canHire, mercenary}) => {
   const {canAffordHire, hire, hireCost} = useHireMercenary(mercenary);
   const {canAffordSpar, spar, sparCost} = useSparMercenary(mercenary);
-  console.log({mercenary});
 
   return <Card layer='4' heading={`${mercenary.name}`}>
     A level {Math.round(mercenary.level)} {mercenary.ethnicity} {mercenary.profession}
