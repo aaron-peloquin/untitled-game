@@ -10,7 +10,14 @@ const quests = {
   professions: ['fighter', 'farmer', 'farmer', 'farmer'],
 };
 
+const questTypes = [
+  'Slay',
+  'Capture',
+  'Follow',
+];
+
 export const worldGeneration = {
   mercenaries,
+  questTypes,
   quests,
 };

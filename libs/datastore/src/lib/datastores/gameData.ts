@@ -1,5 +1,5 @@
 import {pickArray, pickRange, randomName, seedGenerator} from '@helper';
-import {QUEST_TYPE, worldGeneration} from '@static';
+import {worldGeneration} from '@static';
 import * as chance from 'chance';
 import Dexie, {Table} from 'dexie';
 import _ = require('lodash');
@@ -22,21 +22,28 @@ export class GameDataClass extends Dexie {
     super(`untitled-game-${gameDatastoreName}`);
     this.version(1).stores({
       // Primary key and indexed props
-      band: '++bandId, name, currentSave',
-      locations: '++locationId, *mercenaries, *quests, *relatedLocationIds',
+      band: '++bandId, currentLocationId, name, *mercenaryIds',
+      locations: '++locationId, *mercenaryIds, *questIds, *relatedLocationIds',
       mercenaries: '++mercenaryId, ethnicity, personality, profession, statsVisible',
       quests: '++questId, targetEthnicity, targetProfession, type',
     });
 
     this.on('populate', () => {
+      this.numberGenerator = seedGenerator(seed);
+      this.rangeGenerator = pickRange(this.numberGenerator);
+      this.generate = chance(seed);
+
       // create band
       const newBand: Omit<T_Band, 'bandId'> = {
         currentLocationId: 0,
         gold: 15,
-        mercenaryIds: [],
+        mercenaryIds: [1],
         name,
         seed,
       };
+
+      this.generateMercenary([1, 1]);
+
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       this.band.add(newBand);
@@ -52,9 +59,6 @@ export class GameDataClass extends Dexie {
 
   private generateGameWorld = (seed: string) => {
     const locationPromises = [];
-    this.numberGenerator = seedGenerator(seed);
-    this.rangeGenerator = pickRange(this.numberGenerator);
-    this.generate = chance(seed);
     let levelMin: number;
     let levelMax: number;
 
@@ -182,7 +186,7 @@ export class GameDataClass extends Dexie {
   };
 
   private generateQuest = async (levelRange: T_TwoItemNumberArray) => {
-    const type = pickArray(QUEST_TYPE, this.numberGenerator);
+    const type = pickArray(worldGeneration.questTypes, this.numberGenerator);
     const level = parseFloat((this.numberGenerator() * (levelRange[1] - levelRange[0]) + levelRange[0]).toFixed(2));
 
     const ethnicity = pickArray(worldGeneration.quests.ethnicities, this.numberGenerator);
@@ -203,3 +207,7 @@ export class GameDataClass extends Dexie {
     return this.quests.add(quest);
   };
 }
+function QUEST_TYPE(QUEST_TYPE: any, numberGenerator: () => number) {
+  throw new Error('Function not implemented.');
+}
+

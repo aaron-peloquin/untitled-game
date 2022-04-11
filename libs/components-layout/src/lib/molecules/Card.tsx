@@ -1,8 +1,8 @@
 import {memo} from 'react';
 
-import styles from './Card.module.css';
+import {T_CardLayer} from 'TS_General';
 
-export type T_CardLayer = '1' | '2' | '3' | '4'
+import styles from './Card.module.css';
 
 /* eslint-disable-next-line */
 type T_Props = {
