@@ -21,7 +21,7 @@ const MercenaryItem: React.FC<Props> = ({canHire, mercenary}) => {
 
   return <Card layer='4' heading={`${mercenary.name}`}>
     A level {Math.round(mercenary.level)} {mercenary.ethnicity} {mercenary.profession}
-    {mercenary.statsVisible && <p>stats: {stats.capture}</p>}
+    {mercenary.statsVisible && <p>stats: {stats.subtlety}</p>}
     <GridTemplate columns={2} justifyItems="center">
       {(canHire && !mercenary.statsVisible) && <GridArea><button disabled={!canAffordSpar} onClick={spar}>Spar for {sparCost ? `${sparCost} gold` : 'free'}</button></GridArea>}
       {canHire && <GridArea><button disabled={!canAffordHire} onClick={hire}>Hire for {hireCost} gold</button></GridArea>}

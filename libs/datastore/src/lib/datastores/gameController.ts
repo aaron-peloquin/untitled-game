@@ -1,5 +1,5 @@
 import Dexie, {Table} from 'dexie';
-import _ = require('lodash');
+import * as _ from 'lodash';
 import {T_GameSave, T_GameSetting} from 'TS_General';
 
 const defaultSettings: Omit<T_GameSetting, 'hidden'>[] = [

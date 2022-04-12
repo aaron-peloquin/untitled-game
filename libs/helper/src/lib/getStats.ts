@@ -1,10 +1,10 @@
 import {allStats} from '@static';
-import _ = require('lodash');
+import * as _ from 'lodash';
 import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions, T_Stats} from 'TS_Stats';
 
 type getStatsSig = (level: number, ethnicity: T_KnownEthnicities, profession: T_KnownProfessions, personality?: T_KnownPersonalities) => T_Stats
 const getStats:getStatsSig = _.memoize((level, ethnicity, profession, personality) => {
-  const defaultStats: T_Stats = {armor: 0, attack: 0, capture: 0, endurance: 0, _goldHiring: 0, _goldUpkeep: 0, stealth: 0, toHit: 0};
+  const defaultStats: T_Stats = {_goldHiring: 0, _goldUpkeep: 0, attack: 0, cunning: 0, endurance: 0, subtlety: 0};
   const ethnicityStats = allStats[ethnicity];
   const professionStats = allStats[profession];
   const basicStatsArray = [ethnicityStats.stats, professionStats.stats];

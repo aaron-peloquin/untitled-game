@@ -1,13 +1,15 @@
 import {pickArray, pickRange, randomName, seedGenerator} from '@helper';
 import {worldGeneration} from '@static';
-import * as chance from 'chance';
+import * as chanceExport from 'chance';
 import Dexie, {Table} from 'dexie';
-import _ = require('lodash');
+import * as _ from 'lodash';
 import {T_Band} from 'TS_Band';
 import {T_TwoItemNumberArray} from 'TS_General';
 import {T_Location} from 'TS_Location';
 import {T_Mercenary} from 'TS_Mercenary';
 import {T_Quest} from 'TS_Quest';
+
+const chance = chanceExport.Chance;
 
 const LOCATIONS_PER_GAME = 44;
 
