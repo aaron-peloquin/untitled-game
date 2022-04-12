@@ -1,29 +1,25 @@
 import {T_ExportStats, T_Stats} from 'TS_Stats';
 
 const baseStats: T_Stats = {
-  armor: 1,
+  _goldHiring: 3,
+  _goldUpkeep: 2,
   attack: 2,
-  capture: 2,
-  endurance: 0,
-  goldHiring: 3,
-  goldUpkeep: 2,
-  stealth: -1,
-  toHit: 2,
+  cunning: 0,
+  endurance: 1,
+  subtlety: -2,
 };
 
 const levelUpGains: T_Stats = {
-  armor: 0,
+  _goldHiring: 1,
+  _goldUpkeep: 1,
   attack: 1,
-  capture: 1,
-  endurance: 0,
-  goldHiring: 1,
-  goldUpkeep: 1,
-  stealth: 1,
-  toHit: 1,
+  cunning: 0,
+  endurance: 1,
+  subtlety: 0,
 };
 
 const statsData: T_ExportStats = {
-  label: 'Human',
+  label: 'Brave',
   onLevel: levelUpGains,
   stats: baseStats,
 };

@@ -12,7 +12,9 @@ declare module 'TS_General' {
 
   type T_GameSetting = {
     hidden: number
+    label: string
     name: string
+    type: 'number' | 'text',
     value: string
   }
 

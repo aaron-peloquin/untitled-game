@@ -1,33 +1,28 @@
-import {T_ProfessionStats, T_Stats} from 'TS_Stats';
+import {T_ExportStats, T_Stats} from 'TS_Stats';
 
 const stats: T_Stats = {
-  armor: 8,
-  attack: 1,
-  capture: 8,
+  _goldHiring: 3,
+  _goldUpkeep: 1,
+  attack: 8,
+  cunning: 8,
   endurance: 8,
-  goldHiring: 3,
-  goldUpkeep: 1,
-  stealth: 7,
-  toHit: 8,
+  subtlety: 8,
 };
 
 const onLevel: T_Stats = {
-  armor: 1,
+  _goldHiring: 2,
+  _goldUpkeep: 1,
   attack: 2,
-  capture: 2,
+  cunning: 2,
   endurance: 2,
-  goldHiring: 2,
-  goldUpkeep: 1,
-  stealth: -1,
-  toHit: 2,
+  subtlety: 1,
 };
 
 
-const professionStats: T_ProfessionStats = {
+const professionStats: T_ExportStats = {
   label: 'Fighter',
   onLevel,
   stats,
-  type: 'mercenary',
 };
 
 export default professionStats;

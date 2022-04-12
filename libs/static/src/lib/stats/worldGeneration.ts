@@ -1,11 +1,13 @@
+import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions} from 'TS_Stats';
 
-const mercenaries = {
+
+const mercenaries: {ethnicities: T_KnownEthnicities[], personalities: T_KnownPersonalities[], professions: T_KnownProfessions[]} = {
   ethnicities: ['human'],
   personalities: ['brave'],
-  professions: ['fighter'],
+  professions: ['fighter', 'fighter', 'fighter', 'farmer'],
 };
 
-const quests = {
+const quests: {ethnicities: T_KnownEthnicities[], professions: T_KnownProfessions[]} = {
   ethnicities: ['human'],
   professions: ['fighter', 'farmer', 'farmer', 'farmer'],
 };

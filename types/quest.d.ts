@@ -1,16 +1,17 @@
 
 declare module 'TS_Quest' {
   import {T_Mercenary} from 'TS_Mercenary'
-  import {T_NumGenSig, T_TwoItemNumberArray} from 'TS_General'
   import {IndexableType, PromiseExtended} from 'dexie'
+  import {T_NumGenSig, T_TwoItemNumberArray} from 'TS_General'
+  import {T_KnownEthnicities, T_KnownProfessions} from 'TS_Stats'
 
   type T_Quest = {
     questId: number
     level: number
     type: string
-    targetEthnicity: string
+    targetEthnicity: T_KnownEthnicities
     targetName: string
-    targetProfession: string
+    targetProfession: T_KnownProfessions
 }
 
   type T_createQuestArgs = {

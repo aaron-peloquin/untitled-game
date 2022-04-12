@@ -2,15 +2,16 @@
 declare module 'TS_Mercenary' {
   import {T_NumGenSig} from "TS_General"
   import {IndexableType, PromiseExtended} from "dexie"
+  import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions} from "TS_Stats"
 
   interface T_Mercenary {
     mercenaryId: number
     currentHealth: number
-    ethnicity: string
+    ethnicity: T_KnownEthnicities
     level: number
     name: string
-    personality: string
-    profession: string
+    personality: T_KnownPersonalities
+    profession: T_KnownProfessions
     statsVisible: boolean
   }
 

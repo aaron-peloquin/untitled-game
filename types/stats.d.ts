@@ -1,14 +1,12 @@
 declare module 'TS_Stats' {
 
   type T_Stats = {
-    armor: number
+    _goldHiring: number
+    _goldUpkeep: number
     attack: number
-    capture: number
+    cunning: number
     endurance: number
-    goldHiring: number
-    goldUpkeep: number
-    stealth: number
-    toHit: number
+    subtlety : number
   }
 
   type T_ExportStats = {
