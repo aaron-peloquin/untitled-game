@@ -1,4 +1,4 @@
-import {Fragment, memo} from 'react';
+import {memo} from 'react';
 
 import {T_CardLayer} from 'TS_General';
 
@@ -15,12 +15,14 @@ type T_Props = {
 
 const Tabs: React.FC<T_Props> = memo(({defaultTab, layer, children}) => {
   const hasCard = !!layer;
-  const Wrapper = hasCard ? Fragment : Card;
   return <TabsProvider defaultTab={defaultTab}>
-    <Wrapper layer={layer}>
+    {hasCard ? <Card layer={layer}>
       <TabSelector />
       {children}
-    </Wrapper>
+    </Card> : <>
+      <TabSelector />
+      {children}
+    </>}
   </TabsProvider>;
 });
 
