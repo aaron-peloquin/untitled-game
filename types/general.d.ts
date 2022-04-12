@@ -18,7 +18,7 @@ declare module 'TS_General' {
     value: string
   }
 
-  type T_CardLayer = '1' | '2' | '3' | '4'
+  type T_CardLayer = '1' | '2' | '3' | '4' | '5'
 
   type T_TwoItemNumberArray = [ number, number ]
   type T_NumGenSig = () => number

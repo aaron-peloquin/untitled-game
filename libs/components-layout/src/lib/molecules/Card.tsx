@@ -19,6 +19,7 @@ const Card: React.FC<T_Props> = memo(({layer, heading, children}) => {
       {layer === '2' && <h2>{heading}</h2>}
       {layer === '3' && <h3>{heading}</h3>}
       {layer === '4' && <h4>{heading}</h4>}
+      {layer === '5' && <h5>{heading}</h5>}
       {children}
     </div>
   );
