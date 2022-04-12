@@ -1,4 +1,4 @@
-import {Button, Card, GridArea, GridTemplate} from '@components-layout';
+import {Button, Card, GridArea, GridTemplate, Label, Output} from '@components-layout';
 import {useHireMercenary, useSparMercenary} from '@datastore';
 import {getStats} from '@helper';
 import {memo, useMemo} from 'react';
@@ -22,12 +22,12 @@ const MercenaryItem: React.FC<Props> = memo(({canHire, mercenary}) => {
 
   return <Card layer='4' heading={`${mercenary.name}`}>
     A level {mercenary.level} {mercenary.ethnicity} {mercenary.profession}
-    {mercenary.statsVisible && <Card layer="5" heading="Statistics">
+    {mercenary.statsVisible && <Card layer="5">
       <GridTemplate gridTemplateRows="1fr 1fr" gridTemplateColumns="1fr 1fr" textAlign='center'>
-        <GridArea>attack<br />{stats.attack}</GridArea>
-        <GridArea>cunning<br />{stats.cunning}</GridArea>
-        <GridArea>endurance<br />{stats.endurance}</GridArea>
-        <GridArea>subtlety<br />{stats.subtlety}</GridArea>
+        <GridArea><Output label="Attack" id={`${mercenary.mercenaryId}_attack`} value={stats.attack} /></GridArea>
+        <GridArea><Output label="Cunning" id={`${mercenary.mercenaryId}_cunning`} value={stats.cunning} /></GridArea>
+        <GridArea><Output label="Endurance" id={`${mercenary.mercenaryId}_endurance`} value={stats.endurance} /></GridArea>
+        <GridArea><Output label="Subtlety" id={`${mercenary.mercenaryId}_subtlety`} value={stats.subtlety} /></GridArea>
       </GridTemplate>
     </Card>}
     <GridTemplate columns={2} justifyItems="center">

@@ -1,4 +1,4 @@
-import {Button, Card, GridArea, GridTemplate} from '@components-layout';
+import {Button, Card, GridArea, GridTemplate, Input} from '@components-layout';
 import {useDeleteGameSetting, useListGameSettings, useSetGameSetting} from '@datastore';
 
 import {TopNav} from '../organisms/TopNav';
@@ -12,11 +12,10 @@ export const ManageSettingsLayout = () => {
     <Card heading='Settings' layer="2">
       <form>
         <Card layer="3">
-          <GridTemplate gridTemplateColumns="1fr 2fr 1fr" gridGap="16px">
+          <GridTemplate gridTemplateColumns="2fr 1fr" gridGap="16px" alignItems="end">
             {settings.map((setting) => {
               return <>
-                <GridArea textAlign="right"><label htmlFor={setting.name}>{setting.label}: </label></GridArea>
-                <GridArea><input name={setting.name} onChange={handleChange} type={setting.type} value={setting.value} {...setting.otherFieldProps} /></GridArea>
+                <GridArea><Input id={`setting-${setting.name}`} label={setting.label} name={setting.name} onChange={handleChange} type={setting.type} value={setting.value} {...setting.otherFieldProps} /></GridArea>
                 <GridArea><Button type="button" text='Reset to default' onClick={(e) => {
                   e.preventDefault();
                   resetSetting(setting.name);
