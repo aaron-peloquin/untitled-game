@@ -21,7 +21,6 @@ export const useSparMercenary = (mercenary: T_Mercenary) => {
     const newGoldValue = bandGold - sparCost;
 
     if (gameData?.dataStore && bandId > 0 && newGoldValue >= 0) {
-      console.log({mercenaryId});
       // reduce gold
       gameData.dataStore.band.update(bandId, {gold: newGoldValue});
       // show mercenary stats

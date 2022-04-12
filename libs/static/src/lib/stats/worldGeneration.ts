@@ -3,7 +3,7 @@ import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions} from 'TS_S
 
 const mercenaries: {ethnicities: T_KnownEthnicities[], personalities: T_KnownPersonalities[], professions: T_KnownProfessions[]} = {
   ethnicities: ['human'],
-  personalities: ['brave'],
+  personalities: ['brave', 'leader'],
   professions: ['fighter', 'fighter', 'fighter', 'farmer'],
 };
 
