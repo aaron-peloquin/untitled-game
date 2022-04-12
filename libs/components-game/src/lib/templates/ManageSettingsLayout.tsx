@@ -16,7 +16,7 @@ export const ManageSettingsLayout = () => {
             {settings.map((setting) => {
               return <>
                 <GridArea textAlign="right"><label htmlFor={setting.name}>{setting.label}: </label></GridArea>
-                <GridArea><input name={setting.name} onChange={handleChange} type={setting.type} value={setting.value} /></GridArea>
+                <GridArea><input name={setting.name} onChange={handleChange} type={setting.type} value={setting.value} {...setting.otherFieldProps} /></GridArea>
                 <GridArea><Button type="button" text='Reset to default' onClick={(e) => {
                   e.preventDefault();
                   resetSetting(setting.name);

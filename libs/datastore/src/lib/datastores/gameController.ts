@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import {T_GameSave, T_GameSetting} from 'TS_General';
 
 const defaultSettings: Omit<T_GameSetting, 'hidden'>[] = [
+  {label: 'Locations per World', name: 'locs_per_world', otherFieldProps: {max: 500, min: 4}, type: 'number', value: '44'},
   {label: 'Action points per day', name: 'ap_per_day', type: 'number', value: '5'},
   {label: 'Health per endurance point', name: 'hp_per_end', type: 'number', value: '5'},
 ];

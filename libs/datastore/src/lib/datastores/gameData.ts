@@ -11,8 +11,6 @@ import {T_Quest} from 'TS_Quest';
 
 const chance = chanceExport.Chance;
 
-const LOCATIONS_PER_GAME = 44;
-
 // export gameData datastore, to be initalized by the provider
 export class GameDataClass extends Dexie {
   band!: Table<T_Band, number>;
@@ -20,7 +18,7 @@ export class GameDataClass extends Dexie {
   mercenaries!: Table<T_Mercenary, number>;
   quests!: Table<T_Quest, number>;
 
-  constructor(gameDatastoreName: string, name: string, seed: string) {
+  constructor(gameDatastoreName: string, name: string, seed: string, locationsToGenerate: number) {
     super(`untitled-game-${gameDatastoreName}`);
     this.version(1).stores({
       // Primary key and indexed props
@@ -51,7 +49,7 @@ export class GameDataClass extends Dexie {
       this.band.add(newBand);
 
       // generate world locations
-      this.generateGameWorld();
+      this.generateGameWorld(locationsToGenerate);
     });
   }
 
@@ -59,12 +57,12 @@ export class GameDataClass extends Dexie {
   rangeGenerator = pickRange();
   generate = chance();
 
-  private generateGameWorld = () => {
+  private generateGameWorld = (locationsToGenerate: number) => {
     const locationPromises = [];
     let levelMin: number;
     let levelMax: number;
-
-    for (let index = 0; index < LOCATIONS_PER_GAME; index++) {
+    console.log({locationsToGenerate});
+    for (let index = 0; index < locationsToGenerate; index++) {
       const quarterIndex = index / 1.4;
       levelMin = quarterIndex < 1 ? 1 : quarterIndex;
       levelMax = index * 1.4 || 1.4;

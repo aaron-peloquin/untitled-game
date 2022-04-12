@@ -8,6 +8,7 @@ declare module 'TS_General' {
     gameDatastoreName: string
     currentLocation: number
     pastLocations: number[]
+    totalLocations: number
   }
 
   type T_GameSetting = {
@@ -16,6 +17,7 @@ declare module 'TS_General' {
     name: string
     type: 'number' | 'text',
     value: string
+    otherFieldProps?: Record<string, any>
   }
 
   type T_CardLayer = '1' | '2' | '3' | '4' | '5'
