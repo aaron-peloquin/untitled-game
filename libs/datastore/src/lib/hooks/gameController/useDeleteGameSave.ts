@@ -5,7 +5,7 @@ import {useCallback} from 'react';
 import {gameController} from '../../datastores/gameController';
 
 
-export const useDeleteSave = (saveId: number, landingPage: string = URLs.mainMenu) => {
+export const useDeleteGameSave = (saveId: number, landingPage: string = URLs.mainMenu) => {
   const router = useRouter();
   const deleteSave = useCallback(async () => {
     const gameSave = await gameController.gameSaves.get(saveId);

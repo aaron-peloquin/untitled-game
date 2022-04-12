@@ -1,3 +1,6 @@
+import { ManageSettingsLayout } from "@components-game";
 import { memo } from "react";
 
-export default memo(() => <p>WIP</p>)
+export default memo(() => {
+   return <ManageSettingsLayout />
+})

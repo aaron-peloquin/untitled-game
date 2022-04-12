@@ -1,5 +1,5 @@
 import {Button} from '@components-layout';
-import {useDeleteSave, useSetCurrentGameSave} from '@datastore';
+import {useDeleteGameSave, useSetCurrentGameSave} from '@datastore';
 import {memo, SyntheticEvent, useCallback, useState} from 'react';
 import {T_GameSave} from 'TS_General';
 
@@ -13,7 +13,7 @@ const ManageGame: React.FC<T_Props> = memo(({save}) => {
   }, []);
   const saveId = save.gameSaveId || 0;
 
-  const handleDeleteGame = useDeleteSave(saveId);
+  const handleDeleteGame = useDeleteGameSave(saveId);
 
   const setGameSave = useSetCurrentGameSave();
   const handleLoadGame = useCallback((e: SyntheticEvent) => {
