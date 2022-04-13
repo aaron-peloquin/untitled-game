@@ -13,7 +13,7 @@ const BandPanel = memo(() => {
   return <Card heading={`${band?.name}'s Mercenary Band`} layer="2">
     <p>You are visiting <strong>{bandLocation?.name}</strong> with <strong>{band?.gold.toLocaleString('en-US') || '0'} gold</strong> in your coffers</p>
     <Card layer="3" heading="Your Mercenaries">
-      {bandMercenaries?.length ? <MercenaryList columns={3} mercenaries={bandMercenaries} /> : null}
+      {bandMercenaries?.length ? <MercenaryList columns={3} canSelect mercenaries={bandMercenaries} /> : null}
     </Card>
   </Card>;
 });

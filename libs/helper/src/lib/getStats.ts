@@ -1,16 +1,10 @@
 import {allStats} from '@static';
 import * as _ from 'lodash';
-import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions, T_Stats} from 'TS_Stats';
-
-type T_ParsedStats = {
-  maxHealth: number
-  ethnicity: string
-  profession: string
-} & T_Stats
+import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions, T_ParsedStats, T_Stats} from 'TS_Stats';
 
 export const defaultStats: T_ParsedStats = {_goldHiring: 0, _goldUpkeep: 0, attack: 0, cunning: 0, endurance: 0, ethnicity: '', maxHealth: 0, profession: '', subtlety: 0};
 
-type getStatsSig = (level: number, hpMultipler: number, ethnicity: T_KnownEthnicities, profession: T_KnownProfessions, personality?: T_KnownPersonalities) => T_StatsWithMaxHealth
+type getStatsSig = (level: number, hpMultipler: number, ethnicity: T_KnownEthnicities, profession: T_KnownProfessions, personality?: T_KnownPersonalities) => T_ParsedStats
 const getStats:getStatsSig = _.memoize((level, hpMultipler, ethnicity, profession, personality) => {
   const ethnicityData = allStats[ethnicity];
   const professionData = allStats[profession];

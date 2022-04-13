@@ -1,10 +1,11 @@
-import {Button, Card, GridArea, GridTemplate, Label, Output, ProgressBar} from '@components-layout';
-import {useGetStats, useHireMercenary, useSparMercenary} from '@datastore';
+import {Button, Card, GridArea, GridTemplate, Output, ProgressBar} from '@components-layout';
+import {useHireMercenary, useSparMercenary, useSetSelectMercenaryId, useGetMercenaryStats} from '@datastore';
 import {memo} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
 
 type Props = {
   canHire?: boolean
+  canSelect?: boolean
   mercenary: T_Mercenary
 }
 
@@ -13,9 +14,10 @@ const STATS_AREA = `
 "attack___ cunning__"
 "endurance subtlety_"`;
 
-const MercenaryItem: React.FC<Props> = memo(({canHire, mercenary}) => {
+const MercenaryItem: React.FC<Props> = memo(({canHire, canSelect, mercenary}) => {
   const {currentHealth, level, mercenaryId, name, statsVisible} = mercenary;
-  const stats = useGetStats(mercenary);
+  const stats = useGetMercenaryStats(mercenary);
+  const {isSelected, setSelected} = useSetSelectMercenaryId(mercenaryId);
 
   const {canAffordHire, hire, hireCost} = useHireMercenary(mercenary, stats._goldHiring);
   const {canAffordSpar, spar, sparCost} = useSparMercenary(mercenary);
@@ -42,9 +44,10 @@ const MercenaryItem: React.FC<Props> = memo(({canHire, mercenary}) => {
         <GridArea name="subtlety_"><Output label="Subtlety" id={`${mercenaryId}_subtlety`} value={stats.subtlety} /></GridArea>
       </GridTemplate>
     </Card>}
-    <GridTemplate columns={2} justifyItems="center">
+    <GridTemplate columns={showStatsButton && canHire ? 2 : 1} justifyItems="center">
       {showStatsButton && <GridArea><Button disabled={!canAffordSpar} onClick={spar} text={`Spar for ${sparCost ? `${sparCost} gold` : 'free'}`} /></GridArea>}
       {canHire && <GridArea><Button disabled={!canAffordHire} onClick={hire} text={`Hire for ${hireCost} gold`} /></GridArea>}
+      {canSelect && <GridArea><Button disabled={isSelected} text="Select Mercenary" onClick={setSelected} /></GridArea>}
     </GridTemplate>
   </Card>;
 });

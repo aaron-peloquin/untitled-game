@@ -24,7 +24,7 @@ const Location: React.FC<Props> = memo(({locationId}) => {
         </Card>
       </Tab>
       <Tab name="Available Quests" id="quests">
-        <Card heading='Available Quests' layer="3">
+        <Card heading='Pickup a Quest' layer="3">
           {locationQuests?.length ? <QuestList quests={locationQuests} /> : <span>No quests available</span>}
         </Card>
       </Tab>

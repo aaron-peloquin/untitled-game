@@ -9,6 +9,12 @@ declare module 'TS_Stats' {
     subtlety : number
   }
 
+  type T_ParsedStats = {
+    maxHealth: number
+    ethnicity: string
+    profession: string
+  } & T_Stats
+  
   type T_ExportStats = {
     label: string
     color: string

@@ -5,7 +5,7 @@ import {T_Mercenary} from 'TS_Mercenary';
 import {useLimitMaxHealth} from '../gameActions/useLimitMaxHealth';
 import {useGetGameSetting} from '../gameController/useGetGameSetting';
 
-export const useGetStats = (mercenary: T_Mercenary) => {
+export const useGetMercenaryStats = (mercenary: T_Mercenary) => {
   const {mercenaryId, level, ethnicity, profession, personality, currentHealth} = mercenary;
   const hp_per_end = useGetGameSetting('hp_per_end')?.value;
   const stats = useMemo(() => {
