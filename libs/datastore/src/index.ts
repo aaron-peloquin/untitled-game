@@ -17,11 +17,15 @@ export * from './lib/hooks/gameController/useSetGameSetting';
 
 export * from './lib/hooks/gameData/useGetBand';
 export * from './lib/hooks/gameData/useGetLocation';
+export * from './lib/hooks/gameData/useGetMercenary';
+export * from './lib/hooks/gameData/useGetQuest';
+
 export * from './lib/hooks/gameData/useListLocationsById';
 export * from './lib/hooks/gameData/useListMercenariesById';
 export * from './lib/hooks/gameData/useListQuestsById';
 
 export * from './lib/hooks/general/useGetMercenaryStats';
 export * from './lib/hooks/general/useGetQuestStats';
+export * from './lib/hooks/general/useQuestRunner';
 export * from './lib/hooks/general/useSetSelectMercenaryId';
 export * from './lib/hooks/general/useSetSelectedQuestId';
