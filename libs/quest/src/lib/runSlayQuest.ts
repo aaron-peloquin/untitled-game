@@ -23,15 +23,17 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
   });
 
   const mercenaryAttack = () => {
-    const damage = (numberRange(0, 10) + mercenaryStats.attack) / questStats.endurance;
+    const damage = (numberRange(0, 10) + mercenaryStats.attack) / (questStats.endurance / 4);
     questCurrentHealth -= damage;
-    const roundDescription = `attacked ${quest.targetName} for ${Math.round(damage)}`;
-    roundsLog.push({action: roundDescription, person: quest.targetName});
+    const roundDescription = `attacked ${quest.targetName} for ${Math.round(damage)} damage`;
+    roundsLog.push({action: roundDescription, person: mercenary.name});
   };
 
   const questAttack = () => {
-    const damage = (numberRange(0, 10) + questStats.attack) / mercenaryStats.endurance;
+    const damage = (numberRange(0, 10) + questStats.attack) / (mercenaryStats.endurance / 4);
     mercenaryCurrentHealth -= damage;
+    const roundDescription = `attacked ${quest.targetName} for ${Math.round(damage)} damage`;
+    roundsLog.push({action: roundDescription, person: quest.targetName});
   };
 
   mercenaryAttack();
@@ -41,11 +43,14 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
     mercenaryAttack();
   }
 
+  let removeMercenary = false;
+
   if (mercenaryCurrentHealth > 0) {
     outcome = 'Victory';
     roundsLog.push({action: `defeated ${quest.targetName}`, person: mercenary.name});
   } else if (mercenaryCurrentHealth <= -(mercenary.level * 2)) {
     outcome = 'Death';
+    removeMercenary = true;
     roundsLog.push({action: 'never returned', person: mercenary.name});
   } else {
     outcome = 'Failure';
@@ -55,7 +60,7 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
   const result: T_QuestResult = {
     mercenaryCurrentHealth,
     outcome,
-    removeMercenary: false,
+    removeMercenary,
     rewards: {bandExp: 5, gold: 2, mercenaryExp: 5},
     roundsLog,
   };

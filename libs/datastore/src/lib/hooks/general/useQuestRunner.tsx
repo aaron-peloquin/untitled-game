@@ -18,9 +18,8 @@ export const useQuestRunner = () => {
   const runQuest = useCallback(() => {
     if (quest?.type && mercenary && quest) {
       const questRunner = questRunners?.[quest?.type];
-      console.log('questRunner', questRunner);
       const questResults = questRunner({mercenary, mercenaryStats, quest, questStats});
-      console.log({questResults, questRunner});
+      console.log('questResults', questResults);
     }
   }, [mercenary, mercenaryStats, quest, questStats]);
 
