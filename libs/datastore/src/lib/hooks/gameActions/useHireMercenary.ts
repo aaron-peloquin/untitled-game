@@ -1,4 +1,3 @@
-import {getStats} from '@helper';
 import {useCallback} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
 
@@ -7,15 +6,13 @@ import {useGameData} from '../gameController/useGameData';
 import {useGetBand} from '../gameData/useGetBand';
 
 
-export const useHireMercenary = (mercenary: T_Mercenary) => {
+export const useHireMercenary = (mercenary: T_Mercenary, hireCost: number) => {
   const gameData = useGameData();
   const band = useGetBand();
   const bandGold = band?.gold || 0;
   const bandId = band?.bandId || 0;
   const mercenaryId = mercenary.mercenaryId;
-  const mercStats = getStats(mercenary.level, mercenary.ethnicity, mercenary.profession, mercenary.personality);
 
-  const hireCost = mercStats._goldHiring;
   const canAffordHire = bandGold >= hireCost;
 
   const hire = useCallback(() => {

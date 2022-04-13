@@ -11,7 +11,7 @@ const stats: T_Stats = {
 
 
 const onLevel: T_Stats = {
-  _goldHiring: 1,
+  _goldHiring: 0,
   _goldUpkeep: 1,
   attack: 1,
   cunning: 0,
@@ -20,6 +20,7 @@ const onLevel: T_Stats = {
 };
 
 const professionStats: T_ExportStats = {
+  color: 'tan',
   label: 'Farmer',
   onLevel,
   stats,

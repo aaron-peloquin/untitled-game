@@ -171,7 +171,7 @@ export class GameDataClass extends Dexie {
     const name = randomName(this.generate);
 
     const mercenary: Omit<T_Mercenary, 'mercenaryId'> = {
-      currentHealth: -1,
+      currentHealth: 9999,
       ethnicity,
       level,
       name,

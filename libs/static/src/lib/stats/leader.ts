@@ -19,6 +19,7 @@ const levelUpGains: T_Stats = {
 };
 
 const statsData: T_ExportStats = {
+  color: '',
   label: 'Brave',
   onLevel: levelUpGains,
   stats: baseStats,

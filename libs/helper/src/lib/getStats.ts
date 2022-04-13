@@ -2,20 +2,27 @@ import {allStats} from '@static';
 import * as _ from 'lodash';
 import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions, T_Stats} from 'TS_Stats';
 
-type getStatsSig = (level: number, ethnicity: T_KnownEthnicities, profession: T_KnownProfessions, personality?: T_KnownPersonalities) => T_Stats
-const getStats:getStatsSig = _.memoize((level, ethnicity, profession, personality) => {
-  const defaultStats: T_Stats = {_goldHiring: 0, _goldUpkeep: 0, attack: 0, cunning: 0, endurance: 0, subtlety: 0};
-  const ethnicityStats = allStats[ethnicity];
-  const professionStats = allStats[profession];
-  const basicStatsArray = [ethnicityStats.stats, professionStats.stats];
-  const levelingStats = [ethnicityStats.onLevel, professionStats.onLevel];
+type T_ParsedStats = {
+  maxHealth: number
+  ethnicity: string
+  profession: string
+} & T_Stats
+
+export const defaultStats: T_ParsedStats = {_goldHiring: 0, _goldUpkeep: 0, attack: 0, cunning: 0, endurance: 0, ethnicity: '', maxHealth: 0, profession: '', subtlety: 0};
+
+type getStatsSig = (level: number, hpMultipler: number, ethnicity: T_KnownEthnicities, profession: T_KnownProfessions, personality?: T_KnownPersonalities) => T_StatsWithMaxHealth
+const getStats:getStatsSig = _.memoize((level, hpMultipler, ethnicity, profession, personality) => {
+  const ethnicityData = allStats[ethnicity];
+  const professionData = allStats[profession];
+  const basicStatsArray = [ethnicityData.stats, professionData.stats];
+  const levelingStats = [ethnicityData.onLevel, professionData.onLevel];
 
   if (personality) {
     const personalityStats = allStats[personality];
     basicStatsArray.push(personalityStats.stats);
     levelingStats.push(personalityStats.onLevel);
   }
-  if (level > 1) {
+  if (level >= 1) {
     const levelUpStats = levelingStats.reduce((stats, newStats) => {
       // eslint-disable-next-line guard-for-in
       for (const newStat in newStats) {
@@ -38,7 +45,12 @@ const getStats:getStatsSig = _.memoize((level, ethnicity, profession, personalit
     return stats;
   }, {...defaultStats});
 
-  return statBlock;
+  return {
+    ...statBlock,
+    ethnicity: ethnicityData.label,
+    maxHealth: statBlock.endurance * hpMultipler,
+    profession: professionData.label,
+  };
 });
 
 export {getStats};

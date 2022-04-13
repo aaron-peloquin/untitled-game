@@ -20,6 +20,7 @@ const onLevel: T_Stats = {
 
 
 const professionStats: T_ExportStats = {
+  color: 'red',
   label: 'Fighter',
   onLevel,
   stats,

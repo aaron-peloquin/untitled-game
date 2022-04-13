@@ -11,6 +11,7 @@ declare module 'TS_Stats' {
 
   type T_ExportStats = {
     label: string
+    color: string
     stats: T_Stats
     onLevel: T_Stats
   }
