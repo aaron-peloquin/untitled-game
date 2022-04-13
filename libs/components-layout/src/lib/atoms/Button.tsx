@@ -30,5 +30,5 @@ const Button: React.FC<T_CombinedProps> = memo(({
   </button>;
 });
 
-
+Button.displayName = 'Button';
 export {Button};

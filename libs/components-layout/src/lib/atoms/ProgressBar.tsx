@@ -1,7 +1,6 @@
-// import CSS from 'csstype';
-import {useMemo} from 'react';
+import {ProgressHTMLAttributes, useMemo} from 'react';
 
-// type T_AccentColors = Pick<CSS.Properties, 'accentColor'>
+import classNames from './ProgressBar.module.css';
 
 type T_Props = {
     color?: 'blue' | 'red' | 'orange'
@@ -9,9 +8,9 @@ type T_Props = {
     value: number
 }
 
-const ProgressBar: React.FC<T_Props> = ({color, max, value}) => {
+const ProgressBar: React.FC<T_Props & ProgressHTMLAttributes<HTMLProgressElement>> = ({color, ...props}) => {
   const style = useMemo(() => ({accentColor: color}), [color]);
-  return <progress style={style} max={max} value={value} />;
+  return <progress className={classNames['progress-bar']} style={style} {...props} />;
 };
 
 ProgressBar.displayName = 'ProgressBar';

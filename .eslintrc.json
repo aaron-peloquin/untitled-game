@@ -31,7 +31,10 @@
     {
       "files": ["*.ts", "*.tsx"],
       "excludedFiles": ["next-env.d.ts"],
-      "extends": ["plugin:@nrwl/nx/typescript","google"],
+      "extends": [
+        "plugin:@nrwl/nx/typescript",
+        "google"
+      ],
       "rules": {
         "camelcase": "off",
         "linebreak-style":"off",

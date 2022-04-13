@@ -16,10 +16,10 @@ const GameLayout = memo(() => {
   return <>
     <TopNav />
     <GridTemplate gridTemplateAreas={gridTemplateAreas}>
-      <GridArea gridArea='band____'>
+      <GridArea name='band____'>
         <BandPanel />
       </GridArea>
-      <GridArea gridArea='location'>
+      <GridArea name='location'>
         {band?.currentLocationId && <Location locationId={band.currentLocationId} />}
       </GridArea>
     </GridTemplate></>;

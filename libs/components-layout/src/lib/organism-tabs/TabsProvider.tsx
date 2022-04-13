@@ -1,5 +1,4 @@
-import _ from 'lodash';
-import {memo, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {memo, useCallback, useEffect, useMemo, useState} from 'react';
 
 import {tabsContext, T_Tab, T_tabsContextValue} from './tabsContext';
 

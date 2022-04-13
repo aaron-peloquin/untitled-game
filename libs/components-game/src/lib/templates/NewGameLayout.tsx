@@ -41,21 +41,21 @@ export const NewGameLayout = () => {
       <Card layer='2' heading='New Game'>
         <Card layer='3' heading="Game Settings">
           <GridTemplate gridTemplateAreas={gridTemplateAreas} gridTemplateColumns="1fr 2fr" gridGap="8px">
-            <GridArea gridArea='name-label'>
+            <GridArea name='name-label'>
               <Button type="button" ariaLabel="Randomize Band Name" text="Random" onClick={handleRandomName} />
               <label htmlFor="name">Mercenary Band Leader:</label>
             </GridArea>
-            <GridArea gridArea='name-field'>
+            <GridArea name='name-field'>
               <input required name="name" id="name" value={name} onChange={handleNameChange} />
             </GridArea>
-            <GridArea gridArea='seed-label'>
+            <GridArea name='seed-label'>
               <Button type="button" ariaLabel="Randomize Seed" text="Random" onClick={handleRandomSeed} />
               <label htmlFor='seed'>Game Seed:</label>
             </GridArea>
-            <GridArea gridArea='seed-field'>
+            <GridArea name='seed-field'>
               <input required name="seed" id="seed" value={seed} onChange={handleSeedChange} />
             </GridArea>
-            <GridArea gridArea='btn-submit' justifySelf="center">
+            <GridArea name='btn-submit' justifySelf="center">
               <Button text='Create Game' type="submit" />
             </GridArea>
           </GridTemplate>
