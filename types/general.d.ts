@@ -20,6 +20,14 @@ declare module 'TS_General' {
     otherFieldProps?: Record<string, any>
   }
 
+  type T_KnownQuestTypes = 'Slay'
+  type T_KnownEthnicities = 'human'
+  type T_KnownPersonalities = 'brave' | 'leader'
+  type T_KnownProfessions = 'farmer' | 'fighter'
+  
+  type T_KnownStatBlocks = T_KnownEthnicities | T_KnownPersonalities | T_KnownProfessions
+
+
   type T_CardLayer = '1' | '2' | '3' | '4' | '5'
 
   type T_TwoItemNumberArray = [ number, number ]

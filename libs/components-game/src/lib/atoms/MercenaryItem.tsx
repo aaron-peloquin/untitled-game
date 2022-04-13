@@ -7,6 +7,7 @@ type Props = {
   canHire?: boolean
   canSelect?: boolean
   mercenary: T_Mercenary
+  showHealthBar?: boolean
 }
 
 const STATS_AREA = `
@@ -14,7 +15,7 @@ const STATS_AREA = `
 "attack___ cunning__"
 "endurance subtlety_"`;
 
-const MercenaryItem: React.FC<Props> = memo(({canHire, canSelect, mercenary}) => {
+const MercenaryItem: React.FC<Props> = memo(({canHire, canSelect, mercenary, showHealthBar}) => {
   const {currentHealth, level, mercenaryId, name, statsVisible} = mercenary;
   const stats = useGetMercenaryStats(mercenary);
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenaryId);
@@ -35,9 +36,9 @@ const MercenaryItem: React.FC<Props> = memo(({canHire, canSelect, mercenary}) =>
 
     {statsVisible && <Card layer="5">
       <GridTemplate gridTemplateAreas={STATS_AREA} gridTemplateColumns="1fr 1fr" textAlign='center'>
-        <GridArea name="health___">
+        {showHealthBar && <GridArea name="health___">
           <ProgressBar max={stats.maxHealth} color="red" value={currentHealth} id={`${mercenaryId}_health`} />
-        </GridArea>
+        </GridArea>}
         <GridArea name="attack___"><Output label="Attack" id={`${mercenaryId}_attack`} value={stats.attack} /></GridArea>
         <GridArea name="cunning__"><Output label="Cunning" id={`${mercenaryId}_cunning`} value={stats.cunning} /></GridArea>
         <GridArea name="endurance"><Output label="Endurance" id={`${mercenaryId}_endurance`} value={stats.endurance} /></GridArea>

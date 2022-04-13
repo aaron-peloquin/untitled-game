@@ -7,13 +7,15 @@ import {MercenaryItem} from '../atoms/MercenaryItem';
 type Props = {
   canHire?: boolean
   canSelect?: boolean
-  mercenaries: T_Mercenary[]
   columns?: number
+  mercenaries: T_Mercenary[]
+  showHealthBar?: boolean
 }
-const MercenaryList: React.FC<Props> = ({canHire, canSelect, mercenaries, columns = 3}) => {
+
+const MercenaryList: React.FC<Props> = ({canHire, canSelect, columns = 3, mercenaries, showHealthBar}) => {
   return <GridTemplate columns={columns}>
     {mercenaries.map((mercenary) => <GridArea key={mercenary.mercenaryId}>
-      <MercenaryItem canHire={canHire} canSelect={canSelect} mercenary={mercenary} />
+      <MercenaryItem canHire={canHire} canSelect={canSelect} mercenary={mercenary} showHealthBar={showHealthBar} />
     </GridArea>)}
   </GridTemplate>;
 };

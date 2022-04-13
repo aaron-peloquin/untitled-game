@@ -3,14 +3,14 @@ import {useQuestRunner} from '@datastore';
 import {memo} from 'react';
 
 const QuestRunner = memo(() => {
-  const {mercenary, quest} = useQuestRunner();
+  const {mercenary, quest, runQuest} = useQuestRunner();
 
   return <Card layer="4">
     {(mercenary && quest) ?
-    <>`Send ${mercenary?.name} to ${quest?.type} ${quest?.targetName}`
-      <Button text="Go on quests" />
+    <>Send {mercenary?.name} to {quest?.type} {quest?.targetName}
+      <Button text="Send Mercenary" onClick={runQuest} />
     </> :
-        `Select a ${!mercenary ? 'mercenary' : ''}${!mercenary && !quest ? ' and ' : ''}${!quest ? 'quest' : ''} first`}
+        `Select a ${!mercenary ? 'mercenary' : ''}${!mercenary && !quest ? ' and ' : ''}${!quest ? 'quest' : ''}`}
   </Card>;
 });
 

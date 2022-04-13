@@ -1,4 +1,5 @@
-import {T_ExportStats, T_KnownStatBlocks} from 'TS_Stats';
+import { T_KnownStatBlocks } from 'TS_General';
+import {T_ExportStats} from 'TS_Stats';
 
 import brave from './brave';
 

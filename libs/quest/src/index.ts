@@ -1,1 +1,1 @@
-export * from './lib/runSlayQuest';
+export * from './lib/questRunners';

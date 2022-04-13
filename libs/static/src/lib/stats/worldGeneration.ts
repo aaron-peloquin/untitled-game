@@ -1,4 +1,4 @@
-import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions} from 'TS_Stats';
+import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions, T_KnownQuestTypes} from 'TS_General';
 
 
 const mercenaries: {ethnicities: T_KnownEthnicities[], personalities: T_KnownPersonalities[], professions: T_KnownProfessions[]} = {
@@ -12,10 +12,10 @@ const quests: {ethnicities: T_KnownEthnicities[], professions: T_KnownProfession
   professions: ['fighter', 'farmer', 'farmer', 'farmer'],
 };
 
-const questTypes = [
+const questTypes: T_KnownQuestTypes[] = [
   'Slay',
-  'Capture',
-  'Follow',
+  // 'Capture',
+  // 'Follow',
 ];
 
 export const worldGeneration = {

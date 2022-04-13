@@ -15,12 +15,14 @@ export const useQuestRunner = () => {
   const mercenaryStats = useGetMercenaryStats(mercenary);
   const quest = useGetQuest(selectedQuestId);
   const questStats = useGetQuestStats(quest);
-  const questRunner = questRunners?.[quest?.type];
-  console.log('questRunner', questRunner);
   const runQuest = useCallback(() => {
-    const questResults = questRunner({mercenary, mercenaryStats, quest, questStats});
-    console.log({questResults, questRunner});
-  }, [mercenary, mercenaryStats, quest, questRunner, questStats]);
+    if (quest?.type && mercenary && quest) {
+      const questRunner = questRunners?.[quest?.type];
+      console.log('questRunner', questRunner);
+      const questResults = questRunner({mercenary, mercenaryStats, quest, questStats});
+      console.log({questResults, questRunner});
+    }
+  }, [mercenary, mercenaryStats, quest, questStats]);
 
   return {mercenary, mercenaryStats, quest, questStats, runQuest};
   console.log({mercenary, mercenaryStats, quest, questStats});

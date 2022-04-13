@@ -20,12 +20,5 @@ declare module 'TS_Stats' {
     color: string
     stats: T_Stats
     onLevel: T_Stats
-  }
-
-  type T_KnownEthnicities = 'human'
-  type T_KnownPersonalities = 'brave' | 'leader'
-  type T_KnownProfessions = 'farmer' | 'fighter'
-  
-  type T_KnownStatBlocks = T_KnownEthnicities | T_KnownPersonalities | T_KnownProfessions
-  
+  }  
 }

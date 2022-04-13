@@ -17,7 +17,7 @@ const BandPanel = memo(() => {
       <QuestRunner />
     </Card>
     <Card layer="3" heading="Your Mercenaries">
-      {bandMercenaries?.length ? <MercenaryList columns={3} canSelect mercenaries={bandMercenaries} /> : null}
+      {bandMercenaries?.length ? <MercenaryList columns={3} canSelect mercenaries={bandMercenaries} showHealthBar /> : null}
     </Card>
   </Card>;
 });

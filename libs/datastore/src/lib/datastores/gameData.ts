@@ -4,7 +4,7 @@ import * as chanceExport from 'chance';
 import Dexie, {Table} from 'dexie';
 import * as _ from 'lodash';
 import {T_Band} from 'TS_Band';
-import {T_TwoItemNumberArray} from 'TS_General';
+import {T_KnownQuestTypes, T_TwoItemNumberArray} from 'TS_General';
 import {T_Location} from 'TS_Location';
 import {T_Mercenary} from 'TS_Mercenary';
 import {T_Quest} from 'TS_Quest';
@@ -186,7 +186,7 @@ export class GameDataClass extends Dexie {
   };
 
   private generateQuest = async (levelRange: T_TwoItemNumberArray) => {
-    const type = pickArray(worldGeneration.questTypes, this.numberGenerator);
+    const type = pickArray<T_KnownQuestTypes>(worldGeneration.questTypes, this.numberGenerator);
     const level = parseFloat((this.numberGenerator() * (levelRange[1] - levelRange[0]) + levelRange[0]).toFixed(2));
 
     const ethnicity = pickArray(worldGeneration.quests.ethnicities, this.numberGenerator);

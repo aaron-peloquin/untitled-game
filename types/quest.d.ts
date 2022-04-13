@@ -1,14 +1,14 @@
 
 declare module 'TS_Quest' {
+  import {T_ParsedStats} from 'TS_Stats'
   import {T_Mercenary} from 'TS_Mercenary'
   import {IndexableType, PromiseExtended} from 'dexie'
-  import {T_NumGenSig, T_TwoItemNumberArray} from 'TS_General'
-  import {T_KnownEthnicities, T_KnownProfessions} from 'TS_Stats'
+  import {T_KnownEthnicities, T_KnownProfessions, T_KnownQuestTypes, T_NumGenSig, T_TwoItemNumberArray} from 'TS_General'
 
   type T_Quest = {
     questId: number
     level: number
-    type: string
+    type: T_KnownQuestTypes
     targetEthnicity: T_KnownEthnicities
     targetName: string
     targetProfession: T_KnownProfessions
@@ -26,9 +26,12 @@ declare module 'TS_Quest' {
     action: string
   }
 
+  type T_QuestOutcome = 'Victory' | 'Failure' | 'Death'
+
   type T_QuestResult = {
-    outcome: string
+    outcome: T_QuestOutcome
     removeMercenary: boolean
+    mercenaryCurrentHealth: number
     rewards: {
       bandExp: number
       mercenaryExp: number
@@ -37,5 +40,11 @@ declare module 'TS_Quest' {
     roundsLog: T_QuestLogItem[]
   }
 
-  type T_RunQuestSig = (quest: T_BaseQuest, mercenary: T_Mercenary) => T_QuestResult
+  type T_RunQuestArgs = {
+    quest: T_Quest,
+    mercenary: T_Mercenary,
+    mercenaryStats: T_ParsedStats,
+    questStats: T_ParsedStats
+  }
+  type T_RunQuestSig = (questRunnerArgsBag: T_RunQuestArgs) => T_QuestResult
 }
