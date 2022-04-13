@@ -5,11 +5,11 @@ import {T_ParsedStats} from 'TS_Stats';
 
 import {useGetGameSetting} from '../gameController/useGetGameSetting';
 
-export const useGetQuestStats = (quest: T_Quest) => {
-  const {level, targetEthnicity, targetProfession} = quest;
+export const useGetQuestStats = (quest?: T_Quest) => {
+  const {level, targetEthnicity, targetProfession} = quest || {};
   const hp_per_end = useGetGameSetting('hp_per_end')?.value;
   const stats = useMemo<T_ParsedStats>(() => {
-    if (hp_per_end) {
+    if (hp_per_end && level && targetEthnicity && targetProfession) {
       const healthMultiplier = parseInt(hp_per_end);
       return getStats(level, healthMultiplier, targetEthnicity, targetProfession);
     }
