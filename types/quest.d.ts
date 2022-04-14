@@ -8,6 +8,7 @@ declare module 'TS_Quest' {
   type T_Quest = {
     questId: number
     level: number
+    questCompletedByMercenaryId: number
     type: T_KnownQuestTypes
     targetEthnicity: T_KnownEthnicities
     targetName: string
@@ -30,8 +31,13 @@ declare module 'TS_Quest' {
 
   type T_QuestResult = {
     outcome: T_QuestOutcome
-    removeMercenary: boolean
-    mercenaryCurrentHealth: number
+    mercenary: {
+      removeMercenary: boolean
+      mercenaryCurrentHealth: number
+    }
+    quest: {
+      removeQuest: boolean
+    }
     rewards: {
       bandExp: number
       mercenaryExp: number

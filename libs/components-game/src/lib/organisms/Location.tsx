@@ -12,7 +12,7 @@ type Props = {
 const Location: React.FC<Props> = memo(({locationId}) => {
   const location = useGetLocation(locationId);
   const locationMercenaries = useListMercenariesById(location?.mercenaryIds);
-  const locationQuests = useListQuestsById(location?.questIds);
+  const locationQuests = useListQuestsById(location?.questIds, true);
   const relatedLocations = useListLocationsById(location?.relatedLocationIds);
 
   return <Card heading={`Location: ${location?.name}`} layer="2">

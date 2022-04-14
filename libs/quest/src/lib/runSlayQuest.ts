@@ -1,6 +1,4 @@
-/* eslint-disable guard-for-in */
 import {pickArray, pickRange, seedGenerator} from '@helper';
-import * as _ from 'lodash';
 import {T_QuestLogItem, T_QuestOutcome, T_QuestResult, T_RunQuestSig} from 'TS_Quest';
 
 const initialActions = [
@@ -23,14 +21,15 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
   });
 
   const mercenaryAttack = () => {
-    const damage = (numberRange(0, 10) + mercenaryStats.attack) / (questStats.endurance / 4);
+    const damage = (numberRange(1, 20) + mercenaryStats.attack) / (questStats.endurance / 4);
     questCurrentHealth -= damage;
     const roundDescription = `attacked ${quest.targetName} for ${Math.round(damage)} damage`;
     roundsLog.push({action: roundDescription, person: mercenary.name});
   };
 
   const questAttack = () => {
-    const damage = (numberRange(0, 10) + questStats.attack) / (mercenaryStats.endurance / 4);
+    const topRange = quest.level > 20 ? 20 : quest.level;
+    const damage = (numberRange(0, topRange) + questStats.attack) / (mercenaryStats.endurance / 4);
     mercenaryCurrentHealth -= damage;
     const roundDescription = `attacked ${quest.targetName} for ${Math.round(damage)} damage`;
     roundsLog.push({action: roundDescription, person: quest.targetName});
@@ -44,9 +43,11 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
   }
 
   let removeMercenary = false;
+  let removeQuest = false;
 
   if (mercenaryCurrentHealth > 0) {
     outcome = 'Victory';
+    removeQuest = true;
     roundsLog.push({action: `defeated ${quest.targetName}`, person: mercenary.name});
   } else if (mercenaryCurrentHealth <= -(mercenary.level * 2)) {
     outcome = 'Death';
@@ -58,9 +59,9 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
   }
 
   const result: T_QuestResult = {
-    mercenaryCurrentHealth,
+    mercenary: {mercenaryCurrentHealth, removeMercenary},
     outcome,
-    removeMercenary,
+    quest: {removeQuest},
     rewards: {bandExp: 5, gold: 2, mercenaryExp: 5},
     roundsLog,
   };

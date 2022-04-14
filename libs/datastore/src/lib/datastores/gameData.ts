@@ -25,7 +25,7 @@ export class GameDataClass extends Dexie {
       band: '++bandId, currentLocationId, name, *mercenaryIds',
       locations: '++locationId, *mercenaryIds, *questIds, *relatedLocationIds',
       mercenaries: '++mercenaryId, ethnicity, personality, profession, statsVisible',
-      quests: '++questId, targetEthnicity, targetProfession, type',
+      quests: '++questId, questCompletedByMercenaryId, targetEthnicity, targetProfession, type',
     });
 
     this.on('populate', () => {
@@ -196,6 +196,7 @@ export class GameDataClass extends Dexie {
 
     const quest: Omit<T_Quest, 'questId'> = {
       level,
+      questCompletedByMercenaryId: 0,
       targetEthnicity: ethnicity,
       targetName: name,
       targetProfession: profession,

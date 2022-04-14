@@ -29,7 +29,6 @@ export const useHireMercenary = (mercenary: T_Mercenary, hireCost: number) => {
       // remove mercenary from locations
       gameData.dataStore.locations.where('mercenaryIds').equals(mercenaryId).modify((location) => {
         const newMercenaries = location.mercenaryIds.filter((locMercId) => locMercId !== mercenaryId);
-        console.log({newMercenaries});
         location.mercenaryIds = newMercenaries;
       });
     }
