@@ -58,11 +58,13 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
     roundsLog.push({action: `returned in failure`, person: mercenary.name});
   }
 
+  const mercExp = 0.05 * quest.level;
+
   const result: T_QuestResult = {
-    mercenary: {mercenaryCurrentHealth, removeMercenary},
+    band: {exp: mercExp / mercenary.level, gold: 2},
+    mercenary: {exp: mercExp, health: mercenaryCurrentHealth, remove: removeMercenary},
     outcome,
-    quest: {removeQuest},
-    rewards: {bandExp: 5, gold: 2, mercenaryExp: 5},
+    quest: {remove: removeQuest},
     roundsLog,
   };
 

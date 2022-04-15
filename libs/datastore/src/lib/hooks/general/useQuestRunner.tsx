@@ -1,6 +1,8 @@
 import {questRunners} from '@quest';
 import {useCallback} from 'react';
 
+import {T_QuestResult, T_QuestResultBand, T_QuestResultMercenary, T_QuestResultQuest} from 'TS_Quest';
+
 import {useGetMercenaryStats} from './useGetMercenaryStats';
 import {useGetQuestStats} from './useGetQuestStats';
 
@@ -19,35 +21,49 @@ export const useQuestRunner = () => {
   const quest = useGetQuest(selectedQuestId);
   const questStats = useGetQuestStats(quest);
 
-  const updateMercenaryHealth = useCallback((newHealth) => {
-    dataStore?.mercenaries.update(selectedMercenaryId, {currentHealth: newHealth});
-  }, [dataStore?.mercenaries, selectedMercenaryId]);
-
-  const removeMercenary = useCallback(() => {
-    dataStore?.band.where('bandId').equals(bandId).modify((band) => {
-      const newMercenaries = band.mercenaryIds.filter((mercenaryId) => mercenaryId !== selectedMercenaryId);
-      band.mercenaryIds = newMercenaries;
+  const updateMercenary = useCallback((mercenaryResults: T_QuestResultMercenary) => {
+    dataStore?.mercenaries.where('mercenaryId').equals(selectedMercenaryId).modify((mercenary) => {
+      mercenary.currentHealth = mercenaryResults.health;
+      mercenary.level += mercenaryResults.exp;
     });
-  }, [bandId, dataStore?.band, selectedMercenaryId]);
 
-  const removeQuest = useCallback(() => {
-    dataStore?.quests.update(selectedQuestId, {questCompletedByMercenaryId: selectedMercenaryId});
-  }, [dataStore?.quests, selectedMercenaryId, selectedQuestId]);
+    if (mercenaryResults.remove) {
+      dataStore?.band.where('bandId').equals(bandId).modify((band) => {
+        const newMercenaries = band.mercenaryIds.filter((mercenaryId) => mercenaryId !== selectedMercenaryId);
+        band.mercenaryIds = newMercenaries;
+      });
+    }
+  }, [bandId, dataStore?.band, dataStore?.mercenaries, selectedMercenaryId]);
+
+  const updateQuest = useCallback((questResults: T_QuestResultQuest) => {
+    setSelectedQuestId(0);
+    if (questResults.remove) {
+      dataStore?.quests.update(selectedQuestId, {questCompletedByMercenaryId: selectedMercenaryId});
+    }
+  }, [dataStore?.quests, selectedMercenaryId, selectedQuestId, setSelectedQuestId]);
+
+  const updateBand = useCallback((bandResults: T_QuestResultBand) => {
+    // TODO: exp
+    dataStore?.band.where('bandId').equals(bandId).modify((band) => {
+      band.gold += bandResults.gold;
+      band.level += bandResults.exp;
+    });
+  }, [bandId, dataStore?.band]);
+
 
   const runQuest = useCallback(() => {
     if (quest?.type && mercenary && quest) {
       const questRunner = questRunners?.[quest?.type];
       if (questRunner) {
         const questResults = questRunner({mercenary, mercenaryStats, quest, questStats});
-        setSelectedQuestId(0);
-        updateMercenaryHealth(questResults.mercenary.mercenaryCurrentHealth);
-        questResults.mercenary.removeMercenary && removeMercenary();
-        questResults.quest.removeQuest && removeQuest();
+        updateMercenary(questResults.mercenary);
+        updateBand(questResults.band);
+        updateQuest(questResults.quest);
 
         return questResults;
       }
     }
-  }, [mercenary, mercenaryStats, quest, questStats, removeMercenary, removeQuest, setSelectedQuestId, updateMercenaryHealth]);
+  }, [mercenary, mercenaryStats, quest, questStats, updateBand, updateMercenary, updateQuest]);
 
   return {mercenary, mercenaryStats, quest, questStats, runQuest};
 };

@@ -29,20 +29,26 @@ declare module 'TS_Quest' {
 
   type T_QuestOutcome = 'Victory' | 'Failure' | 'Death'
 
+  type T_QuestResultMercenary = {
+    remove: boolean
+    health: number
+    exp: number
+  }
+
+  type T_QuestResultQuest = {
+    remove: boolean
+  }
+
+  type T_QuestResultBand = {
+    exp: number
+    gold: number
+  }
+
   type T_QuestResult = {
     outcome: T_QuestOutcome
-    mercenary: {
-      removeMercenary: boolean
-      mercenaryCurrentHealth: number
-    }
-    quest: {
-      removeQuest: boolean
-    }
-    rewards: {
-      bandExp: number
-      mercenaryExp: number
-      gold: number
-    }
+    mercenary: T_QuestResultMercenary
+    quest: T_QuestResultQuest
+    band: T_QuestResultBand
     roundsLog: T_QuestLogItem[]
   }
 

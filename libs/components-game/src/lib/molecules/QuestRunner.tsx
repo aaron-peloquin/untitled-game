@@ -1,6 +1,6 @@
 import {Button, Card} from '@components-layout';
 import {useQuestRunner} from '@datastore';
-import React, {memo, useCallback, useEffect, useState} from 'react';
+import {memo, useCallback, useEffect, useState} from 'react';
 import {T_QuestResult} from 'TS_Quest';
 
 const QuestRunner = memo(() => {

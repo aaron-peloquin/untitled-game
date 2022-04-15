@@ -37,6 +37,7 @@ export class GameDataClass extends Dexie {
       const newBand: Omit<T_Band, 'bandId'> = {
         currentLocationId: 0,
         gold: 15,
+        level: 1,
         mercenaryIds: [1],
         name,
         seed,
