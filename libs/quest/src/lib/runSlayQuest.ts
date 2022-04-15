@@ -44,10 +44,14 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
 
   let removeMercenary = false;
   let removeQuest = false;
+  let goldReward = 0;
+  let mercExp = 0;
 
   if (mercenaryCurrentHealth > 0) {
     outcome = 'Victory';
     removeQuest = true;
+    mercExp = parseFloat((0.25 * quest.level / mercenary.level).toFixed(2));
+    goldReward = Math.round(4 * quest.level);
     roundsLog.push({action: `defeated ${quest.targetName}`, person: mercenary.name});
   } else if (mercenaryCurrentHealth <= -(mercenary.level * 2)) {
     outcome = 'Death';
@@ -55,13 +59,18 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
     roundsLog.push({action: 'never returned', person: mercenary.name});
   } else {
     outcome = 'Failure';
+    goldReward = 1;
+    mercExp = parseFloat((0.25 * quest.level / mercenary.level).toFixed(2)) / 2;
     roundsLog.push({action: `returned in failure`, person: mercenary.name});
   }
 
-  const mercExp = 0.05 * quest.level;
+  const levelSpread = quest.level - mercenary.level;
+
+  const bandExp = parseFloat((mercExp / mercenary.level).toFixed(2));
+  console.log({bandExp, levelSpread, mercExp});
 
   const result: T_QuestResult = {
-    band: {exp: mercExp / mercenary.level, gold: 2},
+    band: {exp: bandExp, gold: goldReward},
     mercenary: {exp: mercExp, health: mercenaryCurrentHealth, remove: removeMercenary},
     outcome,
     quest: {remove: removeQuest},

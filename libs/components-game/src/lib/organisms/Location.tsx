@@ -18,14 +18,14 @@ const Location: React.FC<Props> = memo(({locationId}) => {
   return <Card heading={`Location: ${location?.name}`} layer="2">
     You're in {location?.name}, a level {location?.levelRange?.[0]} to {location?.levelRange?.[1]} area. There are {locationMercenaries?.length} recruits, and {locationQuests?.length} citizens with quests available here.
     <Tabs layer="3">
-      <Tab name="Mercenary" id="mercenaries">
-        <Card heading='Mercenaries' layer="3">
-          {locationMercenaries?.length ? <MercenaryList canHire mercenaries={locationMercenaries} /> : <span>No mercenaries for hire</span>}
-        </Card>
-      </Tab>
       <Tab name="Available Quests" id="quests">
         <Card heading='Pickup a Quest' layer="3">
           {locationQuests?.length ? <QuestList quests={locationQuests} /> : <span>No quests available</span>}
+        </Card>
+      </Tab>
+      <Tab name="Mercenaries for hire" id="mercenaries">
+        <Card heading='Mercenaries' layer="3">
+          {locationMercenaries?.length ? <MercenaryList canHire mercenaries={locationMercenaries} /> : <span>No mercenaries for hire</span>}
         </Card>
       </Tab>
       <Tab name="Nearby Locations" id="nearby-locations">

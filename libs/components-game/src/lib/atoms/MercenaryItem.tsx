@@ -1,5 +1,6 @@
 import {Button, Card, GridArea, GridTemplate, Output, ProgressBar} from '@components-layout';
 import {useHireMercenary, useSparMercenary, useSetSelectMercenaryId, useGetMercenaryStats} from '@datastore';
+import {displayNumber} from '@helper';
 import {memo} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
 
@@ -23,11 +24,12 @@ const MercenaryItem: React.FC<Props> = memo(({canHire, canSelect, mercenary, sho
   const {canAffordHire, hire, hireCost} = useHireMercenary(mercenary, stats._goldHiring);
   const {canAffordSpar, spar, sparCost} = useSparMercenary(mercenary);
   const showStatsButton = (canHire && !statsVisible);
+  const showSelectButton = canSelect && currentHealth > 0;
 
   return <Card layer='4'>
     <GridTemplate gridTemplateColumns="3fr 1fr">
       <GridArea>
-        <Output label={`${stats.ethnicity} ${stats.profession}`} value={`${name}, lvl: ${level}`} id={`${mercenaryId}_heading`} />
+        <Output label={`${stats.ethnicity} ${stats.profession}`} value={`${name}, lvl: ${displayNumber(level)}  (${displayNumber(level, 2)})`} id={`${mercenaryId}_heading`} />
       </GridArea>
       <GridArea justifySelf="right">
         {!showStatsButton && <GridArea><Output label="Wages" id={`${mercenaryId}_wages`} value={`${stats._goldUpkeep} gold`} /></GridArea>}
@@ -48,7 +50,7 @@ const MercenaryItem: React.FC<Props> = memo(({canHire, canSelect, mercenary, sho
     <GridTemplate columns={showStatsButton && canHire ? 2 : 1} justifyItems="center">
       {showStatsButton && <GridArea><Button disabled={!canAffordSpar} onClick={spar} text={`Spar for ${sparCost ? `${sparCost} gold` : 'free'}`} /></GridArea>}
       {canHire && <GridArea><Button disabled={!canAffordHire} onClick={hire} text={`Hire for ${hireCost} gold`} /></GridArea>}
-      {canSelect && <GridArea><Button disabled={isSelected} text="Select Mercenary" onClick={setSelected} /></GridArea>}
+      {showSelectButton && <GridArea><Button disabled={isSelected} text="Select Mercenary" onClick={setSelected} /></GridArea>}
     </GridTemplate>
   </Card>;
 });
