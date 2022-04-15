@@ -127,7 +127,7 @@ export class GameDataClass extends Dexie {
     ].sort((a, b) => a > b ? 0 : -1) as T_TwoItemNumberArray;
 
     const level = this.rangeGenerator(levelRange[0], levelRange[1]);
-    const countQuests = this.rangeGenerator(2, 5);
+    const countQuests = this.rangeGenerator(levelMin < 4 ? 4 : 2, levelMin < 8 ? 15 : 8);
     const countMercenaries = this.rangeGenerator(levelMin < 4 ? 2 : 1, levelMin < 8 ? 6 : 4);
     const mercenaryIds: number[] = [];
     const questIds: number[] = [];

@@ -8,7 +8,7 @@ type Props = {
 }
 
 const QUEST_AREAS = `
-"difficulty target____"
+"target____ difficulty"
 "take_job__ take_job__"`;
 
 const QuestItem: React.FC<Props> = ({quest}) => {

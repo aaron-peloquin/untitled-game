@@ -21,53 +21,66 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
   });
 
   const mercenaryAttack = () => {
-    const damage = (numberRange(1, 20) + mercenaryStats.attack) / (questStats.endurance / 4);
-    questCurrentHealth -= damage;
-    const roundDescription = `attacked ${quest.targetName} for ${Math.round(damage)} damage`;
-    roundsLog.push({action: roundDescription, person: mercenary.name});
+    const hit = numberRange(0, (mercenaryStats.subtlety * 10) + mercenary.level);
+    if (hit > questStats.cunning) {
+      const damage = (numberRange(1, 20) + mercenaryStats.attack) / (questStats.endurance / 5);
+      questCurrentHealth -= damage;
+      const roundDescription = `attacked ${quest.targetName} for ${Math.round(damage)} damage`;
+      roundsLog.push({action: roundDescription, person: mercenary.name});
+    } else {
+      roundsLog.push({action: `dodged ${mercenary.name}'s attack`, person: quest.targetName});
+    }
   };
 
+  const questAttackTopRange = quest.level > 20 ? 20 : quest.level;
   const questAttack = () => {
-    const topRange = quest.level > 20 ? 20 : quest.level;
-    const damage = (numberRange(0, topRange) + questStats.attack) / (mercenaryStats.endurance / 4);
-    mercenaryCurrentHealth -= damage;
-    const roundDescription = `attacked ${quest.targetName} for ${Math.round(damage)} damage`;
-    roundsLog.push({action: roundDescription, person: quest.targetName});
+    const hit = numberRange(0, questStats.subtlety * 10);
+    if (hit > mercenaryStats.cunning) {
+      const damage = (numberRange(0, questAttackTopRange) + questStats.attack) / (mercenaryStats.endurance / 5);
+      mercenaryCurrentHealth -= damage;
+      roundsLog.push({action: `attacked ${mercenary.name} for ${Math.round(damage)} damage`, person: quest.targetName});
+    } else {
+      roundsLog.push({action: `dodged ${quest.targetName}'s attack`, person: mercenary.name});
+    }
   };
 
   mercenaryAttack();
 
-  while (questCurrentHealth > 0 && mercenaryCurrentHealth > 0) {
+  while (questCurrentHealth > 0 && mercenaryCurrentHealth > 0 && roundsLog.length < 30) {
     questAttack();
     mercenaryAttack();
   }
+
 
   let removeMercenary = false;
   let removeQuest = false;
   let goldReward = 0;
   let mercExp = 0;
-
-  if (mercenaryCurrentHealth > 0) {
+  if (roundsLog.length >= 30) {
+    outcome = 'Failure';
+    mercExp = parseFloat((0.05 * quest.level / mercenary.level).toFixed(2)) / 2;
+    goldReward = 2;
+    roundsLog.push({action: `escaped, dropping ${goldReward} gold as they fled`, person: quest.targetName});
+  } else if (mercenaryCurrentHealth > 0) {
     outcome = 'Victory';
     removeQuest = true;
-    mercExp = parseFloat((0.25 * quest.level / mercenary.level).toFixed(2));
-    goldReward = Math.round(4 * quest.level);
-    roundsLog.push({action: `defeated ${quest.targetName}`, person: mercenary.name});
+    mercExp = parseFloat((0.15 * quest.level / mercenary.level).toFixed(2));
+    goldReward = Math.round((4 * quest.level) + (questStats._goldUpkeep / 4));
+
+    roundsLog.push({action: `defeated ${quest.targetName} and returned with ${goldReward} gold`, person: mercenary.name});
   } else if (mercenaryCurrentHealth <= -(mercenary.level * 2)) {
     outcome = 'Death';
     removeMercenary = true;
+
     roundsLog.push({action: 'never returned', person: mercenary.name});
   } else {
     outcome = 'Failure';
-    goldReward = 1;
-    mercExp = parseFloat((0.25 * quest.level / mercenary.level).toFixed(2)) / 2;
+    mercExp = parseFloat((0.10 * quest.level / mercenary.level).toFixed(2)) / 2;
+
     roundsLog.push({action: `returned in failure`, person: mercenary.name});
   }
 
-  const levelSpread = quest.level - mercenary.level;
-
   const bandExp = parseFloat((mercExp / mercenary.level).toFixed(2));
-  console.log({bandExp, levelSpread, mercExp});
 
   const result: T_QuestResult = {
     band: {exp: bandExp, gold: goldReward},
