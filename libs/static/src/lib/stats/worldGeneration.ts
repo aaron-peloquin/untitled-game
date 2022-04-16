@@ -3,7 +3,7 @@ import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions, T_KnownQue
 
 const mercenaries: {ethnicities: T_KnownEthnicities[], personalities: T_KnownPersonalities[], professions: T_KnownProfessions[]} = {
   ethnicities: ['human', 'human', 'human', 'human', 'human', 'human', 'human', 'human', 'human', 'goblin'],
-  personalities: ['brave', 'leader'],
+  personalities: ['brave', 'brave', 'leader'],
   professions: ['fighter', 'fighter', 'fighter', 'farmer'],
 };
 
