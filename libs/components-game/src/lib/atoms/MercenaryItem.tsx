@@ -29,7 +29,7 @@ const MercenaryItem: React.FC<Props> = memo(({canHire, canSelect, mercenary, sho
   return <Card layer='4'>
     <GridTemplate gridTemplateColumns="3fr 1fr">
       <GridArea>
-        <Output label={`${stats.ethnicity} ${stats.profession}`} value={`${name}, lvl: ${displayNumber(level)}  (${displayNumber(level, 2)})`} id={`${mercenaryId}_heading`} />
+        <Output label={`${stats.ethnicity} ${stats.profession} (${mercenary.personality})`} value={`${name}, lvl: ${displayNumber(level)}  (${displayNumber(level, 2)})`} id={`${mercenaryId}_heading`} />
       </GridArea>
       <GridArea justifySelf="right">
         {!showStatsButton && <GridArea><Output label="Wages" id={`${mercenaryId}_wages`} value={`${stats._goldUpkeep} gold`} /></GridArea>}

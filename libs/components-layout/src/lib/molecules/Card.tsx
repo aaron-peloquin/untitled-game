@@ -8,13 +8,14 @@ import styles from './Card.module.css';
 type T_Props = {
   layer: T_CardLayer
   heading?: string
+  style?: Record<string, any>
 }
 
-const Card: React.FC<T_Props> = memo(({layer, heading, children}) => {
+const Card: React.FC<T_Props> = memo(({layer, heading, children, style}) => {
   const classNames = styles['card'] + ' ' + styles[`card-layer-${layer}`];
 
   return (
-    <div className={classNames}>
+    <div className={classNames} style={style}>
       {(layer === '1' && heading) && <h1>{heading}</h1>}
       {(layer === '2' && heading) && <h2>{heading}</h2>}
       {(layer === '3' && heading) && <h3>{heading}</h3>}
