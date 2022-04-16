@@ -2,12 +2,14 @@ declare module 'TS_Band' {
  
   type T_Band = {
     bandId: number
-    seed: string
+    actionPoints: number
     currentLocationId: number
+    daysUntilWages: number
     gold: number,
+    level: number
     mercenaryIds: number[],
     name: string
-    level: number
+    seed: string
   }
 
   type createBandSig = (name: string, seed: string) => T_Band

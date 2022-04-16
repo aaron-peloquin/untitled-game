@@ -18,7 +18,7 @@ export class GameDataClass extends Dexie {
   mercenaries!: Table<T_Mercenary, number>;
   quests!: Table<T_Quest, number>;
 
-  constructor(gameDatastoreName: string, name: string, seed: string, locationsToGenerate: number) {
+  constructor(gameDatastoreName: string, name: string, seed: string, locationsToGenerate: number, apPerDay:number) {
     super(`untitled-game-${gameDatastoreName}`);
     this.version(1).stores({
       // Primary key and indexed props
@@ -34,8 +34,11 @@ export class GameDataClass extends Dexie {
       this.generate = chance(seed);
 
       // create band
+      console.log({apPerDay});
       const newBand: Omit<T_Band, 'bandId'> = {
+        actionPoints: apPerDay * 2,
         currentLocationId: 0,
+        daysUntilWages: 5,
         gold: 15,
         level: 1,
         mercenaryIds: [1],
@@ -62,7 +65,6 @@ export class GameDataClass extends Dexie {
     const locationPromises = [];
     let levelMin: number;
     let levelMax: number;
-    console.log({locationsToGenerate});
     for (let index = 0; index < locationsToGenerate; index++) {
       const quarterIndex = index / 1.4;
       levelMin = quarterIndex < 1 ? 1 : quarterIndex;

@@ -4,16 +4,18 @@ import {GameDataClass} from './gameData';
 import {gameDataContext, T_GameDataContext} from './gameDataContext';
 
 import {useGetCurrentSave} from '../hooks/gameController/useGetCurrentSave';
+import {useGetGameSetting} from '../hooks/gameController/useGetGameSetting';
 
 const {Provider} = gameDataContext;
 
 const GameDataProvider: React.FC = memo(({children}) => {
   const [selectedMercenaryId, setSelectedMercenaryId] = useState(0);
   const [selectedQuestId, setSelectedQuestId] = useState(0);
+  const apPerDay = useGetGameSetting('ap_per_day');
 
   const save = useGetCurrentSave();
   const gameProviderValue = useMemo<T_GameDataContext>(() => {
-    const dataStore = save?.gameDatastoreName ? new GameDataClass(save.gameDatastoreName, save.name, save.seed, save.totalLocations) : undefined;
+    const dataStore = apPerDay !== undefined && save?.gameDatastoreName ? new GameDataClass(save.gameDatastoreName, save.name, save.seed, save.totalLocations, parseInt(apPerDay.value)) : undefined;
     return {
       dataStore,
       name: save?.name || '',
@@ -23,7 +25,7 @@ const GameDataProvider: React.FC = memo(({children}) => {
       setSelectedMercenaryId,
       setSelectedQuestId,
     };
-  }, [save?.gameDatastoreName, save?.name, save?.seed, save?.totalLocations, selectedMercenaryId, selectedQuestId]);
+  }, [apPerDay, save?.gameDatastoreName, save?.name, save?.seed, save?.totalLocations, selectedMercenaryId, selectedQuestId]);
 
   return <Provider value={gameProviderValue}>
     {children}
