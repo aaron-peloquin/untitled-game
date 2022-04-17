@@ -3,23 +3,27 @@ import {useCallback} from 'react';
 
 import {T_QuestResultBand, T_QuestResultMercenary, T_QuestResultQuest} from 'TS_Quest';
 
-import {useGetMercenaryStats} from './useGetMercenaryStats';
-import {useGetQuestStats} from './useGetQuestStats';
+import {useActionPoints} from './useActionPoints';
 
 import {useGameData} from '../gameController/useGameData';
 import {useGetBand} from '../gameData/useGetBand';
 import {useGetMercenary} from '../gameData/useGetMercenary';
 import {useGetQuest} from '../gameData/useGetQuest';
+import {useGetMercenaryStats} from '../general/useGetMercenaryStats';
+import {useGetQuestStats} from '../general/useGetQuestStats';
 
 export const useQuestRunner = () => {
   const gameData = useGameData();
   const band = useGetBand();
   const bandId = band?.bandId || 1;
+  const {changeActionPoints, currentAp} = useActionPoints();
   const {dataStore, selectedMercenaryId, selectedQuestId, setSelectedQuestId, setSelectedMercenaryId} = gameData;
   const mercenary = useGetMercenary(selectedMercenaryId);
   const mercenaryStats = useGetMercenaryStats(mercenary);
   const quest = useGetQuest(selectedQuestId);
   const questStats = useGetQuestStats(quest);
+  const apCost = 1;
+  const hasEnoughAp = currentAp >= apCost;
 
   const updateMercenary = useCallback((mercenaryResults: T_QuestResultMercenary) => {
     dataStore?.mercenaries.where('mercenaryId').equals(selectedMercenaryId).modify((mercenary) => {
@@ -59,15 +63,18 @@ export const useQuestRunner = () => {
     if (quest?.type && mercenary && quest) {
       const questRunner = questRunners?.[quest?.type];
       if (questRunner) {
-        const questResults = questRunner({mercenary, mercenaryStats, quest, questStats});
-        updateMercenary(questResults.mercenary);
-        updateBand(questResults.band);
-        updateQuest(questResults.quest);
+        const removeAp = changeActionPoints(-1);
+        if (removeAp) {
+          const questResults = questRunner({mercenary, mercenaryStats, quest, questStats});
+          updateMercenary(questResults.mercenary);
+          updateBand(questResults.band);
+          updateQuest(questResults.quest);
 
-        return questResults;
+          return questResults;
+        }
       }
     }
-  }, [mercenary, mercenaryStats, quest, questStats, updateBand, updateMercenary, updateQuest]);
+  }, [changeActionPoints, mercenary, mercenaryStats, quest, questStats, updateBand, updateMercenary, updateQuest]);
 
-  return {mercenary, mercenaryStats, quest, questStats, runQuest};
+  return {apCost, hasEnoughAp, mercenary, mercenaryStats, quest, questStats, runQuest};
 };
