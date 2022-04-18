@@ -1,4 +1,4 @@
-import {memo, useMemo, useState} from 'react';
+import {memo, useEffect, useMemo, useState} from 'react';
 
 import {GameDataClass} from './gameData';
 import {gameDataContext, T_GameDataContext} from './gameDataContext';
@@ -14,6 +14,11 @@ const GameDataProvider: React.FC = memo(({children}) => {
   const apPerDay = useGetGameSetting('ap_per_day');
 
   const save = useGetCurrentSave();
+  useEffect(() => {
+    if (save) {
+      setSelectedQuestId(0);
+    }
+  }, [save]);
   const gameProviderValue = useMemo<T_GameDataContext>(() => {
     const dataStore = apPerDay !== undefined && save?.gameDatastoreName ? new GameDataClass(save.gameDatastoreName, save.name, save.seed, save.totalLocations, parseInt(apPerDay.value)) : undefined;
     return {

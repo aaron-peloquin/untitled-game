@@ -21,7 +21,7 @@ const QuestRunner = memo(() => {
   return <Card layer="4">
     {(mercenary && quest) ?
     <>Send {mercenary?.name} to {quest?.type} {quest?.targetName}
-      <Button disabled={!hasEnoughAp} text={`Send Mercenary (${apCost} AP)`} onClick={handleRunQuest} />
+      <Button disabled={!hasEnoughAp} text={`Send Mercenary (${hasEnoughAp ? `${apCost} AP` : `Rest to regain AP`})`} onClick={handleRunQuest} />
     </> :
         `Select a ${!mercenary ? 'mercenary' : ''}${!mercenary && !quest ? ' and ' : ''}${!quest ? 'quest' : ''}`}
     {questResults ? <ul>{questResults.roundsLog.map((round, index) => <li key={index}><strong>{round.person}</strong> {round.action}</li>)}</ul> : undefined}

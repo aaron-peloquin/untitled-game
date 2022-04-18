@@ -59,13 +59,13 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
   if (roundsLog.length >= 30) {
     outcome = 'Failure';
     mercExp = parseFloat((0.05 * quest.level / mercenary.level).toFixed(2)) / 2;
-    goldReward = 2;
+    goldReward = Math.round(quest.level);
     roundsLog.push({action: `escaped, dropping ${goldReward} gold as they fled`, person: quest.targetName});
   } else if (mercenaryCurrentHealth > 0) {
     outcome = 'Victory';
     removeQuest = true;
     mercExp = parseFloat((0.15 * quest.level / mercenary.level).toFixed(2));
-    goldReward = Math.round((4 * quest.level) + (questStats._goldUpkeep / 4));
+    goldReward = Math.round((quest.level) + (questStats._goldUpkeep / 4));
 
     roundsLog.push({action: `defeated ${quest.targetName} and returned with ${goldReward} gold`, person: mercenary.name});
   } else if (mercenaryCurrentHealth <= -(mercenary.level * 2)) {
