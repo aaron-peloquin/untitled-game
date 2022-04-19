@@ -34,7 +34,7 @@ const BandPanel = memo(() => {
     </Card>
     <GridTemplate gridTemplateColumns="2fr 1fr">
       <GridArea>
-        <Card layer="3" heading="Send Mercenary">
+        <Card layer="3" heading="Send Mercenary on a Quest">
           <QuestRunner />
         </Card>
       </GridArea>
