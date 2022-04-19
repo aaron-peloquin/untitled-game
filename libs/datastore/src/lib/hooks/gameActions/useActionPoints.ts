@@ -7,8 +7,8 @@ import {useGetBand} from '../gameData/useGetBand';
 export const useActionPoints = () => {
   const gameData = useGameData();
   const band = useGetBand();
-  const ApPerDay = useGetGameSetting('ap_per_day');
   const bandLevel = Math.round(band?.level || 0);
+  const ApPerDay = useGetGameSetting('ap_per_day');
   const maxAp = parseInt(ApPerDay?.value || '0') * bandLevel;
   const currentAp = band?.actionPoints || 0;
 

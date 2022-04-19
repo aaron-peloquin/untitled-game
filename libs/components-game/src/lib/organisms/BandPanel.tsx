@@ -1,8 +1,7 @@
 import {Button, Card, GridArea, GridTemplate, Label, ProgressBar} from '@components-layout';
-import {useActionPoints, useGetBand, useGetLocation, useListMercenariesById} from '@datastore';
+import {useRest, useGetBand, useGetLocation, useListMercenariesById} from '@datastore';
 import {displayNumber} from '@helper';
-import {useGameData} from 'libs/datastore/src/lib/hooks/gameController/useGameData';
-import {memo, useCallback} from 'react';
+import {memo} from 'react';
 
 import MercenaryList from '../molecules/MercenaryList';
 import {QuestRunner} from '../molecules/QuestRunner';
@@ -15,15 +14,7 @@ const BandPanel = memo(() => {
   const band = useGetBand();
   const bandLocation = useGetLocation(band?.currentLocationId);
   const bandMercenaries = useListMercenariesById(band?.mercenaryIds);
-  const {currentAp, maxAp, changeActionPoints} = useActionPoints();
-  const restoreApAmount = maxAp - currentAp;
-  const gameSave = useGameData();
-  const restoreAp = useCallback(() => {
-    if (gameSave?.dataStore) {
-      changeActionPoints(restoreApAmount);
-      gameSave.dataStore.band.update(band?.bandId || 1, {daysUntilWages: (band?.daysUntilWages || 1) - 1});
-    }
-  }, [band?.bandId, band?.daysUntilWages, changeActionPoints, gameSave.dataStore, restoreApAmount]);
+  const {currentAp, maxAp, restoreAp, restoreApAmount} = useRest();
 
   return <Card heading={`${band?.name}'s Mercenary Band`} layer="2">
     <Card layer="3" heading="Overview">
