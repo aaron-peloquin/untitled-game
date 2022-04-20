@@ -20,6 +20,9 @@ const QuestRunner = memo(() => {
 
   const showRunButton = mercenary && quest;
   const questRunnerText = useMemo(() => {
+    if (questResults) {
+      return `Your mercenary was sent`;
+    }
     if (mercenary && quest) {
       return `Send ${mercenary?.name} to ${quest?.type} ${quest?.targetName}`;
     } else if (mercenary) {
@@ -29,12 +32,12 @@ const QuestRunner = memo(() => {
     } else {
       return 'Select a mercenary and a quest to send them on';
     }
-  }, [mercenary, quest]);
+  }, [mercenary, quest, questResults]);
 
   return <Card layer="4">
     {questRunnerText}
     {showRunButton && <Button disabled={!hasEnoughAp} text={`Send Mercenary (${hasEnoughAp ? `${apCost} AP` : `Rest to regain AP`})`} onClick={handleRunQuest} />}
-    {questResults ? <ul>{questResults.roundsLog.map((round, index) => <li key={index}><strong>{round.person}</strong> {round.action}</li>)}</ul> : undefined}
+    {questResults ? <ul>{questResults.roundsLog.map((round, index) => <li style={round.styles} key={index}><strong>{round.person}</strong> {round.action}</li>)}</ul> : undefined}
   </Card>;
 });
 

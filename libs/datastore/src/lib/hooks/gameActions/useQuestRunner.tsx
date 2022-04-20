@@ -1,7 +1,7 @@
 import {questRunners} from '@quest';
 import {useCallback} from 'react';
 
-import {T_QuestResultBand, T_QuestResultMercenary, T_QuestResultQuest} from 'TS_Quest';
+import {T_QuestResult, T_QuestResultBand, T_QuestResultMercenary, T_QuestResultQuest} from 'TS_Quest';
 
 import {useActionPoints} from './useActionPoints';
 
@@ -11,6 +11,14 @@ import {useGetMercenary} from '../gameData/useGetMercenary';
 import {useGetQuest} from '../gameData/useGetQuest';
 import {useGetMercenaryStats} from '../general/useGetMercenaryStats';
 import {useGetQuestStats} from '../general/useGetQuestStats';
+
+const QUEST_DID_NOT_RUN: T_QuestResult = {
+  band: {exp: 0, gold: 0},
+  mercenary: {exp: 0, health: 99999, remove: false},
+  outcome: 'Failure',
+  quest: {remove: false},
+  roundsLog: [{action: 'Something went wrong, they failed to go on quest.', person: 'Something went wrong'}],
+};
 
 export const useQuestRunner = () => {
   const gameData = useGameData();
@@ -59,7 +67,7 @@ export const useQuestRunner = () => {
   }, [bandId, dataStore?.band]);
 
 
-  const runQuest = useCallback(() => {
+  const runQuest = useCallback<() => T_QuestResult>(() => {
     if (quest?.type && mercenary && quest) {
       const questRunner = questRunners?.[quest?.type];
       if (questRunner) {
@@ -74,6 +82,7 @@ export const useQuestRunner = () => {
         }
       }
     }
+    return QUEST_DID_NOT_RUN;
   }, [changeActionPoints, mercenary, mercenaryStats, quest, questStats, updateBand, updateMercenary, updateQuest]);
 
   return {apCost, hasEnoughAp, mercenary, mercenaryStats, quest, questStats, runQuest};

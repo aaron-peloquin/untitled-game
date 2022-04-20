@@ -4,6 +4,7 @@ declare module 'TS_Quest' {
   import {T_Mercenary} from 'TS_Mercenary'
   import {IndexableType, PromiseExtended} from 'dexie'
   import {T_KnownEthnicities, T_KnownProfessions, T_KnownQuestTypes, T_NumGenSig, T_TwoItemNumberArray} from 'TS_General'
+  import CSS from 'csstype'
 
   type T_Quest = {
     questId: number
@@ -25,6 +26,7 @@ declare module 'TS_Quest' {
   type T_QuestLogItem = {
     person: string
     action: string
+    styles?: CSS.Properties
   }
 
   type T_QuestOutcome = 'Victory' | 'Failure' | 'Death'
