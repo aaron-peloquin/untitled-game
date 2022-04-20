@@ -1,7 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "band": "libs/band",
     "components-game": "libs/components-game",
     "components-layout": "libs/components-layout",
     "datastore": "libs/datastore",
