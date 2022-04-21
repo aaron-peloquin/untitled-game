@@ -11,7 +11,7 @@ const initialActions = [
 const fadeInAnimation = {animation: 'fade-in 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
 const flyInLeftAnimation = {animation: 'fly-from-left 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
 const flyInRightAnimation = {animation: 'fly-from-right 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
-const animationDelayIncriment = 0.75;
+const animationDelayIncriment = 0.5;
 
 export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, questStats}) => {
   const numberGenerator = seedGenerator(`${quest.type} ${quest.targetName} ${quest.targetProfession}`);
