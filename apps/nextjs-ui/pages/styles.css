@@ -27,3 +27,25 @@ input {
     opacity: 1;
   }
 }
+
+@-webkit-keyframes fly-from-left {
+  0% {
+    margin-left: -200%;
+    position: relative;
+  }
+  100% {
+    margin-left: 0;
+    position: relative;
+  }
+}
+
+@-webkit-keyframes fly-from-right {
+  0% {
+    left: 105%;
+    position: relative;
+  }
+  100% {
+    left: 0%;
+    position: relative;
+  }
+}

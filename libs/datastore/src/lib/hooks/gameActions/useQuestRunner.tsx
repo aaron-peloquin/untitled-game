@@ -1,7 +1,7 @@
 import {questRunners} from '@quest';
 import {useCallback} from 'react';
 
-import {T_QuestResult, T_QuestResultBand, T_QuestResultMercenary, T_QuestResultQuest} from 'TS_Quest';
+import {T_QuestResults, T_QuestResultsBand, T_QuestResultsMercenary, T_QuestResultsQuest} from 'TS_Quest';
 
 import {useActionPoints} from './useActionPoints';
 
@@ -12,7 +12,7 @@ import {useGetQuest} from '../gameData/useGetQuest';
 import {useGetMercenaryStats} from '../general/useGetMercenaryStats';
 import {useGetQuestStats} from '../general/useGetQuestStats';
 
-const QUEST_DID_NOT_RUN: T_QuestResult = {
+const QUEST_DID_NOT_RUN: T_QuestResults = {
   band: {exp: 0, gold: 0},
   mercenary: {exp: 0, health: 99999, remove: false},
   outcome: 'Failure',
@@ -33,7 +33,7 @@ export const useQuestRunner = () => {
   const apCost = 1;
   const hasEnoughAp = currentAp >= apCost;
 
-  const updateMercenary = useCallback((mercenaryResults: T_QuestResultMercenary) => {
+  const updateMercenary = useCallback((mercenaryResults: T_QuestResultsMercenary) => {
     dataStore?.mercenaries.where('mercenaryId').equals(selectedMercenaryId).modify((mercenary) => {
       mercenary.currentHealth = mercenaryResults.health;
       mercenary.level += mercenaryResults.exp;
@@ -52,14 +52,14 @@ export const useQuestRunner = () => {
     }
   }, [bandId, dataStore?.band, dataStore?.mercenaries, selectedMercenaryId, setSelectedMercenaryId]);
 
-  const updateQuest = useCallback((questResults: T_QuestResultQuest) => {
+  const updateQuest = useCallback((questResults: T_QuestResultsQuest) => {
     if (questResults.remove) {
       setSelectedQuestId(0);
       dataStore?.quests.update(selectedQuestId, {questCompletedByMercenaryId: selectedMercenaryId});
     }
   }, [dataStore?.quests, selectedMercenaryId, selectedQuestId, setSelectedQuestId]);
 
-  const updateBand = useCallback((bandResults: T_QuestResultBand) => {
+  const updateBand = useCallback((bandResults: T_QuestResultsBand) => {
     dataStore?.band.where('bandId').equals(bandId).modify((band) => {
       band.gold += bandResults.gold;
       band.level += bandResults.exp;
@@ -67,7 +67,7 @@ export const useQuestRunner = () => {
   }, [bandId, dataStore?.band]);
 
 
-  const runQuest = useCallback<() => T_QuestResult>(() => {
+  const runQuest = useCallback<() => T_QuestResults>(() => {
     if (quest?.type && mercenary && quest) {
       const questRunner = questRunners?.[quest?.type];
       if (questRunner) {

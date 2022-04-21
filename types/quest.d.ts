@@ -24,33 +24,35 @@ declare module 'TS_Quest' {
   type T_createQuestSig = (T_createQuestArgs) => PromiseExtended<IndexableType>
 
   type T_QuestLogItem = {
-    person: string
     action: string
-    styles?: CSS.Properties
+    icon?: IconType
+    person: string
+    styles?: Record<string, string>
   }
 
   type T_QuestOutcome = 'Victory' | 'Failure' | 'Death'
 
-  type T_QuestResultMercenary = {
+  type T_QuestResultsMercenary = {
     remove: boolean
     health: number
     exp: number
   }
 
-  type T_QuestResultQuest = {
+  type T_QuestResultsQuest = {
     remove: boolean
   }
 
-  type T_QuestResultBand = {
+  type T_QuestResultsBand = {
     exp: number
     gold: number
   }
 
-  type T_QuestResult = {
+  type T_QuestResults = {
+    band: T_QuestResultsBand
+    finalStyles: Record<string, string>
+    mercenary: T_QuestResultsMercenary
     outcome: T_QuestOutcome
-    mercenary: T_QuestResultMercenary
-    quest: T_QuestResultQuest
-    band: T_QuestResultBand
+    quest: T_QuestResultsQuest
     roundsLog: T_QuestLogItem[]
   }
 
@@ -60,5 +62,5 @@ declare module 'TS_Quest' {
     mercenaryStats: T_ParsedStats,
     questStats: T_ParsedStats
   }
-  type T_RunQuestSig = (questRunnerArgsBag: T_RunQuestArgs) => T_QuestResult
+  type T_RunQuestSig = (questRunnerArgsBag: T_RunQuestArgs) => T_QuestResults
 }

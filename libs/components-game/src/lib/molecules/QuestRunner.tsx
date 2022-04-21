@@ -1,28 +1,28 @@
 import {Button, Card} from '@components-layout';
 import {useQuestRunner} from '@datastore';
-import {memo, useCallback, useEffect, useMemo, useState} from 'react';
-import {T_QuestResult} from 'TS_Quest';
+import {Dispatch, memo, SetStateAction, useCallback, useEffect, useMemo} from 'react';
+import {T_QuestResults} from 'TS_Quest';
 
-const QuestRunner = memo(() => {
+type T_Props = {
+  setQuestResults: Dispatch<SetStateAction<T_QuestResults | undefined>>
+}
+
+const QuestRunner: React.FC<T_Props> = memo(({setQuestResults}) => {
   const {mercenary, quest, runQuest, hasEnoughAp, apCost} = useQuestRunner();
-  const [questResults, setQuestResults] = useState<T_QuestResult>();
+
+  const handleRunQuest = useCallback(() => {
+    const results = runQuest();
+    setQuestResults(results);
+  }, [runQuest, setQuestResults]);
 
   useEffect(() => {
     if ((quest?.questId || 0) > 0) {
       setQuestResults(undefined);
     }
-  }, [quest?.questId]);
-
-  const handleRunQuest = useCallback(() => {
-    const results = runQuest();
-    setQuestResults(results);
-  }, [runQuest]);
+  }, [quest?.questId, setQuestResults]);
 
   const showRunButton = mercenary && quest;
   const questRunnerText = useMemo(() => {
-    if (questResults) {
-      return `Your mercenary was sent`;
-    }
     if (mercenary && quest) {
       return `Send ${mercenary?.name} to ${quest?.type} ${quest?.targetName}`;
     } else if (mercenary) {
@@ -32,12 +32,11 @@ const QuestRunner = memo(() => {
     } else {
       return 'Select a mercenary and a quest to send them on';
     }
-  }, [mercenary, quest, questResults]);
+  }, [mercenary, quest]);
 
   return <Card layer="4">
     {questRunnerText}
     {showRunButton && <Button disabled={!hasEnoughAp} text={`Send Mercenary (${hasEnoughAp ? `${apCost} AP` : `Rest to regain AP`})`} onClick={handleRunQuest} />}
-    {questResults ? <ul>{questResults.roundsLog.map((round, index) => <li style={round.styles} key={index}><strong>{round.person}</strong> {round.action}</li>)}</ul> : undefined}
   </Card>;
 });
 
