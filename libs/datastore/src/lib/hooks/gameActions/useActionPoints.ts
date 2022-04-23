@@ -9,7 +9,7 @@ export const useActionPoints = () => {
   const band = useGetBand();
   const bandLevel = Math.round(band?.level || 0);
   const ApPerDay = useGetGameSetting('ap_per_day');
-  const maxAp = parseInt(ApPerDay?.value || '0') * bandLevel;
+  const maxAp = Math.round(parseInt(ApPerDay?.value || '0') * Math.sqrt(bandLevel * 2));
   const currentAp = band?.actionPoints || 0;
 
   const changeActionPoints = useCallback((changeAmount: number) => {

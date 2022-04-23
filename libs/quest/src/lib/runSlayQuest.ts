@@ -1,5 +1,5 @@
 import {pickArray, pickRange, seedGenerator} from '@helper';
-import {GiAcrobatic, GiBroadsword} from 'react-icons/gi';
+import {GiAcrobatic, GiBroadsword, GiDeathSkull} from 'react-icons/gi';
 import {T_QuestLogItem, T_QuestOutcome, T_QuestResults, T_RunQuestSig} from 'TS_Quest';
 
 const initialActions = [
@@ -78,14 +78,14 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
     outcome = 'Victory';
     removeQuest = true;
     mercExp = parseFloat((0.15 * quest.level / mercenary.level).toFixed(2));
-    goldReward = Math.round((quest.level) + (questStats._goldUpkeep / 4));
+    goldReward = Math.round((quest.level) + (questStats._goldUpkeep / 2));
 
     roundsLog.push({action: `defeated ${quest.targetName} and returned with ${goldReward} gold`, person: mercenary.name, styles: lastItemStylesObj});
   } else if (mercenaryCurrentHealth <= -(mercenary.level * 2)) {
     outcome = 'Death';
     removeMercenary = true;
 
-    roundsLog.push({action: 'never returned', person: mercenary.name, styles: lastItemStylesObj});
+    roundsLog.push({action: 'never returned', icon: GiDeathSkull, person: mercenary.name, styles: lastItemStylesObj});
   } else {
     outcome = 'Failure';
     mercExp = parseFloat((0.10 * quest.level / mercenary.level).toFixed(2)) / 2;
