@@ -5,3 +5,4 @@ export * from './lib/seedGenerator';
 export * from './lib/randomName';
 
 export * from './lib/getStats';
+export * from './lib/getMaxBandMercenaries';

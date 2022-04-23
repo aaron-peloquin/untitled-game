@@ -1,6 +1,6 @@
 import {Card, GridArea, GridTemplate} from '@components-layout';
 import {useGetBand, useGetLocation, useListMercenariesById} from '@datastore';
-import { displayNumber } from '@helper';
+import {displayNumber, getMaxBandMercenaries} from '@helper';
 import {memo, useCallback, useState} from 'react';
 import {T_QuestResults} from 'TS_Quest';
 
@@ -37,7 +37,7 @@ const BandPanel = memo(() => {
           </Card>
         </GridArea>
         <GridArea>
-          <Card layer="3" heading={`Your Mercenaries (${bandMercenaries?.length}/${Math.round((band?.level || 1) + 1)})`}>
+          <Card layer="3" heading={`Your Mercenaries (${bandMercenaries?.length}/${getMaxBandMercenaries(band)})`}>
             {bandMercenaries?.length ? <MercenaryList columns={3} canSelect mercenaries={bandMercenaries} showHealthBar /> : null}
           </Card>
         </GridArea>

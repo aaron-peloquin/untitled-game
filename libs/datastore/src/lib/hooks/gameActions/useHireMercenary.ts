@@ -1,3 +1,4 @@
+import {getMaxBandMercenaries} from '@helper';
 import {useCallback} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
 
@@ -12,6 +13,7 @@ export const useHireMercenary = (mercenary: T_Mercenary, hireCost: number) => {
   const bandGold = band?.gold || 0;
   const bandId = band?.bandId || 0;
   const mercenaryId = mercenary.mercenaryId;
+  const slotsAvailable = (band?.mercenaryIds.length || 99) < getMaxBandMercenaries(band);
 
   const canAffordHire = bandGold >= hireCost;
 
@@ -34,5 +36,5 @@ export const useHireMercenary = (mercenary: T_Mercenary, hireCost: number) => {
     }
   }, [bandGold, hireCost, gameData.dataStore, bandId, mercenaryId]);
 
-  return {canAffordHire, hire, hireCost};
+  return {canAffordHire, hire, hireCost, slotsAvailable};
 };
