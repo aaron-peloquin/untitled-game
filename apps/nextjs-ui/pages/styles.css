@@ -30,7 +30,7 @@ input {
 
 @keyframes fly-from-left {
   0% {
-    margin-left: 5%;
+    margin-left: -10%;
     opacity: 0;
   }
   100% {
