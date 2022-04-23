@@ -9,9 +9,10 @@ const TravelingShip = () => {
   return <GridTemplate justifyItems="center">
     <svg width="1px" height="1px">
       <defs>
-        <linearGradient id="wagon-gradient" gradientTransform="rotate(81.65)">
-          <stop stopColor="tan" offset="89%" />
-          <stop stopColor="saddlebrown" offset="90%" />
+        <linearGradient id="wagon-gradient" gradientTransform="rotate(81.2)">
+          <stop stopColor="tan" offset="0%" />
+          <stop stopColor="sandybrown" offset="89.5%" />
+          <stop stopColor="saddlebrown" offset="90.5%" />
         </linearGradient>
       </defs>
     </svg>
