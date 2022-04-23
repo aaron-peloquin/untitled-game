@@ -1,5 +1,7 @@
 import {InputHTMLAttributes, memo} from 'react';
 
+import {Label} from './Label';
+
 import classNames from './Toggle.module.css';
 
 type T_Props = {
@@ -9,11 +11,13 @@ type T_Props = {
 }
 
 const Toggle: React.FC<T_Props & InputHTMLAttributes<HTMLInputElement>> = memo(({id, label, checked, ...props}) => {
-  console.log({checked});
-  return <label>
+  return <label htmlFor={id}>
     <input type="checkbox" className={classNames['checkbox']} id={id} name={id} checked={checked} {...props} />
+    <span>{label}:</span>
     <div className={classNames['toggle-plate']}>
-      <div className={classNames[`toggle-switch-${checked ? 'on' : 'off'}`]} />
+      {checked ?
+      <div className={`${classNames['toggle-switch']} ${classNames['switch-on']}`}>Yes</div> :
+      <div className={`${classNames['toggle-switch']} ${classNames['switch-off']}`}>No</div>}
     </div>
   </label>;
 });

@@ -13,27 +13,32 @@
 
 .toggle-plate {
     border-radius: 8px;
-    border: 1px solid brown;
-    width: 2.8rem;
-    height: 1.4rem;
+    border: solid #444;
+    border-width: .25rem;
+    width: 2rem;
+    height: .75rem;
+    margin: 0;
 }
 
-.toggle-switch-on {
+.toggle-switch {
     position: relative;
-    border-radius: 100px;
-    background-color: red;
-    top: 0.2rem;
-    right: 0.4rem;
-    width: 1rem;
-    height: 1rem;
+    border-radius: 4px;
+    font-size: 0px;
+    width: .75rem;
+    height: .75rem;
+    transition: 0.25s ease-in-out 0s;
+    transition-property: background-color, left;
 }
 
-.toggle-switch-off {
-    position: relative;
-    border-radius: 100px;
-    background-color: green;
-    top: 0.2rem;
-    right: 0.4rem;
-    width: 1rem;
-    height: 1rem;
+.switch-on {
+    left: 1.25rem;
+    background-color: seagreen;
+    /* animation: switch-on 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both; */
+    animation: fly-from-left 1.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+.switch-off {
+    left: 0rem;
+    background-color: saddlebrown;
+    animation: switch-off 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
