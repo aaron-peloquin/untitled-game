@@ -1,0 +1,39 @@
+.checkbox {
+    border: 0;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+}
+
+.toggle-plate {
+    border-radius: 8px;
+    border: 1px solid brown;
+    width: 2.8rem;
+    height: 1.4rem;
+}
+
+.toggle-switch-on {
+    position: relative;
+    border-radius: 100px;
+    background-color: red;
+    top: 0.2rem;
+    right: 0.4rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+.toggle-switch-off {
+    position: relative;
+    border-radius: 100px;
+    background-color: green;
+    top: 0.2rem;
+    right: 0.4rem;
+    width: 1rem;
+    height: 1rem;
+}

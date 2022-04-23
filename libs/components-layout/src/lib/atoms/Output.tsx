@@ -1,12 +1,12 @@
-import {OutputHTMLAttributes} from 'react';
+import {OutputHTMLAttributes, ReactNode} from 'react';
 
 import {Label} from './Label';
 import styles from './Output.module.css';
 
 type T_Props = {
-    value: string | number
-    label: string
-    id: string
+  value: string | number | ReactNode
+  label: string
+  id: string
 }
 
 const Output: React.FC<T_Props & OutputHTMLAttributes<HTMLOutputElement>> = ({id, label, value, ...props}) => {

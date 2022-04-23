@@ -4,6 +4,7 @@ export * from './lib/hooks/gameActions/useActionPoints';
 export * from './lib/hooks/gameActions/useBandTravel';
 export * from './lib/hooks/gameActions/useHireMercenary';
 export * from './lib/hooks/gameActions/useLimitMaxHealth';
+export * from './lib/hooks/gameActions/usePayWages';
 export * from './lib/hooks/gameActions/useRest';
 export * from './lib/hooks/gameActions/useSparMercenary';
 

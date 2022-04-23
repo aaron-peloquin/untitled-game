@@ -1,13 +1,15 @@
-import {Button, Card, GridArea, GridTemplate, Output, ProgressBar} from '@components-layout';
+import {Button, Card, GridArea, GridTemplate, Input, Output, ProgressBar, Toggle} from '@components-layout';
 import {useHireMercenary, useSparMercenary, useSetSelectMercenaryId, useGetMercenaryStats} from '@datastore';
 import {displayNumber} from '@helper';
-import {memo} from 'react';
+import {Dispatch, memo, SetStateAction, useCallback} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
 
 type Props = {
   canHire?: boolean
   canSelect?: boolean
   mercenary: T_Mercenary
+  isChecked: boolean
+  setCheckedMercenaries: Dispatch<SetStateAction<number[]>>
   showHealthBar?: boolean
 }
 
@@ -16,7 +18,23 @@ const STATS_AREA = `
 "attack___ cunning__"
 "endurance subtlety_"`;
 
-const MercenaryItem: React.FC<Props> = memo(({canHire, canSelect, mercenary, showHealthBar}) => {
+const MercenaryItem: React.FC<Props> = memo(({canHire, canSelect, mercenary, isChecked, setCheckedMercenaries, showHealthBar}) => {
+  const showCheckbox = !!setCheckedMercenaries;
+  const toggleChecked = useCallback(() => {
+    setCheckedMercenaries((checkedMercenaries) => {
+      const isChecked = checkedMercenaries.some((mercenaryId) => mercenaryId === mercenary.mercenaryId);
+      console.log('Function:', {id: mercenary.mercenaryId, isChecked});
+      if (isChecked) {
+        return checkedMercenaries.filter((mercenaryId) => mercenaryId !== mercenary.mercenaryId);
+      } else {
+        return [
+          ...checkedMercenaries,
+          mercenary.mercenaryId,
+        ];
+      }
+    });
+  }, [mercenary.mercenaryId, setCheckedMercenaries]);
+  console.log('isChecked', isChecked);
   const {currentHealth, level, mercenaryId, name, statsVisible} = mercenary;
   const stats = useGetMercenaryStats(mercenary);
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenaryId);
@@ -48,6 +66,7 @@ const MercenaryItem: React.FC<Props> = memo(({canHire, canSelect, mercenary, sho
       </GridTemplate>
     </Card>}
     <GridTemplate columns={showStatsButton && canHire ? 2 : 1} justifyItems="center">
+      {showCheckbox && <GridArea><Toggle label="Check Mercenary" checked={isChecked} id={`check-mercenary-${mercenary.mercenaryId}`} onChange={toggleChecked} /></GridArea>}
       {showStatsButton && <GridArea><Button disabled={!canAffordSpar} onClick={spar} text={`Spar for ${sparCost ? `${sparCost} gold` : 'free'}`} /></GridArea>}
       {canHire && <GridArea><Button disabled={!canAffordHire} onClick={hire} text={`Hire for ${hireCost} gold`} /></GridArea>}
       {showSelectButton && <GridArea><Button disabled={isSelected} text="Select Mercenary" onClick={setSelected} /></GridArea>}

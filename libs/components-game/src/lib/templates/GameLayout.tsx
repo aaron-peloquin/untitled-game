@@ -1,10 +1,11 @@
 import {GridArea, GridTemplate} from '@components-layout';
-import {useGetBand} from '@datastore';
+import {useGetBand, usePayWages} from '@datastore';
 import {memo} from 'react';
 
 import {Location} from './../organisms/Location';
 
 import {BandPanel} from '../organisms/BandPanel';
+import {BandWages} from '../organisms/BandWages';
 import {TopNav} from '../organisms/TopNav';
 
 const gridTemplateAreas = `
@@ -13,8 +14,11 @@ const gridTemplateAreas = `
 
 const GameLayout = memo(() => {
   const band = useGetBand();
+  const {wagesDone, wagesDue} = usePayWages(band);
   return <>
     <TopNav />
+    {wagesDue ?
+    <BandWages wagesDone={wagesDone} /> :
     <GridTemplate gridTemplateAreas={gridTemplateAreas}>
       <GridArea name='band____'>
         <BandPanel />
@@ -22,7 +26,8 @@ const GameLayout = memo(() => {
       <GridArea name='location'>
         {band?.currentLocationId && <Location locationId={band.currentLocationId} />}
       </GridArea>
-    </GridTemplate></>;
+    </GridTemplate>}
+  </>;
 });
 
 GameLayout.displayName = 'GameLayout';

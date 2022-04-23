@@ -30,22 +30,26 @@ input {
 
 @-webkit-keyframes fly-from-left {
   0% {
-    margin-left: -200%;
+    margin-left: -10%;
+    opacity: 0;
     position: relative;
   }
   100% {
     margin-left: 0;
+    opacity: 1;
     position: relative;
   }
 }
 
 @-webkit-keyframes fly-from-right {
   0% {
-    left: 105%;
+    left: 15%;
+    opacity: 0;
     position: relative;
   }
   100% {
     left: 0%;
+    opacity: 1;
     position: relative;
   }
 }
