@@ -1,4 +1,4 @@
-import {Button, Card, GridArea, GridTemplate, Input, Output, ProgressBar, Toggle} from '@components-layout';
+import {Button, Card, GridArea, GridTemplate, Output, ProgressBar, Toggle} from '@components-layout';
 import {useHireMercenary, useSparMercenary, useSetSelectMercenaryId, useGetMercenaryStats} from '@datastore';
 import {displayNumber} from '@helper';
 import {Dispatch, memo, SetStateAction, useCallback} from 'react';
@@ -9,47 +9,40 @@ type T_Props = {
   canSelect?: boolean
   mercenary: T_Mercenary
   showHealthBar?: boolean
+  checkboxLabel?: string
+  isChecked?: boolean
+  setCheckedMercenaries?: Dispatch<SetStateAction<number[]>>
 }
-
-type T_CheckboxProps = {
-  checkboxLabel: string
-  isChecked: true
-  setCheckedMercenaries: Dispatch<SetStateAction<number[]>>
-} & T_Props
-
-type T_NoCheckboxProps = {
-  checkboxLabel?: never
-  isChecked: false
-  setCheckedMercenaries?: never
-} & T_Props
 
 const STATS_AREA = `
 "health___ health___"
 "attack___ cunning__"
 "endurance subtlety_"`;
 
-const MercenaryItem: React.FC<T_CheckboxProps | T_NoCheckboxProps> = memo(({
+const MercenaryItem: React.FC<T_Props> = memo(({
   canHire,
   canSelect,
   mercenary,
-  isChecked,
-  checkboxLabel,
+  isChecked = false,
+  checkboxLabel = '',
   setCheckedMercenaries,
   showHealthBar,
 }) => {
   const showCheckbox = !!setCheckedMercenaries;
   const toggleChecked = useCallback(() => {
-    setCheckedMercenaries((checkedMercenaries) => {
-      const isChecked = checkedMercenaries.some((mercenaryId) => mercenaryId === mercenary.mercenaryId);
-      if (isChecked) {
-        return checkedMercenaries.filter((mercenaryId) => mercenaryId !== mercenary.mercenaryId);
-      } else {
-        return [
-          ...checkedMercenaries,
-          mercenary.mercenaryId,
-        ];
-      }
-    });
+    if (setCheckedMercenaries) {
+      setCheckedMercenaries((checkedMercenaries) => {
+        const isChecked = checkedMercenaries.some((mercenaryId) => mercenaryId === mercenary.mercenaryId);
+        if (isChecked) {
+          return checkedMercenaries.filter((mercenaryId) => mercenaryId !== mercenary.mercenaryId);
+        } else {
+          return [
+            ...checkedMercenaries,
+            mercenary.mercenaryId,
+          ];
+        }
+      });
+    }
   }, [mercenary.mercenaryId, setCheckedMercenaries]);
 
   const {currentHealth, level, mercenaryId, name, statsVisible} = mercenary;

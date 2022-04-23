@@ -7,11 +7,11 @@ import {MercenaryItem} from '../atoms/MercenaryItem';
 type Props = {
   canHire?: boolean
   canSelect?: boolean
-  checkedMercenaries: number[]
+  checkedMercenaries?: number[]
   checkboxLabel?: string
   columns?: number
   mercenaries: T_Mercenary[]
-  setCheckedMercenaries: Dispatch<SetStateAction<number[]>>
+  setCheckedMercenaries?: Dispatch<SetStateAction<number[]>>
   showHealthBar?: boolean
 }
 
