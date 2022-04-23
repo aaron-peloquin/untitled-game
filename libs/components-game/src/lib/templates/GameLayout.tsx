@@ -19,7 +19,7 @@ const GameLayout = memo(() => {
   return <>
     <TopNav />
     {bandMercenaries && wagesDue ?
-    <BandWages bandMercenaries={bandMercenaries} {...wagesProps} /> :
+    <BandWages bandGold={band?.gold || 0} bandMercenaries={bandMercenaries} {...wagesProps} /> :
     <GridTemplate gridTemplateAreas={gridTemplateAreas}>
       <GridArea name='band____'>
         <BandPanel />

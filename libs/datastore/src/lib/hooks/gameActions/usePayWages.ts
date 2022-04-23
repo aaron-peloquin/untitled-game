@@ -16,6 +16,12 @@ export const usePayWages = (band?: T_Band) => {
   const hp_per_end = useGetGameSetting('hp_per_end');
 
   useEffect(() => {
+    if (band?.mercenaryIds.length) {
+      setCheckedMercenaries(band.mercenaryIds);
+    }
+  }, [band?.mercenaryIds]);
+
+  useEffect(() => {
     if (!wagesDue && bandDaysUntilWages === 0) {
       setWagesDue(true);
     } else if (bandDaysUntilWages > 0) {
@@ -32,7 +38,7 @@ export const usePayWages = (band?: T_Band) => {
         const stats = getStats(mercenary.level, hpMultiplier, mercenary.ethnicity, mercenary.profession, mercenary.personality);
         return {name: mercenary.name, wage: stats._goldUpkeep};
       }
-      return {};
+      return {name: 'Loading...', wage: 0};
     });
   }, [bandMercenaries, checkedMercenaries, hp_per_end]);
 

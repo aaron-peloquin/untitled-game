@@ -14,6 +14,7 @@ import {useGetQuestStats} from '../general/useGetQuestStats';
 
 const QUEST_DID_NOT_RUN: T_QuestResults = {
   band: {exp: 0, gold: 0},
+  finalStyles: {},
   mercenary: {exp: 0, health: 99999, remove: false},
   outcome: 'Failure',
   quest: {remove: false},
