@@ -19,7 +19,7 @@ input {
   width: 100%;
 }
 
-@-webkit-keyframes fade-in {
+@keyframes fade-in {
   0% {
     opacity: 0;
   }
@@ -28,7 +28,7 @@ input {
   }
 }
 
-@-webkit-keyframes fly-from-left {
+@keyframes fly-from-left {
   0% {
     margin-left: -10%;
     opacity: 0;
@@ -41,7 +41,7 @@ input {
   }
 }
 
-@-webkit-keyframes fly-from-right {
+@keyframes fly-from-right {
   0% {
     left: 15%;
     opacity: 0;

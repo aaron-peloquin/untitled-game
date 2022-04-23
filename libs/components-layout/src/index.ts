@@ -1,3 +1,5 @@
+export * from './lib/animated-icons/TravelingShip';
+
 export * from './lib/atoms/Button';
 export * from './lib/atoms/Input';
 export * from './lib/atoms/Label';
