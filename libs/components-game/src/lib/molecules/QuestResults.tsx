@@ -1,5 +1,5 @@
 import {Card, GridTemplate, GridArea, Output, Button} from '@components-layout';
-import React, {memo} from 'react';
+import React, {Fragment, memo} from 'react';
 import {GiTwoCoins} from 'react-icons/gi';
 import {T_QuestResults} from 'TS_Quest';
 
@@ -15,12 +15,12 @@ const QuestResults: React.FC<T_Props> = memo(({clearQuestResults, questResults})
         <GridTemplate gridTemplateColumns="1fr 4fr">
           {questResults.roundsLog.map((round, index) => {
             const Icon = round?.icon;
-            return <>
+            return <Fragment key={index}>
               <GridArea />
-              <GridArea style={round.styles} key={index}>
+              <GridArea style={round.styles}>
                 {Icon && <><Icon />{` `}</>}<strong>{round.person}</strong> {round.action}
               </GridArea>
-            </>;
+            </Fragment>;
           })}
         </GridTemplate>
         <GridArea style={questResults.finalStyles}>
