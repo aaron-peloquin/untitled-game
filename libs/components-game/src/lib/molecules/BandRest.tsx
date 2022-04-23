@@ -11,7 +11,7 @@ const BandRest: React.FC<T_Props> = ({band}) => {
   return <GridTemplate alignItems="right" columns={3} gridGap="8px">
     <GridArea>
       <Label htmlFor='band_action-points' text={`Action Poionts (${currentAp}/${maxAp} AP)`} />
-      <ProgressBar value={currentAp} max={maxAp} id="band_action-points" />
+      <ProgressBar color="skyblue" value={currentAp} max={maxAp} id="band_action-points" />
     </GridArea>
     <GridArea textAlign="center">
       <Output label="Wages due in" value={`${band?.daysUntilWages} days`} id="days-until-wages-due" />

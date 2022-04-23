@@ -1,7 +1,7 @@
 import {Button, Card, GridArea, GridTemplate, Output, ProgressBar, Toggle} from '@components-layout';
 import {useHireMercenary, useSparMercenary, useSetSelectMercenaryId, useGetMercenaryStats} from '@datastore';
 import {displayNumber} from '@helper';
-import {Dispatch, memo, SetStateAction, useCallback} from 'react';
+import {Dispatch, memo, SetStateAction, useCallback, useMemo} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
 
 type T_Props = {
@@ -53,6 +53,15 @@ const MercenaryItem: React.FC<T_Props> = memo(({
   const {canAffordSpar, spar, sparCost} = useSparMercenary(mercenary);
   const showStatsButton = (canHire && !statsVisible);
   const showSelectButton = canSelect && currentHealth > 0;
+  const healthbarColor = useMemo(() => {
+    if (currentHealth > stats.maxHealth / 2) {
+      return 'green';
+    } else if (currentHealth > stats.maxHealth / 4) {
+      return 'yellow';
+    } else {
+      return 'orange';
+    }
+  }, [currentHealth, stats.maxHealth]);
 
   return <Card layer='4'>
     <GridTemplate gridTemplateColumns="3fr 1fr">
@@ -67,7 +76,7 @@ const MercenaryItem: React.FC<T_Props> = memo(({
     {statsVisible && <Card layer="5">
       <GridTemplate gridTemplateAreas={STATS_AREA} gridTemplateColumns="1fr 1fr" textAlign='center'>
         {showHealthBar && <GridArea name="health___">
-          <ProgressBar max={stats.maxHealth} color="red" value={currentHealth} id={`${mercenaryId}_health`} />
+          <ProgressBar max={stats.maxHealth} color={healthbarColor} value={currentHealth} id={`${mercenaryId}_health`} />
         </GridArea>}
         <GridArea name="attack___"><Output label="Attack" id={`${mercenaryId}_attack`} value={stats.attack} /></GridArea>
         <GridArea name="cunning__"><Output label="Cunning" id={`${mercenaryId}_cunning`} value={stats.cunning} /></GridArea>
