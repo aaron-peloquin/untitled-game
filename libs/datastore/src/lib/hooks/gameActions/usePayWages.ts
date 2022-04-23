@@ -4,6 +4,7 @@ import {T_Band} from 'TS_Band';
 import {T_Mercenary} from 'TS_Mercenary';
 
 import {useGameData} from '../gameController/useGameData';
+import {useGetGameSetting} from '../gameController/useGetGameSetting';
 import {useListMercenariesById} from '../gameData/useListMercenariesById';
 
 export const usePayWages = (band?: T_Band) => {
@@ -12,6 +13,7 @@ export const usePayWages = (band?: T_Band) => {
   const bandDaysUntilWages = band?.daysUntilWages ?? 0;
   const [checkedMercenaries, setCheckedMercenaries] = useState<number[]>([]);
   const bandMercenaries = useListMercenariesById(band?.mercenaryIds);
+  const hp_per_end = useGetGameSetting('hp_per_end');
 
   useEffect(() => {
     if (!wagesDue && bandDaysUntilWages === 0) {
@@ -25,10 +27,14 @@ export const usePayWages = (band?: T_Band) => {
     const upkeepMercenaries: T_Mercenary[] = bandMercenaries?.filter((mercenary) => checkedMercenaries.indexOf(mercenary.mercenaryId) !== -1) || [];
 
     return upkeepMercenaries.map((mercenary) => {
-      const stats = getStats(mercenary.level, 0, mercenary.ethnicity, mercenary.profession, mercenary.personality);
-      return {name: mercenary.name, wage: stats._goldUpkeep};
+      if (hp_per_end) {
+        const hpMultiplier = parseInt(hp_per_end.value);
+        const stats = getStats(mercenary.level, hpMultiplier, mercenary.ethnicity, mercenary.profession, mercenary.personality);
+        return {name: mercenary.name, wage: stats._goldUpkeep};
+      }
+      return {};
     });
-  }, [bandMercenaries, checkedMercenaries]);
+  }, [bandMercenaries, checkedMercenaries, hp_per_end]);
 
   const totalAmount = useMemo(() => receipt.reduce((total, {wage}) => total += wage, 0), [receipt]);
 
