@@ -47,10 +47,10 @@ export const usePayWages = (band?: T_Band) => {
   const canAffordWages = (band?.gold || 0) >= totalAmount;
 
   const wagesDone = useCallback(() => {
-    gameData.dataStore?.band.update(band?.bandId || 1, {daysUntilWages: 5, mercenaryIds: checkedMercenaries});
+    const gold = (band?.gold || 0) - totalAmount;
+    gameData.dataStore?.band.update(band?.bandId || 1, {daysUntilWages: 5, gold, mercenaryIds: checkedMercenaries});
     setWagesDue(false);
-    console.log(checkedMercenaries, receipt);
-  }, [band?.bandId, checkedMercenaries, gameData.dataStore?.band, receipt]);
+  }, [band?.bandId, band?.gold, checkedMercenaries, gameData.dataStore?.band, totalAmount]);
 
   return {bandMercenaries, canAffordWages, checkedMercenaries, receipt, setCheckedMercenaries, totalAmount, wagesDone, wagesDue};
 };
