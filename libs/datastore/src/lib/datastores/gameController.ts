@@ -6,6 +6,7 @@ const defaultSettings: Omit<T_GameSetting, 'hidden'>[] = [
   {label: 'Locations per World', name: 'locs_per_world', otherFieldProps: {max: 500, min: 4}, type: 'number', value: '44'},
   {label: 'Action points per day', name: 'ap_per_day', type: 'number', value: '5'},
   {label: 'Health per endurance point', name: 'hp_per_end', type: 'number', value: '5'},
+  {label: 'Starting Gold', name: 'starting_gold', type: 'number', value: '15'},
 ];
 
 class GameControllerClass extends Dexie {

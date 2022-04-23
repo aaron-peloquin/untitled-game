@@ -18,7 +18,7 @@ export class GameDataClass extends Dexie {
   mercenaries!: Table<T_Mercenary, number>;
   quests!: Table<T_Quest, number>;
 
-  constructor(gameDatastoreName: string, name: string, seed: string, locationsToGenerate: number, apPerDay:number) {
+  constructor(gameDatastoreName: string, name: string, seed: string, locationsToGenerate: number, apPerDay:number, startingGold: number) {
     super(`untitled-game-${gameDatastoreName}`);
     this.version(1).stores({
       // Primary key and indexed props
@@ -39,7 +39,7 @@ export class GameDataClass extends Dexie {
         actionPoints: apPerDay * 2,
         currentLocationId: 0,
         daysUntilWages: 5,
-        gold: 15,
+        gold: startingGold,
         level: 1,
         mercenaryIds: [1],
         name,

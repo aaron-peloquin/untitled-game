@@ -12,6 +12,7 @@ const GameDataProvider: React.FC = memo(({children}) => {
   const [selectedMercenaryId, setSelectedMercenaryId] = useState(0);
   const [selectedQuestId, setSelectedQuestId] = useState(0);
   const apPerDay = useGetGameSetting('ap_per_day');
+  const startingGold = useGetGameSetting('starting_gold');
 
   const save = useGetCurrentSave();
   useEffect(() => {
@@ -20,7 +21,7 @@ const GameDataProvider: React.FC = memo(({children}) => {
     }
   }, [save]);
   const gameProviderValue = useMemo<T_GameDataContext>(() => {
-    const dataStore = apPerDay !== undefined && save?.gameDatastoreName ? new GameDataClass(save.gameDatastoreName, save.name, save.seed, save.totalLocations, parseInt(apPerDay.value)) : undefined;
+    const dataStore = (apPerDay !== undefined && startingGold !== undefined && save?.gameDatastoreName) ? new GameDataClass(save.gameDatastoreName, save.name, save.seed, save.totalLocations, parseInt(apPerDay.value), parseInt(startingGold.value)) : undefined;
     return {
       dataStore,
       name: save?.name || '',
@@ -30,7 +31,7 @@ const GameDataProvider: React.FC = memo(({children}) => {
       setSelectedMercenaryId,
       setSelectedQuestId,
     };
-  }, [apPerDay, save?.gameDatastoreName, save?.name, save?.seed, save?.totalLocations, selectedMercenaryId, selectedQuestId]);
+  }, [apPerDay, save?.gameDatastoreName, save?.name, save?.seed, save?.totalLocations, selectedMercenaryId, selectedQuestId, startingGold]);
 
   return <Provider value={gameProviderValue}>
     {children}
