@@ -10,12 +10,13 @@ type Props = {
 const RelatedLocationItem: React.FC<Props> = ({location, setIsTraveling}) => {
   const {canAffordTravel, travel, travelCost} = useBandTravel(location);
   const handleTravel = useCallback(() => {
+    const animationDuration = Math.sqrt(travelCost) * 2000;
     setIsTraveling(true);
     travel();
     setTimeout(() => {
       setIsTraveling(false);
-    }, 7000);
-  }, [setIsTraveling, travel]);
+    }, animationDuration);
+  }, [setIsTraveling, travel, travelCost]);
 
   return <>
     <Button onClick={handleTravel} disabled={!canAffordTravel} text="Travel" /> to {location.name}, for {travelCost} gold
