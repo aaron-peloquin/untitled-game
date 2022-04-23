@@ -7,18 +7,27 @@ import {MercenaryItem} from '../atoms/MercenaryItem';
 type Props = {
   canHire?: boolean
   canSelect?: boolean
+  checkedMercenaries: number[]
+  checkboxLabel?: string
   columns?: number
   mercenaries: T_Mercenary[]
-  checkedMercenaries: number[]
   setCheckedMercenaries: Dispatch<SetStateAction<number[]>>
   showHealthBar?: boolean
 }
 
-const MercenaryList: React.FC<Props> = ({canHire, canSelect, columns = 3, mercenaries, checkedMercenaries, setCheckedMercenaries, showHealthBar}) => {
+const MercenaryList: React.FC<Props> = ({
+  canHire,
+  canSelect,
+  columns = 3,
+  mercenaries,
+  checkboxLabel,
+  checkedMercenaries,
+  setCheckedMercenaries,
+  showHealthBar,
+}) => {
   return <GridTemplate columns={columns}>
     {mercenaries.map((mercenary) => {
-      const isChecked = checkedMercenaries.some((mercenaryId)=>{
-        console.log('comparezz', mercenaryId === mercenary.mercenaryId);
+      const isChecked = checkedMercenaries?.some((mercenaryId)=>{
         return mercenaryId === mercenary.mercenaryId;
       });
       return <GridArea key={mercenary.mercenaryId}>
@@ -29,6 +38,7 @@ const MercenaryList: React.FC<Props> = ({canHire, canSelect, columns = 3, mercen
           isChecked={isChecked}
           setCheckedMercenaries={setCheckedMercenaries}
           showHealthBar={showHealthBar}
+          checkboxLabel={checkboxLabel}
         />
       </GridArea>;
     })}

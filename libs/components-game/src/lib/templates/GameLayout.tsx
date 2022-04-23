@@ -14,11 +14,12 @@ const gridTemplateAreas = `
 
 const GameLayout = memo(() => {
   const band = useGetBand();
-  const {wagesDone, wagesDue} = usePayWages(band);
+  const {wagesDue, bandMercenaries, ...wagesProps} = usePayWages(band);
+
   return <>
     <TopNav />
-    {wagesDue ?
-    <BandWages wagesDone={wagesDone} /> :
+    {bandMercenaries && wagesDue ?
+    <BandWages bandMercenaries={bandMercenaries} {...wagesProps} /> :
     <GridTemplate gridTemplateAreas={gridTemplateAreas}>
       <GridArea name='band____'>
         <BandPanel />
