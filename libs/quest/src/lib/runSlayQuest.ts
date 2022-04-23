@@ -1,5 +1,5 @@
 import {pickArray, pickRange, seedGenerator} from '@helper';
-import {GiAcrobatic, GiBroadsword, GiDeathSkull} from 'react-icons/gi';
+import {GiAcrobatic, GiBoots, GiBroadsword, GiDeathSkull, GiTripwire} from 'react-icons/gi';
 import {T_QuestLogItem, T_QuestOutcome, T_QuestResults, T_RunQuestSig} from 'TS_Quest';
 
 const initialActions = [
@@ -27,30 +27,68 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
   });
 
   let animationDelayCounter = 0;
+  let staggered = false;
 
+  const mercenaryDamageChunk = (20 + mercenaryStats.attack) / (questStats.endurance / 5) / 5;
   const mercenaryAttack = () => {
     animationDelayCounter += animationDelayIncriment;
-    const hit = numberRange(0, (mercenaryStats.subtlety * 10) + mercenary.level);
-    if (hit > questStats.cunning) {
-      const damage = (numberRange(1, 20) + mercenaryStats.attack) / (questStats.endurance / 5);
-      questCurrentHealth -= damage;
-      const roundDescription = `attacked for ${Math.round(damage)} damage`;
-      roundsLog.push({action: roundDescription, icon: GiBroadsword, person: mercenary.name, styles: {...flyInLeftAnimation, animationDelay: `${animationDelayCounter}s`}});
+    if (!staggered) {
+      const hit = numberRange(0, (mercenaryStats.subtlety * 10) + mercenary.level);
+      if (hit > questStats.cunning) {
+        const damage = (numberRange(1, 20) + mercenaryStats.attack) / (questStats.endurance / 5);
+        questCurrentHealth -= damage;
+
+        if (damage > (mercenaryDamageChunk * 2) && damage < (mercenaryDamageChunk * 3)) {
+          staggered = true;
+          roundsLog.push({action: `staggered ${quest.targetName}`, icon: GiTripwire, person: mercenary.name, styles: {...flyInRightAnimation, animationDelay: `${animationDelayCounter}s`}});
+        } else {
+          let damageDescription = 'moderate';
+          if (damage < (mercenaryDamageChunk * 2)) {
+            damageDescription = 'light';
+          } else if (damage > mercenaryDamageChunk * 4) {
+            damageDescription = 'heavy';
+          }
+          const roundDescription = `attacked for ${damageDescription} damage`;
+          roundsLog.push({action: roundDescription, icon: GiBroadsword, person: mercenary.name, styles: {...flyInLeftAnimation, animationDelay: `${animationDelayCounter}s`}});
+        }
+      } else {
+        roundsLog.push({action: `dodged!`, icon: GiAcrobatic, person: quest.targetName, styles: {...flyInRightAnimation, animationDelay: `${animationDelayCounter}s`}});
+      }
     } else {
-      roundsLog.push({action: `dodged!`, icon: GiAcrobatic, person: quest.targetName, styles: {...flyInRightAnimation, animationDelay: `${animationDelayCounter}s`}});
+      roundsLog.push({action: `regains their footing`, icon: GiBoots, person: mercenary.name, styles: {...flyInLeftAnimation, animationDelay: `${animationDelayCounter}s`}});
+      staggered = false;
     }
   };
 
+
   const questAttackTopRange = quest.level > 20 ? 20 : quest.level;
+  const questDamageChunk = (questAttackTopRange + questStats.attack / (mercenaryStats.endurance / 5)) / 5;
   const questAttack = () => {
     animationDelayCounter += animationDelayIncriment;
-    const hit = numberRange(0, questStats.subtlety * 10);
-    if (hit > mercenaryStats.cunning) {
-      const damage = (numberRange(0, questAttackTopRange) + questStats.attack) / (mercenaryStats.endurance / 5);
-      mercenaryCurrentHealth -= damage;
-      roundsLog.push({action: `attacked for ${Math.round(damage)} damage`, icon: GiBroadsword, person: quest.targetName, styles: {...flyInRightAnimation, animationDelay: `${animationDelayCounter}s`}});
+    if (!staggered) {
+      const hit = numberRange(0, questStats.subtlety * 10);
+      if (hit > mercenaryStats.cunning) {
+        const damage = (numberRange(0, questAttackTopRange) + questStats.attack) / (mercenaryStats.endurance / 5);
+        mercenaryCurrentHealth -= damage;
+
+        if (damage > (questDamageChunk * 2) && damage < (questDamageChunk * 3)) {
+          staggered = true;
+          roundsLog.push({action: `staggered ${mercenary.name}`, icon: GiTripwire, person: quest.targetName, styles: {...flyInRightAnimation, animationDelay: `${animationDelayCounter}s`}});
+        } else {
+          let damageDescription = 'moderate';
+          if (damage < (questDamageChunk * 2)) {
+            damageDescription = 'light';
+          } else if (damage > questDamageChunk * 4) {
+            damageDescription = 'heavy';
+          }
+          roundsLog.push({action: `attacked for ${damageDescription} damage`, icon: GiBroadsword, person: quest.targetName, styles: {...flyInRightAnimation, animationDelay: `${animationDelayCounter}s`}});
+        }
+      } else {
+        roundsLog.push({action: `dodges!`, icon: GiAcrobatic, person: mercenary.name, styles: {...flyInLeftAnimation, animationDelay: `${animationDelayCounter}s`}});
+      }
     } else {
-      roundsLog.push({action: `dodges!`, icon: GiAcrobatic, person: mercenary.name, styles: {...flyInLeftAnimation, animationDelay: `${animationDelayCounter}s`}});
+      roundsLog.push({action: `regains their footing`, icon: GiBoots, person: quest.targetName, styles: {...flyInRightAnimation, animationDelay: `${animationDelayCounter}s`}});
+      staggered = false;
     }
   };
 
