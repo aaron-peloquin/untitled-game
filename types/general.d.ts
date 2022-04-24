@@ -21,7 +21,7 @@ declare module 'TS_General' {
   }
 
   type T_KnownQuestTypes = 'Slay'
-  type T_KnownEthnicities = 'human' | 'goblin'
+  type T_KnownEthnicities = 'human' | 'goblin' | 'elf' | 'dwarf'
   type T_KnownPersonalities = 'brave' | 'leader' | 'clever'
   type T_KnownProfessions = 'farmer' | 'fighter' | 'rogue' | 'fisher' | 'butcher'
   

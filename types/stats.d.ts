@@ -13,6 +13,8 @@ declare module 'TS_Stats' {
     maxHealth: number
     ethnicity: string
     profession: string
+    textColorEthnicity: string
+    textColorProfession: string
   } & T_Stats
   
   type T_ExportStats = {

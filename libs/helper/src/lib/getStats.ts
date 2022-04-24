@@ -40,12 +40,15 @@ const getStats:getStatsSig = _.memoize((level, hpMultipler, ethnicity, professio
     return stats;
   }, {...defaultStats});
 
-  return {
+  const response: T_ParsedStats = {
     ...statBlock,
     ethnicity: ethnicityData.label,
     maxHealth: statBlock.endurance * hpMultipler,
     profession: professionData.label,
+    textColorEthnicity: ethnicityData.color,
+    textColorProfession: professionData.color,
   };
+  return response;
 });
 
 export {getStats};

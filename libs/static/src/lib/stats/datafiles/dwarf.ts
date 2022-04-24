@@ -1,12 +1,12 @@
 import {T_ExportStats, T_Stats} from 'TS_Stats';
 
 const baseStats: T_Stats = {
-  _goldHiring: 1,
+  _goldHiring: 3,
   _goldUpkeep: 0,
-  attack: 1,
-  cunning: 2,
-  endurance: 1,
-  subtlety: 1,
+  attack: 2,
+  cunning: 0,
+  endurance: 3,
+  subtlety: 0,
 };
 
 const levelUpGains: T_Stats = {
@@ -19,8 +19,8 @@ const levelUpGains: T_Stats = {
 };
 
 const statsData: T_ExportStats = {
-  color: 'darkgoldenrod',
-  label: 'Human',
+  color: 'grey',
+  label: 'Dwarf',
   onLevel: levelUpGains,
   stats: baseStats,
 };
