@@ -13,7 +13,7 @@ export const useHireMercenary = (mercenary: T_Mercenary, hireCost: number) => {
   const bandGold = band?.gold || 0;
   const bandId = band?.bandId || 0;
   const mercenaryId = mercenary.mercenaryId;
-  const slotsAvailable = (band?.mercenaryIds.length || 99) < getMaxBandMercenaries(band);
+  const slotsAvailable = (band?.mercenaryIds.length ?? 99) < getMaxBandMercenaries(band);
 
   const canAffordHire = bandGold >= hireCost;
 
