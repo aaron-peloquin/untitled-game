@@ -117,7 +117,7 @@ export const runFollowQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, 
   if (mercenaryDetectedResult === 0) {
     outcome = 'Success';
     removeQuest = true;
-    mercExp = parseFloat((0.2 * quest.level / mercenary.level / 2 + (roundsLog.length / 300)).toFixed(2));
+    mercExp = parseFloat((0.2 * quest.level / mercenary.level + (roundsLog.length / 300) / 3).toFixed(2));
     goldReward = Math.round((quest.level) + (questStats._goldUpkeep / 2));
 
     roundsLog.push({action: wrappingActions[1], person: quest.targetName, styles: lastItemStylesObj});
@@ -125,12 +125,12 @@ export const runFollowQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, 
   } else if (mercenaryDetectedResult > (4 * Math.sqrt(mercenary.level))) {
     outcome = 'Caught';
     mercenaryCurrentHealth = 0;
-    mercExp = parseFloat((0.15 * quest.level / mercenary.level / 2).toFixed(2));
+    mercExp = parseFloat((0.15 * quest.level / mercenary.level / 4).toFixed(2));
 
     roundsLog.push({action: ` limps back in great pain. ${quest.targetName} apparently has some friends in high places`, icon: GiArmSling, person: mercenary.name, styles: lastItemStylesObj});
   } else {
     outcome = 'Failure';
-    mercExp = parseFloat((0.10 * quest.level / mercenary.level / 2).toFixed(2));
+    mercExp = parseFloat((0.10 * quest.level / mercenary.level / 5).toFixed(2));
 
     roundsLog.push({action: `returned in failure`, person: mercenary.name, styles: lastItemStylesObj});
   }
