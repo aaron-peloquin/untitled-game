@@ -3,7 +3,11 @@ import {GiAcrobatic, GiBoots, GiBroadsword, GiDeathSkull, GiTripwire} from 'reac
 import {T_QuestLogItem, T_QuestOutcome, T_QuestResults, T_RunQuestSig} from 'TS_Quest';
 
 const initialActions = [
-  (name: string) => `Tracks down ${name} in a nearby village`,
+  (name: string) => `Tracks down ${name}`,
+  (name: string) => `Spots ${name} while traveling`,
+  (name: string) => `Finds ${name} hiding out in the woods`,
+  (name: string) => `Tracks ${name} to a shady tavern`,
+  (name: string) => `Locates ${name} after asking locals for their wherebaouts`,
   (name: string) => `Follows ${name} to a secluded spot`,
   (name: string) => `Sets an ambush for ${name} along the road`,
 ];

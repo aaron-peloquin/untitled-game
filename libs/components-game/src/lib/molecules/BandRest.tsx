@@ -8,12 +8,12 @@ type T_Props = {
 const BandRest: React.FC<T_Props> = ({band}) => {
   const {currentAp, maxAp, restoreAp, restoreApAmount} = useRest(band);
 
-  return <GridTemplate alignItems="right" columns={3} gridGap="8px">
+  return <GridTemplate textAlign='center' columns={3} gridGap="8px">
     <GridArea>
       <Label htmlFor='band_action-points' text={`Action Poionts (${currentAp}/${maxAp} AP)`} />
       <ProgressBar color="skyblue" value={currentAp} max={maxAp} id="band_action-points" />
     </GridArea>
-    <GridArea textAlign="center">
+    <GridArea>
       <Output label="Wages due in" value={`${band?.daysUntilWages} days`} id="days-until-wages-due" />
     </GridArea>
     <GridArea>
