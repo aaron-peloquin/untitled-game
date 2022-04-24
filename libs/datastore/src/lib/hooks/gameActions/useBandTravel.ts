@@ -1,11 +1,16 @@
 import {useCallback} from 'react';
 import {T_Location} from 'TS_Location';
 
+import {useActionPoints} from './useActionPoints';
+
 import {useGameData} from '../gameController/useGameData';
 import {useGetBand} from '../gameData/useGetBand';
 
+const apCost = 2;
 
 export const useBandTravel = (location: T_Location) => {
+  const {changeActionPoints, currentAp} = useActionPoints();
+  const hasEnoughAp = currentAp >= apCost;
   const gameData = useGameData();
   const band = useGetBand();
   const bandGold = band?.gold || 0;
@@ -16,14 +21,19 @@ export const useBandTravel = (location: T_Location) => {
 
   const travel = useCallback(() => {
     const newGoldValue = bandGold - travelCost;
+    const newApValue = currentAp - apCost;
 
-    if (gameData?.dataStore && bandId > 0 && newGoldValue >= 0) {
+    const canAfford = newGoldValue >= 0 && hasEnoughAp;
+
+    if (gameData?.dataStore && bandId > 0 && canAfford) {
+      changeActionPoints(-apCost);
       gameData.dataStore.band.update(bandId, {
+        currentAp: newApValue,
         currentLocationId: location.locationId,
         gold: newGoldValue,
       });
     }
-  }, [bandGold, bandId, gameData.dataStore, location.locationId, travelCost]);
+  }, [bandGold, bandId, changeActionPoints, currentAp, gameData.dataStore, hasEnoughAp, location.locationId, travelCost]);
 
-  return {canAffordTravel, travel, travelCost};
+  return {apCost, canAffordTravel, hasEnoughAp, travel, travelCost};
 };

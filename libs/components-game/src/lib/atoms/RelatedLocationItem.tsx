@@ -7,19 +7,21 @@ type Props = {
     location: T_Location
     setIsTraveling: Dispatch<SetStateAction<boolean>>
 }
+
 const RelatedLocationItem: React.FC<Props> = ({location, setIsTraveling}) => {
-  const {canAffordTravel, travel, travelCost} = useBandTravel(location);
+  const {apCost, canAffordTravel, hasEnoughAp, travel, travelCost} = useBandTravel(location);
   const handleTravel = useCallback(() => {
     const animationDuration = Math.sqrt(travelCost) * 2000;
     setIsTraveling(true);
     travel();
+
     setTimeout(() => {
       setIsTraveling(false);
     }, animationDuration);
   }, [setIsTraveling, travel, travelCost]);
 
   return <>
-    <Button onClick={handleTravel} disabled={!canAffordTravel} text="Travel" /> to {location.name}, for {travelCost} gold
+    <Button onClick={handleTravel} disabled={!canAffordTravel || !hasEnoughAp} text={`Travel (${travelCost} gold, ${apCost} AP)`} /> to {location.name} (lvl: {location.level})
   </>;
 };
 
