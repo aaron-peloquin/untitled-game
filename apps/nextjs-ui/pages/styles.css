@@ -49,3 +49,67 @@ input {
     opacity: 1;
   }
 }
+
+@keyframes sneak-from-left { /* comments are breakdown of a 2 second duration */
+  0% {
+    margin-left: -20%;
+    opacity: 0;
+  }
+  10% { /* 0.2 seconds*/
+    margin-left: -15%;
+    opacity: 0.8;
+  }
+  20% { /* 0.4 seconds*/
+    opacity: 0.6
+  }
+  50% { /* 1.0 seconds */
+    margin-left: -10%;
+    opacity: 0.8;
+  }
+  60% { /* 1.2 seconds */
+    opacity: 0.6;
+  }
+  90% { /* 1.8 seconds */
+    margin-left: -5%;
+    opacity: 0.8;
+  }
+  100% {
+    margin-left: 0;
+    opacity: 1;
+  }
+}
+@keyframes sneak-from-left-pause {
+  0% {
+    margin-left: -20%;
+    opacity: 0;
+  }
+  25% { /* 0.5 seconds */
+    margin-left: -10%;
+    opacity: 0.8;
+  }
+  90% { /* 1.8 seconds */
+    opacity: 0.6;
+  }
+  100% {
+    margin-left: 0;
+    opacity: 1;
+  }
+}
+@keyframes sneak-from-left-caught {
+  0% {
+    margin-left: -20%;
+    opacity: 0;
+  }
+  25% { /* 0.5 seconds*/
+    margin-left: -10%;
+    opacity: 0.8;
+  }
+  95% { /* 1.9 seconds */
+
+  }
+  100% {
+    margin-left: -10%;
+    opacity: 1;
+    text-decoration: dashed;
+  }
+}

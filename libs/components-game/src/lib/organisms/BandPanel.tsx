@@ -29,13 +29,9 @@ const BandPanel = memo(() => {
       </Card>
       <Card layer="3">
         <p>You are visiting <strong>{bandLocation?.name}</strong>. Your band is level {displayNumber(band?.level)} ({displayNumber(band?.level, 2)}) has <strong>{band?.gold.toLocaleString('en-US') || '0'} gold</strong> in your coffers</p>
+        <QuestRunner setQuestResults={setQuestResults} />
       </Card>
       <GridTemplate>
-        <GridArea>
-          <Card layer="3" heading="Send Mercenary on a Quest">
-            <QuestRunner setQuestResults={setQuestResults} />
-          </Card>
-        </GridArea>
         <GridArea>
           <Card layer="3" heading={`Your Mercenaries (${bandMercenaries?.length}/${getMaxBandMercenaries(band)})`}>
             {bandMercenaries?.length ? <MercenaryList columns={3} canSelect mercenaries={bandMercenaries} showHealthBar /> : null}

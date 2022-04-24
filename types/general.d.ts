@@ -1,4 +1,6 @@
+
 declare module 'TS_General' {
+  import {ReactNode} from "react"
 
   type T_GameSave = {
     gameSaveId: number
@@ -20,7 +22,7 @@ declare module 'TS_General' {
     otherFieldProps?: Record<string, any>
   }
 
-  type T_KnownQuestTypes = 'Slay'
+  type T_KnownQuestTypes = 'Slay' | 'Follow'
   type T_KnownEthnicities = 'human' | 'goblin' | 'elf' | 'dwarf'
   type T_KnownPersonalities = 'brave' | 'leader' | 'clever'
   type T_KnownProfessions = 'farmer' | 'fighter' | 'rogue' | 'fisher' | 'butcher'
@@ -31,6 +33,8 @@ declare module 'TS_General' {
   type T_CardLayer = '1' | '2' | '3' | '4' | '5'
 
   type T_TwoItemNumberArray = [ number, number ]
+  type T_TwoItemStringArray = [ string, string ]
+  type T_TwoItemStringNodeArray = [ string, ReactNode ]
   type T_NumGenSig = () => number
 }
 

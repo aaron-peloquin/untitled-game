@@ -30,7 +30,7 @@ declare module 'TS_Quest' {
     styles?: Record<string, string>
   }
 
-  type T_QuestOutcome = 'Victory' | 'Failure' | 'Death'
+  type T_QuestOutcome = 'Victory' | 'Success' | 'Failure' | 'Death' | 'Caught'
 
   type T_QuestResultsMercenary = {
     remove: boolean

@@ -34,7 +34,7 @@ const QuestRunner: React.FC<T_Props> = memo(({setQuestResults}) => {
     }
   }, [mercenary, quest]);
 
-  return <Card layer="4">
+  return <Card layer="4" heading='Send Mercenary on a Quest'>
     {questRunnerText}
     {showRunButton && <Button disabled={!hasEnoughAp} text={`Send Mercenary (${hasEnoughAp ? `${apCost} AP` : `Rest to regain AP`})`} onClick={handleRunQuest} />}
   </Card>;
