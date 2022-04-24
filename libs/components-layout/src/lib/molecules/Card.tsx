@@ -1,4 +1,4 @@
-import {memo} from 'react';
+import {memo, useEffect, useState} from 'react';
 
 import {T_CardLayer} from 'TS_General';
 
@@ -12,10 +12,16 @@ type T_Props = {
 }
 
 const Card: React.FC<T_Props> = memo(({layer, heading, children, style}) => {
+  const [opacity, setOpacity] = useState(0);
+  useEffect(() => {
+    setTimeout(() => {
+      setOpacity(1);
+    }, 50);
+  }, []);
   const classNames = styles['card'] + ' ' + styles[`card-layer-${layer}`];
 
   return (
-    <div className={classNames} style={style}>
+    <div className={classNames} style={{opacity, ...style}}>
       {(layer === '1' && heading) && <h1>{heading}</h1>}
       {(layer === '2' && heading) && <h2>{heading}</h2>}
       {(layer === '3' && heading) && <h3>{heading}</h3>}

@@ -3,6 +3,8 @@
     border-radius: 4px;
     margin: 12px;
     padding: 12px;
+    transition-property: opacity;
+    transition-duration: 1s;
 }
 
 .card h1,

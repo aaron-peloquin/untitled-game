@@ -3,7 +3,7 @@ import {ProgressHTMLAttributes, useMemo} from 'react';
 import classNames from './ProgressBar.module.css';
 
 type T_Props = {
-    color?: 'skyblue' | 'red' | 'orange' | 'green' | 'yellow'
+    color?: 'skyblue' | 'red' | 'orange' | 'seagreen' | 'yellow'
     max: number
     value: number
 }

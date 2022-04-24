@@ -24,11 +24,11 @@ const BandPanel = memo(() => {
   return questResults ?
     <QuestResults clearQuestResults={clearQuestResults} questResults={questResults} /> :
     <Card heading={`${band?.name}'s Mercenary Band`} layer="2">
-      <Card layer="3">
-        <p>You are visiting <strong>{bandLocation?.name}</strong>. Your band is level {displayNumber(band?.level)} ({displayNumber(band?.level, 2)}) has <strong>{band?.gold.toLocaleString('en-US') || '0'} gold</strong> in your coffers</p>
-      </Card>
       <Card layer="3" heading="Overview">
         <BandRest band={band} />
+      </Card>
+      <Card layer="3">
+        <p>You are visiting <strong>{bandLocation?.name}</strong>. Your band is level {displayNumber(band?.level)} ({displayNumber(band?.level, 2)}) has <strong>{band?.gold.toLocaleString('en-US') || '0'} gold</strong> in your coffers</p>
       </Card>
       <GridTemplate>
         <GridArea>

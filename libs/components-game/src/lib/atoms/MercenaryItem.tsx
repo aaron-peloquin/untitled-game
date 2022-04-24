@@ -55,7 +55,7 @@ const MercenaryItem: React.FC<T_Props> = memo(({
   const showSelectButton = canSelect && currentHealth > 0;
   const healthbarColor = useMemo(() => {
     if (currentHealth > stats.maxHealth / 2) {
-      return 'green';
+      return 'seagreen';
     } else if (currentHealth > stats.maxHealth / 4) {
       return 'yellow';
     } else {
