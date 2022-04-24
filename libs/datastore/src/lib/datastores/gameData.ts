@@ -34,7 +34,6 @@ export class GameDataClass extends Dexie {
       this.generate = chance(seed);
 
       // create band
-      console.log({apPerDay});
       const newBand: Omit<T_Band, 'bandId'> = {
         actionPoints: apPerDay * 2,
         currentLocationId: 0,
