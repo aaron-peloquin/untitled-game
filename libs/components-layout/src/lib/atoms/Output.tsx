@@ -5,7 +5,7 @@ import styles from './Output.module.css';
 
 type T_Props = {
   value: string | number | ReactNode
-  label: string
+  label: string | ReactNode
   id: string
 }
 

@@ -1,10 +1,10 @@
-import {InputHTMLAttributes} from 'react';
+import {InputHTMLAttributes, ReactNode} from 'react';
 
 import styles from './Input.module.css';
 import {Label} from './Label';
 
 type T_Props = {
-    label: string
+    label: string | ReactNode
     id: string
 }
 
