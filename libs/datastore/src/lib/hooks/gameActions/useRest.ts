@@ -24,7 +24,7 @@ export const useRest = (band?: T_Band) => {
           gameSave.dataStore?.mercenaries.where('mercenaryId').equals(mercenaryId).modify((mercenary) => {
             const hpMultiplier = parseInt(hp_per_end.value);
             const stats = getStats(mercenary.level, hpMultiplier, mercenary.ethnicity, mercenary.profession, mercenary.personality);
-            mercenary.currentHealth += (stats.maxHealth / 2 + Math.ceil(mercenary.level));
+            mercenary.currentHealth += (stats.maxHealth / 3 + Math.ceil(mercenary.level));
           });
         });
       }
