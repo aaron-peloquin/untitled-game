@@ -3,13 +3,13 @@ import {T_KnownEthnicities, T_KnownPersonalities, T_KnownProfessions, T_KnownQue
 
 const mercenaries: {ethnicities: T_KnownEthnicities[], personalities: T_KnownPersonalities[], professions: T_KnownProfessions[]} = {
   ethnicities: ['human', 'human', 'human', 'human', 'human', 'human', 'human', 'human', 'human', 'goblin'],
-  personalities: ['brave', 'brave', 'leader'],
-  professions: ['fighter', 'fighter', 'fighter', 'farmer'],
+  personalities: ['brave', 'leader', 'clever'],
+  professions: ['fighter', 'fighter', 'fighter', 'rogue', 'rogue', 'rogue', 'farmer'],
 };
 
 const quests: {ethnicities: T_KnownEthnicities[], professions: T_KnownProfessions[]} = {
   ethnicities: ['human', 'goblin'],
-  professions: ['fighter', 'farmer', 'farmer', 'farmer'],
+  professions: ['fighter', 'rogue', 'farmer', 'farmer', 'farmer'],
 };
 
 const questTypes: T_KnownQuestTypes[] = [

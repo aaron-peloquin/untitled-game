@@ -4,7 +4,7 @@ import {T_QuestLogItem, T_QuestOutcome, T_QuestResults, T_RunQuestSig} from 'TS_
 
 const initialActions = [
   (name: string) => `Tracks down ${name} in a nearby village`,
-  (name: string) => `Follows ${name} out of town to a secluded spot`,
+  (name: string) => `Follows ${name} to a secluded spot`,
   (name: string) => `Sets an ambush for ${name} along the road`,
 ];
 
