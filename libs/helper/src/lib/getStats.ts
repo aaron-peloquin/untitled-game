@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import {T_KnownEthnicities, T_KnownProfessions, T_KnownPersonalities} from 'TS_General';
 import {T_ParsedStats} from 'TS_Stats';
 
-export const defaultStats: T_ParsedStats = {_goldHiring: 0, _goldUpkeep: 0, attack: 0, cunning: 0, endurance: 0, ethnicity: '', maxHealth: 0, profession: '', subtlety: 0};
+export const defaultStats: T_ParsedStats = {_goldHiring: 0, _goldUpkeep: 0, attack: 0, cunning: 0, endurance: 0, ethnicity: '', maxHealth: 0, profession: '', subtlety: 0, textColorEthnicity: '', textColorProfession: ''};
 
 type getStatsSig = (level: number, hpMultipler: number, ethnicity: T_KnownEthnicities, profession: T_KnownProfessions, personality?: T_KnownPersonalities) => T_ParsedStats
 const getStats:getStatsSig = _.memoize((level, hpMultipler, ethnicity, profession, personality) => {
