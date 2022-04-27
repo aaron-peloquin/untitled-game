@@ -39,7 +39,7 @@ const quests: {ethnicities: T_KnownEthnicities[], professions: T_KnownProfession
 };
 
 const questTypes: T_KnownQuestTypes[] = [
-  // 'Slay',
+  'Slay',
   // 'Capture',
   'Follow',
 ];

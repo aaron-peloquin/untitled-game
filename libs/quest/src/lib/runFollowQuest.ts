@@ -1,5 +1,5 @@
 import {pickArray, pickRange, seedGenerator} from '@helper';
-import {GiAcrobatic, GiArmSling, GiFootsteps, GiHumanEar, GiPointing, GiStandingPotion} from 'react-icons/gi';
+import {GiAcrobatic, GiArmSling, GiFootsteps, GiHumanEar, GiPointing, GiRun, GiStandingPotion} from 'react-icons/gi';
 import {T_TwoItemStringArray, T_TwoItemStringNodeArray} from 'TS_General';
 import {T_QuestLogItem, T_QuestOutcome, T_QuestResults, T_RunQuestSig} from 'TS_Quest';
 
@@ -34,14 +34,17 @@ const stealthActions: ((questName: string) => string)[] = [
 const questReactions: T_TwoItemStringNodeArray[] = [
   ['thinks they heard something!', GiHumanEar],
   ['turns around quickly!', GiAcrobatic],
-  ['feels like they are being followed and stops to look around at strangers', GiStandingPotion],
+  ['looks around!', GiStandingPotion],
+  ['hurries around a corner!', GiRun],
 ];
 
 const fadeInAnimation = {animation: 'fade-in 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
-const mercenarySneakAnimation = {animation: 'sneak-from-left 3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
+const mercenarySneakAnimation = {animation: 'sneak-from-left 2.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
 const mercenarySneakAnimationWithPause = {animation: 'sneak-from-left-pause 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
 const mercenarySneakAnimationWithCaught = {animation: 'sneak-from-left-caught 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
 const questReactionAnimation = {animation: 'fly-from-right 0.2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
+const questCaughtAnimation = {animation: 'fly-from-right-red 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
+
 const animationDelayIncriment = 0.5;
 const animationDelayIncrimentMercenary = 3.5;
 const animationDelayIncrimentQuest = 0.2;
@@ -53,7 +56,7 @@ export const runFollowQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, 
   const roundsLog: T_QuestLogItem[] = [];
   let mercenaryCurrentHealth = mercenary.currentHealth;
 
-  const checksNeeded = Math.ceil(quest.level * 2);
+  const checksNeeded = Math.ceil(Math.sqrt(quest.level) * 2);
   let checksPassed = 0;
   let mercenaryDetectedResult = 0;
   let suspiciousTarget = 0;
@@ -65,15 +68,18 @@ export const runFollowQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, 
   });
 
   let animationDelayCounter = 1;
+  const questDetectionRating = questStats.cunning + questStats.subtlety;
 
-  const questDifficultyCheck = ((questStats.cunning + questStats.subtlety) * 2) + quest.level - Math.sqrt(mercenaryStats.endurance);
+  const questDifficultyCheck = ((questDetectionRating) * 2) + quest.level - Math.sqrt(mercenaryStats.endurance);
   const mercenaryStealthing = () => {
     const sneakAction = pickArray(stealthActions, numberGenerator)(quest.targetName);
     const stealthTopRange = ((mercenaryStats.cunning) * 2) + mercenary.level;
-    const stealthAttempt = numberRange(0, stealthTopRange) + (mercenaryStats.subtlety * 2);
+    const stealthAttempt = numberRange(mercenaryStats.subtlety / 2, stealthTopRange) + (mercenaryStats.subtlety * 2);
 
-    const stealthResult = stealthAttempt - (questDifficultyCheck + (suspiciousTarget * 2));
+    const stealthResult = stealthAttempt - (questDifficultyCheck + suspiciousTarget);
     console.log({
+      mercenaryCurrentHealth,
+      questDetectionRating,
       questDifficultyCheck,
       stealthAttempt,
       stealthResult,
@@ -82,7 +88,7 @@ export const runFollowQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, 
     });
     if (stealthResult >= 0) {
       checksPassed++;
-      if (stealthResult < 5) {
+      if (stealthResult < questDetectionRating) {
         // suspicious description
         suspiciousTarget++;
         roundsLog.push({action: sneakAction, icon: GiFootsteps, person: mercenary.name, styles: {...mercenarySneakAnimationWithPause, animationDelay: `${animationDelayCounter}s`}});
@@ -99,7 +105,7 @@ export const runFollowQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, 
       mercenaryDetectedResult = stealthResult;
       roundsLog.push({action: sneakAction, icon: GiFootsteps, person: mercenary.name, styles: {...mercenarySneakAnimationWithCaught, animationDelay: `${animationDelayCounter}s`}});
       animationDelayCounter += animationDelayIncrimentQuest;
-      roundsLog.push({action: `caught ${mercenary.name}!`, icon: GiPointing, person: quest.targetName, styles: {...questReactionAnimation, animationDelay: `${animationDelayCounter}s`}});
+      roundsLog.push({action: `caught ${mercenary.name}!`, icon: GiPointing, person: quest.targetName, styles: {...questCaughtAnimation, animationDelay: `${animationDelayCounter}s`}});
     }
   };
 
@@ -122,10 +128,14 @@ export const runFollowQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, 
 
     roundsLog.push({action: wrappingActions[1], person: quest.targetName, styles: lastItemStylesObj});
     roundsLog.push({action: `reports back to the contact, returning with ${goldReward} gold`, person: mercenary.name, styles: lastItemStylesObj});
-  } else if (mercenaryDetectedResult > (4 * Math.sqrt(mercenary.level))) {
+  } else if (mercenaryDetectedResult < -(4 * Math.sqrt(mercenary.level))) {
+    console.log('we hit it', {
+      a: mercenaryDetectedResult,
+      b: -(4 * Math.sqrt(mercenary.level)),
+    });
     outcome = 'Caught';
     mercenaryCurrentHealth = 0;
-    mercExp = parseFloat((0.15 * quest.level / mercenary.level / 4).toFixed(2));
+    mercExp = parseFloat((0.35 * quest.level / mercenary.level / 4).toFixed(2));
 
     roundsLog.push({action: ` limps back in great pain. ${quest.targetName} apparently has some friends in high places`, icon: GiArmSling, person: mercenary.name, styles: lastItemStylesObj});
   } else {

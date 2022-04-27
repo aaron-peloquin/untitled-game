@@ -87,7 +87,16 @@ input {
     margin-left: -10%;
     opacity: 0.8;
   }
+  70% { /* 1.8 seconds */
+    margin-left: -10%;
+    opacity: 0.6;
+  }
   90% { /* 1.8 seconds */
+    margin-left: -5%;
+    opacity: 0.6;
+  }
+  90% { /* 1.8 seconds */
+    margin-left: -5%;
     opacity: 0.6;
   }
   100% {
@@ -100,16 +109,40 @@ input {
     margin-left: -20%;
     opacity: 0;
   }
-  25% { /* 0.5 seconds*/
+  25% {
     margin-left: -10%;
     opacity: 0.8;
   }
-  95% { /* 1.9 seconds */
-
+  75% {
+    margin-left: -10%;
   }
   100% {
-    margin-left: -10%;
+    margin-left: -5%;
     opacity: 1;
-    text-decoration: dashed;
+    text-decoration: line-through;
+  }
+}
+
+
+@keyframes fly-from-right-red {
+  0% {
+    margin-left: 15%;
+    opacity: 0;
+  }
+  10% {
+    color: red;
+  }
+  40% {
+    color: inherit;
+  }
+  60% {
+    color: red;
+  }
+  90% {
+    color: inherit;
+  }
+  100% {
+    margin-left: 0%;
+    opacity: 1;
   }
 }
