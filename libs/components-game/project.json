@@ -18,6 +18,14 @@
         "jestConfig": "libs/components-game/jest.config.js",
         "passWithNoTests": true
       }
+    },
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/components-game/**/*.css"],
+        "formatter": "json"
+      }
     }
   }
 }

@@ -3,8 +3,8 @@
     border-radius: 4px;
     margin: 12px;
     padding: 12px;
-    transition-property: opacity;
     transition-duration: 1s;
+    transition-property: opacity;
 }
 
 .card h1,
@@ -12,36 +12,36 @@
 .card h3, 
 .card h4,
 .card h5 {
-    margin-top: 0;
     margin-bottom: 4px;
+    margin-top: 0;
 }
 
 .card-layer-1 {
     background-color: #000;
-    color: #FFF;
     box-shadow:1 4px 4px #000;
+    color: #FFF;
 }
 
 .card-layer-2 {
     background-color: #111;
-    color: #EEE;
     box-shadow:1 4px 4px #111;
+    color: #EEE;
 }
 
 .card-layer-3 {
     background-color: #222;
-    color: #DDD;
     box-shadow:1 4px 4px #222;
+    color: #DDD;
 }
 
 .card-layer-4 {
     background-color: #333;
-    color: #CCC;
     box-shadow:1 4px 4px #333;
+    color: #CCC;
 }
 
 .card-layer-5 {
     background-color: #444;
-    color: #BBB;
     box-shadow:1 4px 4px #444;
+    color: #BBB;
 }

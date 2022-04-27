@@ -4,11 +4,11 @@
 }
 
 .active-tab{
-  border-width: 4px;
-  margin: 0;
-  margin-top: -18px;
-  display: block;
+  border-color: sandybrown;
   border-style: solid;
   border-top: 0;
-  border-color: sandybrown;
+  border-width: 4px;
+  display: block;
+  margin: 0;
+  margin-top: -18px;
 }

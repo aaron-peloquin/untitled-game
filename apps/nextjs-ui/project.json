@@ -48,6 +48,14 @@
       "options": {
         "lintFilePatterns": ["apps/nextjs-ui/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nextjs-ui/**/*.css"],
+        "formatter": "json"
+      }
     }
   },
   "tags": []
