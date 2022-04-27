@@ -1,7 +1,3 @@
 # components-layout
 
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test components-layout` to execute the unit tests via [Jest](https://jestjs.io).
+A **UI library**, which contains React components (Organisms, Molecules, Atoms, and Icons) who generally get data from their props

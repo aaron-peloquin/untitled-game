@@ -1,11 +1,5 @@
 # datastore
 
-This library was generated with [Nx](https://nx.dev).
+A **Data-access library** that exports functions to query and mutate game data
 
-## Building
-
-Run `nx build datastore` to build the library.
-
-## Running unit tests
-
-Run `nx test datastore` to execute the unit tests via [Jest](https://jestjs.io).
+This library also creates and manages our datastores (using Dexie, and IndexedDb wrapper).

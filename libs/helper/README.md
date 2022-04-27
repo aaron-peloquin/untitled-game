@@ -1,11 +1,3 @@
 # helper
 
-This library was generated with [Nx](https://nx.dev).
-
-## Building
-
-Run `nx build helper` to build the library.
-
-## Running unit tests
-
-Run `nx test helper` to execute the unit tests via [Jest](https://jestjs.io).
+A **Utility library** that exports helper functions who do not call data-access libraries

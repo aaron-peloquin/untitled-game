@@ -1,7 +1,3 @@
 # components-game
 
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test components-game` to execute the unit tests via [Jest](https://jestjs.io).
+A **Feature library**, which contains React components (Templates, Organisms, Molecules, and Atoms) who generally get data from data-access libraries
