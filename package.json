@@ -9,6 +9,7 @@
     "serve": "nx serve --prod",
     "test": "nx affected:test",
     "fix-stylelint": "nx run-many --target=stylelint --all --fix",
+    "fix-lint": "nx run-many --target=lint --all --fix",
     "prune": "ts-prune -p .\\apps\\nextjs-ui\\tsconfig.json"
   },
   "private": true,
@@ -33,7 +34,7 @@
     "@nrwl/cypress": "13.9.3",
     "@nrwl/eslint-plugin-nx": "13.9.3",
     "@nrwl/jest": "13.9.3",
-    "@nrwl/linter": "13.9.3",
+    "@nrwl/linter": "^13.9.3",
     "@nrwl/nx-cloud": "latest",
     "@nrwl/react": "13.9.3",
     "@nrwl/web": "13.9.3",
