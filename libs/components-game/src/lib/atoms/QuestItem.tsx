@@ -1,6 +1,6 @@
 import {Button, Card, GridArea, GridTemplate, Output} from '@components-layout';
 import {useGetQuestStats, useSetSelectedQuestId} from '@datastore';
-import {questData} from '@quest';
+import {questData} from '@static';
 import {memo} from 'react';
 import {T_Quest} from 'TS_Quest';
 

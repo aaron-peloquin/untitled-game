@@ -1,4 +1,5 @@
 export * from './lib/emptyFunction';
+export * from './lib/questData';
 export * from './lib/URLs';
 
 export * from './lib/stats/worldGeneration';
