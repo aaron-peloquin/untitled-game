@@ -13,9 +13,9 @@ const onLevel: T_Stats = {
   _goldHiring: 2,
   _goldUpkeep: 1,
   attack: 2,
-  cunning: 2,
-  endurance: 2,
-  subtlety: 1,
+  cunning: 0,
+  endurance: 1,
+  subtlety: 0,
 };
 
 

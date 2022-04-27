@@ -13,9 +13,9 @@ const levelUpGains: T_Stats = {
   _goldHiring: 2,
   _goldUpkeep: 1,
   attack: 1,
-  cunning: 1,
-  endurance: 0,
-  subtlety: 1,
+  cunning: 0,
+  endurance: 2,
+  subtlety: 0,
 };
 
 const statsData: T_ExportStats = {
