@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
+    "build-analyze": "set ANALYZE=true&&nx build",
     "serve": "nx serve --prod",
     "test": "nx affected:test",
     "stylelint": "npx stylelint \"**/*.css\" --fix",
@@ -12,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@next/bundle-analyzer": "^12.1.5",
     "@nrwl/next": "13.9.3",
     "chance": "^1.1.8",
     "core-js": "^3.6.5",
