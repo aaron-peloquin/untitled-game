@@ -5,6 +5,6 @@ import {runFollowQuest} from './runFollowQuest';
 import {runSlayQuest} from './runSlayQuest';
 
 export const questRunners: Record<T_KnownQuestTypes, T_RunQuestSig> = {
-  Follow: runFollowQuest,
-  Slay: runSlayQuest,
+  follow: runFollowQuest,
+  slay: runSlayQuest,
 };

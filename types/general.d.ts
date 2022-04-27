@@ -22,7 +22,7 @@ declare module 'TS_General' {
     otherFieldProps?: Record<string, any>
   }
 
-  type T_KnownQuestTypes = 'Slay' | 'Follow'
+  type T_KnownQuestTypes = 'slay' | 'follow'
   type T_KnownEthnicities = 'human' | 'goblin' | 'elf' | 'dwarf'
   type T_KnownPersonalities = 'brave' | 'leader' | 'clever'
   type T_KnownProfessions = 'farmer' | 'fighter' | 'rogue' | 'fisher' | 'butcher'

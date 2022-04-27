@@ -1,4 +1,4 @@
-import {memo, useEffect, useState} from 'react';
+import {memo, ReactNode, useEffect, useState} from 'react';
 
 import {T_CardLayer} from 'TS_General';
 
@@ -7,7 +7,7 @@ import styles from './Card.module.css';
 /* eslint-disable-next-line */
 type T_Props = {
   layer: T_CardLayer
-  heading?: string
+  heading?: string | ReactNode
   style?: Record<string, any>
 }
 

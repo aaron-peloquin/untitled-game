@@ -1,5 +1,6 @@
 import {Button, Card, GridArea, GridTemplate, Output} from '@components-layout';
 import {useGetQuestStats, useSetSelectedQuestId} from '@datastore';
+import {questData} from '@quest';
 import {memo} from 'react';
 import {T_Quest} from 'TS_Quest';
 
@@ -11,10 +12,14 @@ const QUEST_AREAS = `
 "target____ difficulty"
 "take_job__ take_job__"`;
 
+
 const QuestItem: React.FC<Props> = ({quest}) => {
   const {isSelected, setSelected} = useSetSelectedQuestId(quest.questId);
   const stats = useGetQuestStats(quest);
-  return <Card layer="4" heading={`${quest.type} ${quest.targetName}`}>
+  const questType = questData[quest.type].label;
+  const QuestIcon = questData[quest.type].icon;
+
+  return <Card layer="4" heading={<><QuestIcon /> {questType} {quest.targetName}</>}>
     <GridTemplate gridTemplateAreas={QUEST_AREAS} justifyItems="center" textAlign='center' columns={2}>
       <GridArea name='difficulty'>
         <Output id={`quest_${quest.questId}_difficulty`} value={quest.level} label="Difficulty" />
