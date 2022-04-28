@@ -8,6 +8,7 @@
     "nextjs-ui": "apps/nextjs-ui",
     "nextjs-ui-e2e": "apps/nextjs-ui-e2e",
     "quest": "libs/quest",
-    "static": "libs/static"
+    "static": "libs/static",
+    "three60": "apps/three60"
   }
 }

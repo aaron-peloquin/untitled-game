@@ -1,0 +1,46 @@
+{
+  "root": "apps/three60",
+  "sourceRoot": "apps/three60",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/three60",
+        "outputPath": "dist/apps/three60"
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "three60:build",
+        "dev": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "three60:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "three60:build:production"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/three60/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}
