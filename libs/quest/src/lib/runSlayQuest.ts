@@ -44,7 +44,7 @@ export const runSlayQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, qu
 
         if (damage > (mercenaryDamageChunk * 2) && damage < (mercenaryDamageChunk * 3)) {
           staggered = true;
-          roundsLog.push({action: `staggered ${quest.targetName}`, icon: GiTripwire, person: mercenary.name, styles: {...flyInRightAnimation, animationDelay: `${animationDelayCounter}s`}});
+          roundsLog.push({action: `attacked and staggered ${quest.targetName}`, icon: GiTripwire, person: mercenary.name, styles: {...flyInRightAnimation, animationDelay: `${animationDelayCounter}s`}});
         } else {
           let damageDescription = 'moderate';
           if (damage < (mercenaryDamageChunk * 2)) {
