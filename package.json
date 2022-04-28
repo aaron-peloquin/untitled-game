@@ -14,7 +14,6 @@
   },
   "private": true,
   "dependencies": {
-    "@next/bundle-analyzer": "^12.1.5",
     "@nrwl/next": "13.9.3",
     "chance": "^1.1.8",
     "core-js": "^3.6.5",
@@ -30,6 +29,7 @@
     "tslib": "^2.0.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^12.1.5",
     "@nrwl/cli": "13.9.3",
     "@nrwl/cypress": "13.9.3",
     "@nrwl/eslint-plugin-nx": "13.9.3",
