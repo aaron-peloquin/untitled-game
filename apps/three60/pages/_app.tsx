@@ -1,7 +1,7 @@
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import './styles.css';
-import { Canvas } from '@react-three/fiber'
+import { VRCanvas, DefaultXRControllers  } from '@react-three/xr'
 
 function CustomApp({ Component, pageProps }: AppProps) {
   return <>
@@ -9,9 +9,10 @@ function CustomApp({ Component, pageProps }: AppProps) {
         <title>Welcome to three60!</title>
       </Head>
     <main className="app">
-    <Canvas>
-      <Component {...pageProps} />
-    </Canvas>
+      <VRCanvas>
+        <DefaultXRControllers />
+        <Component {...pageProps} />
+      </VRCanvas>
     </main>
   </>;
 }

@@ -17,6 +17,7 @@
   "dependencies": {
     "@nrwl/next": "13.9.3",
     "@react-three/fiber": "^8.0.12",
+    "@react-three/xr": "^3.5.0",
     "chance": "^1.1.8",
     "core-js": "^3.6.5",
     "dexie": "^3.2.1",
