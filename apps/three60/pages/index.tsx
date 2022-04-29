@@ -1,6 +1,6 @@
-// import { createRoot } from 'react-dom/client'
-import React, { useRef, useState } from 'react'
-import { useFrame } from '@react-three/fiber'
+import React from 'react'
+import { VRCanvas, DefaultXRControllers } from '@react-three/xr';
+// import { useFrame } from '@react-three/fiber'
 
 export function Index(props) {
   // This reference gives us direct access to the THREE.Mesh object
@@ -17,10 +17,11 @@ export function Index(props) {
   //   ref.current.rotation.y += 0.04;
   // })
   // Return the view, these are regular Threejs elements expressed in JSX
-  return <>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
-  </>
+  return <VRCanvas>
+    <DefaultXRControllers />
+    <ambientLight />
+    <pointLight position={[10, 10, 10]} />
+  </VRCanvas>
 }
 
 
