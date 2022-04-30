@@ -1,13 +1,9 @@
-import React, { useRef, useState } from 'react'
-import { VRCanvas, DefaultXRControllers, Interactive, useController } from '@react-three/xr';
+import React from 'react'
+import { VRCanvas, DefaultXRControllers } from '@react-three/xr';
 
 import { ButtonBar } from '../temp/ButtonBar';
 
 export function Index(props) {
-  // Hold state for hovered and clicked events
-  // const [hovered, hover] = useState(false)
-  // const [clicked, click] = useState(false)
-
   // Return the view, these are regular Threejs elements expressed in JSX
   return <VRCanvas>
     <DefaultXRControllers rayMaterial={true} />

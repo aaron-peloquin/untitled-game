@@ -40,6 +40,14 @@
       "options": {
         "lintFilePatterns": ["apps/three60/**/*.{ts,tsx,js,jsx}"]
       }
+    },
+    "stylelint": {
+      "executor": "nx-stylelint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/three60/**/*.css"],
+        "formatter": "json"
+      }
     }
   },
   "tags": []

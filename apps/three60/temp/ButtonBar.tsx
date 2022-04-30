@@ -2,7 +2,6 @@ import { useState, useRef } from "react"
 import { useFrame } from "@react-three/fiber"
 import { useController, Interactive } from "@react-three/xr"
 
-
 import { Box, Text } from '@react-three/drei'
 
 export const ButtonBar = (props) => {
@@ -16,6 +15,7 @@ export const ButtonBar = (props) => {
   
     // Subscribe this component to the render-loop, rotate the mesh every frame
     useFrame((state, delta) => {
+      console.log({state, delta})
       if(hover) {
         ref.current.rotation.x += 0.01;
         ref.current.rotation.z += 0.02;
@@ -27,8 +27,13 @@ export const ButtonBar = (props) => {
       <Interactive onSelect={() => setColor((Math.random() * 0xffffff) | 0)} onHover={() => setHover(true)} onBlur={() => setHover(false)}>
         <Box ref={ref} scale={[1, 1, 1]} args={[0.4, 0.1, 0.1]} {...props}>
           <meshStandardMaterial attach="material" color={color} />
-          {false && (
-            <Text position={[0, 0, 0.06]} fontSize={0.05} color="#888" anchorX="center" anchorY="middle" key="my-text-key"
+            <Text
+              position={[0, 0.0, 0.051]}
+              fontSize={0.05}
+              color="#888"
+              anchorX="center"
+              anchorY="middle"
+              key="my-text-key"
               attach={undefined}
               args={undefined}
               onUpdate={undefined}
@@ -106,7 +111,6 @@ export const ButtonBar = (props) => {
             >
              Hello react-xr!
             </Text>
-          )}
         </Box>
       </Interactive>
     )
