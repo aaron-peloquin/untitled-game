@@ -18,6 +18,7 @@ const MainMenuLayout = memo(() => {
       <GridArea name="menu_items" style={{width: '100%'}}>
         <Card layer='2' heading='Main Menu' style={{width: '100%'}}>
           {currentSave && <GridArea><Link href={URLs.playGame}>{`Continue (${currentSave.name})`}</Link></GridArea>}
+          {currentSave && <GridArea><Link href={URLs.playVirtualGame}>{`Virtually Continue (${currentSave.name})`}</Link></GridArea>}
           <GridArea><Link href={URLs.newGame}>New Game</Link></GridArea>
           <GridArea><Link href={URLs.settings}>Settings</Link></GridArea>
         </Card>

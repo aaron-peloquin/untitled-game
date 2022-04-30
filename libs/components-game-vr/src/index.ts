@@ -1,1 +1,1 @@
-export * from './lib/VrGameLayout';
+export * from './lib/templates/RealityGameLayout';

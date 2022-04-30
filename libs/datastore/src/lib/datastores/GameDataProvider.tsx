@@ -15,6 +15,7 @@ const GameDataProvider: React.FC = memo(({children}) => {
   const startingGold = useGetGameSetting('starting_gold');
 
   const save = useGetCurrentSave();
+  console.log({save});
   useEffect(() => {
     if (save) {
       setSelectedQuestId(0);
@@ -22,6 +23,7 @@ const GameDataProvider: React.FC = memo(({children}) => {
   }, [save]);
   const gameProviderValue = useMemo<T_GameDataContext>(() => {
     const dataStore = (apPerDay !== undefined && startingGold !== undefined && save?.gameDatastoreName) ? new GameDataClass(save.gameDatastoreName, save.name, save.seed, save.totalLocations, parseInt(apPerDay.value), parseInt(startingGold.value)) : undefined;
+    console.log({dataStore});
     return {
       dataStore,
       name: save?.name || '',
