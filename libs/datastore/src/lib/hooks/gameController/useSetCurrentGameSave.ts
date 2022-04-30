@@ -16,7 +16,7 @@ export const useSetCurrentGameSave = (landingPage: string | boolean = URLs.playG
       gameController.gameSaves.update(currentSave.gameSaveId, {currentSave: 0});
     }
     gameController.gameSaves.update(id, {currentSave: 1});
-    if (landingPage) {
+    if (typeof landingPage === 'string') {
       router.push(landingPage);
     }
     return;
