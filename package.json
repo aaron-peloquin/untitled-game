@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nx serve",
     "start360": "nx serve three60",
-    "start360ssl": "local-ssl-proxy --source 3000 --target 4200",
+    "startSSL": "local-ssl-proxy --source 3000 --target 4200",
     "build": "nx build",
     "build-analyze": "set ANALYZE=true&&nx build",
     "serve": "nx serve --prod",
