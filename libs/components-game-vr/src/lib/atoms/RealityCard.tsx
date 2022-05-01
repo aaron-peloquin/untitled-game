@@ -1,4 +1,7 @@
-import {Backdrop, Billboard, Environment, Plane, Text} from '@react-three/drei';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import {Billboard, Plane, Text} from '@react-three/drei';
+import {MeshBasicMaterialProps, useFrame} from '@react-three/fiber';
+import {useRef} from 'react';
 import {T_CardLayer} from 'TS_General';
 
 type T_Props = {
@@ -7,15 +10,50 @@ type T_Props = {
 }
 
 const RealityCard: React.FC<T_Props> = ({children, heading}) => {
-  console.log({heading});
-  return <Billboard key={undefined} attach={undefined} args={undefined} onUpdate={undefined} visible={undefined} type={undefined} isGroup={undefined} id={undefined} uuid={undefined} name={undefined} parent={undefined} modelViewMatrix={undefined} normalMatrix={undefined} matrixWorld={undefined} matrixAutoUpdate={undefined} matrixWorldNeedsUpdate={undefined} castShadow={undefined} receiveShadow={undefined} frustumCulled={undefined} renderOrder={undefined} animations={undefined} userData={undefined} customDepthMaterial={undefined} customDistanceMaterial={undefined} isObject3D={undefined} onBeforeRender={undefined} onAfterRender={undefined} applyMatrix4={undefined} applyQuaternion={undefined} setRotationFromAxisAngle={undefined} setRotationFromEuler={undefined} setRotationFromMatrix={undefined} setRotationFromQuaternion={undefined} rotateOnAxis={undefined} rotateOnWorldAxis={undefined} rotateX={undefined} rotateY={undefined} rotateZ={undefined} translateOnAxis={undefined} translateX={undefined} translateY={undefined} translateZ={undefined} localToWorld={undefined} worldToLocal={undefined} lookAt={undefined} add={undefined} remove={undefined} removeFromParent={undefined} clear={undefined} getObjectById={undefined} getObjectByName={undefined} getObjectByProperty={undefined} getWorldPosition={undefined} getWorldQuaternion={undefined} getWorldScale={undefined} getWorldDirection={undefined} raycast={undefined} traverse={undefined} traverseVisible={undefined} traverseAncestors={undefined} updateMatrix={undefined} updateMatrixWorld={undefined} updateWorldMatrix={undefined} toJSON={undefined} clone={undefined} copy={undefined} addEventListener={undefined} hasEventListener={undefined} removeEventListener={undefined} dispatchEvent={undefined}>
-    {/* <Plane scale={[8, 1, 1]} position={[0,0,-.01]} /> */}
-    {/* <Plane> */}
-    {heading ? <Text fontSize={.75} color="green" key={undefined} attach={undefined} args={undefined} onUpdate={undefined} visible={undefined} type={undefined} id={undefined} uuid={undefined} name={undefined} parent={undefined} modelViewMatrix={undefined} normalMatrix={undefined} matrixWorld={undefined} matrixAutoUpdate={undefined} matrixWorldNeedsUpdate={undefined} castShadow={undefined} receiveShadow={undefined} frustumCulled={undefined} renderOrder={undefined} animations={undefined} userData={undefined} customDepthMaterial={undefined} customDistanceMaterial={undefined} isObject3D={undefined} onBeforeRender={undefined} onAfterRender={undefined} applyMatrix4={undefined} applyQuaternion={undefined} setRotationFromAxisAngle={undefined} setRotationFromEuler={undefined} setRotationFromMatrix={undefined} setRotationFromQuaternion={undefined} rotateOnAxis={undefined} rotateOnWorldAxis={undefined} rotateX={undefined} rotateY={undefined} rotateZ={undefined} translateOnAxis={undefined} translateX={undefined} translateY={undefined} translateZ={undefined} localToWorld={undefined} worldToLocal={undefined} lookAt={undefined} add={undefined} remove={undefined} removeFromParent={undefined} clear={undefined} getObjectById={undefined} getObjectByName={undefined} getObjectByProperty={undefined} getWorldPosition={undefined} getWorldQuaternion={undefined} getWorldScale={undefined} getWorldDirection={undefined} raycast={undefined} traverse={undefined} traverseVisible={undefined} traverseAncestors={undefined} updateMatrix={undefined} updateMatrixWorld={undefined} updateWorldMatrix={undefined} toJSON={undefined} clone={undefined} copy={undefined} addEventListener={undefined} hasEventListener={undefined} removeEventListener={undefined} dispatchEvent={undefined} material={undefined} geometry={undefined} morphTargetInfluences={undefined} morphTargetDictionary={undefined} isMesh={undefined} updateMorphTargets={undefined}>
-      {heading}
-    </Text> : null}
-    {children}
-    {/* </Plane> */}
+  const refContent = useRef<MeshBasicMaterialProps>();
+  const refCard = useRef<MeshBasicMaterialProps>();
+
+  useFrame(() => {
+    if (refContent.current?.children && refCard.current) {
+      const {x, y} = refContent.current.children.reduce((sum: {x:number, y:number}, child:MeshBasicMaterialProps) => {
+        const maxGeometry = child['geometry'].boundingBox.max;
+        // const minGeometryY = Math.abs(child['geometry'].boundingBox.max.y);
+        if (maxGeometry.x > sum.x) {
+          sum.x = maxGeometry.x;
+        }
+
+        if (maxGeometry.y) {
+          sum.y += maxGeometry.y;
+        }
+        return sum;
+      }, {x: 0, y: 1});
+      // console.log({x, y});
+      refCard.current['scale'].set(
+          x * 2 + 0.2,
+          refContent.current.children.length + .75,
+          0);
+    }
+  });
+
+  console.log({
+    refContent,
+  });
+
+  console.log('cr', refCard.current?.scale);
+  // @ts-ignore
+  return <Billboard follow>
+    {/** @ts-ignore */}
+    <Plane ref={refCard} position={[0, .5, -.01]} args={[1, 1, 1]} />
+    <group ref={refContent}>
+      {/** @ts-ignore */}
+      {heading ? <Text position={[0, 3, 0]} fontSize={.75} color="green">{heading}</Text> : null}
+      {heading ? <Text position={[0, 2, 0]} fontSize={.75} color="green">{heading}</Text> : null}
+      {heading ? <Text position={[0, 1, 0]} fontSize={.75} color="green">{heading}</Text> : null}
+      {heading ? <Text fontSize={.75} color="green">{heading}</Text> : null}
+      {heading ? <Text position={[0, -1, 0]} fontSize={.75} color="green">{heading} and {heading}</Text> : null}
+      {heading ? <Text position={[0, -2, 0]} fontSize={.75} color="green">and?</Text> : null}
+      {children}
+    </group>
   </Billboard>;
 };
 
