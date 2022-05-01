@@ -19,7 +19,7 @@ const RealityGameLayout: React.FC = () => {
       <GameDataProvider>
         <RealityScene />
         <DefaultXRControllers />
-        <group position={[0, 0, 2]} rotation={[0, 3.14, 0]}>
+        <group position={[0, 1, 2]} rotation={[0, 3.14, 0]}>
           <RealityMainMenu />
         </group>
         <group position={[-15, 1, -20]}>

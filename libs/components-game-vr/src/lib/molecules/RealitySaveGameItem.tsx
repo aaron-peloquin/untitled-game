@@ -11,7 +11,7 @@ type T_Props = {
 const RealitySaveGameItem: React.FC<T_Props> = ({gameSave, index}) => {
   const setGameSave = useSetCurrentGameSave(false);
   const handleSetSave = () => setGameSave(gameSave.gameSaveId);
-  return <RealityButton handleSelect={handleSetSave}>Load Game: {gameSave.name}</RealityButton>;
+  return <RealityButton handleSelect={handleSetSave}>Load: {gameSave.name}</RealityButton>;
 };
 
 RealitySaveGameItem.displayName = 'RealitySaveGameItem';
