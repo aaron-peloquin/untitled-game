@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import {Billboard, Plane, Text} from '@react-three/drei';
+import {Billboard, Plane} from '@react-three/drei';
 import {MeshBasicMaterialProps, useFrame} from '@react-three/fiber';
 import {useRef} from 'react';
+
 import {T_CardLayer} from 'TS_General';
+
+import {RealityText} from './RealityText';
 
 type T_Props = {
   layer: T_CardLayer
@@ -46,12 +49,12 @@ const RealityCard: React.FC<T_Props> = ({children, heading}) => {
     <Plane ref={refCard} position={[0, .5, -.01]} args={[1, 1, 1]} />
     <group ref={refContent}>
       {/** @ts-ignore */}
-      {heading ? <Text position={[0, 3, 0]} fontSize={.75} color="green">{heading}</Text> : null}
-      {heading ? <Text position={[0, 2, 0]} fontSize={.75} color="green">{heading}</Text> : null}
-      {heading ? <Text position={[0, 1, 0]} fontSize={.75} color="green">{heading}</Text> : null}
-      {heading ? <Text fontSize={.75} color="green">{heading}</Text> : null}
-      {heading ? <Text position={[0, -1, 0]} fontSize={.75} color="green">{heading} and {heading}</Text> : null}
-      {heading ? <Text position={[0, -2, 0]} fontSize={.75} color="green">and?</Text> : null}
+      {heading ? <RealityText position={[0, 3, 0]} fontSize={.75} color="green" text={heading} /> : null}
+      {heading ? <RealityText position={[0, 2, 0]} fontSize={.75} color="green" text={heading} /> : null}
+      {heading ? <RealityText position={[0, 1, 0]} fontSize={.75} color="green" text={heading} /> : null}
+      {heading ? <RealityText fontSize={.75} color="green" text={heading} /> : null}
+      {heading ? <RealityText position={[0, -1, 0]} fontSize={.75} color="green" text={`${heading} and ${heading}`} /> : null}
+      {heading ? <RealityText position={[0, -2, 0]} fontSize={.75} color="green" text={'and?'} /> : null}
       {children}
     </group>
   </Billboard>;
