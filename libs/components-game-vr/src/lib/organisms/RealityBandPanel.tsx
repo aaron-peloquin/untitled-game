@@ -2,7 +2,7 @@ import {useGetBand} from '@datastore';
 
 import {RealityCard} from '../atoms/RealityCard';
 
-const BandPanelReality: React.FC = () => {
+const RealityBandPanel: React.FC = () => {
   const band = useGetBand();
   // const bandMercenaries = useListMercenariesById(band?.mercenaryIds);
   // const bandLocation = useGetLocation(band?.currentLocationId);
@@ -12,5 +12,5 @@ const BandPanelReality: React.FC = () => {
   </RealityCard>;
 };
 
-BandPanelReality.displayName = 'BandPanelReality';
-export {BandPanelReality};
+RealityBandPanel.displayName = 'RealityBandPanel';
+export {RealityBandPanel};

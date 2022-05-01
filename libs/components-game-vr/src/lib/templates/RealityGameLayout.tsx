@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import {TopNav} from '@components-game';
 import {GameDataProvider} from '@datastore';
 import {VRCanvas, DefaultXRControllers} from '@react-three/xr';
 
-import {BandPanelReality} from '../organisms/BandPanelReality';
+import {RealityScene} from '../atoms/RealityScene';
+
+import {RealityBandPanel} from '../organisms/RealityBandPanel';
 import {RealityMainMenu} from '../organisms/RealityMainMenu';
 
 
@@ -11,16 +14,16 @@ import {RealityMainMenu} from '../organisms/RealityMainMenu';
 const RealityGameLayout: React.FC = () => {
   return <div>
     <TopNav />
-    <VRCanvas>
+    {/** @ts-ignore, cleanup DOM error */}
+    <VRCanvas vr="true">
       <GameDataProvider>
-        <ambientLight />
-        <pointLight position={[8, 10, 10]} />
+        <RealityScene />
         <DefaultXRControllers />
         <group position={[0, 0, 2]} rotation={[0, 3.14, 0]}>
           <RealityMainMenu />
         </group>
         <group position={[-15, 1, -20]}>
-          <BandPanelReality />
+          <RealityBandPanel />
         </group>
       </GameDataProvider>
     </VRCanvas>
