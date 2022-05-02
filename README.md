@@ -8,6 +8,6 @@ This project runs on [Nx](https://nx.dev).
 Applications ([/apps](./apps)) are packages that link, bundle and compile functionality implemented in library ([/libs](./libs)) packages for being deployed.
 
 ## Getting Started
-1. `npm i` to install local packages
-2. `npm run start` to start the local dev server
-
+1. `npm install -g nx` globally install the `nx` cli on your dev machine
+2. `npm i` to install packages local packages
+3. `npm run start` to start the local dev server on [localhost:4200](http://localhost:4200)
