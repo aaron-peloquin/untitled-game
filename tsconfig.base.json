@@ -17,14 +17,14 @@
     "paths": {
       "@band": ["libs/band/src/index.ts"],
       "@components-game": ["libs/components-game/src/index.ts"],
+      "@components-game-vr": ["libs/components-game-vr/src/index.ts"],
       "@components-layout": ["libs/components-layout/src/index.ts"],
       "@datastore": ["libs/datastore/src/index.ts"],
       "@helper": ["libs/helper/src/index.ts"],
       "@location": ["libs/location/src/index.ts"],
       "@mercenary": ["libs/mercenary/src/index.ts"],
       "@quest": ["libs/quest/src/index.ts"],
-      "@static": ["libs/static/src/index.ts"],
-      "@components-game-vr": ["libs/components-game-vr/src/index.ts"]
+      "@static": ["libs/static/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
