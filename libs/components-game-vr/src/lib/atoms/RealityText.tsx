@@ -1,17 +1,19 @@
 import {Text} from '@react-three/drei';
-import { ReactThreeFiber } from '@react-three/fiber';
+import {ReactThreeFiber} from '@react-three/fiber';
+import {forwardRef} from 'react';
 
-type T_Props = {
+export type T_Props = {
     text?: string
     fontSize?: number
     color?: ReactThreeFiber.Color
-    [passThrough: string]: any
-}
-const RealityText: React.FC<T_Props> = ({text, fontSize = .5, ...props}) => {
+    textAlign?: 'left' | 'right' | 'center' | 'justify'
+    font?: string
+  } & JSX.IntrinsicElements['mesh']
+const RealityText = forwardRef<any, T_Props>(({text, fontSize = .5, ...props}, ref) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  return <Text fontSize={fontSize} {...props}>{text}</Text>;
-};
+  return <Text ref={ref} fontSize={fontSize} {...props}>{text}</Text>;
+});
 
 RealityText.displayName = 'RealityText';
 export {RealityText};

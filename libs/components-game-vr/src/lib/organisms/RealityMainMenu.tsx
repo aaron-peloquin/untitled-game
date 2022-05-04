@@ -18,7 +18,7 @@ const RealityMainMenu: React.FC = () => {
     });
   }, [gl.xr]);
   return <group>
-    <RealityButton handleSelect={handleExitVr}>Exit VR</RealityButton>;
+    <RealityButton handleSelect={handleExitVr} text="Exit VR" fontSize={.1} fontColor="blue" />;
     {gameSaves?.map((gameSave, index) => {
       return <group position={[0, -.2 * (index + 1), 0]} key={gameSave.gameSaveId}>
         <RealitySaveGameItem gameSave={gameSave} />;
