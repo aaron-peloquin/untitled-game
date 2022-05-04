@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import {TopNav} from '@components-game';
-import {GameDataProvider} from '@datastore';
+import {gameDataContext} from '@datastore';
+import {useContextBridge} from '@react-three/drei';
 import {VRCanvas, DefaultXRControllers} from '@react-three/xr';
 
 import {RealityScene} from '../atoms/RealityScene';
@@ -12,11 +13,12 @@ import {RealityMainMenu} from '../organisms/RealityMainMenu';
 // type T_Props = {}
 
 const RealityGameLayout: React.FC = () => {
+  const GameDataBridge = useContextBridge(gameDataContext);
   return <div>
     <TopNav />
     {/** @ts-ignore, cleanup DOM error */}
     <VRCanvas vr="true">
-      <GameDataProvider>
+      <GameDataBridge>
         <RealityScene />
         <DefaultXRControllers />
         <group position={[0, 1, 2]} rotation={[0, 3.14, 0]}>
@@ -25,7 +27,7 @@ const RealityGameLayout: React.FC = () => {
         <group position={[-15, 1, -20]}>
           <RealityBandPanel />
         </group>
-      </GameDataProvider>
+      </GameDataBridge>
     </VRCanvas>
   </div>;
 };

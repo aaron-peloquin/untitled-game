@@ -1,4 +1,5 @@
 export * from './lib/datastores/GameDataProvider';
+export * from './lib/datastores/gameDataContext';
 
 export * from './lib/hooks/gameActions/useBandTravel';
 export * from './lib/hooks/gameActions/useHireMercenary';
