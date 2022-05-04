@@ -1,5 +1,5 @@
-import {OrbitControls, Sphere} from '@react-three/drei';
-import {RayGrab, useController, useInteraction} from '@react-three/xr';
+import {Sphere} from '@react-three/drei';
+import {useInteraction} from '@react-three/xr';
 import {useRef} from 'react';
 
 const GrabBall = () => {
