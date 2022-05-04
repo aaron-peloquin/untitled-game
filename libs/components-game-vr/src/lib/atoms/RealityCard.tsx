@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import {Billboard, Plane, RoundedBox} from '@react-three/drei';
+import {Billboard, Plane} from '@react-three/drei';
 import {MeshBasicMaterialProps, useFrame} from '@react-three/fiber';
 import _ from 'lodash';
 import {useRef} from 'react';
@@ -48,7 +48,7 @@ const RealityCard: React.FC<T_Props> = ({children, heading}) => {
   return <Billboard follow>
     {/** @ts-ignore */}
     <Plane ref={refCard} position={[0, -1, -.01]} args={[1, 1, 1]}>
-      <meshBasicMaterial color="grea" />
+      <meshBasicMaterial color="gray" />
     </Plane>
     <group ref={refContent}>
       {/** @ts-ignore */}
