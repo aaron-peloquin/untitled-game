@@ -8,7 +8,7 @@ export type T_Props = {
     color?: ReactThreeFiber.Color
     textAlign?: 'left' | 'right' | 'center' | 'justify'
     font?: string
-  } & JSX.IntrinsicElements['mesh']
+  }
 const RealityText = forwardRef<any, T_Props>(({text, fontSize = .5, ...props}, ref) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

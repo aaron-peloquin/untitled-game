@@ -40,7 +40,6 @@ const RealityButton: React.FC<T_Props> = ({
   });
 
   return <Interactive onSelect={handleSelect}>
-    {/** @ts-ignore */}
     <RoundedBox args={[2, 1, 0.2]} position={[0, 0, -0.021]} ref={refButtonBox}>
       <meshBasicMaterial color="gray" />
     </RoundedBox>
