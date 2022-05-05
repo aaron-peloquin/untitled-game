@@ -6,3 +6,5 @@ export * from './lib/randomName';
 
 export * from './lib/getStats';
 export * from './lib/getMaxBandMercenaries';
+
+export * from './lib/hooks/useGrab';
