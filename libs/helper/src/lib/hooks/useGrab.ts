@@ -1,7 +1,11 @@
+import {useThree} from '@react-three/fiber';
 import {useInteraction} from '@react-three/xr';
-import {useRef, useState} from 'react';
+import {MutableRefObject, useRef, useState} from 'react';
 
-export const useGrab = (maxDistance = 0.075) => {
+type useGrabSig = (maxDistance?: number, dropTargets?: any[]) => {isGrabbed: boolean, ref: MutableRefObject<any>}
+
+export const useGrab: useGrabSig = (maxDistance = 0.075, dropTargets) => {
+  const three = useThree();
   const ref = useRef<any>();
   const refContainer = useRef<any>();
   const [isGrabbed, setIsGrabbed] = useState(false);
@@ -9,7 +13,6 @@ export const useGrab = (maxDistance = 0.075) => {
   useInteraction(ref, 'onSqueezeStart', ({controller, intersection}) => {
     const controllerApi = controller.controller;
     if (intersection && intersection?.distance <= maxDistance) {
-      console.log('intersection.object.parent', intersection.object.parent);
       const objParent = intersection.object.parent;
       if (objParent?.userData?.['name'] !== 'controller') {
         refContainer.current = objParent;
@@ -21,6 +24,21 @@ export const useGrab = (maxDistance = 0.075) => {
 
   useInteraction(ref, 'onSqueezeEnd', ({intersection}) => {
     if (refContainer.current && intersection) {
+      if (dropTargets?.length) {
+        dropTargets.forEach(({ref, callback}) => {
+          // const ray = three.raycaster.set(intersection.object.getWorldPosition());
+          // const result = three.raycaster.intersectObject(intersection.object, false, ref);
+
+          console.log('ref', ref.current);
+          three.raycaster.set(intersection.object.position, ref.current.position);
+          const dist = three.raycaster.intersectObject(ref.current.position);
+          console.log('dist', dist);
+          // const result = intersection.object.raycast(three.raycaster, ref.current).intersectObject(intersection.object);
+          // console.log('result', result);
+          // intersection.object.raycast;
+          // dropTargets[0](intersection);
+        });
+      }
       setIsGrabbed(false);
       refContainer.current.attach(intersection.object);
     }
