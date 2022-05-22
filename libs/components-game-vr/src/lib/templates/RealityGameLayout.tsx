@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import {TopNav} from '@components-game';
 import {gameDataContext} from '@datastore';
-import {Physics} from '@react-three/cannon';
 import {useContextBridge} from '@react-three/drei';
 import {VRCanvas, DefaultXRControllers, Hands} from '@react-three/xr';
 
@@ -19,7 +18,6 @@ const RealityGameLayout: React.FC = () => {
     {/** @ts-ignore, cleanup DOM error */}
     <VRCanvas vr="true">
       <GameDataBridge>
-        <Physics gravity={[0, -0.0000000000000000000000000001, 0]}>
           <RealityScene />
           <DefaultXRControllers />
           <Hands />
@@ -32,7 +30,6 @@ const RealityGameLayout: React.FC = () => {
           <group position={[-15, 1, -20]}>
             <RealityBandPanel />
           </group>
-        </Physics>
       </GameDataBridge>
     </VRCanvas>
   </div>;

@@ -17,7 +17,6 @@
   "private": true,
   "dependencies": {
     "@nrwl/next": "13.9.3",
-    "@react-three/cannon": "^6.3.0",
     "@react-three/drei": "^9.6.0",
     "@react-three/fiber": "^8.0.12",
     "@react-three/xr": "^3.5.0",
