@@ -1,16 +1,33 @@
 import {useGrab} from '@helper';
 import {Box, Sphere} from '@react-three/drei';
-import {useCallback} from 'react';
+import {XRInteractionEvent} from '@react-three/xr';
+import {useCallback, useRef} from 'react';
+import * as THREE from 'three';
 
+const box = new THREE.Box3();
 
 const GrabBall = () => {
   // const onCollideBox = useCallback((event) => {
   //   console.log('event', event);
   // }, []);
 
+  const boxRef = useRef();
 
-  const onRelease = useCallback((event) => {
-    console.log('event', event);
+  const onRelease = useCallback((releaseArgs: XRInteractionEvent) => {
+    const object = releaseArgs.intersection?.object;
+    if (boxRef.current && object) {
+      console.log('object', object);
+      box.setFromObject( boxRef.current );
+      console.log('set done');
+
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      if ( box.intersectsSphere( {...object.geometry.boundingSphere, position: object.position} ) ) {
+        console.log('intersectioned!');
+      } else {
+        console.log('nah bro');
+      }
+    }
   }, []);
 
 
