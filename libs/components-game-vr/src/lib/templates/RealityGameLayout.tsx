@@ -4,7 +4,7 @@ import {gameDataContext} from '@datastore';
 import {useContextBridge} from '@react-three/drei';
 import {VRCanvas, DefaultXRControllers, Hands} from '@react-three/xr';
 
-import {GrabBall} from '../atoms/GrabBall';
+import {GrabBox} from '../atoms/GrabBox';
 
 import {RealityScene} from '../atoms/RealityScene';
 
@@ -25,7 +25,7 @@ const RealityGameLayout: React.FC = () => {
             <RealityMainMenu />
           </group>
           <group position={[0, 1.2, -.75]}>
-            <GrabBall />
+            <GrabBox />
           </group>
           <group position={[-15, 1, -20]}>
             <RealityBandPanel />
