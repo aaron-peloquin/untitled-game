@@ -1,52 +1,42 @@
 import {useGrab} from '@helper';
-import {Bounds, Box} from '@react-three/drei';
+import {Box} from '@react-three/drei';
 import {XRInteractionEvent} from '@react-three/xr';
-import {useCallback, useRef} from 'react';
-import {Box3} from 'three';
+import {useCallback, useRef, useState} from 'react';
+import {Mesh} from 'three';
+import * as THREE from 'three';
 
-function intersect(a: Box3, b: Box3) {
-  console.log({a, b});
-  return (a.min.x <= b.max.x && a.max.x >= b.min.x) &&
-         (a.min.y <= b.max.y && a.max.y >= b.min.y) &&
-         (a.min.z <= b.max.z && a.max.z >= b.min.z);
-}
+import {RealityText} from './RealityText';
+
 const GrabBox = () => {
-  const boxRef = useRef<any>();
+  // const draggableGlobalPosition = useRef(new THREE.Vector3());
+  const [debugText1, setDebugText1] = useState('Nothing');
+  const [debugText2, setDebugText2] = useState('Nothing');
+  const boxRef = useRef<Mesh>();
 
   const onRelease = useCallback((releaseArgs: XRInteractionEvent) => {
     const object = releaseArgs.intersection?.object;
     if (boxRef.current && object) {
-      console.log('object', object);
-      // box.setFromObject(boxRef.current);
-      // box.expandByObject
-      console.log('set done');
+      // object.getWorldPosition(draggableGlobalPosition.current);
+      boxRef.current.geometry.computeBoundingBox();
+      const distanceToPoint = boxRef.current.geometry.boundingBox?.distanceToPoint(object.position) ?? 1;
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const theyIntersect = intersect(object, boxRef.current);
-      if (theyIntersect) {
-        console.log('intersectioned!');
-      } else {
-        console.log('nah bro');
-      }
+      setDebugText1(`DIST: ${distanceToPoint}`);
+      setDebugText2(distanceToPoint < 0.01 ? 'yay' : 'nay');
     }
   }, []);
-
 
   const {ref, isGrabbed} = useGrab(0.075, onRelease);
 
   return <>
-    <Bounds fit ref={ref}>
-      <Box args={[.1, .1, .1]}>
-        <meshBasicMaterial color={isGrabbed ? '#E55' : '#E99'} />
-      </Box>
-    </Bounds>
+    <RealityText position={[0, .5, -1]} text={debugText1} fontSize={0.5} />
+    <RealityText position={[0, .0, -1]} text={debugText2} fontSize={0.5} />
 
-    <Bounds fit ref={boxRef}>
-      <Box args={[.5, .25, .25]} position={[0, -0.5, 0]}>
-        <meshBasicMaterial transparent opacity={0.5} color="blue" />
-      </Box>
-    </Bounds>
+    <Box args={[.1, .1, .1]} position={[0, -0.5, 0]} ref={ref}>
+      <meshBasicMaterial color={isGrabbed ? '#E55' : '#E99'} />
+    </Box>
+    <Box args={[.5, .25, .25]} ref={boxRef}>
+      <meshBasicMaterial transparent opacity={0.5} color="blue" />
+    </Box>
   </>;
 };
 
