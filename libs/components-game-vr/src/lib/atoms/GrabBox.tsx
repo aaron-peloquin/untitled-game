@@ -1,41 +1,50 @@
 import {useGrab} from '@helper';
 import {Box} from '@react-three/drei';
 import {XRInteractionEvent} from '@react-three/xr';
-import {useCallback, useRef, useState} from 'react';
+import {MutableRefObject, useCallback, useRef, useState} from 'react';
 import {Mesh} from 'three';
 import * as THREE from 'three';
 
 import {RealityText} from './RealityText';
 
-const GrabBox = () => {
-  // const draggableGlobalPosition = useRef(new THREE.Vector3());
-  const [debugText1, setDebugText1] = useState('Nothing');
-  const [debugText2, setDebugText2] = useState('Nothing');
-  const boxRef = useRef<Mesh>();
 
+const useGrabAndDrop = (refRecieverBox: MutableRefObject<Mesh | undefined>, handleDrop:(distance: number) => void, grabbableDistance?: number) => {
   const onRelease = useCallback((releaseArgs: XRInteractionEvent) => {
     const object = releaseArgs.intersection?.object;
-    if (boxRef.current && object) {
-      // object.getWorldPosition(draggableGlobalPosition.current);
-      boxRef.current.geometry.computeBoundingBox();
-      const distanceToPoint = boxRef.current.geometry.boundingBox?.distanceToPoint(object.position) ?? 1;
 
-      setDebugText1(`DIST: ${distanceToPoint}`);
-      setDebugText2(distanceToPoint < 0.01 ? 'yay' : 'nay');
+    if (refRecieverBox.current && object) {
+      refRecieverBox.current.geometry.computeBoundingBox();
+      const distanceToPoint = refRecieverBox.current.geometry.boundingBox?.distanceToPoint(object.position) ?? 1;
+
+      handleDrop(distanceToPoint);
+    }
+  }, [handleDrop, refRecieverBox]);
+
+  const {ref: refGrabbableBox, isGrabbed} = useGrab(grabbableDistance, onRelease);
+  return {isGrabbed, refGrabbableBox};
+};
+
+const GrabBox = () => {
+  const [recieverColor, setRecieverColor] = useState('blue');
+
+  const refRecieverBox = useRef<Mesh>();
+  const handleDrop = useCallback((distance) => {
+    if (distance < 0.01) {
+      setRecieverColor('orange');
+    } else if (distance > .5) {
+      setRecieverColor('purple');
+    } else {
+      setRecieverColor('navy');
     }
   }, []);
-
-  const {ref, isGrabbed} = useGrab(0.075, onRelease);
+  const {isGrabbed, refGrabbableBox} = useGrabAndDrop(refRecieverBox, handleDrop);
 
   return <>
-    <RealityText position={[0, .5, -1]} text={debugText1} fontSize={0.5} />
-    <RealityText position={[0, .0, -1]} text={debugText2} fontSize={0.5} />
-
-    <Box args={[.1, .1, .1]} position={[0, -0.5, 0]} ref={ref}>
+    <Box args={[.1, .1, .1]} position={[0, -0.5, 0]} ref={refGrabbableBox}>
       <meshBasicMaterial color={isGrabbed ? '#E55' : '#E99'} />
     </Box>
-    <Box args={[.5, .25, .25]} ref={boxRef}>
-      <meshBasicMaterial transparent opacity={0.5} color="blue" />
+    <Box args={[.5, .25, .25]} ref={refRecieverBox}>
+      <meshBasicMaterial transparent opacity={0.5} color={recieverColor} />
     </Box>
   </>;
 };
