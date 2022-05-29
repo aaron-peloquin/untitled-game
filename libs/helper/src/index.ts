@@ -8,3 +8,4 @@ export * from './lib/getStats';
 export * from './lib/getMaxBandMercenaries';
 
 export * from './lib/hooks/useGrab';
+export * from './lib/hooks/useGrabAndDrop';
