@@ -4,26 +4,26 @@ import {useCallback, useRef, useState} from 'react';
 import {Mesh} from 'three';
 
 const GrabBox = () => {
-  const [recieverColor, setRecieverColor] = useState('blue');
+  const [receiverColor, setReceiverColor] = useState('blue');
 
-  const refRecieverBox = useRef<Mesh>();
+  const refReceiverBox = useRef<Mesh>();
   const handleDrop = useCallback((distance) => {
     if (distance < 0.01) {
-      setRecieverColor('orange');
+      setReceiverColor('orange');
     } else if (distance > .5) {
-      setRecieverColor('purple');
+      setReceiverColor('purple');
     } else {
-      setRecieverColor('navy');
+      setReceiverColor('navy');
     }
   }, []);
-  const {isGrabbed, refGrabbableBox} = useGrabAndDrop(refRecieverBox, handleDrop);
+  const {isGrabbed, refGrabbableBox} = useGrabAndDrop(refReceiverBox, handleDrop);
 
   return <>
     <Box args={[.1, .1, .1]} position={[0, -0.5, 0]} ref={refGrabbableBox}>
       <meshBasicMaterial color={isGrabbed ? '#E55' : '#E99'} />
     </Box>
-    <Box args={[.5, .25, .25]} ref={refRecieverBox}>
-      <meshBasicMaterial transparent opacity={0.5} color={recieverColor} />
+    <Box args={[.5, .25, .25]} ref={refReceiverBox}>
+      <meshBasicMaterial transparent opacity={0.5} color={receiverColor} />
     </Box>
   </>;
 };
