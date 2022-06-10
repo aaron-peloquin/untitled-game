@@ -1,6 +1,7 @@
 import {Text} from '@react-three/drei';
 import {ReactThreeFiber} from '@react-three/fiber';
 import {forwardRef} from 'react';
+import {Mesh} from 'three';
 
 export type T_Props = {
     text?: string
@@ -10,9 +11,7 @@ export type T_Props = {
     font?: string
     position?: ReactThreeFiber.Vector3
   }
-const RealityText = forwardRef<any, T_Props>(({text, fontSize = .5, ...props}, ref) => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
+const RealityText = forwardRef<Mesh, T_Props>(({text, fontSize = .5, ...props}, ref) => {
   return <Text ref={ref} fontSize={fontSize} {...props}>{text}</Text>;
 });
 
