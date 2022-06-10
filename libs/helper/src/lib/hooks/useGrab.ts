@@ -12,15 +12,21 @@ export const useGrab: useGrabSig = (maxDistance = 0.075, onRelease, onGrab) => {
     const {controller, intersection} = onGrabArgs;
     const controllerApi = controller.controller;
     if (intersection && intersection?.distance <= maxDistance) {
-      const objParent = intersection.object.parent;
-      if (objParent?.userData?.['name'] !== 'controller') {
-        refContainer.current = objParent;
+      let obj = intersection.object;
+      while (obj !== ref.current && obj.parent) {
+        obj = obj.parent;
       }
-      setIsGrabbed(true);
-      if (onGrab) {
-        onGrab(onGrabArgs);
+      if (obj) {
+        const objParent = obj.parent;
+        if (objParent?.userData?.['name'] !== 'controller') {
+          refContainer.current = objParent;
+        }
+        setIsGrabbed(true);
+        if (onGrab) {
+          onGrab(onGrabArgs);
+        }
+        controllerApi.attach(obj);
       }
-      controllerApi.attach(intersection.object);
     }
   });
 
@@ -28,9 +34,15 @@ export const useGrab: useGrabSig = (maxDistance = 0.075, onRelease, onGrab) => {
     const {intersection} = onReleaseArgs;
     if (refContainer.current && intersection) {
       setIsGrabbed(false);
-      refContainer.current.attach(intersection.object);
-      if (onRelease) {
-        onRelease(onReleaseArgs);
+      let obj = intersection.object;
+      while (obj !== ref.current && obj.parent) {
+        obj = obj.parent;
+      }
+      if (obj) {
+        refContainer.current.attach(obj);
+        if (onRelease) {
+          onRelease(onReleaseArgs);
+        }
       }
     }
   });
