@@ -1,54 +1,27 @@
-import {useGetBand, useListMercenariesById, useSetSelectMercenaryId} from '@datastore';
-import {useGrabAndDrop} from '@helper';
-import {MutableRefObject, useCallback, useEffect, useRef, useState} from 'react';
+import {useGetBand, useListMercenariesById} from '@datastore';
+import {useMemo, useRef} from 'react';
 import {Mesh, Vector3} from 'three';
-import {T_Mercenary} from 'TS_Mercenary';
+
+import {RealityBandMercenary} from './RealityBandMercenary';
 
 import {RealityBox} from '../atoms/RealityBox';
 import {RealityText} from '../atoms/RealityText';
 
 const RealityBandMercenaries = () => {
   const refSelectMercenaryBox = useRef<Mesh>();
+  const selectPosition = useMemo(() => new Vector3(0, 0.25, 0), []);
   const band = useGetBand();
   const bandMercenaries = useListMercenariesById(band?.mercenaryIds);
 
   return <>
-    {bandMercenaries?.map((mercenary, index) => <RealityBandMercenary mercenary={mercenary} position={[-.1 * index, -.1 * index, 0]} refSelectMercenaryBox={refSelectMercenaryBox} />)}
-    <RealityBox color='orange' ref={refSelectMercenaryBox} position={[0, .25, 0]} args={[.15, .15, .05]} />
+    {bandMercenaries?.map((mercenary, index) => <RealityBandMercenary key={mercenary.mercenaryId} mercenary={mercenary} offset={index} refSelectMercenaryBox={refSelectMercenaryBox} />)}
+    <RealityBox transparent opacity={0.5} color='orange' ref={refSelectMercenaryBox} position={selectPosition} args={[.15, .15, .05]}>
+      <RealityText text='Select' position={[0, 0, 0.03]} fontSize={0.075} />
+      <RealityText text='(Drop mercenary here)' position={[0, -.05, 0.03]} fontSize={0.025} />
+    </RealityBox>
   </>;
 };
 
-
-type Props = {
-  refSelectMercenaryBox: MutableRefObject<Mesh | undefined>
-  mercenary: T_Mercenary
-  position: Vector3
-}
-
-const RealityBandMercenary: React.FC<Props> = ({refSelectMercenaryBox, mercenary, position}) => {
-  const {isSelected, setSelected} = useSetSelectMercenaryId(mercenary.mercenaryId);
-  const [distance, setDistance] = useState(42);
-  const textRef = useRef<Mesh>();
-
-  const handleSelect = useCallback((dist) => {
-    setDistance(dist.toFixed(3));
-    if (dist < .25) {
-      setSelected();
-    }
-  }, [setSelected]);
-  const {isGrabbed, refGrabbableBox} = useGrabAndDrop(refSelectMercenaryBox, handleSelect);
-  const currentColor = (isSelected ? 'teal' : (isGrabbed ? 'forestgreen' : 'gray'));
-  useEffect(() => {
-    refGrabbableBox.current.attach(textRef.current);
-  }, [refGrabbableBox]);
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return <>
-    <RealityBox color={currentColor} ref={refGrabbableBox} position={position} />
-    <RealityText text={`${mercenary?.name}, ${distance}`} fontSize={.075} position={[0, 0, 0.055]} ref={textRef} />
-  </>;
-};
 
 RealityBandMercenaries.displayName = 'RealityBandMercenaries';
 export {RealityBandMercenaries};

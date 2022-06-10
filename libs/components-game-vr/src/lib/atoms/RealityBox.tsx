@@ -7,11 +7,13 @@ type Props = {
   children?: ReactNode
   color?: string
   position?: Vector3
+  transparent?: boolean
+  opacity?: number
 }
 
-const RealityBox = forwardRef<Mesh | undefined, Props>(({args = [.1, .1, .1], children, color, position}, boxRef) => {
+const RealityBox = forwardRef<Mesh | undefined, Props>(({args = [.1, .1, .1], children, color, position, transparent, opacity}, boxRef) => {
   return <Box args={args} position={position} ref={boxRef}>
-    <meshBasicMaterial color={color} />
+    <meshBasicMaterial color={color} transparent={transparent} opacity={opacity} />
     {children}
   </Box>;
 });
