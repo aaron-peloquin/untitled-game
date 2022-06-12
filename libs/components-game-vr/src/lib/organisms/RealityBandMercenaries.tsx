@@ -2,18 +2,17 @@ import {useGetBand, useListMercenariesById} from '@datastore';
 import {useMemo, useRef} from 'react';
 import {Mesh, Vector3} from 'three';
 
-import {RealityBandMercenary} from './RealityBandMercenary';
-
 import {RealityBox} from '../atoms/RealityBox';
 import {RealityText} from '../atoms/RealityText';
+import {RealityBandMercenary} from '../molecules/RealityBandMercenary';
 
 const RealityBandMercenaries = () => {
   const band = useGetBand();
   const refSelectMercenaryBox = useRef<Mesh>();
   const refInspectMercenaryBox = useRef<Mesh>();
   const selectPosition = useMemo(() => new Vector3(0.23, 0.15, 0), []);
-  // const inspectPosition = useMemo(() => new Vector3(0.23, -0.04, 0), []);
   const bandMercenaries = useListMercenariesById(band?.mercenaryIds);
+  // const inspectPosition = useMemo(() => new Vector3(0.23, -0.04, 0), []);
 
   return <>
     <group position={[0, .15, 0]}>
