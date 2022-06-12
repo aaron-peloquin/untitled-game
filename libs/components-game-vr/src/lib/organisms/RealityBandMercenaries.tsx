@@ -16,8 +16,8 @@ const RealityBandMercenaries = () => {
   return <>
     {bandMercenaries?.map((mercenary, index) => <RealityBandMercenary key={mercenary.mercenaryId} mercenary={mercenary} offset={index} refSelectMercenaryBox={refSelectMercenaryBox} />)}
     <RealityBox transparent opacity={0.5} color='orange' ref={refSelectMercenaryBox} position={selectPosition} args={[.15, .15, .05]}>
-      <RealityText text='Select' position={[0, 0, 0.03]} fontSize={0.075} />
-      <RealityText text='(Drop mercenary here)' position={[0, -.05, 0.03]} fontSize={0.025} />
+      <RealityText text='Select' position={[0, .035, 0.03]} fontSize={0.075} />
+      <RealityText text='(Drop mercenary in here)' position={[0, -.09, 0.03]} fontSize={0.025} />
     </RealityBox>
   </>;
 };
