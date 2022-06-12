@@ -12,7 +12,7 @@ const RealityBandMercenaries = () => {
   const refSelectMercenaryBox = useRef<Mesh>();
   const refInspectMercenaryBox = useRef<Mesh>();
   const selectPosition = useMemo(() => new Vector3(0.23, 0.15, 0), []);
-  const inspectPosition = useMemo(() => new Vector3(0.23, -0.04, 0), []);
+  // const inspectPosition = useMemo(() => new Vector3(0.23, -0.04, 0), []);
   const bandMercenaries = useListMercenariesById(band?.mercenaryIds);
 
   return <>
@@ -29,11 +29,10 @@ const RealityBandMercenaries = () => {
       <RealityText text='Select' position={[0, .035, 0.03]} fontSize={0.075} />
       <RealityText text='(Grab &amp; drop here)' position={[0, -.05, 0.03]} fontSize={0.025} />
     </RealityBox>
-    <RealityBox transparent opacity={0.5} color='blue' ref={refInspectMercenaryBox} position={inspectPosition} args={[.25, .15, .05]}>
+    {/* <RealityBox transparent opacity={0.5} color='blue' ref={refInspectMercenaryBox} position={inspectPosition} args={[.25, .15, .05]}>
       <RealityText text="Inspect" position={[0, .035, 0.03]} fontSize={0.075} />
-      {/* <RealityText text={inspectMercenaryId.toString()} position={[0, -0.04, 0.03]} fontSize={0.075} /> */}
       <RealityText text='(Grab &amp; drop here)' position={[0, -.05, 0.03]} fontSize={0.025} />
-    </RealityBox>
+    </RealityBox> */}
   </>;
 };
 
