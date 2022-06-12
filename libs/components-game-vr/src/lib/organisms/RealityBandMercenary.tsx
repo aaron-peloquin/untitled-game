@@ -14,13 +14,11 @@ type Props = {
 }
 
 const RealityBandMercenary: React.FC<Props> = ({refSelectMercenaryBox, mercenary, offset}) => {
-  const [d, setD] = useState(4.444);
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenary.mercenaryId);
   const stats = useGetMercenaryStats(mercenary);
-  const position = useMemo(() => new Vector3(-.4 * offset, -.4 * offset, 0), [offset]);
+  const position = useMemo(() => new Vector3(-.1 * offset, -.1 * offset, 0), [offset]);
 
   const handleSelect = useCallback((distance) => {
-    setD(distance.toFixed(3));
     if (distance <= .15) {
       setSelected();
     }
@@ -29,8 +27,8 @@ const RealityBandMercenary: React.FC<Props> = ({refSelectMercenaryBox, mercenary
   const currentColor = (isSelected ? 'teal' : (isGrabbed ? 'forestgreen' : stats.textColorEthnicity));
 
   return <RealityBox color={currentColor} ref={refGrabbableBox} position={position}>
-    <RealityText text={`${mercenary?.name} ${d}`} fontSize={.05} position={[0, .01, 0.055]} />
-    <RealityText text={`${stats?.profession} ${stats?.ethnicity}`} position={[0, -.03, 0.055]} fontSize={0.025} />
+    <RealityText text={`${mercenary?.name}${isSelected ? '*' : ''}`} fontSize={.05} position={[0, .01, 0.055]} />
+    <RealityText text={`${stats?.ethnicity} ${stats?.profession}`} position={[0, -.03, 0.055]} fontSize={0.025} />
   </RealityBox>;
 };
 

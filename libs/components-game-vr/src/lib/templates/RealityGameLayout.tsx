@@ -24,7 +24,7 @@ const RealityGameLayout: React.FC = () => {
         <group position={[0, 1, 2]} rotation={[0, 3.14, 0]}>
           <RealityMainMenu />
         </group>
-        <group position={[-0.75, 1, 0]} rotation={[0,1.5,0]}>
+        <group position={[-0.75, 0.75, 0]} rotation={[0, 1.5, 0]}>
           <RealityBandMercenaries />
         </group>
         <group position={[-15, 1, -20]}>
