@@ -27,7 +27,7 @@ const RealityGameLayout: React.FC = () => {
         <group position={[-0.75, 0.75, 0]} rotation={[0, 1.5, 0]}>
           <RealityBandMercenaries />
         </group>
-        <group position={[-15, 1, -20]}>
+        <group position={[-16, 4, -20]}>
           <RealityBandPanel />
         </group>
       </GameDataBridge>
