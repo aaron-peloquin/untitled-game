@@ -20,12 +20,30 @@ const RealityBandMercenary: React.FC<Props> = ({refSelectMercenaryBox, refInspec
   const {isGrabbed, refGrabbableBox} = useRealityMercenaryDropActions(refSelectMercenaryBox, refInspectMercenaryBox, setSelected, setInspect, isSelected, isInspecting);
   const mercenaryStats = useGetMercenaryStats(mercenary);
 
-  const position = useMemo(() => new Vector3(-.11 * offset, -.075 * offset, 0), [offset]);
+  const mainPosition = useMemo(() => new Vector3(-.11 * offset, -.075 * offset, 0), [offset]);
   const currentColor = (isSelected ? 'teal' : (isGrabbed ? 'forestgreen' : mercenaryStats.textColorEthnicity));
 
-  return <RealityBox color={currentColor} ref={refGrabbableBox} position={position}>
+  return <RealityBox color={currentColor} ref={refGrabbableBox} position={mainPosition}>
     <RealityText text={`${mercenary?.name}${isSelected ? '*' : ''}${isInspecting ? '^' : ''}`} fontSize={.05} position={[0, .01, 0.055]} />
     <RealityText text={`${mercenaryStats?.ethnicity} ${mercenaryStats?.profession}`} position={[0, -.03, 0.055]} fontSize={0.025} />
+    <group rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.051, 0]}>
+      <group position={[-0.025, 0.01, 0]}>
+        <RealityText fontSize={0.01} text="Attack" position={[0, 0.02, 0]} />
+        <RealityText fontSize={0.02} text={mercenaryStats.attack.toString()} />
+      </group>
+      <group position={[0.025, 0.01, 0]}>
+        <RealityText fontSize={0.01} text="Cunning" position={[0, 0.02, 0]} />
+        <RealityText fontSize={0.02} text={mercenaryStats.cunning.toString()} />
+      </group>
+      <group position={[-0.025, -0.035, 0]}>
+        <RealityText fontSize={0.01} text="Subtlety" position={[0, 0.02, 0]} />
+        <RealityText fontSize={0.02} text={mercenaryStats.subtlety.toString()} />
+      </group>
+      <group position={[0.025, -0.035, 0]}>
+        <RealityText fontSize={0.01} text="Endurance" position={[0, 0.02, 0]} />
+        <RealityText fontSize={0.02} text={mercenaryStats.endurance.toString()} />
+      </group>
+    </group>
   </RealityBox>;
 };
 
