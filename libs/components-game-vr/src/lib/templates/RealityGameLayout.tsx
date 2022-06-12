@@ -10,6 +10,7 @@ import {RealityMercenaryInspect} from '../molecules/RealityMercenaryInspect';
 import {RealityBandMercenaries} from '../organisms/RealityBandMercenaries';
 
 import {RealityBandPanel} from '../organisms/RealityBandPanel';
+import {RealityLocationQuests} from '../organisms/RealityLocationQuests';
 import {RealityMainMenu} from '../organisms/RealityMainMenu';
 
 const RealityGameLayout: React.FC = () => {
@@ -35,6 +36,9 @@ const RealityGameLayout: React.FC = () => {
         </group>
         <group position={[-0.75, 0.75, 0]} rotation={[0, 1.5, 0]}>
           <RealityBandMercenaries />
+        </group>
+        <group position={[0.75, 0.75, 0]} rotation={[0, -1.5, 0]}>
+          <RealityLocationQuests />
         </group>
       </GameDataBridge>
     </VRCanvas>

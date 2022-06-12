@@ -12,7 +12,7 @@ export type T_GameDataContext = {
   selectedQuestId: number
   setInspectMercenaryId: (id?: number) => void
   setSelectedMercenaryId: (id?: number) => void
-  setSelectedQuestId: (id: number) => void
+  setSelectedQuestId: (id?: number) => void
 }
 
 const gameDataContextDefault: T_GameDataContext = {
