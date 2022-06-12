@@ -9,6 +9,7 @@ import {useGetGameSetting} from '../hooks/gameController/useGetGameSetting';
 const {Provider} = gameDataContext;
 
 const GameDataProvider: React.FC = memo(({children}) => {
+  const [inspectMercenaryId, setInspectMercenaryId] = useState(0);
   const [selectedMercenaryId, setSelectedMercenaryId] = useState(0);
   const [selectedQuestId, setSelectedQuestId] = useState(0);
   const apPerDay = useGetGameSetting('ap_per_day');
@@ -18,6 +19,8 @@ const GameDataProvider: React.FC = memo(({children}) => {
 
   useEffect(() => {
     if (save) {
+      setInspectMercenaryId(0);
+      setSelectedMercenaryId(0);
       setSelectedQuestId(0);
     }
   }, [save]);
@@ -26,14 +29,16 @@ const GameDataProvider: React.FC = memo(({children}) => {
 
     return {
       dataStore,
+      inspectMercenaryId,
       name: save?.name || '',
       seed: save?.seed || '',
       selectedMercenaryId,
       selectedQuestId,
+      setInspectMercenaryId,
       setSelectedMercenaryId,
       setSelectedQuestId,
     };
-  }, [apPerDay, save?.gameDatastoreName, save?.name, save?.seed, save?.totalLocations, selectedMercenaryId, selectedQuestId, startingGold]);
+  }, [apPerDay, inspectMercenaryId, save?.gameDatastoreName, save?.name, save?.seed, save?.totalLocations, selectedMercenaryId, selectedQuestId, startingGold]);
 
   return <Provider value={gameProviderValue}>
     {children}

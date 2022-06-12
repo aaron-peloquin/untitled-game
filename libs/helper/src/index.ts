@@ -9,3 +9,4 @@ export * from './lib/getMaxBandMercenaries';
 
 export * from './lib/hooks/useGrab';
 export * from './lib/hooks/useGrabAndDrop';
+export * from './lib/hooks/useRealityMercenaryDropActions';
