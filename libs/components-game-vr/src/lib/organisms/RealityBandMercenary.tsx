@@ -1,6 +1,6 @@
 import {useGetMercenaryStats, useSetSelectMercenaryId} from '@datastore';
 import {useGrabAndDrop} from '@helper';
-import {MutableRefObject, useMemo, useCallback, useState} from 'react';
+import {MutableRefObject, useMemo, useCallback} from 'react';
 import {Mesh, Vector3} from 'three';
 import {T_Mercenary} from 'TS_Mercenary';
 
@@ -9,21 +9,36 @@ import {RealityText} from '../atoms/RealityText';
 
 type Props = {
   refSelectMercenaryBox: MutableRefObject<Mesh | undefined>
+  refInspectMercenaryBox: MutableRefObject<Mesh | undefined>
   mercenary: T_Mercenary
+  setInspectMercenaryId: (mercenaryId: number) => void
   offset: number
 }
 
-const RealityBandMercenary: React.FC<Props> = ({refSelectMercenaryBox, mercenary, offset}) => {
+const RealityBandMercenary: React.FC<Props> = ({refSelectMercenaryBox, refInspectMercenaryBox, setInspectMercenaryId, mercenary, offset}) => {
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenary.mercenaryId);
   const stats = useGetMercenaryStats(mercenary);
-  const position = useMemo(() => new Vector3(-.1 * offset, -.1 * offset, 0), [offset]);
+  const position = useMemo(() => new Vector3(-.11 * offset, -.075 * offset, 0), [offset]);
+
+  const handleInspect = useCallback((distance) => {
+    if (distance <= .2) {
+      setInspectMercenaryId(mercenary.mercenaryId);
+    }
+  }, [mercenary.mercenaryId, setInspectMercenaryId]);
 
   const handleSelect = useCallback((distance) => {
     if (distance <= .15) {
       setSelected();
     }
   }, [setSelected]);
-  const {isGrabbed, refGrabbableBox} = useGrabAndDrop(refSelectMercenaryBox, handleSelect);
+
+  const dropTargets = useMemo(() => ([
+    {handleDrop: handleInspect, refReceiverBox: refInspectMercenaryBox},
+    {handleDrop: handleSelect, refReceiverBox: refSelectMercenaryBox},
+  ]), [handleInspect, handleSelect, refInspectMercenaryBox, refSelectMercenaryBox]);
+
+  const {isGrabbed, refGrabbableBox} = useGrabAndDrop(dropTargets);
+
   const currentColor = (isSelected ? 'teal' : (isGrabbed ? 'forestgreen' : stats.textColorEthnicity));
 
   return <RealityBox color={currentColor} ref={refGrabbableBox} position={position}>
