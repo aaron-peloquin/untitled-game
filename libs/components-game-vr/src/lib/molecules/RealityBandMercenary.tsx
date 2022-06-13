@@ -1,5 +1,5 @@
 import {useGetMercenaryStats, useSetInspectMercenaryId, useSetSelectMercenaryId} from '@datastore';
-import {useRealityMercenaryDropActions} from '@helper';
+import {displayNumber, useRealityMercenaryDropActions} from '@helper';
 import {MutableRefObject, useMemo} from 'react';
 import {Mesh, Vector3} from 'three';
 import {T_Mercenary} from 'TS_Mercenary';
@@ -43,6 +43,10 @@ const RealityBandMercenary: React.FC<Props> = ({refSelectMercenaryBox, refInspec
         <RealityText fontSize={0.01} text="Endurance" position={[0, 0.02, 0]} />
         <RealityText fontSize={0.02} text={mercenaryStats.endurance.toString()} />
       </group>
+    </group>
+    <group rotation={[0, -Math.PI / 2, 0]} position={[-0.051, 0, 0]}>
+      <RealityText fontSize={0.04} text="Level" position={[0, 0.018, 0]} />
+      <RealityText fontSize={0.04} text={displayNumber(mercenary.level, 2)} position={[0, -0.018, 0]} />
     </group>
   </RealityBox>;
 };
