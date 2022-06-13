@@ -8,7 +8,7 @@ export const useSetSelectMercenaryId = (mercenaryId: number) => {
 
   const setSelected = useCallback((unset?: boolean) => {
     if (unset) {
-      setSelectedMercenaryId(undefined);
+      setSelectedMercenaryId(0);
     } else {
       setSelectedMercenaryId(mercenaryId);
     }

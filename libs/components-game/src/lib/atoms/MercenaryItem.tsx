@@ -48,6 +48,9 @@ const MercenaryItem: React.FC<T_Props> = memo(({
   const {currentHealth, level, mercenaryId, name, statsVisible} = mercenary;
   const stats = useGetMercenaryStats(mercenary);
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenaryId);
+  const selectMercenary = useCallback(() => {
+    setSelected();
+  }, [setSelected]);
 
   const {canAffordHire, hire, hireCost, slotsAvailable} = useHireMercenary(mercenary, stats._goldHiring);
   const {canAffordSpar, spar, sparCost} = useSparMercenary(mercenary);
@@ -88,7 +91,7 @@ const MercenaryItem: React.FC<T_Props> = memo(({
       {showCheckbox && <GridArea><Toggle label={checkboxLabel} checked={isChecked} id={`check-mercenary-${mercenary.mercenaryId}`} onChange={toggleChecked} /></GridArea>}
       {showStatsButton && <GridArea><Button disabled={!canAffordSpar} onClick={spar} text={`Spar for ${sparCost ? `${sparCost} gold` : 'free'}`} /></GridArea>}
       {canHire && <GridArea><Button disabled={!canAffordHire || !slotsAvailable} onClick={hire} text={`Hire for ${hireCost} gold`} /></GridArea>}
-      {showSelectButton && <GridArea><Button disabled={isSelected} text="Select Mercenary" onClick={setSelected} /></GridArea>}
+      {showSelectButton && <GridArea><Button disabled={isSelected} text="Select Mercenary" onClick={selectMercenary} /></GridArea>}
     </GridTemplate>
   </Card>;
 });

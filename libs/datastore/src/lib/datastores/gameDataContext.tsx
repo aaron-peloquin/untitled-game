@@ -1,5 +1,5 @@
 import {emptyFunction} from '@static';
-import {createContext} from 'react';
+import {createContext, Dispatch, SetStateAction} from 'react';
 
 import {GameDataClass} from './gameData';
 
@@ -10,9 +10,9 @@ export type T_GameDataContext = {
   inspectMercenaryId: number
   selectedMercenaryId: number
   selectedQuestId: number
-  setInspectMercenaryId: (id?: number) => void
-  setSelectedMercenaryId: (id?: number) => void
-  setSelectedQuestId: (id?: number) => void
+  setInspectMercenaryId: Dispatch<SetStateAction<number>>
+  setSelectedMercenaryId: Dispatch<SetStateAction<number>>
+  setSelectedQuestId: Dispatch<SetStateAction<number>>
 }
 
 const gameDataContextDefault: T_GameDataContext = {

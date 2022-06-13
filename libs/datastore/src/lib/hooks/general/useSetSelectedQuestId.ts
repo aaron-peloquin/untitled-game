@@ -8,7 +8,7 @@ export const useSetSelectedQuestId = (questId: number) => {
 
   const setSelected = useCallback((unset?: boolean) => {
     if (unset) {
-      setSelectedQuestId(undefined);
+      setSelectedQuestId(0);
     } else {
       setSelectedQuestId(questId);
     }

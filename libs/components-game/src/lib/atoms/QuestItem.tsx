@@ -1,7 +1,7 @@
 import {Button, Card, GridArea, GridTemplate, Output} from '@components-layout';
 import {useGetQuestStats, useSetSelectedQuestId} from '@datastore';
 import {questData} from '@static';
-import {memo} from 'react';
+import {memo, useCallback} from 'react';
 import {T_Quest} from 'TS_Quest';
 
 type Props = {
@@ -18,6 +18,9 @@ const QuestItem: React.FC<Props> = ({quest}) => {
   const stats = useGetQuestStats(quest);
   const questType = questData[quest.type].label;
   const QuestIcon = questData[quest.type].icon;
+  const selectQuest = useCallback(() => {
+    setSelected();
+  }, [setSelected]);
 
   return <Card layer="4" heading={<><QuestIcon /> {questType} {quest.targetName}</>}>
     <GridTemplate gridTemplateAreas={QUEST_AREAS} justifyItems="center" textAlign='center' columns={2}>
@@ -28,7 +31,7 @@ const QuestItem: React.FC<Props> = ({quest}) => {
         <Output id={`quest_${quest.questId}_target`} value={`${stats.ethnicity} ${stats.profession}`} label="Target" />
       </GridArea>
       <GridArea name="take_job__">
-        <Button disabled={isSelected} onClick={setSelected} text="Take Job" />
+        <Button disabled={isSelected} onClick={selectQuest} text="Take Job" />
       </GridArea>
     </GridTemplate>
   </Card>;

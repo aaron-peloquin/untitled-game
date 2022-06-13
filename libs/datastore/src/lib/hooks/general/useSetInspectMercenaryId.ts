@@ -9,7 +9,7 @@ export const useSetInspectMercenaryId = (mercenaryId: number) => {
 
   const setInspect = useCallback((unset?: boolean) => {
     if (unset) {
-      setInspectMercenaryId(undefined);
+      setInspectMercenaryId(0);
     } else {
       setInspectMercenaryId(mercenaryId);
     }

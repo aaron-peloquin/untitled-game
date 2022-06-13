@@ -27,7 +27,7 @@ const GameDataProvider: React.FC = memo(({children}) => {
   const gameProviderValue = useMemo<T_GameDataContext>(() => {
     const dataStore = (apPerDay !== undefined && startingGold !== undefined && save?.gameDatastoreName) ? new GameDataClass(save.gameDatastoreName, save.name, save.seed, save.totalLocations, parseInt(apPerDay.value), parseInt(startingGold.value)) : undefined;
 
-    return {
+    const value: T_GameDataContext = {
       dataStore,
       inspectMercenaryId,
       name: save?.name || '',
@@ -38,6 +38,7 @@ const GameDataProvider: React.FC = memo(({children}) => {
       setSelectedMercenaryId,
       setSelectedQuestId,
     };
+    return value;
   }, [apPerDay, inspectMercenaryId, save?.gameDatastoreName, save?.name, save?.seed, save?.totalLocations, selectedMercenaryId, selectedQuestId, startingGold]);
 
   return <Provider value={gameProviderValue}>
