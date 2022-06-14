@@ -1,16 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
+import {Stats} from '@react-three/drei';
 
 const RealityScene: React.FC = () => {
   return <>
     <ambientLight intensity={.5} />
     <color attach="background" args={['#133760']} />
-    {/** @ts-ignore */}
-    {/* <Sky sunPosition={[25, 10, 0]} /> */}
-    {/* <Stars speed={5} /> */}
-    {/** @ts-ignore */}
-    {/* <Plane args={[100, 100]} position={[0, -10, 0]} rotation={[Math.PI / 2, 0, 0]}>
-      <meshLambertMaterial color="blue" />
-    </Plane> */}
+    <Stats />
   </>;
 };
 

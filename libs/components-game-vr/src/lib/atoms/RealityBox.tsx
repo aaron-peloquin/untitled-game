@@ -1,9 +1,9 @@
-import {Box} from '@react-three/drei';
+import {RoundedBox} from '@react-three/drei';
 import {forwardRef, ReactNode} from 'react';
-import {Mesh, Vector3} from 'three';
+import {Vector3} from 'three';
 
 type Props = {
-  args?: [width?: number | undefined, height?: number | undefined, depth?: number | undefined, widthSegments?: number | undefined, heightSegments?: number | undefined, depthSegments?: number | undefined]
+  args?: [width?: number | undefined, height?: number | undefined, depth?: number | undefined]
   children?: ReactNode
   color?: string
   position?: Vector3
@@ -11,11 +11,11 @@ type Props = {
   opacity?: number
 }
 
-const RealityBox = forwardRef<Mesh | undefined, Props>(({args = [.1, .1, .1], children, color, position, transparent, opacity}, boxRef) => {
-  return <Box args={args} position={position} ref={boxRef}>
+const RealityBox = forwardRef<any, Props>(({args = [.1, .1, .1], children, color, position, transparent, opacity}, boxRef) => {
+  return <RoundedBox radius={0.005} args={args} position={position} ref={boxRef}>
     <meshBasicMaterial color={color} transparent={transparent} opacity={opacity} />
     {children}
-  </Box>;
+  </RoundedBox>;
 });
 
 RealityBox.displayName = 'RealityBox';
