@@ -2,7 +2,7 @@
 import {TopNav} from '@components-game';
 import {gameDataContext} from '@datastore';
 import {useContextBridge} from '@react-three/drei';
-import {VRCanvas, DefaultXRControllers, Hands} from '@react-three/xr';
+import {VRCanvas, DefaultXRControllers} from '@react-three/xr';
 
 
 import {RealityScene} from '../atoms/RealityScene';
@@ -22,7 +22,6 @@ const RealityGameLayout: React.FC = () => {
       <GameDataBridge>
         <RealityScene />
         <DefaultXRControllers />
-        <Hands />
         {/** Main Menu behind player */}
         <group position={[0, 1, 2]} rotation={[0, 3.14, 0]}>
           <RealityMainMenu />
