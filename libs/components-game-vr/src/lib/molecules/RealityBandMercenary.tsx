@@ -20,10 +20,13 @@ const RealityBandMercenary: React.FC<Props> = ({refSelectMercenaryBox, refInspec
   const {isGrabbed, refGrabbableBox} = useRealityMercenaryDropActions(refSelectMercenaryBox, refInspectMercenaryBox, setSelected, setInspect, isSelected, isInspecting);
   const mercenaryStats = useGetMercenaryStats(mercenary);
 
-  const mainPosition = useMemo(() => new Vector3(-.11 * offset, -.075 * offset, 0), [offset]);
-  const currentColor = (isSelected ? 'teal' : (isGrabbed ? 'forestgreen' : mercenaryStats.textColorEthnicity));
+  const boxPosition = useMemo(() => {
+    const offsetRow = Math.floor(offset / 4);
+    const offsetColumn = (offset % 4) + 1;
+    return new Vector3(-.125 * offsetColumn, -.125 * offsetRow, 0);
+  }, [offset]); const currentColor = (isSelected ? 'teal' : (isGrabbed ? 'forestgreen' : mercenaryStats.textColorEthnicity));
 
-  return <RealityBox color={currentColor} ref={refGrabbableBox} position={mainPosition}>
+  return <RealityBox color={currentColor} ref={refGrabbableBox} position={boxPosition}>
     <RealityText text={`${mercenary?.name}${isSelected ? '*' : ''}${isInspecting ? '^' : ''}`} fontSize={.05} position={[0, .01, 0.055]} />
     <RealityText text={`${mercenaryStats?.ethnicity} ${mercenaryStats?.profession}`} position={[0, -.03, 0.055]} fontSize={0.025} />
     <group rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.051, 0]}>
