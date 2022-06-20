@@ -22,9 +22,9 @@ const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, refInspectMer
   const {isGrabbed, refGrabbableBox} = useRealityMercenaryDropActions(refSelectMercenaryBox, refInspectMercenaryBox, setSelected, setInspect, isSelected, isInspecting);
 
   const boxPosition = useMemo(() => {
-    const offsetRow = Math.floor(offset / 4);
-    const offsetColumn = (offset % 4) + 1;
-    return new Vector3(-.125 * offsetColumn, -.125 * offsetRow, 0);
+    const offsetRow = Math.floor(offset / 3);
+    const offsetColumn = (offset % 3) + 1;
+    return new Vector3(-.2 * offsetColumn, -.2 * offsetRow, 0);
   }, [offset]); const currentColor = (isSelected ? 'teal' : (isGrabbed ? 'forestgreen' : textColorEthnicity));
 
   return <RealityBox color={currentColor} ref={refGrabbableBox} position={boxPosition}>

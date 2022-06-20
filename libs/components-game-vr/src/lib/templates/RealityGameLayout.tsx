@@ -20,7 +20,7 @@ import {RealityMainMenu} from '../organisms/RealityMainMenu';
 const RealityGameLayout: React.FC = () => {
   const refSelectBox = useRef<Mesh>();
   const GameDataBridge = useContextBridge(gameDataContext);
-  const selectBoxPosition = useMemo(() => new Vector3(0, -0.1, .05), []);
+  const selectBoxPosition = useMemo(() => new Vector3(0, -0.3, .05), []);
   return <div>
     <TopNav />
     {/** @ts-ignore, cleanup DOM error */}
@@ -29,25 +29,25 @@ const RealityGameLayout: React.FC = () => {
         <RealityScene />
         <DefaultXRControllers />
         {/** Main Menu behind player */}
-        <group position={[0, 1, 2]} rotation={[0, 3.14, 0]}>
+        <group position={[0, 1, 2]} rotation={[0, Math.PI, 0]}>
           <RealityMainMenu />
         </group>
         {/** Game Elements */}
-        <group position={[0, 0.75, -0.75]}>
+        <group position={[0, 1, -0.75]}>
           <RealityText text="Quest" fontSize={.25} position={[0, .75, -1]} color="gray" />
-          <RealityBox transparent opacity={0.5} color='orange' ref={refSelectBox} position={selectBoxPosition} args={[.25, .15, .05]}>
-            <RealityText text='Select' position={[0, .035, 0.03]} fontSize={0.075} />
-            <RealityText text='(Grab &amp; drop here)' position={[0, -.05, 0.03]} fontSize={0.025} />
+          <RealityBox transparent opacity={0.5} color='orange' ref={refSelectBox} position={selectBoxPosition} args={[.25, .25, .05]}>
+            <RealityText text='Select' position={[0, -.05, 0.03]} fontSize={0.075} />
+            <RealityText text='(Grab &amp; drop here)' position={[0, -.1, 0.03]} fontSize={0.025} />
           </RealityBox>
         </group>
         <group position={[-18, 4, -16]}>
           <RealityBandPanel />
         </group>
-        <group position={[-.25, 0.75, -0.75]} rotation={[0, 1, 0]}>
+        <group position={[-.25, 1, -0.75]} rotation={[0, 1, 0]}>
           <RealityText text="Band" fontSize={.25} position={[0, .75, -1]} color="gray" />
           <RealityBandMercenaries refSelectMercenaryBox={refSelectBox} />
         </group>
-        <group position={[0.6, 0.75, -0.25]} rotation={[0, -1, 0]}>
+        <group position={[0.6, 1, -0.25]} rotation={[0, -1, 0]}>
           <RealityText text="Location" fontSize={.25} position={[0, .75, -1]} color="gray" />
           <RealityLocationQuests refSelectQuestBox={refSelectBox} />
         </group>
