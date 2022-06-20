@@ -1,5 +1,6 @@
 import {useGetMercenaryStats, useSetInspectMercenaryId, useSetSelectMercenaryId} from '@datastore';
 import {displayNumber, useRealityMercenaryDropActions} from '@helper';
+import {Plane} from '@react-three/drei';
 import {MutableRefObject, useMemo} from 'react';
 import {Mesh, Vector3} from 'three';
 import {T_Mercenary} from 'TS_Mercenary';
@@ -15,7 +16,7 @@ type Props = {
 
 const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, mercenary, offset}) => {
   const {currentHealth, level, mercenaryId, name, statsVisible} = mercenary || {};
-  const {textColorEthnicity, _goldUpkeep, ethnicity, profession, attack, cunning, subtlety, endurance, maxHealth} = useGetMercenaryStats(mercenary) || {};
+  const {textColorEthnicity, textColorProfession, _goldUpkeep, ethnicity, profession, attack, cunning, subtlety, endurance, maxHealth} = useGetMercenaryStats(mercenary) || {};
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenaryId);
   const {isGrabbed, refGrabbableBox} = useRealityMercenaryDropActions(refSelectMercenaryBox, setSelected, isSelected);
 
@@ -29,8 +30,11 @@ const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, mercenary, of
   return <RealityBox color={currentColor} ref={refGrabbableBox} position={boxPosition} transparent opacity={isSelected ? 1 : 0.8}>
     {/** front face group */}
     <group>
-      <RealityText text={`${name}${isSelected ? '*' : ''}`} fontSize={.05} position={[0, .01, 0.0505]} />
-      <RealityText text={`${ethnicity} ${profession}`} position={[0, -.03, 0.0505]} fontSize={0.025} />
+      <RealityText text={`${name}${isSelected ? '*' : ''}`} fontSize={.025} position={[0, .01, 0.0505]} />
+      <Plane args={[0.092, 0.03, 1]} position={[0, -.03, 0.0501]}>
+        <meshBasicMaterial color="#222" transparent opacity={0.75} />
+        <RealityText fontSize={0.0135} position={[0, 0, 0.0001]} color={textColorProfession} text={`${ethnicity} ${profession}`} />
+      </Plane>
     </group>
     {statsVisible && <>
       {/** top face group */}

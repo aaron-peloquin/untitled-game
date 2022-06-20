@@ -40,7 +40,7 @@ const RealityGameLayout: React.FC = () => {
             <RealityText text='(Grab &amp; drop here)' position={[0, -.1, 0.03]} fontSize={0.025} />
           </RealityBox>
         </group>
-        <group position={[-18, 4, -16]}>
+        <group position={[0, 4, -16]}>
           <RealityBandPanel />
         </group>
         <group position={[-.25, 1, -0.75]} rotation={[0, 1, 0]}>
