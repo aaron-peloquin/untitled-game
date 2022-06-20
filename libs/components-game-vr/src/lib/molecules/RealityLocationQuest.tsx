@@ -35,7 +35,7 @@ const RealityLocationQuest: React.FC<Props> = ({quest, offset, refSelectQuestBox
       <meshBasicMaterial color="#222" />
       <RealityText fontSize={0.014} position={[0, 0, 0.0001]} color={questStats.textColorProfession} text={`${questStats?.ethnicity} ${questStats?.profession}`} />
     </Plane>
-    <group rotation={[0, -Math.PI / 2, 0]} position={[-0.051, 0, 0]}>
+    <group rotation={[0, Math.PI / 2, 0]} position={[0.051, 0, 0]}>
       <RealityText fontSize={0.04} text="Level" position={[0, 0.018, 0]} />
       <RealityText fontSize={0.04} text={displayNumber(quest.level, 2)} position={[0, -0.018, 0]} />
     </group>
