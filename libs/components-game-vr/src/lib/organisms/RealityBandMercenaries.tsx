@@ -12,7 +12,7 @@ const RealityBandMercenaries: React.FC<Props> = ({refSelectMercenaryBox}) => {
   const band = useGetBand();
   const bandMercenaries = useListMercenariesById(band?.mercenaryIds);
 
-  return <group position={[0, 0, 0]}>
+  return <group position={[.5, 0, 0]}>
     {bandMercenaries?.map((mercenary, index) => <RealityMercenary
       key={mercenary.mercenaryId}
       mercenary={mercenary}
