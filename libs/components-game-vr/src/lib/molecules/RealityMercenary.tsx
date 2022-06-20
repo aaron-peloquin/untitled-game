@@ -9,28 +9,27 @@ import {RealityText} from '../atoms/RealityText';
 
 type Props = {
   refSelectMercenaryBox: MutableRefObject<Mesh | undefined>
-  refInspectMercenaryBox: MutableRefObject<Mesh | undefined>
   mercenary: T_Mercenary
   offset: number
 }
 
-const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, refInspectMercenaryBox, mercenary, offset}) => {
+const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, mercenary, offset}) => {
   const {currentHealth, level, mercenaryId, name, statsVisible} = mercenary || {};
   const {textColorEthnicity, _goldUpkeep, ethnicity, profession, attack, cunning, subtlety, endurance, maxHealth} = useGetMercenaryStats(mercenary) || {};
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenaryId);
-  const {isInspecting, setInspect} = useSetInspectMercenaryId(mercenaryId);
-  const {isGrabbed, refGrabbableBox} = useRealityMercenaryDropActions(refSelectMercenaryBox, refInspectMercenaryBox, setSelected, setInspect, isSelected, isInspecting);
+  const {isGrabbed, refGrabbableBox} = useRealityMercenaryDropActions(refSelectMercenaryBox, setSelected, isSelected);
 
   const boxPosition = useMemo(() => {
     const offsetRow = Math.floor(offset / 3);
     const offsetColumn = (offset % 3) + 1;
     return new Vector3(-.2 * offsetColumn, -.2 * offsetRow, 0);
-  }, [offset]); const currentColor = (isSelected ? 'teal' : (isGrabbed ? 'forestgreen' : textColorEthnicity));
+  }, [offset]);
+  const currentColor = isGrabbed ? 'teal' : textColorEthnicity;
 
-  return <RealityBox color={currentColor} ref={refGrabbableBox} position={boxPosition}>
+  return <RealityBox color={currentColor} ref={refGrabbableBox} position={boxPosition} transparent opacity={isSelected ? 1 : 0.8}>
     {/** front face group */}
     <group>
-      <RealityText text={`${name}${isSelected ? '*' : ''}${isInspecting ? '^' : ''}`} fontSize={.05} position={[0, .01, 0.0505]} />
+      <RealityText text={`${name}${isSelected ? '*' : ''}`} fontSize={.05} position={[0, .01, 0.0505]} />
       <RealityText text={`${ethnicity} ${profession}`} position={[0, -.03, 0.0505]} fontSize={0.025} />
     </group>
     {statsVisible && <>

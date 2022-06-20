@@ -26,9 +26,9 @@ const RealityLocationQuest: React.FC<Props> = ({quest, offset, refSelectQuestBox
     const offsetColumn = (offset % 4) + 1;
     return new Vector3(-.125 * offsetColumn, -.125 * offsetRow, 0);
   }, [offset]);
-  const currentColor = (isSelected ? 'teal' : (isGrabbed ? 'darkred' : questStats.textColorEthnicity));
+  const currentColor = isGrabbed ? 'teal' : questStats.textColorEthnicity;
 
-  return <RealityBox color={currentColor} ref={refGrabbableBox} position={boxPosition}>
+  return <RealityBox color={currentColor} ref={refGrabbableBox} position={boxPosition} transparent opacity={isSelected ? 1 : 0.8}>
     <RealityText fontSize={.025} text={`${questType}${isSelected ? '*' : ''}`} position={[0, .035, 0.055]} />
     <RealityText fontSize={.025} text={`${quest.targetName}`} position={[0, .01, 0.055]} />
     <Plane args={[0.092, 0.03, 1]} position={[0, -.03, 0.0501]}>

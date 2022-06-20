@@ -1,5 +1,5 @@
 import {useGetBand, useListMercenariesById} from '@datastore';
-import {MutableRefObject, useRef} from 'react';
+import {MutableRefObject} from 'react';
 import {Mesh} from 'three';
 
 import {RealityMercenary} from '../molecules/RealityMercenary';
@@ -10,7 +10,6 @@ type Props = {
 
 const RealityBandMercenaries: React.FC<Props> = ({refSelectMercenaryBox}) => {
   const band = useGetBand();
-  const refInspectMercenaryBox = useRef<Mesh>();
   const bandMercenaries = useListMercenariesById(band?.mercenaryIds);
 
   return <group position={[0, 0, 0]}>
@@ -19,7 +18,6 @@ const RealityBandMercenaries: React.FC<Props> = ({refSelectMercenaryBox}) => {
       mercenary={mercenary}
       offset={index}
       refSelectMercenaryBox={refSelectMercenaryBox}
-      refInspectMercenaryBox={refInspectMercenaryBox}
     />)}
   </group>;
 };
