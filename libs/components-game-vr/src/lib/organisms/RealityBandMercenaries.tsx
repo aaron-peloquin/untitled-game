@@ -4,7 +4,7 @@ import {Mesh, Vector3} from 'three';
 
 import {RealityBox} from '../atoms/RealityBox';
 import {RealityText} from '../atoms/RealityText';
-import {RealityBandMercenary} from '../molecules/RealityBandMercenary';
+import {RealityMercenary} from '../molecules/RealityMercenary';
 
 const RealityBandMercenaries = () => {
   const band = useGetBand();
@@ -16,7 +16,7 @@ const RealityBandMercenaries = () => {
 
   return <>
     <group position={[0, .15, 0]}>
-      {bandMercenaries?.map((mercenary, index) => <RealityBandMercenary
+      {bandMercenaries?.map((mercenary, index) => <RealityMercenary
         key={mercenary.mercenaryId}
         mercenary={mercenary}
         offset={index}
