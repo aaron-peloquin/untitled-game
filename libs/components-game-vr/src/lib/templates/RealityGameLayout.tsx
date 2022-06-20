@@ -43,9 +43,9 @@ const RealityGameLayout: React.FC = () => {
         <group position={[-18, 4, -16]}>
           <RealityBandPanel />
         </group>
-        <group position={[-0.75, 0.75, 0]} rotation={[0, 1.5, 0]}>
+        <group position={[-.25, 0.75, -0.75]} rotation={[0, 1, 0]}>
           <RealityText text="Band" fontSize={.25} position={[0, .75, -1]} color="gray" />
-          <RealityBandMercenaries />
+          <RealityBandMercenaries refSelectMercenaryBox={refSelectBox} />
         </group>
         <group position={[0.6, 0.75, -0.25]} rotation={[0, -1, 0]}>
           <RealityText text="Location" fontSize={.25} position={[0, .75, -1]} color="gray" />
