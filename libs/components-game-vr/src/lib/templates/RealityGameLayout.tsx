@@ -1,13 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import {TopNav} from '@components-game';
 import {gameDataContext} from '@datastore';
-import {Plane, useContextBridge} from '@react-three/drei';
+import {useContextBridge} from '@react-three/drei';
 import {VRCanvas, DefaultXRControllers} from '@react-three/xr';
-import {useMemo, useRef} from 'react';
-import {Mesh, Vector3} from 'three';
-
-import {RealityBox} from '../atoms/RealityBox';
-
+import {useRef} from 'react';
+import {Mesh} from 'three';
 
 import {RealityScene} from '../atoms/RealityScene';
 import {RealityText} from '../atoms/RealityText';

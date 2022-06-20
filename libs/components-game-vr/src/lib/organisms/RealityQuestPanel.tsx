@@ -1,6 +1,5 @@
-import {useGetBand, useQuestRunner} from '@datastore';
-import {displayNumber, getMaxBandMercenaries} from '@helper';
-import {Billboard, Plane} from '@react-three/drei';
+import {useQuestRunner} from '@datastore';
+import {Plane} from '@react-three/drei';
 import {MutableRefObject, useMemo} from 'react';
 import {Mesh, Vector3} from 'three';
 
