@@ -1,6 +1,5 @@
 import {useQuestRunner} from '@datastore';
 import {displayNumber} from '@helper';
-import {Plane} from '@react-three/drei';
 import {MutableRefObject, useMemo, useState} from 'react';
 import {Mesh, Vector3} from 'three';
 import {T_QuestResults} from 'TS_Quest';
@@ -23,9 +22,6 @@ const RealityQuestPanel: React.FC<Props> = ({refSelectBox}) => {
   return <>
     <group position={[0, 0, -1]}>
       <RealityBox color="#533" args={[1.5, 1, 0.001]} position={boardPosition} />
-      {/* <Plane  >
-        <meshBasicMaterial color="#533" />
-      </Plane> */}
       {questResults && <>
         <RealityText text={questResults.outcome} fontSize={0.1} position={[0, .5, 0]} />
         <RealityText text={`Band: +${displayNumber(questResults.band.exp * 100)}% exp, +${questResults.band.gold} gold`} fontSize={0.05} position={[0, .4, 0]} />

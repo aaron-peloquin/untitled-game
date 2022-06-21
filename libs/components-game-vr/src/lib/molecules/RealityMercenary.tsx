@@ -1,4 +1,4 @@
-import {useGetMercenaryStats, useSetInspectMercenaryId, useSetSelectMercenaryId} from '@datastore';
+import {useGetMercenaryStats, useSetSelectMercenaryId} from '@datastore';
 import {displayNumber, useRealityMercenaryDropActions} from '@helper';
 import {Plane} from '@react-three/drei';
 import {MutableRefObject, useMemo} from 'react';
@@ -48,12 +48,12 @@ const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, mercenary, of
           <RealityText fontSize={0.019} text={`${cunning}`} />
         </group>
         <group position={[-0.025, -0.03, 0]}>
-          <RealityText fontSize={0.009} text="Subtlety" position={[0, 0.019, 0]} />
-          <RealityText fontSize={0.019} text={`${subtlety}`} />
-        </group>
-        <group position={[0.025, -0.03, 0]}>
           <RealityText fontSize={0.009} text="Endurance" position={[0, 0.019, 0]} />
           <RealityText fontSize={0.019} text={`${endurance}`} />
+        </group>
+        <group position={[0.025, -0.03, 0]}>
+          <RealityText fontSize={0.009} text="Subtlety" position={[0, 0.019, 0]} />
+          <RealityText fontSize={0.019} text={`${subtlety}`} />
         </group>
       </group>
       {/** bottom face group */}
