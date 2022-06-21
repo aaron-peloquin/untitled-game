@@ -9,7 +9,7 @@ import {Mesh} from 'three';
 import {RealityScene} from '../atoms/RealityScene';
 import {RealityText} from '../atoms/RealityText';
 import {RealityBandMercenaries} from '../organisms/RealityBandMercenaries';
-
+import {RealityBandPanel} from '../organisms/RealityBandPanel';
 import {RealityLocationQuests} from '../organisms/RealityLocationQuests';
 import {RealityMainMenu} from '../organisms/RealityMainMenu';
 import {RealityQuestPanel} from '../organisms/RealityQuestPanel';
@@ -33,11 +33,8 @@ const RealityGameLayout: React.FC = () => {
           <RealityText text="Quest" fontSize={.25} position={[0, .75, -1]} color="gray" />
           <RealityQuestPanel refSelectBox={refSelectBox} />
         </group>
-        {/* <group position={[0, 4, -16]}>
+        <group position={[-0.7, 1, -0.25]} rotation={[0, 1, 0]}>
           <RealityBandPanel />
-        </group> */}
-        <group position={[-.7, 1, -0.25]} rotation={[0, 1, 0]}>
-          <RealityText text="Band" fontSize={.25} position={[0, .75, -1]} color="gray" />
           <RealityBandMercenaries refSelectMercenaryBox={refSelectBox} />
         </group>
         <group position={[.7, 1, -0.25]} rotation={[0, -1, 0]}>
