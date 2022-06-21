@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import {RoundedBox} from '@react-three/drei';
-import {useFrame} from '@react-three/fiber';
 import {Interactive, XRInteractionEvent} from '@react-three/xr';
-import {useRef} from 'react';
+import {useEffect, useRef} from 'react';
 
 import {RealityText} from './RealityText';
 
@@ -29,15 +28,16 @@ const RealityButton: React.FC<T_Props> = ({
   const refButtonText = useRef<any>();
 
   // size wrapping box to text
-  useFrame(() => {
-    if (refButtonBox.current && refButtonText.current) {
-      const text = refButtonText.current?.geometry.boundingBox.max || {};
-      const newX = (text.x || 0) + fontPadding;
-      const newY = (text.y || 0) + fontPadding;
-      refButtonBox.current.scale.set(newX, newY, .2);
-      // refButtonBox.current.position.set(0, 0, -.01);
-    }
-  });
+  useEffect(() => {
+    setTimeout(() => {
+      if (refButtonBox.current && refButtonText.current) {
+        const text = refButtonText.current?.geometry.boundingBox.max || {};
+        const newX = (text.x || 0) + fontPadding;
+        const newY = (text.y || 0) + fontPadding;
+        refButtonBox.current.scale.set(newX, newY, .2);
+      }
+    }, 5);
+  }, [fontPadding]);
 
   return <Interactive onSelect={handleSelect}>
     <RoundedBox args={[2, 1, 0.2]} position={[0, 0, -0.021]} ref={refButtonBox}>
