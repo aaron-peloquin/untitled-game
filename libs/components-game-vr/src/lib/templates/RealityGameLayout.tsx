@@ -42,7 +42,7 @@ const RealityGameLayout: React.FC = () => {
           <RealityText text="Location" fontSize={.25} position={[0, .75, -1]} color="gray" />
           <RealityLocationQuests refSelectQuestBox={refSelectBox} />
         </group>
-        <group position={[0.8, 1, -0]} rotation={[0, -1.25, 0]}>
+        <group position={[0.8, 1, -0]} rotation={[0, -1.5, 0]}>
           <RealityLocationMercenaries />
         </group>
       </GameDataBridge>

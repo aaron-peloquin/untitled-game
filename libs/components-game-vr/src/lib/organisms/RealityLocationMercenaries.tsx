@@ -29,7 +29,7 @@ const RealityLocationMercenaries: React.FC = () => {
       <RealityText text='(Grab &amp; drop here)' position={[0, -.075, 0.03]} fontSize={0.025} />
     </RealityBox>
 
-    <group position={[0.05, 0.075, 0]}>
+    <group position={[0.05, -0.15, 0]}>
       {locationMercenaries?.map((mercenary, index) => <RealityMercenary
         key={mercenary.mercenaryId}
         mercenary={mercenary}
