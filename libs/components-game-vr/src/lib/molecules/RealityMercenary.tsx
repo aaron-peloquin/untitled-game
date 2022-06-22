@@ -22,7 +22,7 @@ const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, refHireMercen
   const {_goldHiring, _goldUpkeep, textColorEthnicity, textColorProfession, ethnicity, profession, attack, cunning, subtlety, endurance, maxHealth} = useGetMercenaryStats(mercenary) || {};
 
   const {canAffordSpar, spar, sparCost} = useSparMercenary(mercenary);
-  const {canAffordHire, hire, hireCost, slotsAvailable} = useHireMercenary(mercenary, _goldHiring);
+  const {canAffordHire, hire, hireCost, slotsAvailable, isHired} = useHireMercenary(mercenary, _goldHiring);
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenaryId);
   const {isGrabbed, refGrabbableBox} = useRealityMercenaryDropActions({
     canAffordHire, canAffordSpar, hire,
@@ -40,7 +40,7 @@ const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, refHireMercen
   return <RealityBox color={currentColor} ref={refGrabbableBox} position={boxPosition} transparent opacity={isSelected ? 1 : 0.8}>
     {/** front face group */}
     <group>
-      <RealityText text={`Hire for ${hireCost} gold`} fontSize={.01} position={[0, .035, 0.0505]} />
+      {!isHired && <RealityText text={`Hire for ${hireCost} gold`} fontSize={.01} position={[0, .035, 0.0505]} />}
       <RealityText text={`${name}${isSelected ? '*' : ''}`} fontSize={.025} position={[0, .01, 0.0505]} />
       <Plane args={[0.092, 0.03, 1]} position={[0, -.03, 0.0501]}>
         <meshBasicMaterial color="#222" transparent opacity={0.75} />

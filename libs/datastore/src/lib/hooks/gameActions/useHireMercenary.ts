@@ -14,6 +14,7 @@ export const useHireMercenary = (mercenary: T_Mercenary, hireCost: number) => {
   const bandId = band?.bandId || 0;
   const mercenaryId = mercenary.mercenaryId;
   const slotsAvailable = (band?.mercenaryIds.length ?? 99) < getMaxBandMercenaries(band);
+  const isHired = band?.mercenaryIds?.some((bandMercenaryId) => bandMercenaryId === mercenary.mercenaryId);
 
   const canAffordHire = bandGold >= hireCost;
 
@@ -35,5 +36,5 @@ export const useHireMercenary = (mercenary: T_Mercenary, hireCost: number) => {
     }
   }, [bandGold, hireCost, gameData.dataStore, bandId, mercenaryId]);
 
-  return {canAffordHire, hire, hireCost, slotsAvailable};
+  return {canAffordHire, hire, hireCost, isHired, slotsAvailable};
 };
