@@ -39,9 +39,9 @@ export const useQuestRunner = () => {
     } else if (mercenary) {
       return `Select a quest to send  ${mercenary?.name} on`;
     } else if (quest) {
-      return `Select a mercenary  to ${quest?.type} ${quest?.targetName}`;
+      return `Select a mercenary from your band to ${quest?.type} ${quest?.targetName}`;
     } else {
-      return 'Select a mercenary and a quest to send them on';
+      return 'Select a mercenary from your band and a quest to send them on';
     }
   }, [mercenary, quest]);
 
