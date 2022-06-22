@@ -10,6 +10,7 @@ import {RealityScene} from '../atoms/RealityScene';
 import {RealityText} from '../atoms/RealityText';
 import {RealityBandMercenaries} from '../organisms/RealityBandMercenaries';
 import {RealityBandPanel} from '../organisms/RealityBandPanel';
+import {RealityLocationMercenaries} from '../organisms/RealityLocationMercenaries';
 import {RealityLocationQuests} from '../organisms/RealityLocationQuests';
 import {RealityMainMenu} from '../organisms/RealityMainMenu';
 import {RealityQuestPanel} from '../organisms/RealityQuestPanel';
@@ -40,6 +41,9 @@ const RealityGameLayout: React.FC = () => {
         <group position={[.7, 1, -0.25]} rotation={[0, -1, 0]}>
           <RealityText text="Location" fontSize={.25} position={[0, .75, -1]} color="gray" />
           <RealityLocationQuests refSelectQuestBox={refSelectBox} />
+        </group>
+        <group position={[0.8, 1, -0]} rotation={[0, -1.25, 0]}>
+          <RealityLocationMercenaries />
         </group>
       </GameDataBridge>
     </VRCanvas>
