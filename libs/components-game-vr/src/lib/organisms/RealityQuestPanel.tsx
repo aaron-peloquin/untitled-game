@@ -30,7 +30,7 @@ const RealityQuestPanel: React.FC<Props> = ({refSelectBox}) => {
       <RealityText position={[0, -.25, 0]} fontSize={0.05} color="black" text={questRunnerText} />
       <RealityGoQuestButton setQuestResults={setQuestResults} position={goQuestPosition} />
     </group>
-    <RealityBox transparent opacity={0.5} color='orange' ref={refSelectBox} position={selectBoxPosition} args={[.25, .25, .05]}>
+    <RealityBox transparent opacity={0.5} color='navy' ref={refSelectBox} position={selectBoxPosition} args={[.25, .25, .05]}>
       <RealityText text='Select' position={[0, -.05, 0.03]} fontSize={0.075} />
       <RealityText text='(Grab &amp; drop here)' position={[0, -.1, 0.03]} fontSize={0.025} />
     </RealityBox>
