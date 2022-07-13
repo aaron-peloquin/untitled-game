@@ -1,5 +1,4 @@
 import {Stats, useGLTF} from '@react-three/drei';
-import _ from 'lodash';
 import {useRef} from 'react';
 import {Mesh} from 'three';
 
@@ -8,8 +7,9 @@ const RealityScene: React.FC = () => {
   const {scene} = useGLTF('/tavern/scene.gltf');
 
   return <>
-    <ambientLight intensity={.5} />
-    <primitive ref={refTavern} object={scene} scale={0.25} position={[-2, -1, -1.75]} rotation={[0, 0, 0]} />
+    <ambientLight intensity={.025} />
+    <directionalLight castShadow receiveShadow intensity={0.5} position={[-.5, 2, 8]} />
+    <primitive ref={refTavern} object={scene} scale={0.25} position={[-2.4, -1.2, -2]} rotation={[0, -0.1, 0]} />
     {/* <TestScene /> */}
     {/* <directionalLight
       intensity={0.5}

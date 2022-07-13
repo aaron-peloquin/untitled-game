@@ -12,7 +12,7 @@ type Props = {
 }
 
 const RealityBox = forwardRef<any, Props>(({args = [.1, .1, .1], children, color, position, transparent, opacity}, boxRef) => {
-  return <RoundedBox radius={0.005} args={args} position={position} ref={boxRef}>
+  return <RoundedBox receiveShadow castShadow radius={0.005} args={args} position={position} ref={boxRef}>
     <meshBasicMaterial color={color} transparent={transparent} opacity={opacity} />
     {children}
   </RoundedBox>;
