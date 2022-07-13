@@ -9,7 +9,6 @@ import {RealityText} from '../atoms/RealityText';
 
 const RealityBandPanel: React.FC = () => {
   const band = useGetBand();
-  // const bandLocation = useGetLocation(band?.currentLocationId);
   const {restoreAp, restoreApAmount} = useRest(band);
 
   return <group position={[0, 0, -1]}>
