@@ -14,6 +14,7 @@ import {RealityLocationMercenaries} from '../organisms/RealityLocationMercenarie
 import {RealityLocationQuests} from '../organisms/RealityLocationQuests';
 import {RealityMainMenu} from '../organisms/RealityMainMenu';
 import {RealityQuestPanel} from '../organisms/RealityQuestPanel';
+import {RealityTravel} from '../organisms/RealityTravel';
 
 const RealityGameLayout: React.FC = () => {
   const refSelectBox = useRef<Mesh>();
@@ -42,7 +43,10 @@ const RealityGameLayout: React.FC = () => {
           <RealityText text="Location" fontSize={.25} position={[0, .75, -1]} color="gray" />
           <RealityLocationQuests refSelectQuestBox={refSelectBox} />
         </group>
-        <group position={[0.8, 1, -0]} rotation={[0, -1.5, 0]}>
+        <group position={[-0.8, 1, 0.5]} rotation={[0, 1.5, 0]}>
+          <RealityTravel />
+        </group>
+        <group position={[0.8, 1, 0]} rotation={[0, -1.5, 0]}>
           <RealityLocationMercenaries />
         </group>
       </GameDataBridge>
