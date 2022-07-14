@@ -13,7 +13,7 @@ const RealityTravel: React.FC = () => {
         key={location.locationId}
         location={location}
         offset={index}
-        offsetModifier={0.15}
+        offsetModifier={-0.2}
       />)}
     </group>
   </group>;
