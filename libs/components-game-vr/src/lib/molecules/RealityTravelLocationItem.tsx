@@ -15,20 +15,21 @@ type Props = {
 }
 
 const RealityTravelLocationItem: React.FC<Props> = ({location, offset, offsetModifier}) => {
-  const travelBag = useBandTravel(location);
+  const {apCost, travelCost, canAffordTravel, hasEnoughAp, travel} = useBandTravel(location);
 
-  const planePosition = useMemo(() => new Vector3(0, 0, -0.05), []);
+  const planePosition = useMemo(() => new Vector3(0, 0.03, -0.041), []);
   const boxPosition = useMemo(() => {
-    const offsetRow = offset;
-    const offsetColumn = 0;
-    return new Vector3(offsetModifier * offsetColumn, offsetModifier * offsetRow, 0);
+    return new Vector3(0, offsetModifier * offset, 0);
   }, [offset, offsetModifier]);
 
   return <group position={boxPosition}>
-    <Plane args={[.25, .1, 1]} position={planePosition} />
+    <Plane args={[.25, .15, 1]} position={planePosition}>
+      <meshBasicMaterial color="navy" />
+    </Plane>
     <group position={[0, 0, 0.001]}>
-      <RealityText fontSize={.05} text={location.name} position={[0, 0.05, 0]} />
-      <RealityButton fontSize={0.05} handleSelect={travelBag.travel} text="Travel" />;
+      <RealityText fontSize={.05} text={location.name} position={[0, 0.08, -0.041]} />
+      <RealityText fontSize={.025} text={`Cost: ${apCost} AP, ${travelCost} Gold`} position={[0, 0.045, -0.041]} />
+      {(hasEnoughAp && canAffordTravel) && <RealityButton fontSize={0.05} handleSelect={travel} text="Travel" />}
     </group>
   </group>;
 };
