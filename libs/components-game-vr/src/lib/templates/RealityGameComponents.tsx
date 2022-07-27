@@ -1,12 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import {TopNav} from '@components-game';
-import {gameDataContext, useGetBand, usePayWages} from '@datastore';
-import {useContextBridge} from '@react-three/drei';
-import {VRCanvas, DefaultXRControllers} from '@react-three/xr';
 import {useRef} from 'react';
 import {Mesh} from 'three';
 
-import {RealityScene} from '../atoms/RealityScene';
 import {RealityText} from '../atoms/RealityText';
 import {RealityBandMercenaries} from '../organisms/RealityBandMercenaries';
 import {RealityBandPanel} from '../organisms/RealityBandPanel';
@@ -16,7 +11,7 @@ import {RealityMainMenu} from '../organisms/RealityMainMenu';
 import {RealityQuestPanel} from '../organisms/RealityQuestPanel';
 import {RealityTravel} from '../organisms/RealityTravel';
 
-const RealityGameLayout: React.FC = () => {
+const RealityGameComponents: React.FC = () => {
   const refSelectBox = useRef<Mesh>();
   return <>
     {/** Main Menu behind player */}
@@ -45,5 +40,5 @@ const RealityGameLayout: React.FC = () => {
   </>;
 };
 
-RealityGameLayout.displayName = 'RealityGameLayout';
-export {RealityGameLayout};
+RealityGameComponents.displayName = 'RealityGameComponents';
+export {RealityGameComponents};
