@@ -1,1 +1,1 @@
-export * from './lib/templates/RealityGameLayout';
+export * from './lib/templates/RealityGameTemplate';

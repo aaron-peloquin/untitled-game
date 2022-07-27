@@ -1,7 +1,7 @@
-import {RealityGameLayout} from '@components-game-vr';
+import {RealityGameTemplate} from '@components-game-vr';
 
 const VirtualGame = () => {
-    return <RealityGameLayout />;
+    return <RealityGameTemplate />;
 }
 
 export default VirtualGame;
