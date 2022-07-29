@@ -12,12 +12,14 @@ type Props = {
   mercenary: T_Mercenary
   offset: number
   offsetModifier?: number
+  generalActionCallback?: (distance: number) => void
+  refGeneralActionBox?: MutableRefObject<Mesh | undefined>
   refSelectMercenaryBox?: MutableRefObject<Mesh | undefined>
   refHireMercenaryBox?: MutableRefObject<Mesh | undefined>
   refSparMercenaryBox?: MutableRefObject<Mesh | undefined>
 }
 
-const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, refHireMercenaryBox, refSparMercenaryBox, mercenary, offset, offsetModifier = -0.2}) => {
+const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, refGeneralActionBox, refHireMercenaryBox, refSparMercenaryBox, generalActionCallback, mercenary, offset, offsetModifier = -0.2}) => {
   const {currentHealth, level, mercenaryId, name, statsVisible} = mercenary || {};
   const {_goldHiring, _goldUpkeep, textColorEthnicity, textColorProfession, ethnicity, profession, attack, cunning, subtlety, endurance, maxHealth} = useGetMercenaryStats(mercenary) || {};
 
@@ -25,8 +27,9 @@ const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, refHireMercen
   const {canAffordHire, hire, hireCost, slotsAvailable, isHired} = useHireMercenary(mercenary, _goldHiring);
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenaryId);
   const {isGrabbed, refGrabbableBox} = useRealityMercenaryDropActions({
-    canAffordHire, canAffordSpar, hire,
-    isSelected, refHireMercenaryBox, refSelectMercenaryBox, refSparMercenaryBox,
+    canAffordHire, canAffordSpar, generalActionCallback,
+    hire, isSelected,
+    refGeneralActionBox, refHireMercenaryBox, refSelectMercenaryBox, refSparMercenaryBox,
     setSelected, slotsAvailable, spar, statsVisible,
   });
 

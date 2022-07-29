@@ -8,6 +8,9 @@ type args = {
   setSelected: (unset?: boolean | undefined) => void,
   isSelected: boolean,
 
+  refGeneralActionBox?: MutableRefObject<Mesh | undefined>,
+  generalActionCallback?: (distance: number) => void,
+
   refSparMercenaryBox?: MutableRefObject<Mesh | undefined>,
   statsVisible: boolean,
   canAffordSpar: boolean,
@@ -23,6 +26,9 @@ export const useRealityMercenaryDropActions = ({
   refSelectMercenaryBox,
   setSelected,
   isSelected,
+
+  refGeneralActionBox,
+  generalActionCallback,
 
   refSparMercenaryBox,
   statsVisible,
@@ -60,6 +66,9 @@ export const useRealityMercenaryDropActions = ({
 
   const dropTargets = useMemo(() => {
     const targets = [];
+    if (refGeneralActionBox) {
+      targets.push({handleDrop: generalActionCallback, refReceiverBox: refGeneralActionBox});
+    }
     if (refSelectMercenaryBox) {
       targets.push({handleDrop: handleSelect, refReceiverBox: refSelectMercenaryBox});
     }
@@ -70,7 +79,7 @@ export const useRealityMercenaryDropActions = ({
       targets.push({handleDrop: handleHire, refReceiverBox: refHireMercenaryBox});
     }
     return targets;
-  }, [handleHire, handleSelect, handleSpar, refHireMercenaryBox, refSelectMercenaryBox, refSparMercenaryBox]);
+  }, [generalActionCallback, handleHire, handleSelect, handleSpar, refGeneralActionBox, refHireMercenaryBox, refSelectMercenaryBox, refSparMercenaryBox]);
 
   const {isGrabbed, refGrabbableBox} = useGrabAndDrop(dropTargets);
 

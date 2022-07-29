@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import {useGetBand, useRest} from '@datastore';
 import {useRef} from 'react';
 import {Mesh} from 'three';
 
@@ -13,6 +14,11 @@ import {RealityTravel} from '../organisms/RealityTravel';
 
 const RealityGameComponents: React.FC = () => {
   const refSelectBox = useRef<Mesh>();
+  const band = useGetBand();
+  const {restoreAp, restoreApAmount} = useRest(band);
+
+  const actionText = `Rest Band (regain ${restoreApAmount} AP)`;
+
   return <>
     {/** Main Menu behind player */}
     <group position={[0, 1, 2]} rotation={[0, Math.PI, 0]}>
@@ -24,7 +30,7 @@ const RealityGameComponents: React.FC = () => {
       <RealityQuestPanel refSelectBox={refSelectBox} />
     </group>
     <group position={[-0.7, 1, -0.25]} rotation={[0, 1, 0]}>
-      <RealityBandPanel />
+      <RealityBandPanel bandActionText={actionText} bandActionCallback={restoreAp} />
       <RealityBandMercenaries refSelectMercenaryBox={refSelectBox} />
     </group>
     <group position={[.7, 1, -0.25]} rotation={[0, -1, 0]}>
