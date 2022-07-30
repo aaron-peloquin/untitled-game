@@ -66,7 +66,7 @@ export const useRealityMercenaryDropActions = ({
 
   const dropTargets = useMemo(() => {
     const targets = [];
-    if (refGeneralActionBox) {
+    if (refGeneralActionBox && generalActionCallback) {
       targets.push({handleDrop: generalActionCallback, refReceiverBox: refGeneralActionBox});
     }
     if (refSelectMercenaryBox) {
