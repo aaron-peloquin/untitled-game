@@ -22,8 +22,9 @@ const RealityLocationMercenaries: React.FC = () => {
       <RealityText text='To reveals their stats' position={[0, -0.01, 0.03]} fontSize={0.025} />
       <RealityText text='(Grab &amp; drop here)' position={[0, -.075, 0.03]} fontSize={0.025} />
     </RealityBox>
-    <RealityText text={`${band?.name}'s Band (${band?.mercenaryIds.length}/${getMaxBandMercenaries(band)} Mercenaries)`} fontSize={0.025} position={[0, 0.015, 0]} color="gray" />
-    <RealityText text={`Currently has ${band?.gold} gold`} fontSize={0.025} position={[0, -0.015, 0]} color="gray" />
+    <RealityText text={`${band?.name}'s Band`} fontSize={0.025} position={[0, 0.022, 0.03]} color="#CCC" />
+    <RealityText text={`${band?.mercenaryIds.length}/${getMaxBandMercenaries(band)} Mercenaries`} fontSize={0.025} position={[0, 0, 0.03]} color="#CCC" />
+    <RealityText text={`Has ${band?.gold} gold`} fontSize={0.025} position={[0, -0.022, 0.03]} color="#CCC" />
     <RealityBox transparent opacity={0.5} color='orange' ref={refHireBox} position={hireBoxPosition} args={[.25, .2, .05]}>
       <RealityText text='Hire' position={[0, .05, 0.03]} fontSize={0.075} />
       <RealityText text='Mercenary' position={[0, -0.01, 0.03]} fontSize={0.05} />
