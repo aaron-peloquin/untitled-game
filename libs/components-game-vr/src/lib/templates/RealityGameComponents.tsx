@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import {useGetBand, useRest} from '@datastore';
+import {useGetBand, useGetLocation, useRest} from '@datastore';
 import {useRef} from 'react';
 import {Mesh} from 'three';
 
@@ -15,9 +15,8 @@ import {RealityTravel} from '../organisms/RealityTravel';
 const RealityGameComponents: React.FC = () => {
   const refSelectBox = useRef<Mesh>();
   const band = useGetBand();
+  const currentLocation = useGetLocation(band?.currentLocationId)
   const {restoreAp, restoreApAmount} = useRest(band);
-
-  const actionText = `Rest Band (regain ${restoreApAmount} AP)`;
 
   return <>
     {/** Main Menu behind player */}
@@ -30,11 +29,11 @@ const RealityGameComponents: React.FC = () => {
       <RealityQuestPanel refSelectBox={refSelectBox} />
     </group>
     <group position={[-0.7, 1, -0.25]} rotation={[0, 1, 0]}>
-      <RealityBandPanel bandActionText={actionText} bandActionCallback={restoreAp} />
+      <RealityBandPanel noBandAction={restoreApAmount < 0} bandActionText={`Rest Band (regain ${restoreApAmount} AP)`} bandActionCallback={restoreAp} />
       <RealityBandMercenaries refSelectMercenaryBox={refSelectBox} />
     </group>
     <group position={[.7, 1, -0.25]} rotation={[0, -1, 0]}>
-      <RealityText text="Location" fontSize={.25} position={[0, .75, -1]} color="gray" />
+      <RealityText text={`Location: ${currentLocation?.name}`} fontSize={.25} position={[0, .75, -1]} color="gray" />
       <RealityLocationQuests refSelectQuestBox={refSelectBox} />
     </group>
     <group position={[-0.8, 1, 0.5]} rotation={[0, 1.5, 0]}>

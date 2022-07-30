@@ -7,6 +7,7 @@ type args = {
   refSelectMercenaryBox?: MutableRefObject<Mesh | undefined>,
   setSelected: (unset?: boolean | undefined) => void,
   isSelected: boolean,
+  currentHealth: number
 
   refGeneralActionBox?: MutableRefObject<Mesh | undefined>,
   generalActionCallback?: (distance: number) => void,
@@ -26,6 +27,7 @@ export const useRealityMercenaryDropActions = ({
   refSelectMercenaryBox,
   setSelected,
   isSelected,
+  currentHealth,
 
   refGeneralActionBox,
   generalActionCallback,
@@ -57,12 +59,12 @@ export const useRealityMercenaryDropActions = ({
   }, [canAffordHire, hire, slotsAvailable]);
 
   const handleSelect = useCallback((distance) => {
-    if (distance <= .15) {
+    if (distance <= .15 && currentHealth > 0) {
       setSelected();
     } else if (isSelected) {
       setSelected(true);
     }
-  }, [isSelected, setSelected]);
+  }, [currentHealth, isSelected, setSelected]);
 
   const dropTargets = useMemo(() => {
     const targets = [];

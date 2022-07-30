@@ -28,10 +28,12 @@ const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, refGeneralAct
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenaryId);
   const {isGrabbed, refGrabbableBox} = useRealityMercenaryDropActions({
     canAffordHire, canAffordSpar, generalActionCallback,
-    hire, isSelected,
+    hire, isSelected, currentHealth,
     refGeneralActionBox, refHireMercenaryBox, refSelectMercenaryBox, refSparMercenaryBox,
     setSelected, slotsAvailable, spar, statsVisible,
   });
+
+  const isExhausted = currentHealth <= 0
 
   const boxPosition = useMemo(() => {
     const offsetRow = Math.floor(offset / 3);
@@ -84,7 +86,8 @@ const RealityMercenary: React.FC<Props> = ({refSelectMercenaryBox, refGeneralAct
       {/** right face group */}
       <group rotation={[0, Math.PI / 2, 0]} position={[0.051, 0, 0]}>
         <RealityText fontSize={0.025} text="Health" position={[0, 0.03, 0]} />
-        <RealityText fontSize={0.025} text={`${(currentHealth / maxHealth * 100).toFixed(0)}%`} position={[0, 0.005, 0]} />
+        {isExhausted && <RealityText fontSize={0.02} text="Exhausted" position={[0, 0.005, 0]} color="red" />}
+        {!isExhausted && <RealityText fontSize={0.025} text={`${(currentHealth / maxHealth * 100).toFixed(0)}%`} position={[0, 0.005, 0]} />}
         <RealityText fontSize={0.02} text={`Max: ${maxHealth}`} position={[0, -0.03, 0]} />
       </group>
     </> :
