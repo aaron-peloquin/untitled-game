@@ -6,8 +6,12 @@ export const useSetSelectedQuestId = (questId: number) => {
   const gameData = useGameData();
   const {selectedQuestId, setSelectedQuestId} = gameData;
 
-  const setSelected = useCallback(() => {
-    setSelectedQuestId(questId);
+  const setSelected = useCallback((unset?: boolean) => {
+    if (unset) {
+      setSelectedQuestId(0);
+    } else {
+      setSelectedQuestId(questId);
+    }
   }, [questId, setSelectedQuestId]);
 
   return {

@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "components-game": "libs/components-game",
+    "components-game-vr": "libs/components-game-vr",
     "components-layout": "libs/components-layout",
     "datastore": "libs/datastore",
     "helper": "libs/helper",

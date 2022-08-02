@@ -1,4 +1,5 @@
 export * from './lib/datastores/GameDataProvider';
+export * from './lib/datastores/gameDataContext';
 
 export * from './lib/hooks/gameActions/useBandTravel';
 export * from './lib/hooks/gameActions/useHireMercenary';
@@ -21,8 +22,11 @@ export * from './lib/hooks/gameData/useListLocationsById';
 export * from './lib/hooks/gameData/useListMercenariesById';
 export * from './lib/hooks/gameData/useListQuestsById';
 
+export * from './lib/hooks/general/useGetInspectingMercenary';
 export * from './lib/hooks/general/useGetMercenaryStats';
 export * from './lib/hooks/general/useGetQuestStats';
 export * from './lib/hooks/gameActions/useQuestRunner';
+export * from './lib/hooks/general/useSetInspectMercenaryId';
 export * from './lib/hooks/general/useSetSelectMercenaryId';
 export * from './lib/hooks/general/useSetSelectedQuestId';
+

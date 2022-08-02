@@ -17,6 +17,7 @@
     "paths": {
       "@band": ["libs/band/src/index.ts"],
       "@components-game": ["libs/components-game/src/index.ts"],
+      "@components-game-vr": ["libs/components-game-vr/src/index.ts"],
       "@components-layout": ["libs/components-layout/src/index.ts"],
       "@datastore": ["libs/datastore/src/index.ts"],
       "@helper": ["libs/helper/src/index.ts"],

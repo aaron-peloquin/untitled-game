@@ -48,12 +48,15 @@ const MercenaryItem: React.FC<T_Props> = memo(({
   const {currentHealth, level, mercenaryId, name, statsVisible} = mercenary;
   const stats = useGetMercenaryStats(mercenary);
   const {isSelected, setSelected} = useSetSelectMercenaryId(mercenaryId);
+  const selectMercenary = useCallback(() => {
+    setSelected();
+  }, [setSelected]);
 
   const {canAffordHire, hire, hireCost, slotsAvailable} = useHireMercenary(mercenary, stats._goldHiring);
   const {canAffordSpar, spar, sparCost} = useSparMercenary(mercenary);
   const showStatsButton = (canHire && !statsVisible);
   const showSelectButton = canSelect && currentHealth > 0;
-  const healthbarColor = useMemo(() => {
+  const healthBarColor = useMemo(() => {
     if (currentHealth > stats.maxHealth / 2) {
       return 'seagreen';
     } else if (currentHealth > stats.maxHealth / 4) {
@@ -76,7 +79,7 @@ const MercenaryItem: React.FC<T_Props> = memo(({
     {statsVisible && <Card layer="5">
       <GridTemplate gridTemplateAreas={STATS_AREA} gridTemplateColumns="1fr 1fr" textAlign='center'>
         {showHealthBar && <GridArea name="health___">
-          <ProgressBar max={stats.maxHealth} color={healthbarColor} value={currentHealth} id={`${mercenaryId}_health`} />
+          <ProgressBar max={stats.maxHealth} color={healthBarColor} value={currentHealth} id={`${mercenaryId}_health`} />
         </GridArea>}
         <GridArea name="attack___"><Output label="Attack" id={`${mercenaryId}_attack`} value={stats.attack} /></GridArea>
         <GridArea name="cunning__"><Output label="Cunning" id={`${mercenaryId}_cunning`} value={stats.cunning} /></GridArea>
@@ -88,7 +91,7 @@ const MercenaryItem: React.FC<T_Props> = memo(({
       {showCheckbox && <GridArea><Toggle label={checkboxLabel} checked={isChecked} id={`check-mercenary-${mercenary.mercenaryId}`} onChange={toggleChecked} /></GridArea>}
       {showStatsButton && <GridArea><Button disabled={!canAffordSpar} onClick={spar} text={`Spar for ${sparCost ? `${sparCost} gold` : 'free'}`} /></GridArea>}
       {canHire && <GridArea><Button disabled={!canAffordHire || !slotsAvailable} onClick={hire} text={`Hire for ${hireCost} gold`} /></GridArea>}
-      {showSelectButton && <GridArea><Button disabled={isSelected} text="Select Mercenary" onClick={setSelected} /></GridArea>}
+      {showSelectButton && <GridArea><Button disabled={isSelected} text="Select Mercenary" onClick={selectMercenary} /></GridArea>}
     </GridTemplate>
   </Card>;
 });

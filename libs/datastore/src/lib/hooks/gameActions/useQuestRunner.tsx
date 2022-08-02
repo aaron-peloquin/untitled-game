@@ -1,5 +1,5 @@
 import {questRunners} from '@quest';
-import {useCallback} from 'react';
+import {useCallback, useMemo} from 'react';
 
 import {T_QuestResults, T_QuestResultsBand, T_QuestResultsMercenary, T_QuestResultsQuest} from 'TS_Quest';
 
@@ -33,6 +33,17 @@ export const useQuestRunner = () => {
   const questStats = useGetQuestStats(quest);
   const apCost = 1;
   const hasEnoughAp = currentAp >= apCost;
+  const questRunnerText = useMemo(() => {
+    if (mercenary && quest) {
+      return `Send ${mercenary?.name} to ${quest?.type} ${quest?.targetName}`;
+    } else if (mercenary) {
+      return `Select a quest to send  ${mercenary?.name} on`;
+    } else if (quest) {
+      return `Select a mercenary from your band to ${quest?.type} ${quest?.targetName}`;
+    } else {
+      return 'Select a mercenary from your band and a quest to send them on';
+    }
+  }, [mercenary, quest]);
 
   const updateMercenary = useCallback((mercenaryResults: T_QuestResultsMercenary) => {
     dataStore?.mercenaries.where('mercenaryId').equals(selectedMercenaryId).modify((mercenary) => {
@@ -86,5 +97,5 @@ export const useQuestRunner = () => {
     return QUEST_DID_NOT_RUN;
   }, [changeActionPoints, mercenary, mercenaryStats, quest, questStats, updateBand, updateMercenary, updateQuest]);
 
-  return {apCost, hasEnoughAp, mercenary, mercenaryStats, quest, questStats, runQuest};
+  return {apCost, hasEnoughAp, mercenary, mercenaryStats, quest, questRunnerText, questStats, runQuest};
 };

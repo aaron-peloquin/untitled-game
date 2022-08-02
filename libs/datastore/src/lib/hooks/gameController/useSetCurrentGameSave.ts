@@ -7,7 +7,7 @@ import {useGetCurrentSave} from './useGetCurrentSave';
 import {gameController} from '../../datastores/gameController';
 
 
-export const useSetCurrentGameSave = (landingPage: string = URLs.playGame) => {
+export const useSetCurrentGameSave = (landingPage: string | boolean = URLs.playGame) => {
   const router = useRouter();
   const currentSave = useGetCurrentSave();
 
@@ -16,7 +16,7 @@ export const useSetCurrentGameSave = (landingPage: string = URLs.playGame) => {
       gameController.gameSaves.update(currentSave.gameSaveId, {currentSave: 0});
     }
     gameController.gameSaves.update(id, {currentSave: 1});
-    if (landingPage) {
+    if (typeof landingPage === 'string') {
       router.push(landingPage);
     }
     return;

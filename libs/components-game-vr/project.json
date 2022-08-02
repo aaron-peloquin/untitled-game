@@ -1,0 +1,15 @@
+{
+  "root": "libs/components-game-vr",
+  "sourceRoot": "libs/components-game-vr/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/components-game-vr/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}

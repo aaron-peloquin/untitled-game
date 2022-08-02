@@ -10,7 +10,7 @@ import {useListMercenariesById} from '../gameData/useListMercenariesById';
 export const usePayWages = (band?: T_Band) => {
   const gameData = useGameData();
   const [wagesDue, setWagesDue] = useState(false);
-  const bandDaysUntilWages = band?.daysUntilWages ?? 0;
+  const bandDaysUntilWages = band?.daysUntilWages ?? false;
   const [checkedMercenaries, setCheckedMercenaries] = useState<number[]>([]);
   const bandMercenaries = useListMercenariesById(band?.mercenaryIds);
   const hp_per_end = useGetGameSetting('hp_per_end');

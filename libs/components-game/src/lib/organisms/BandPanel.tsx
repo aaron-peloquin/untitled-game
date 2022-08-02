@@ -20,7 +20,6 @@ const BandPanel = memo(() => {
     setQuestResults(undefined);
   }, []);
 
-
   return questResults ?
     <QuestResults clearQuestResults={clearQuestResults} questResults={questResults} /> :
     <Card heading={`${band?.name}'s Mercenary Band`} layer="2">
