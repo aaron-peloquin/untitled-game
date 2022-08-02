@@ -3,12 +3,11 @@ import {MutableRefObject, useRef, useState} from 'react';
 
 type useGrabSig = (maxDistance?: number, onRelease?: (onReleaseArgs: XRInteractionEvent) => void, onGrab?: (onGrabArgs:XRInteractionEvent) => void) => {isGrabbed: boolean, ref: MutableRefObject<any>}
 
-
 export const useGrab: useGrabSig = (maxDistance = 0.075, onRelease, onGrab) => {
   const ref = useRef<any>();
   const refContainer = useRef<any>();
   const [isGrabbed, setIsGrabbed] = useState(false);
-  const clickAudio = new Audio('/sfx/mixkit-interface-click-1126.mp3')
+  const clickAudio = new Audio('/sfx/mixkit-interface-click-1126.mp3');
 
   useInteraction(ref, 'onSqueezeStart', (onGrabArgs) => {
     const {controller, intersection} = onGrabArgs;
@@ -43,7 +42,7 @@ export const useGrab: useGrabSig = (maxDistance = 0.075, onRelease, onGrab) => {
       }
       if (obj) {
         refContainer.current.attach(obj);
-        clickAudio.play()
+        clickAudio.play();
         if (onRelease) {
           onRelease(onReleaseArgs);
         }
