@@ -15,7 +15,6 @@ const SteamHeaderWithCookies = () => {
     }
     return {};
   }, []);
-  console.log({user});
 
   return <Corner location="top-right">
     {user?.username ?
