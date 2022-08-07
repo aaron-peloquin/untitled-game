@@ -1,20 +1,18 @@
 
 .container {
   background-color: #1b2839;
+  padding: 12px 12px 8px 12px;
   position: absolute;
+  top: 0;
   z-index: 9;
 }
 
 .top-left {
   border-bottom-right-radius: 5px;;
   left: 0;
-  padding: 12px 8px 8px 12px;
-  top: 0;
 }
 
 .top-right {
   border-bottom-left-radius: 5px;;
-  padding: 12px 12px 8px 8px;
   right: 0;
-  top: 0;
 }
