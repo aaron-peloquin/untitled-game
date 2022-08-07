@@ -16,7 +16,6 @@ export const useSetGameSetting = () => {
       }
       gameController.gameSettings.update(name, {value});
     }
-    console.log(name, value);
   }, []);
   return handleChange;
 };

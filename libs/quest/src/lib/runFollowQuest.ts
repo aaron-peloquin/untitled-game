@@ -46,8 +46,8 @@ const questReactionAnimation = {animation: 'fly-from-right 0.2s cubic-bezier(0.3
 const questCaughtAnimation = {animation: 'fly-from-right-red 1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both'};
 
 const animationDelayIncriment = 0.5;
-const animationDelayIncrimentMercenary = 3.5;
-const animationDelayIncrimentQuest = 0.2;
+const animationDelayIncrementMercenary = 3.5;
+const animationDelayIncrementQuest = 0.2;
 
 export const runFollowQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, questStats}) => {
   let outcome: T_QuestOutcome = 'Victory';
@@ -71,86 +71,73 @@ export const runFollowQuest:T_RunQuestSig = ({quest, mercenary, mercenaryStats, 
   const questDetectionRating = questStats.cunning + questStats.subtlety;
 
   const questDifficultyCheck = ((questDetectionRating) * 2) + quest.level - Math.sqrt(mercenaryStats.endurance);
-  const mercenaryStealthing = () => {
+  const mercenaryStealthCheck = () => {
     const sneakAction = pickArray(stealthActions, numberGenerator)(quest.targetName);
     const stealthTopRange = ((mercenaryStats.cunning) * 2) + mercenary.level;
     const stealthAttempt = numberRange(mercenaryStats.subtlety / 2, stealthTopRange) + (mercenaryStats.subtlety * 2);
 
     const stealthResult = stealthAttempt - (questDifficultyCheck + suspiciousTarget);
-    console.log({
-      mercenaryCurrentHealth,
-      questDetectionRating,
-      questDifficultyCheck,
-      stealthAttempt,
-      stealthResult,
-      stealthTopRange,
-      suspiciousTarget,
-    });
     if (stealthResult >= 0) {
       checksPassed++;
       if (stealthResult < questDetectionRating) {
         // suspicious description
         suspiciousTarget++;
         roundsLog.push({action: sneakAction, icon: GiFootsteps, person: mercenary.name, styles: {...mercenarySneakAnimationWithPause, animationDelay: `${animationDelayCounter}s`}});
-        animationDelayCounter += animationDelayIncrimentQuest;
+        animationDelayCounter += animationDelayIncrementQuest;
         const questReaction = pickArray(questReactions, numberGenerator);
         roundsLog.push({action: questReaction[0], icon: questReaction[1], person: quest.targetName, styles: {...questReactionAnimation, animationDelay: `${animationDelayCounter}s`}});
       } else {
         // successful stealth description
         roundsLog.push({action: sneakAction, icon: GiFootsteps, person: mercenary.name, styles: {...mercenarySneakAnimation, animationDelay: `${animationDelayCounter}s`}});
       }
-      animationDelayCounter += animationDelayIncrimentMercenary;
+      animationDelayCounter += animationDelayIncrementMercenary;
     } else {
       // failed
       mercenaryDetectedResult = stealthResult;
       roundsLog.push({action: sneakAction, icon: GiFootsteps, person: mercenary.name, styles: {...mercenarySneakAnimationWithCaught, animationDelay: `${animationDelayCounter}s`}});
-      animationDelayCounter += animationDelayIncrimentQuest;
+      animationDelayCounter += animationDelayIncrementQuest;
       roundsLog.push({action: `caught ${mercenary.name}!`, icon: GiPointing, person: quest.targetName, styles: {...questCaughtAnimation, animationDelay: `${animationDelayCounter}s`}});
     }
   };
 
   while (checksPassed < checksNeeded && mercenaryDetectedResult === 0) {
-    mercenaryStealthing();
+    mercenaryStealthCheck();
   }
 
   const removeMercenary = false;
   let removeQuest = false;
   let goldReward = 0;
-  let mercExp = 0;
+  let mercenaryExp = 0;
   const lastItemAnimationDelay = animationDelayCounter + (animationDelayIncriment * 1.5);
   const lastItemStylesObj = {...fadeInAnimation, animationDelay: `${lastItemAnimationDelay}s`};
   const finalStyles = {...fadeInAnimation, animationDelay: `${lastItemAnimationDelay + (animationDelayIncriment * 2)}s`};
   if (mercenaryDetectedResult === 0) {
     outcome = 'Success';
     removeQuest = true;
-    mercExp = parseFloat((0.2 * quest.level / mercenary.level + (roundsLog.length / 300) / 3).toFixed(2));
+    mercenaryExp = parseFloat((0.2 * quest.level / mercenary.level + (roundsLog.length / 300) / 3).toFixed(2));
     goldReward = Math.round((quest.level) + (questStats._goldUpkeep / 2));
 
     roundsLog.push({action: wrappingActions[1], person: quest.targetName, styles: lastItemStylesObj});
     roundsLog.push({action: `reports back to the contact, returning with ${goldReward} gold`, person: mercenary.name, styles: lastItemStylesObj});
   } else if (mercenaryDetectedResult < -(4 * Math.sqrt(mercenary.level))) {
-    console.log('we hit it', {
-      a: mercenaryDetectedResult,
-      b: -(4 * Math.sqrt(mercenary.level)),
-    });
     outcome = 'Caught';
     mercenaryCurrentHealth = 0;
-    mercExp = parseFloat((0.35 * quest.level / mercenary.level / 4).toFixed(2));
+    mercenaryExp = parseFloat((0.35 * quest.level / mercenary.level / 4).toFixed(2));
 
     roundsLog.push({action: ` limps back in great pain. ${quest.targetName} apparently has some friends in high places`, icon: GiArmSling, person: mercenary.name, styles: lastItemStylesObj});
   } else {
     outcome = 'Failure';
-    mercExp = parseFloat((0.10 * quest.level / mercenary.level / 5).toFixed(2));
+    mercenaryExp = parseFloat((0.10 * quest.level / mercenary.level / 5).toFixed(2));
 
     roundsLog.push({action: `returned in failure`, person: mercenary.name, styles: lastItemStylesObj});
   }
 
-  const bandExp = parseFloat((mercExp / mercenary.level).toFixed(2));
+  const bandExp = parseFloat((mercenaryExp / mercenary.level).toFixed(2));
 
   const result: T_QuestResults = {
     band: {exp: bandExp, gold: goldReward},
     finalStyles,
-    mercenary: {exp: mercExp, health: mercenaryCurrentHealth, remove: removeMercenary},
+    mercenary: {exp: mercenaryExp, health: mercenaryCurrentHealth, remove: removeMercenary},
     outcome,
     quest: {remove: removeQuest},
     roundsLog,
