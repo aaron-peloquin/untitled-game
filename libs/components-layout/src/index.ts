@@ -8,6 +8,7 @@ export * from './lib/atoms/Toggle';
 
 export * from './lib/icons/TravelingShip';
 
+export * from './lib/molecules/Corner';
 export * from './lib/molecules/Card';
 export * from './lib/molecules/GridTemplate';
 export * from './lib/molecules/GridArea';
