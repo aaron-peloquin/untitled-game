@@ -1,10 +1,10 @@
-import {memo, useContext, useEffect, useMemo} from 'react';
+import {memo, ReactNode, useContext, useEffect, useMemo} from 'react';
 
 import style from './Tab.module.css';
 
 import {tabsContext, T_Tab} from './tabsContext';
 
-type T_Props = T_Tab
+type T_Props = T_Tab & { children?: ReactNode }
 const Tab: React.FC<T_Props> = memo(({children, id, name, sort}) => {
   const tabsData = useContext(tabsContext);
   const {deregisterTab, registerTab, tabs} = tabsData;

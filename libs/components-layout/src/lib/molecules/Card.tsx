@@ -9,6 +9,7 @@ type T_Props = {
   layer: T_CardLayer
   heading?: string | ReactNode
   style?: Record<string, any>
+  children?: ReactNode
 }
 
 const Card: React.FC<T_Props> = memo(({layer, heading, children, style}) => {

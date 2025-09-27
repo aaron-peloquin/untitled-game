@@ -1,5 +1,5 @@
 import CSS from 'csstype';
-import {memo, useMemo} from 'react';
+import {memo, ReactNode, useMemo} from 'react';
 
 import styles from './GridTemplate.module.css';
 
@@ -9,6 +9,7 @@ type T_Props = {
   className?: string
   columns?: number
   rows?: number
+  children?: ReactNode
 }
 
 type T_CombinedProps = T_Props & T_CssProps

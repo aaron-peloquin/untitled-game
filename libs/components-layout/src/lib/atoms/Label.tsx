@@ -5,6 +5,7 @@ import style from './Label.module.css';
 type T_Props = {
   text: string | ReactNode
   htmlFor: string
+  children?: ReactNode
 }
 
 

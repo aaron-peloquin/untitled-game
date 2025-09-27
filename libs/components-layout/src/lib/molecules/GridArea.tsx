@@ -1,5 +1,5 @@
 import CSS from 'csstype';
-import {memo, useMemo} from 'react';
+import {memo, ReactNode, useMemo} from 'react';
 
 type T_CssProps = Pick<CSS.Properties, 'alignSelf' | 'justifySelf' | 'textAlign'>
 
@@ -9,6 +9,7 @@ type T_Props = {
   // eslint-disable-next-line @typescript-eslint/ban-types
   onClick?: Function
   style?: Record<string, string>
+  children?: ReactNode
 }
 
 type T_CombinedProps = T_Props & T_CssProps

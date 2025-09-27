@@ -9,9 +9,9 @@ export const useGrab: useGrabSig = (maxDistance = 0.075, onRelease, onGrab) => {
   const [isGrabbed, setIsGrabbed] = useState(false);
   const clickAudio = new Audio('/sfx/mixkit-interface-click-1126.mp3');
 
-  useInteraction(ref, 'onSqueezeStart', (onGrabArgs) => {
-    const {controller, intersection} = onGrabArgs;
-    const controllerApi = controller.controller;
+  useInteraction(ref, 'onSqueezeStart', (onGrabArgs: any) => {
+    const {controller, intersection} = onGrabArgs || {};
+    const controllerApi = controller?.controller;
     if (intersection && intersection?.distance <= maxDistance) {
       clickAudio.play();
       let obj = intersection.object;
@@ -32,8 +32,8 @@ export const useGrab: useGrabSig = (maxDistance = 0.075, onRelease, onGrab) => {
     }
   });
 
-  useInteraction(ref, 'onSqueezeEnd', (onReleaseArgs) => {
-    const {intersection} = onReleaseArgs;
+  useInteraction(ref, 'onSqueezeEnd', (onReleaseArgs: any) => {
+    const {intersection} = onReleaseArgs || {};
     if (refContainer.current && intersection) {
       setIsGrabbed(false);
       let obj = intersection.object;

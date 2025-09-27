@@ -1,4 +1,4 @@
-import {memo, useCallback, useEffect, useMemo, useState} from 'react';
+import {memo, ReactNode, useCallback, useEffect, useMemo, useState} from 'react';
 
 import {tabsContext, T_Tab, T_tabsContextValue} from './tabsContext';
 
@@ -6,6 +6,7 @@ const {Provider} = tabsContext;
 
 type T_Props = {
   defaultTab?: string
+  children?: ReactNode
 }
 const TabsProvider:React.FC<T_Props> = memo(({children, defaultTab = ''}) => {
   const [currentTabId, setCurrentTabId] = useState(defaultTab);

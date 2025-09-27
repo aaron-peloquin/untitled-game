@@ -1,4 +1,4 @@
-import {memo} from 'react';
+import {memo, ReactNode} from 'react';
 
 import {T_CardLayer} from 'TS_General';
 
@@ -11,6 +11,7 @@ import {Card} from '../molecules/Card';
 type T_Props = {
     defaultTab?: T_TabId
     layer: T_CardLayer
+  children?: ReactNode
   }
 
 const Tabs: React.FC<T_Props> = memo(({defaultTab, layer, children}) => {
