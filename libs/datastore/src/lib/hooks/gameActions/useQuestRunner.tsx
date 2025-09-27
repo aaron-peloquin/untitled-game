@@ -6,6 +6,7 @@ import {T_QuestResults, T_QuestResultsBand, T_QuestResultsMercenary, T_QuestResu
 import {useActionPoints} from './useActionPoints';
 
 import {useGameData} from '../gameController/useGameData';
+import {useUpdateGameMetrics} from '../gameController/useUpdateGameMetrics';
 import {useGetBand} from '../gameData/useGetBand';
 import {useGetMercenary} from '../gameData/useGetMercenary';
 import {useGetQuest} from '../gameData/useGetQuest';
@@ -24,6 +25,7 @@ const QUEST_DID_NOT_RUN: T_QuestResults = {
 export const useQuestRunner = () => {
   const gameData = useGameData();
   const band = useGetBand();
+  const {incrementMetric} = useUpdateGameMetrics();
   const bandId = band?.bandId || 1;
   const {changeActionPoints, currentAp} = useActionPoints();
   const {dataStore, selectedMercenaryId, selectedQuestId, setSelectedQuestId, setSelectedMercenaryId} = gameData;
@@ -86,6 +88,12 @@ export const useQuestRunner = () => {
         const removeAp = changeActionPoints(-1);
         if (removeAp) {
           const questResults = questRunner({mercenary, mercenaryStats, quest, questStats});
+          
+          // Track death metric before updating mercenary
+          if (questResults.outcome === 'Death' && questResults.mercenary.remove) {
+            incrementMetric('totalDeaths');
+          }
+          
           updateMercenary(questResults.mercenary);
           updateBand(questResults.band);
           updateQuest(questResults.quest);
@@ -95,7 +103,7 @@ export const useQuestRunner = () => {
       }
     }
     return QUEST_DID_NOT_RUN;
-  }, [changeActionPoints, mercenary, mercenaryStats, quest, questStats, updateBand, updateMercenary, updateQuest]);
+  }, [changeActionPoints, incrementMetric, mercenary, mercenaryStats, quest, questStats, updateBand, updateMercenary, updateQuest]);
 
   return {apCost, hasEnoughAp, mercenary, mercenaryStats, quest, questRunnerText, questStats, runQuest};
 };

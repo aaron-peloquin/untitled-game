@@ -3,6 +3,7 @@ import {useCallback} from 'react';
 import {T_Mercenary} from 'TS_Mercenary';
 
 import {useGameData} from '../gameController/useGameData';
+import {useUpdateGameMetrics} from '../gameController/useUpdateGameMetrics';
 
 import {useGetBand} from '../gameData/useGetBand';
 
@@ -10,6 +11,7 @@ import {useGetBand} from '../gameData/useGetBand';
 export const useHireMercenary = (mercenary: T_Mercenary, hireCost: number) => {
   const gameData = useGameData();
   const band = useGetBand();
+  const {incrementMetric} = useUpdateGameMetrics();
   const bandGold = band?.gold || 0;
   const bandId = band?.bandId || 0;
   const mercenaryId = mercenary.mercenaryId;
@@ -33,8 +35,11 @@ export const useHireMercenary = (mercenary: T_Mercenary, hireCost: number) => {
         const newMercenaries = location.mercenaryIds.filter((locMercId) => locMercId !== mercenaryId);
         location.mercenaryIds = newMercenaries;
       });
+
+      // Increment totalHired metric for game over screen
+      incrementMetric('totalHired');
     }
-  }, [bandGold, hireCost, gameData.dataStore, bandId, mercenaryId]);
+  }, [bandGold, hireCost, gameData.dataStore, bandId, mercenaryId, incrementMetric]);
 
   return {canAffordHire, hire, hireCost, isHired, slotsAvailable};
 };

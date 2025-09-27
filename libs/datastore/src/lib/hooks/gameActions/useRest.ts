@@ -6,10 +6,12 @@ import {useActionPoints} from './useActionPoints';
 
 import {useGameData} from '../gameController/useGameData';
 import {useGetGameSetting} from '../gameController/useGetGameSetting';
+import {useUpdateGameMetrics} from '../gameController/useUpdateGameMetrics';
 
 export const useRest = (band?: T_Band) => {
   const {currentAp, maxAp, changeActionPoints} = useActionPoints();
   const hp_per_end = useGetGameSetting('hp_per_end');
+  const {incrementMetric} = useUpdateGameMetrics();
 
   const restoreApAmount = maxAp - currentAp;
   const gameSave = useGameData();
@@ -18,6 +20,9 @@ export const useRest = (band?: T_Band) => {
       const daysUntilWages = band.daysUntilWages - 1;
       changeActionPoints(restoreApAmount);
       gameSave.dataStore.band.update(band?.bandId || 1, {daysUntilWages});
+
+      // Increment totalDays metric for game over screen
+      incrementMetric('totalDays');
 
       if (band?.mercenaryIds) {
         band?.mercenaryIds.forEach((mercenaryId) => {
@@ -29,6 +34,6 @@ export const useRest = (band?: T_Band) => {
         });
       }
     }
-  }, [band?.bandId, band?.daysUntilWages, band?.mercenaryIds, changeActionPoints, gameSave.dataStore, hp_per_end, restoreApAmount]);
+  }, [band?.bandId, band?.daysUntilWages, band?.mercenaryIds, changeActionPoints, gameSave.dataStore, hp_per_end, restoreApAmount, incrementMetric]);
   return {currentAp, maxAp, restoreAp, restoreApAmount};
 };
