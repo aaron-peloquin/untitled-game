@@ -41,5 +41,21 @@
 - See each library's README for more details on its role and conventions.
 - Main project README: `/README.md`
 
+## Engineering Docs
+For deeper, standardized guidance used across this repo, see `/engineering-docs/`:
+
+- `/engineering-docs/README.md` (index)
+- Architecture: `/engineering-docs/architecture.md`
+- Coding standards: `/engineering-docs/coding-standards.md`
+- UI components: `/engineering-docs/ui-components.md`
+- Data access: `/engineering-docs/data-access.md`
+- Testing: `/engineering-docs/testing.md`
+- Workflows (dev/PRs): `/engineering-docs/workflows.md`
+- Next.js guidance: `/engineering-docs/nextjs.md`
+- Types and contracts: `/engineering-docs/types-and-contracts.md`
+- PR checklist: `/engineering-docs/pr-checklist.md`
+- Nx cheat sheet: `/engineering-docs/nx-cheatsheet.md`
+- Library guidelines: `/engineering-docs/library-guidelines.md`
+
 ---
 For questions or unclear conventions, check the relevant README or ask for clarification.
