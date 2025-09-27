@@ -1,6 +1,7 @@
 
 declare module 'TS_General' {
   import {ReactNode} from "react"
+  import {IconType} from 'react-icons'
 
   type T_GameSave = {
     gameSaveId: number
@@ -34,7 +35,9 @@ declare module 'TS_General' {
 
   type T_TwoItemNumberArray = [ number, number ]
   type T_TwoItemStringArray = [ string, string ]
-  type T_TwoItemStringNodeArray = [ string, ReactNode ]
+  // Note: we store the Icon component type (IconType) rather than a rendered ReactNode
+  // because consumers (e.g., quest log items) expect an IconType to render later.
+  type T_TwoItemStringNodeArray = [ string, IconType ]
   type T_NumGenSig = () => number
 }
 
