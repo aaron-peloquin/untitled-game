@@ -1,5 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+/apps/**/.next/*
+
 # compiled output
 /dist
 /tmp
@@ -42,3 +44,8 @@ Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+
+# Package manager lockfiles (using pnpm)
+package-lock.json
+yarn.lock
+.npmrc

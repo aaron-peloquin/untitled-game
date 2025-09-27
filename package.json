@@ -2,6 +2,7 @@
   "name": "untitled-game",
   "version": "0.0.0",
   "license": "MIT",
+  "packageManager": "pnpm@10.13.1",
   "scripts": {
     "start": "nx serve",
     "start360": "nx serve three60",

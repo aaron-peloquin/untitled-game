@@ -11,10 +11,10 @@
   - `helper`, `quest`: Utility libraries (general and quest-specific helpers).
 
 ## Developer Workflows
-- **Install dependencies**: `npm i`
-- **Start dev server**: `npm run start` (default: http://localhost:4200)
-- **Start with SSL/WebXR**: `npm run startSSL` (https://localhost:3000)
-- **Global Nx CLI**: Install with `npm install -g nx`
+- **Install dependencies**: `pnpm i`
+- **Start dev server**: `pnpm run start` (default: http://localhost:4200)
+- **Start with SSL/WebXR**: `pnpm run startSSL` (https://localhost:3000)
+- **Global Nx CLI**: Install with `pnpm install -g nx`
 
 ## Testing
 - Uses Jest for unit tests. Test configs in `jest.config.js` and `jest.preset.js`.
