@@ -39,6 +39,15 @@ declare module 'TS_General' {
   // because consumers (e.g., quest log items) expect an IconType to render later.
   type T_TwoItemStringNodeArray = [ string, IconType ]
   type T_NumGenSig = () => number
+
+  type T_GameMetrics = {
+    id: number
+    totalDays: number
+    totalHired: number
+    totalDeaths: number
+    totalQuestsCompleted?: number
+    maxBandLevel?: number
+  }
 }
 
 declare module '*.css' {

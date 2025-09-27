@@ -4,7 +4,7 @@ import * as chanceExport from 'chance';
 import Dexie, {Table} from 'dexie';
 import * as _ from 'lodash';
 import {T_Band} from 'TS_Band';
-import {T_KnownQuestTypes, T_TwoItemNumberArray} from 'TS_General';
+import {T_GameMetrics, T_KnownQuestTypes, T_TwoItemNumberArray} from 'TS_General';
 import {T_Location} from 'TS_Location';
 import {T_Mercenary} from 'TS_Mercenary';
 import {T_Quest} from 'TS_Quest';
@@ -17,6 +17,7 @@ export class GameDataClass extends Dexie {
   locations!: Table<T_Location, number>;
   mercenaries!: Table<T_Mercenary, number>;
   quests!: Table<T_Quest, number>;
+  metrics!: Table<T_GameMetrics, number>;
 
   constructor(gameDatastoreName: string, name: string, seed: string, locationsToGenerate: number, apPerDay:number, startingGold: number) {
     super(`untitled-game-${gameDatastoreName}`);
@@ -26,6 +27,26 @@ export class GameDataClass extends Dexie {
       locations: '++locationId, *mercenaryIds, *questIds, *relatedLocationIds',
       mercenaries: '++mercenaryId, ethnicity, personality, profession, statsVisible',
       quests: '++questId, questCompletedByMercenaryId, targetEthnicity, targetProfession, type',
+    });
+
+    // Version 2: Add metrics table for game over screen
+    this.version(2).stores({
+      // Primary key and indexed props
+      band: '++bandId, currentLocationId, name, *mercenaryIds',
+      locations: '++locationId, *mercenaryIds, *questIds, *relatedLocationIds',
+      mercenaries: '++mercenaryId, ethnicity, personality, profession, statsVisible',
+      quests: '++questId, questCompletedByMercenaryId, targetEthnicity, targetProfession, type',
+      metrics: '++id',
+    }).upgrade(tx => {
+      // For existing saves, add a default metrics row
+      return tx.table('metrics').add({
+        id: 1,
+        totalDays: 0,
+        totalHired: 0,
+        totalDeaths: 0,
+        totalQuestsCompleted: 0,
+        maxBandLevel: 1,
+      } as T_GameMetrics);
     });
 
     this.on('populate', () => {
@@ -50,6 +71,18 @@ export class GameDataClass extends Dexie {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       this.band.add(newBand);
+
+      // initialize metrics for new save
+      const initialMetrics: Omit<T_GameMetrics, 'id'> = {
+        totalDays: 0,
+        totalHired: 1, // starts with 1 mercenary
+        totalDeaths: 0,
+        totalQuestsCompleted: 0,
+        maxBandLevel: 1,
+      };
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      this.metrics.add(initialMetrics);
 
       // generate world locations
       this.generateGameWorld(locationsToGenerate);

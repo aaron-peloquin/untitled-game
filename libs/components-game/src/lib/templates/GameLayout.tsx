@@ -1,6 +1,8 @@
 import {GridArea, GridTemplate} from '@components-layout';
-import {useGetBand, usePayWages} from '@datastore';
-import {memo} from 'react';
+import {useGetBand, usePayWages, useGameOverCheck} from '@datastore';
+import {URLs} from '@static';
+import {useRouter} from 'next/router';
+import {memo, useEffect} from 'react';
 
 import {Location} from './../organisms/Location';
 
@@ -15,6 +17,16 @@ const gridTemplateAreas = `
 const GameLayout = memo(() => {
   const band = useGetBand();
   const {wagesDue, bandMercenaries, ...wagesProps} = usePayWages(band);
+  const gameOverCheck = useGameOverCheck();
+  const router = useRouter();
+
+  // Check for game over condition and redirect
+  useEffect(() => {
+    if (gameOverCheck.isGameOver && !wagesDue) {
+      console.log('Game Over detected:', gameOverCheck.reason);
+      router.push(URLs.gameOver);
+    }
+  }, [gameOverCheck.isGameOver, gameOverCheck.reason, router, wagesDue]);
 
   return <>
     <TopNav />
