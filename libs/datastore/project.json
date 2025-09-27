@@ -1,6 +1,8 @@
 {
-  "root": "libs/datastore",
+  "name": "@datastore",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/datastore/src",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -13,20 +15,14 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/datastore/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/datastore"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/datastore"],
       "options": {
-        "jestConfig": "libs/datastore/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "libs/datastore/jest.config.js"
       }
     }
-  },
-  "tags": []
+  }
 }

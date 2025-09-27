@@ -1,22 +1,18 @@
 {
-  "root": "libs/components-game",
+  "name": "components-game",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/components-game/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/components-game/**/*.{ts,tsx,js,jsx}"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/components-game"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/components-game"],
       "options": {
-        "jestConfig": "libs/components-game/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "libs/components-game/jest.config.js"
       }
     },
     "stylelint": {

@@ -1,6 +1,8 @@
 {
-  "root": "libs/helper",
+  "name": "@helper",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/helper/src",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -13,20 +15,14 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/helper/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/helper"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/helper"],
       "options": {
-        "jestConfig": "libs/helper/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "libs/helper/jest.config.js"
       }
     }
-  },
-  "tags": []
+  }
 }

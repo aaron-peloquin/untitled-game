@@ -1,4 +1,4 @@
-import {memo, useEffect, useMemo, useState} from 'react';
+import {memo, PropsWithChildren, useEffect, useMemo, useState} from 'react';
 
 import {GameDataClass} from './gameData';
 import {gameDataContext, T_GameDataContext} from './gameDataContext';
@@ -8,7 +8,9 @@ import {useGetGameSetting} from '../hooks/gameController/useGetGameSetting';
 
 const {Provider} = gameDataContext;
 
-const GameDataProvider: React.FC = memo(({children}) => {
+type GameDataProviderProps = PropsWithChildren<{}>;
+
+const GameDataProviderComponent = ({children}: GameDataProviderProps) => {
   const [inspectMercenaryId, setInspectMercenaryId] = useState(0);
   const [selectedMercenaryId, setSelectedMercenaryId] = useState(0);
   const [selectedQuestId, setSelectedQuestId] = useState(0);
@@ -41,12 +43,9 @@ const GameDataProvider: React.FC = memo(({children}) => {
     return value;
   }, [apPerDay, inspectMercenaryId, save?.gameDatastoreName, save?.name, save?.seed, save?.totalLocations, selectedMercenaryId, selectedQuestId, startingGold]);
 
-  return <Provider value={gameProviderValue}>
-    {children}
-  </Provider>;
-});
-
-GameDataProvider.displayName = 'GameDataProvider';
-export {
-  GameDataProvider,
+  return <Provider value={gameProviderValue}>{children}</Provider>;
 };
+
+const GameDataProvider = memo(GameDataProviderComponent);
+GameDataProvider.displayName = 'GameDataProvider';
+export { GameDataProvider };

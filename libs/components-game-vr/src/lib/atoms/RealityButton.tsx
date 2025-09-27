@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import {RoundedBox} from '@react-three/drei';
-import {Interactive, XRInteractionEvent} from '@react-three/xr';
+import {Interactive} from '@react-three/xr';
 import {useEffect, useRef} from 'react';
 
 import {RealityText} from './RealityText';
@@ -15,7 +15,7 @@ type T_Props = {
   fontPadding?: number
   text: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  handleSelect: (event: XRInteractionEvent) => any
+  handleSelect: (event: any) => any
 }
 
 const RealityButton: React.FC<T_Props> = ({

@@ -1,6 +1,8 @@
 {
-  "root": "libs/quest",
+  "name": "@quest",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/quest/src",
+  "tags": [],
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
@@ -13,20 +15,14 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/quest/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/quest"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/quest"],
       "options": {
-        "jestConfig": "libs/quest/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "libs/quest/jest.config.js"
       }
     }
-  },
-  "tags": []
+  }
 }

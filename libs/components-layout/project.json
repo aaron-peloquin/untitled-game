@@ -1,22 +1,18 @@
 {
-  "root": "libs/components-layout",
+  "name": "components-layout",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/components-layout/src",
   "projectType": "library",
   "tags": [],
   "targets": {
     "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["libs/components-layout/**/*.{ts,tsx,js,jsx}"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/components-layout"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/components-layout"],
       "options": {
-        "jestConfig": "libs/components-layout/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "libs/components-layout/jest.config.js"
       }
     },
     "stylelint": {

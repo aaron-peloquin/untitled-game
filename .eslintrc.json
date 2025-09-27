@@ -2,7 +2,7 @@
   "root": true,
   "ignorePatterns": ["**/*"],
   "plugins": [
-    "@nrwl/nx",
+    "@nx",
     "jsx-a11y",
     "sort-keys-fix",
     "import",
@@ -13,7 +13,7 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        "@nrwl/nx/enforce-module-boundaries": [
+        "@nx/enforce-module-boundaries": [
           "error",
           {
             "enforceBuildableLibDependency": true,
@@ -31,27 +31,39 @@
     {
       "files": ["*.ts", "*.tsx"],
       "excludedFiles": ["next-env.d.ts"],
-      "extends": [
-        "plugin:@nrwl/nx/typescript",
-        "google"
-      ],
+      "extends": ["plugin:@nx/typescript", "google"],
       "rules": {
         "camelcase": "off",
-        "linebreak-style":"off",
-        "max-len":"off",
-        "require-jsdoc":"off",
+        "linebreak-style": "off",
+        "max-len": "off",
+        "require-jsdoc": "off",
         "react/display-name": "error",
         "sort-keys": "error",
         "sort-keys-fix/sort-keys-fix": "error",
-        "import/order": ["error", {
-          "alphabetize": {"order": "asc", "caseInsensitive": true},
-          "groups": ["builtin", "external", "internal", "index", "sibling", "parent",  "object"],
-          "newlines-between": "always-and-inside-groups"
+        "import/order": [
+          "error",
+          {
+            "alphabetize": {
+              "order": "asc",
+              "caseInsensitive": true
+            },
+            "groups": [
+              "builtin",
+              "external",
+              "internal",
+              "index",
+              "sibling",
+              "parent",
+              "object"
+            ],
+            "newlines-between": "always-and-inside-groups"
           }
         ],
         "react-hooks/rules-of-hooks": "error",
         "react-hooks/exhaustive-deps": "error",
-        "space-infix-ops": "error"
+        "space-infix-ops": "error",
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
       }
     }
   ]

@@ -1,4 +1,3 @@
-import {XRInteractionEvent} from '@react-three/xr';
 import {MutableRefObject, useCallback} from 'react';
 import {Mesh, Vector3} from 'three';
 
@@ -10,7 +9,7 @@ type T_DropTargets = {
 }
 
 export const useGrabAndDrop = (dropTargets: T_DropTargets[], grabbableDistance?: number) => {
-  const onRelease = useCallback((releaseArgs: XRInteractionEvent) => {
+  const onRelease = useCallback((releaseArgs: any) => {
     const object = releaseArgs.intersection?.object;
 
     if (dropTargets.length) {
